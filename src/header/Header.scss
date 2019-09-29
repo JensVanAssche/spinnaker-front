@@ -27,14 +27,80 @@ header {
       display: flex;
       padding: 15px 0;
 
-      a {
+      li > a {
         color: white;
-        padding: 15px;
+        padding: 16px;
         font-size: 1.5rem;
 
         &:hover {
           background-color: $darkblue;
         }
+      }
+
+      .ui.dropdown {
+        font-size: 1.5rem;
+        color: $white;
+        padding: 15px;
+        border: none;
+        background-color: $blue;
+        margin: -15px 0;
+
+        &:hover {
+          background-color: $darkblue;
+        }
+
+        .menu {
+          display: flex;
+          flex-direction: column;
+          background-color: $blue;
+          border: none;
+          border-radius: 0;
+
+          a {
+            color: $white;
+            padding: 10px 20px;
+
+            &:hover {
+              background-color: $darkblue;
+            }
+          }
+        }
+
+        //   span {
+        //     color: $white;
+        //     padding: 15px;
+        //     font-family: "TW Cen MT" !important;
+        //     margin: -15px 0;
+
+        //     &:hover {
+        //       background-color: $darkblue;
+        //     }
+        //   }
+
+        //   .menu {
+        //     background-color: $blue;
+        //     border: none;
+        //     border-radius: 0;
+        //     margin-top: 15px;
+        //     display: flex;
+        //     flex-direction: column;
+
+        //     > .item {
+        //       font-family: "TW Cen MT";
+        //       font-size: 1.5rem;
+        //       padding: 10px 20px !important;
+        //       min-width: 100px;
+
+        //       .text {
+        //         padding: 0px;
+        //         font-weight: 100;
+        //       }
+
+        //       &:hover {
+        //         background-color: $darkblue;
+        //       }
+        //     }
+        //   }
       }
     }
   }

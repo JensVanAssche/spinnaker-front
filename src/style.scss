@@ -1,10 +1,9 @@
 @import "../node_modules/semantic-ui-css/semantic.min.css";
 
 html {
-  font-family: "TW Cen MT";
   font-size: 10px;
 }
 
-h1 {
-  font-family: "TW Cen MT";
+body {
+  font-family: "TW Cen MT" !important;
 }
