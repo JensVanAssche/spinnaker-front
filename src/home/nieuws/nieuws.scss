@@ -1,0 +1,24 @@
+@import "vars.scss";
+
+.news-detail {
+  margin-bottom: 50px;
+  .date {
+    color: $grey;
+    display: block;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    color: $blue;
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+
+  a {
+    font-size: 1.8rem;
+    font-weight: 100;
+    text-decoration: underline;
+  }
+}

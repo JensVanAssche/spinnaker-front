@@ -1,0 +1,36 @@
+.sport-thumbnail {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    filter: brightness(0.5);
+    width: 100%;
+    position: absolute;
+    transition: 0.2s;
+  }
+
+  span {
+    position: absolute;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.2s;
+  }
+
+  &:hover {
+    span {
+      font-size: 3rem;
+      transition: 0.2s;
+    }
+    img {
+      width: 105%;
+      transition: 0.2s;
+    }
+  }
+}

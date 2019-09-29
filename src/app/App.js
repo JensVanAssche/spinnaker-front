@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-// import './App.css';
 
 import Header from 'header/Header';
 import Home from 'home/Home';
@@ -17,12 +16,13 @@ import Fotos from 'gallery/Fotos';
 import Videos from 'gallery/Videos';
 import Publicaties from 'publicaties/Publicaties';
 import Nieuws from 'nieuws/Nieuws';
+import Footer from 'footer/Footer';
 
 function App() {
   return (
     <div>
       <Header></Header>
-      <div className="ui container">
+      <main>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/spinnaker" component={Spinnaker} />
@@ -39,7 +39,8 @@ function App() {
           <Route exact path="/publicaties" component={Publicaties} />
           <Route exact path="/nieuws" component={Nieuws} />
         </Switch>
-      </div>
+      </main>
+      <Footer></Footer>
     </div>
   );
 }

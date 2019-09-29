@@ -4,6 +4,11 @@ html {
   font-size: 10px;
 }
 
-body {
+body,
+h1 {
   font-family: "TW Cen MT" !important;
+}
+
+main {
+  min-height: 100vh;
 }

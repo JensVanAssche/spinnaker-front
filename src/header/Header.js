@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.scss';
+import './header.scss';
 import logoWhite from 'assets/images/logo_white.png';
 
 function Header() {
@@ -16,9 +16,9 @@ function Header() {
           <li><Link to="/">HOME</Link></li>
           <li><Link to="/spinnaker">SPINNAKER</Link></li>
           <li>
-            <div class="ui simple dropdown item">
+            <div className="ui simple dropdown item">
               <span>SPORTEN</span>
-              <div class="menu">
+              <div className="menu">
                 <Link to="/sporten/boccia">BOCCIA</Link>
                 <Link to="/sporten/dansen">DANSEN</Link>
                 <Link to="/sporten/hockey">HOCKEY</Link>
@@ -28,9 +28,9 @@ function Header() {
             </div>
           </li>
           <li>
-            <div class="ui simple dropdown item">
+            <div className="ui simple dropdown item">
               <span>KALENDER</span>
-              <div class="menu">
+              <div className="menu">
                 <Link to="/sporten/boccia/kalender">BOCCIA KALENDER</Link>
                 <Link to="/sporten/hockey/kalender">HOCKEY KALENDER</Link>
                 <Link to="/sporten/handbal/kalender">HANDBAL KALENDER</Link>
@@ -38,9 +38,9 @@ function Header() {
             </div>
           </li>
           <li>
-            <div class="ui simple dropdown item">
+            <div className="ui simple dropdown item">
               <span>GALLERIJ</span>
-              <div class="menu">
+              <div className="menu">
                 <Link to="/fotos">FOTO'S</Link>
                 <Link to="/videos">VIDEO'S</Link>
               </div>
