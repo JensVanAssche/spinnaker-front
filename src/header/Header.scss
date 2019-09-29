@@ -1,0 +1,41 @@
+@import "vars.scss";
+
+header {
+  .header-image {
+    background-color: $lightblue;
+    height: 300px;
+
+    .ui.container {
+      height: 300px;
+      display: flex;
+      align-items: flex-end;
+
+      img {
+        height: 175px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  nav {
+    background-color: $blue;
+
+    ul.ui.container {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      display: flex;
+      padding: 15px 0;
+
+      a {
+        color: white;
+        padding: 15px;
+        font-size: 1.5rem;
+
+        &:hover {
+          background-color: $darkblue;
+        }
+      }
+    }
+  }
+}
