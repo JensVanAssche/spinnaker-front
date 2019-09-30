@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import BocciaIndex from "./BocciaIndex";
-import BocciaParantee from './BocciaParantee';
-import BocciaScholen from './BocciaScholen';
-import BocciaInterclub from './BocciaInterclub';
+import BocciaParantee from './parantee/Parantee';
+import BocciaScholen from './scholen/Scholen';
+import BocciaInterclub from './interclub/Interclub';
 import BocciaKalender from './BocciaKalender';
-import BocciaNederland from './BocciaNederland';
+import BocciaNederland from './nederland/Nederland';
 import './boccia.scss';
 
 function Boccia({match}) {
@@ -24,11 +24,11 @@ function Boccia({match}) {
       <div className="ui container">
         <Switch>
           <Route exact path={match.path} component={BocciaIndex} />
-          <Route exact path={`${match.path}/paranteecompetitie`} component={BocciaParantee} />
-          <Route exact path={`${match.path}/scholencompetitie`} component={BocciaScholen} />
-          <Route exact path={`${match.path}/interclub`} component={BocciaInterclub} />
-          <Route exact path={`${match.path}/kalender`} component={BocciaKalender} />
-          <Route exact path={`${match.path}/nederland`} component={BocciaNederland} />
+          <Route path={`${match.path}/paranteecompetitie`} component={BocciaParantee} />
+          <Route path={`${match.path}/scholencompetitie`} component={BocciaScholen} />
+          <Route path={`${match.path}/interclub`} component={BocciaInterclub} />
+          <Route path={`${match.path}/kalender`} component={BocciaKalender} />
+          <Route path={`${match.path}/nederland`} component={BocciaNederland} />
         </Switch>
       </div>
     </div>
