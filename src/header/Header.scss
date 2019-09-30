@@ -15,6 +15,12 @@ header {
       img {
         height: 175px;
         margin-bottom: 20px;
+        transition: 0.2s;
+
+        &:hover {
+          transition: 0.2s;
+          filter: brightness(0.9);
+        }
       }
     }
   }

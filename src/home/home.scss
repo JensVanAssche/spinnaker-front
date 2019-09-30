@@ -2,16 +2,42 @@
 
 .home {
   .welcome {
-    background-color: $lightblue;
-    display: flex;
-    justify-content: center;
-    padding: 100px 0;
-    margin-bottom: 90px;
+    margin-bottom: 50px;
+    > div {
+      background-color: $lightblue;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 100px 0;
 
-    h1 {
-      color: $white;
-      font-weight: 100;
-      font-size: 6rem;
+      h1 {
+        color: $white;
+        font-weight: 100;
+        font-size: 7rem;
+        margin-bottom: 50px;
+      }
+
+      a {
+        background-color: $white;
+        color: $blue;
+        border: 2px $lightblue solid;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 2.5rem;
+        transition: 0.1s;
+
+        &:hover {
+          background-color: $lightblue;
+          color: $white;
+          border: 2px $white solid;
+          transition: 0.1s;
+        }
+      }
+    }
+
+    img {
+      width: 100%;
+      transform: rotate(180deg) translateY(1px);
     }
   }
 
@@ -43,6 +69,26 @@
       color: $blue;
       font-size: 4.5rem;
       margin-bottom: 30px;
+    }
+
+    .cta {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+
+      a {
+        background-color: $blue;
+        color: $white;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 2.5rem;
+        transition: 0.1s;
+
+        &:hover {
+          background-color: $darkblue;
+          transition: 0.1s;
+        }
+      }
     }
   }
 }

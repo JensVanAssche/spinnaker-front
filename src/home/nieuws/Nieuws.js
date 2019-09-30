@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './nieuws.scss';
 
 function Nieuws({title, date}) {
-  return <div class="news-detail">
+  return <div className="news-detail">
     <span className="date">{date}</span>
     <span className="title">{title}</span>
     <Link to="/">Lees meer</Link>
