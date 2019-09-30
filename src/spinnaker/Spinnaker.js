@@ -47,7 +47,7 @@ function Spinnaker() {
       </p>
       <h2>Locatie</h2>
       <p>De maatschappelijke zetel van Spinnaker is gevestigd op het adres van het Sint-Jozefinstituut, Galjoenstraat 2, 2030 Antwerpen.</p>
-      <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4323.718782470215!2d4.421402799515983!3d51.2428338195404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f7ca9957a28d%3A0x8ab66788d3194f18!2sGaljoenstraat%202%2C%202000%20Antwerpen!5e0!3m2!1snl!2sbe!4v1569838491198!5m2!1snl!2sbe" width="400" height="300" frameborder="0" allowfullscreen=""></iframe>
+      <iframe title="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4323.718782470215!2d4.421402799515983!3d51.2428338195404!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3f7ca9957a28d%3A0x8ab66788d3194f18!2sGaljoenstraat%202%2C%202000%20Antwerpen!5e0!3m2!1snl!2sbe!4v1569838491198!5m2!1snl!2sbe" width="400" height="300" frameBorder="0" allowFullScreen=""></iframe>
       <h2>Contact</h2>
       <p>Wij zijn te bereiken via telefoon (03/541.33.80 - 03/540.19.73) of of e-mail: info@spinnaker-sport.be</p>
       <h2>Engagement</h2>

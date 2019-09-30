@@ -6,12 +6,11 @@ import NederlandKalender from "./NederlandKalender";
 import NederlandUitslagen from "./NederlandUitslagen";
 import NederlandStand from "./NederlandStand";
 import NederlandHistoriek from "./NederlandHistoriek";
-import './nederland.scss';
 
 function Nederland({match}) {
   return (
     <div className="nederland">
-      <nav>
+      <nav className="tinynav">
         <ul>
           <li><Link to="/boccia/nederland">COMPETITIE NEDERLAND</Link></li>
           <li><Link to={`${match.path}/spelers`}>spelers</Link></li>

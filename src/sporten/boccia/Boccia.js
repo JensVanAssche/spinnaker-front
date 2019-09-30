@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import BocciaIndex from "./BocciaIndex";
 import BocciaParantee from './parantee/Parantee';
 import BocciaScholen from './scholen/Scholen';
@@ -11,14 +11,14 @@ import './boccia.scss';
 function Boccia({match}) {
   return (
     <div className="boccia">
-      <nav>
+      <nav className="subnav">
         <ul className="ui container">
-          <li><Link to="/boccia">BOCCIA</Link></li>
-          <li><Link to={`${match.path}/paranteecompetitie`}>parantee competitie</Link></li>
-          <li><Link to={`${match.path}/scholencompetitie`}>scholencompetitie</Link></li>
-          <li><Link to={`${match.path}/interclub`}>interclub</Link></li>
-          <li><Link to={`${match.path}/kalender`}>kalender</Link></li>
-          <li><Link to={`${match.path}/nederland`}>competitie nederland</Link></li>
+          <li><NavLink to={match.path} exact={true}>BOCCIA</NavLink></li>
+          <li><NavLink to={`${match.path}/paranteecompetitie`}>parantee competitie</NavLink></li>
+          <li><NavLink to={`${match.path}/scholencompetitie`}>scholencompetitie</NavLink></li>
+          <li><NavLink to={`${match.path}/interclub`}>interclub</NavLink></li>
+          <li><NavLink to={`${match.path}/kalender`}>kalender</NavLink></li>
+          <li><NavLink to={`${match.path}/nederland`}>competitie nederland</NavLink></li>
         </ul>
       </nav>
       <div className="ui container">

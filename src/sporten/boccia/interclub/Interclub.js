@@ -6,12 +6,11 @@ import InterclubKalender from "./InterclubKalender";
 import InterclubUitslagen from "./InterclubUitslagen";
 import InterclubStand from "./InterclubStand";
 import InterclubHistoriek from "./InterclubHistoriek";
-import './interclub.scss';
 
 function Interclub({match}) {
   return (
     <div className="interclub">
-      <nav>
+      <nav className="tinynav">
         <ul>
           <li><Link to={match.path}>INTERCLUB</Link></li>
           <li><Link to={`${match.path}/spelers`}>spelers</Link></li>

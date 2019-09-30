@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './header.scss';
 import logoWhite from 'assets/images/logo_white.png';
 
@@ -13,8 +13,8 @@ function Header() {
       </div>
       <nav>
         <ul className="ui container">
-          <li><Link to="/">HOME</Link></li>
-          <li><Link to="/spinnaker">SPINNAKER</Link></li>
+          <li><NavLink to="/" exact={true} >HOME</NavLink></li>
+          <li><NavLink to="/spinnaker">SPINNAKER</NavLink></li>
           <li>
             <div className="ui simple dropdown item">
               <span>SPORTEN</span>
@@ -46,8 +46,8 @@ function Header() {
               </div>
             </div>
           </li>
-          <li><Link to="/publicaties">PUBLICATIES</Link></li>
-          <li><Link to="/nieuws">NIEUWS</Link></li>
+          <li><NavLink to="/publicaties">PUBLICATIES</NavLink></li>
+          <li><NavLink to="/nieuws">NIEUWS</NavLink></li>
         </ul>
       </nav>
     </header>
