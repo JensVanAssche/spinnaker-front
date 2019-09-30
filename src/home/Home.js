@@ -16,7 +16,7 @@ function Home() {
     </div>
     <div className="ui container">
       <div className="sports">
-        <h1>Onze Sporten</h1>
+        <h2>Onze Sporten</h2>
         <div>
           <Sport name="boccia" />
           <Sport name="hockey" />
@@ -28,7 +28,7 @@ function Home() {
         </div>
       </div>
       <div className="nieuws">
-        <h1>Nieuws</h1>
+        <h2>Nieuws</h2>
         <Nieuws title="Eerste versie hockey- en bocciakalender gelanceerd" date="3 juli 2019" />
         <Nieuws title="Nieuwe Spinnaker krant is er" date="24 juli 2019" />
         <Nieuws title="Nederlandse competitie boccia eindigt - Spinnaker missie volbracht" date="23 juli 2019" />

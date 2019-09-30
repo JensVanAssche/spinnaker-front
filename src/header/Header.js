@@ -19,11 +19,11 @@ function Header() {
             <div className="ui simple dropdown item">
               <span>SPORTEN</span>
               <div className="menu">
-                <Link to="/sporten/boccia">BOCCIA</Link>
-                <Link to="/sporten/dansen">DANSEN</Link>
-                <Link to="/sporten/hockey">HOCKEY</Link>
-                <Link to="/sporten/handbal">HANDBAL</Link>
-                <Link to="/sporten/zwemmen">ZWEMMEN</Link>
+                <Link to="/boccia">BOCCIA</Link>
+                <Link to="/dansen">DANSEN</Link>
+                <Link to="/hockey">HOCKEY</Link>
+                <Link to="/handbal">HANDBAL</Link>
+                <Link to="/zwemmen">ZWEMMEN</Link>
               </div>
             </div>
           </li>
@@ -31,9 +31,9 @@ function Header() {
             <div className="ui simple dropdown item">
               <span>KALENDER</span>
               <div className="menu">
-                <Link to="/sporten/boccia/kalender">BOCCIA KALENDER</Link>
-                <Link to="/sporten/hockey/kalender">HOCKEY KALENDER</Link>
-                <Link to="/sporten/handbal/kalender">HANDBAL KALENDER</Link>
+                <Link to="/boccia/kalender">BOCCIA KALENDER</Link>
+                <Link to="/hockey/kalender">HOCKEY KALENDER</Link>
+                <Link to="/handbal/kalender">HANDBAL KALENDER</Link>
               </div>
             </div>
           </li>
