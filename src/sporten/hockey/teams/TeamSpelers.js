@@ -1,9 +1,9 @@
 import React from 'react';
 import Player from 'sporten/player/Player';
 
-class CompetitieSpelers extends React.Component {
+class TeamSpelers extends React.Component {
   state = {
-    title: ['Parantee Competitie Spelers', 'Scholencompetitie Spelers', 'Interclub Spelers', 'Competitie Nederland Spelers'],
+    title: ['Wheelblazers 1 Spelers', 'Wheelblazers 1 Spelers', 'Wheelblazers 1 Spelers', 'Wheelblazers 4 Spelers', 'Competitie Nederland Spelers'],
     players: [
       [
         { name: 'speler1', photo: 'sport.png' },
@@ -22,17 +22,20 @@ class CompetitieSpelers extends React.Component {
       ],
       [
         { name: 'speler1', photo: 'sport.png' },
+      ],
+      [
+        { name: 'speler1', photo: 'sport.png' },
       ]
     ],
   };
 
   render() {
-    const { league } = this.props;
+    const { team } = this.props;
     return (
       <div className="players">
-        <h2>{this.state.title[league]}</h2>
+        <h2>{this.state.title[team]}</h2>
         <div>
-          {this.state.players[league].map(player => (
+          {this.state.players[team].map(player => (
             <Player key={player.name} name={player.name} photo={player.photo} />
           ))}
         </div>
@@ -41,4 +44,4 @@ class CompetitieSpelers extends React.Component {
   }
 }
 
-export default CompetitieSpelers;
+export default TeamSpelers;

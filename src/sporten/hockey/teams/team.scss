@@ -1,6 +1,6 @@
 @import "vars.scss";
 
-.scholen {
+.team {
   nav {
     ul {
       margin: 0;
@@ -14,11 +14,23 @@
         padding: 15px;
         font-size: 1.8rem;
 
-        &:hover {
+        &:hover,
+        &.active {
           color: $white;
           background-color: $darkblue;
         }
       }
+
+      li:first-child {
+        color: $blue;
+        padding: 2px 15px;
+        font-size: 1.8rem;
+      }
     }
+  }
+
+  .players > div {
+    display: flex;
+    flex-wrap: wrap;
   }
 }

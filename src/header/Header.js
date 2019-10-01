@@ -22,7 +22,7 @@ function Header() {
                 <Link to="/boccia">BOCCIA</Link>
                 <Link to="/dansen">DANSEN</Link>
                 <Link to="/hockey">HOCKEY</Link>
-                <Link to="/handbal">HANDBAL</Link>
+                <Link to="/handbal">ROLSTOELHANDBAL</Link>
                 <Link to="/zwemmen">ZWEMMEN</Link>
               </div>
             </div>

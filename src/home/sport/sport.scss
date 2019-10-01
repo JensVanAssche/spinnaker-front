@@ -1,6 +1,6 @@
 .sport-thumbnail {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,9 +15,12 @@
   }
 
   span {
+    width: 100%;
+    text-align: center;
+    line-height: 1;
     position: absolute;
     color: white;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: bold;
     text-transform: uppercase;
     transition: 0.2s;
@@ -25,7 +28,7 @@
 
   &:hover {
     span {
-      font-size: 3rem;
+      font-size: 4rem;
       transition: 0.2s;
     }
     img {

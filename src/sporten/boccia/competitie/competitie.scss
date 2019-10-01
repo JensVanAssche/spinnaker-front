@@ -27,25 +27,4 @@
     display: flex;
     flex-wrap: wrap;
   }
-
-  .calendar {
-    h3 {
-      display: inline-block;
-      width: 250px;
-
-      &:first-child {
-        width: 150px;
-      }
-    }
-
-    .entry p {
-      margin: 0;
-      display: inline-block;
-      width: 250px;
-
-      &:first-child {
-        width: 150px;
-      }
-    }
-  }
 }

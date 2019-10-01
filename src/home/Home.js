@@ -34,13 +34,13 @@ class Home extends React.Component {
             <div>
               <Sport name="dansen" />
               <Sport name="zwemmen" />
-              <Sport name="handbal" />
+              <Sport name="rolstoel handbal" />
             </div>
           </div>
           <div className="nieuws">
             <h2>Nieuws</h2>
             {this.state.nieuws.map(item => (
-              <Nieuws title={item.title} date={item.date} />
+              <Nieuws title={item.title} date={item.date} key={item.title} />
             ))}
             <div className="cta">
               <Link to="/nieuws">Meer nieuws</Link>
