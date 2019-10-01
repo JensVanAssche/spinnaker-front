@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import ParanteeIndex from "./ParanteeIndex";
 import ParanteeSpelers from "./ParanteeSpelers";
 import ParanteeKalender from "./ParanteeKalender";
@@ -13,15 +13,15 @@ function Parantee({match}) {
     <div className="parantee">
       <nav>
         <ul>
-          <li><Link to="/boccia/paranteecompetitie">PARANTEE COMPETITIE</Link></li>
-          <li><Link to={`${match.path}/spelers`}>spelers</Link></li>
-          <li><Link to={`${match.path}/kalender`}>kalender</Link></li>
-          <li><Link to={`${match.path}/uitslagen`}>uitslagen</Link></li>
-          <li><Link to={`${match.path}/stand`}>stand</Link></li>
-          <li><Link to={`${match.path}/historiek`}>historiek uitslagen</Link></li>
+          <li><NavLink exact={true} to="/boccia/paranteecompetitie">PARANTEE COMPETITIE</NavLink></li>
+          <li><NavLink to={`${match.path}/spelers`}>spelers</NavLink></li>
+          <li><NavLink to={`${match.path}/kalender`}>kalender</NavLink></li>
+          <li><NavLink to={`${match.path}/uitslagen`}>uitslagen</NavLink></li>
+          <li><NavLink to={`${match.path}/stand`}>stand</NavLink></li>
+          <li><NavLink to={`${match.path}/historiek`}>historiek uitslagen</NavLink></li>
         </ul>
       </nav>
-      <div>
+      <div className="content">
         <Switch>
           <Route exact path={match.path} component={ParanteeIndex} />
           <Route path={`${match.path}/spelers`} component={ParanteeSpelers} />

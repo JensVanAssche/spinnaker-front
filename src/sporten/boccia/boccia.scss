@@ -1,5 +1,13 @@
 @import "vars.scss";
 
+.boccia .content {
+  margin-top: 50px;
+
+  p {
+    margin-left: 10px;
+  }
+}
+
 nav.subnav {
   background-color: $lightblue;
 
@@ -12,7 +20,7 @@ nav.subnav {
 
     li > a {
       color: white;
-      padding: 15px;
+      padding: 15.5px;
       font-size: 1.8rem;
 
       &:hover,

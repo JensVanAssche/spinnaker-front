@@ -20,7 +20,7 @@ function Nederland({match}) {
           <li><Link to={`${match.path}/historiek`}>historiek uitslagen</Link></li>
         </ul>
       </nav>
-      <div>
+      <div className="content">
         <Switch>
           <Route exact path={match.path} component={NederlandIndex} />
           <Route path={`${match.path}/spelers`} component={NederlandSpelers} />

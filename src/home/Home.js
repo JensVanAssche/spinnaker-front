@@ -5,39 +5,51 @@ import Nieuws from './nieuws/Nieuws';
 import Wave from 'assets/images/wave.png';
 import './home.scss';
 
-function Home() {
-  return <div className="home">
-    <div className="welcome">
-      <div>
-        <h1>Welkom bij Spinnaker!</h1>
-        <Link to="/spinnaker">Ontdek wie we zijn</Link>
-      </div>
-      <img src={Wave} alt="wave" />
-    </div>
-    <div className="ui container">
-      <div className="sports">
-        <h2>Onze Sporten</h2>
-        <div>
-          <Sport name="boccia" />
-          <Sport name="hockey" />
+class Home extends React.Component {
+  state = {
+    nieuws: [
+      { title: "Eerste versie hockey- en bocciakalender gelanceerd", date: "3 juli 2019" },
+      { title: "Nieuwe Spinnaker krant is er", date: "24 juli 2019" },
+      { title: "Nederlandse competitie boccia eindigt - Spinnaker missie volbracht", date: "23 juli 2019" },
+    ],
+  };
+
+  render() {
+    return (
+      <div className="home">
+        <div className="welcome">
+          <div>
+            <h1>Welkom bij Spinnaker!</h1>
+            <Link to="/spinnaker">Ontdek wie we zijn</Link>
+          </div>
+          <img src={Wave} alt="wave" />
         </div>
-        <div>
-          <Sport name="dansen" />
-          <Sport name="zwemmen" />
-          <Sport name="handbal" />
+        <div className="ui container">
+          <div className="sports">
+            <h2>Onze Sporten</h2>
+            <div>
+              <Sport name="boccia" />
+              <Sport name="hockey" />
+            </div>
+            <div>
+              <Sport name="dansen" />
+              <Sport name="zwemmen" />
+              <Sport name="handbal" />
+            </div>
+          </div>
+          <div className="nieuws">
+            <h2>Nieuws</h2>
+            {this.state.nieuws.map(item => (
+              <Nieuws title={item.title} date={item.date} />
+            ))}
+            <div className="cta">
+              <Link to="/nieuws">Meer nieuws</Link>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="nieuws">
-        <h2>Nieuws</h2>
-        <Nieuws title="Eerste versie hockey- en bocciakalender gelanceerd" date="3 juli 2019" />
-        <Nieuws title="Nieuwe Spinnaker krant is er" date="24 juli 2019" />
-        <Nieuws title="Nederlandse competitie boccia eindigt - Spinnaker missie volbracht" date="23 juli 2019" />
-        <div className="cta">
-          <Link to="/nieuws">Meer nieuws</Link>
-        </div>
-      </div>
-    </div>
-  </div>;
+    );
+  }
 }
 
 export default Home;
