@@ -8,9 +8,9 @@ import './home.scss';
 class Home extends React.Component {
   state = {
     nieuws: [
-      { title: "Eerste versie hockey- en bocciakalender gelanceerd", date: "3 juli 2019" },
-      { title: "Nieuwe Spinnaker krant is er", date: "24 juli 2019" },
-      { title: "Nederlandse competitie boccia eindigt - Spinnaker missie volbracht", date: "23 juli 2019" },
+      { id: '1', title: "Eerste versie hockey- en bocciakalender gelanceerd", date: "3 juli 2019" },
+      { id: '2', title: "Nieuwe Spinnaker krant is er", date: "24 juli 2019" },
+      { id: '3', title: "Nederlandse competitie boccia eindigt - Spinnaker missie volbracht", date: "23 juli 2019" },
     ],
   };
 
@@ -40,7 +40,7 @@ class Home extends React.Component {
           <div className="nieuws">
             <h2>Nieuws</h2>
             {this.state.nieuws.map(item => (
-              <Nieuws title={item.title} date={item.date} key={item.title} />
+              <Nieuws id={item.id} title={item.title} date={item.date} key={item.id} />
             ))}
             <div className="cta">
               <Link to="/nieuws">Meer nieuws</Link>

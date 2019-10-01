@@ -4,7 +4,7 @@ import sport from 'assets/images/sport.png';
 import './sport.scss';
 
 function Sport({name}) {
-  return <Link className="sport-thumbnail" to={"/" + name} >
+  return <Link className="sport-thumbnail" to={"/" + name.split(' ').reverse()[0]} >
     <img src={sport} alt="Logo" />
     <span>{name}</span>
   </Link>;

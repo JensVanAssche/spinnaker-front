@@ -70,3 +70,44 @@ main {
     }
   }
 }
+
+.news-item {
+  margin-bottom: 50px;
+
+  .date {
+    color: $grey;
+    display: block;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    color: $blue;
+    display: block;
+    font-size: 2.6rem;
+    text-decoration: none;
+    margin-bottom: 15px;
+
+    &:hover {
+      text-decoration: underline;
+      color: $darkblue;
+    }
+  }
+
+  .body {
+    margin-left: 0;
+  }
+
+  a:last-child {
+    font-size: 1.8rem;
+    font-weight: 100;
+    text-decoration: none;
+    display: block;
+    margin-top: 0px;
+
+    &:hover {
+      text-decoration: underline;
+      color: $darkblue;
+    }
+  }
+}

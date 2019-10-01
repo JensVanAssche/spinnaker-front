@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './nieuws.scss';
 
-function Nieuws({title, date}) {
-  return <div className="news-detail">
+function Nieuws({id, title, date}) {
+  return <div className="news-item">
     <span className="date">{date}</span>
-    <span className="title">{title}</span>
-    <Link to="/">Lees meer</Link>
+    <Link to={`/nieuws/${id}`} className="title">{title}</Link>
+    <Link to={`/nieuws/${id}`}>Lees meer</Link>
   </div>;
 }
 
