@@ -1,4 +1,5 @@
 import React from 'react';
+import header from 'assets/images/header.jpg';
 
 class Zwemmen extends React.Component {
   state = {
@@ -13,7 +14,10 @@ class Zwemmen extends React.Component {
   render() {
     return (
       <div className="content ui container">
-        <h2>Zwemmen</h2>
+        <div className="sport-header">
+          <div style={{'backgroundImage': `url(${header})`}} />
+          <div><h1>Zwemmen</h1></div>
+        </div>
         <div dangerouslySetInnerHTML={{__html: this.state.content}} />
       </div>
     );

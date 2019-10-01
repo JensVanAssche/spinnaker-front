@@ -1,8 +1,9 @@
 import React from 'react';
+import header from 'assets/images/header.jpg';
 
 class BocciaIndex extends React.Component {
   state = {
-    content: `<h3>Wat is boccia</h3>
+    content: `<h3>Wat is Boccia</h3>
     <p>Boccia is een paralympische sport. Het is een sport voor atleten met een motorische handicap (hersenverlamming/spierziekte). Dit kan zowel voor sporters met een evolutieve aandoening als een non-evolutieve aandoening.</p>
     <p>Boccia is een sport die erg lijkt op het meer bekende petanque. Men gooit met gekleurde lederen ballen (zes blauwe en zes rode). De doelbal is een witte lederen bal met dezelfde diameter als de gekleurde ballen. In boccia is het mogelijk om met de voeten te spelen of voor diegenen die niet zelf kunnen gooien gebruik te maken van een hulpstuk en een helper. De helper staat met zijn rug naar het speelveld gekeerd en kan of mag enkel de instructies uitvoeren van de atleet. Zo is boccia de enige sport die toegankelijk is voor iedere motorisch gehandicapte persoon, ook voor personen met een ernstige motorische handicap die vaak geen enkele andere sport kunnen beoefenen. Boccia wordt individueel gespeeld of in ploegen.</p>
     <h3>Boccia in Belgie</h3>
@@ -15,7 +16,10 @@ class BocciaIndex extends React.Component {
   render() {
     return (
       <div className="content">
-        <h2>Boccia</h2>
+        <div className="sport-header">
+          <div style={{'backgroundImage': `url(${header})`}} />
+          <div><h1>Boccia</h1></div>
+        </div>
         <div dangerouslySetInnerHTML={{__html: this.state.content}} />
       </div>
     );

@@ -2,11 +2,12 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './header.scss';
 import logoWhite from 'assets/images/logo_white.png';
+import header from 'assets/images/header.jpg';
 
 function Header() {
   return (
     <header>
-      <div className="header-image">
+      <div className="header-image" style={{'backgroundImage': `url(${header})`}}>
         <div className="ui container">
         <Link to="/"><img src={logoWhite} alt="Logo" /></Link>
         </div>
