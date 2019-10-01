@@ -13,6 +13,7 @@ import Fotos from 'gallery/Fotos';
 import Videos from 'gallery/Videos';
 import Publicaties from 'publicaties/Publicaties';
 import Nieuws from 'nieuws/Nieuws';
+import Article from 'nieuws/article/Article';
 import Footer from 'footer/Footer';
 
 function App() {
@@ -31,7 +32,8 @@ function App() {
           <Route path="/fotos" component={Fotos} />
           <Route path="/videos" component={Videos} />
           <Route path="/publicaties" component={Publicaties} />
-          <Route path="/nieuws" component={Nieuws} />
+          <Route exact path="/nieuws" component={Nieuws} />
+          <Route path="/nieuws/:id" component={Article} />
         </Switch>
       </main>
       <Footer></Footer>

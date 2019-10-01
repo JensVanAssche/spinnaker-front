@@ -2,7 +2,9 @@ import React from 'react';
 
 function Videos() {
   return (
-    <h1>This is Videos</h1>
+    <div className="ui container content">
+      <h2>Video's</h2>
+    </div>
   );
 }
 

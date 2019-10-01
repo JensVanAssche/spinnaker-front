@@ -2,7 +2,9 @@ import React from 'react';
 
 function Fotos() {
   return (
-    <h1>This is Fotos</h1>
+    <div className="ui container content">
+      <h2>Foto's</h2>
+    </div>
   );
 }
 
