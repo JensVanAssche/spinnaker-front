@@ -1,7 +1,7 @@
 import {
-  CONTENT_FULFILLED,
-  CONTENT_PENDING,
-  CONTENT_REJECTED,
+  NEWS_FULFILLED,
+  NEWS_PENDING,
+  NEWS_REJECTED,
 } from './actions';
 
 const initialState = {
@@ -11,18 +11,18 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case CONTENT_PENDING:
+    case NEWS_PENDING:
       return {
         ...state,
         loading: true,
       };
-    case CONTENT_FULFILLED:
+    case NEWS_FULFILLED:
       return {
         ...state,
         loading: false,
         data: action.payload,
       };
-    case CONTENT_REJECTED:
+    case NEWS_REJECTED:
       return initialState;
     default:
       return state;

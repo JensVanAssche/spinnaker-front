@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectContent } from 'app/selectors';
+import { selectData } from 'app/selectors';
 import './spinnaker.scss';
 
 class Spinnaker extends React.Component {
@@ -31,7 +31,7 @@ class Spinnaker extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  content: selectContent(state),
+  content: selectData(state),
 });
 
 export default connect(

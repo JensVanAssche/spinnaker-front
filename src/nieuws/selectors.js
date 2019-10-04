@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectNode = state => state.content;
+const selectNode = state => state.news;
 
 export const selectData = createSelector(
   selectNode,

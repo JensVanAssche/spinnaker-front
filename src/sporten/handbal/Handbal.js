@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectContent } from 'app/selectors';
+import { selectData } from 'app/selectors';
 
 class Handbal extends React.Component {
   render() {
@@ -11,7 +11,7 @@ class Handbal extends React.Component {
     return (
       <div className="content ui container">
         <div className="sport-header">
-          <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST}/header.jpg)`}} />
+          <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST}/handbal.jpg)`}} />
           <div><h1>Rolstoelhandbal</h1></div>
         </div>
         <div dangerouslySetInnerHTML={{__html: content.handbal}} />
@@ -21,7 +21,7 @@ class Handbal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  content: selectContent(state),
+  content: selectData(state),
 });
 
 export default connect(
