@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectContent } from 'app/selectors';
-import pdf from 'assets/pdf/engagementsverklaring.pdf';
 import './spinnaker.scss';
 
 class Spinnaker extends React.Component {
@@ -24,7 +23,7 @@ class Spinnaker extends React.Component {
         <h2>Contact</h2>
         <div dangerouslySetInnerHTML={{__html: content.spinnakerContact}} />
         <h2>Engagement</h2>
-        <a href={pdf} target="_blank" rel="noopener noreferrer">engagement</a>
+        <a href={process.env.REACT_APP_API_HOST + "/example.pdf"} target="_blank" rel="noopener noreferrer">engagement</a>
         <h2>Links</h2>
       </div>
     );
@@ -39,4 +38,3 @@ export default connect(
   mapStateToProps,
   null,
 )(Spinnaker);
-

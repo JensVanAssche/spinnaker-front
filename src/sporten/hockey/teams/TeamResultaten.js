@@ -1,5 +1,4 @@
 import React from 'react';
-import pdf from 'assets/pdf/engagementsverklaring.pdf'
 
 class TeamUitslagen extends React.Component {
   state = {
@@ -20,7 +19,7 @@ class TeamUitslagen extends React.Component {
         <h2>{this.state.title[team]}</h2>
         {this.state.results[team].map(result => (
           <div className="entry" key={result}>
-            <a href={pdf} target="_blank" rel="noopener noreferrer">{result}</a>
+            <a href={process.env.REACT_APP_API_HOST + "/example.pdf"} target="_blank" rel="noopener noreferrer">{result}</a>
           </div>
         ))}
       </div>

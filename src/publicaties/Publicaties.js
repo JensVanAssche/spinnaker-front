@@ -1,5 +1,4 @@
 import React from 'react';
-import pdf from 'assets/pdf/engagementsverklaring.pdf';
 import './publicaties.scss';
 
 class Publicaties extends React.Component {
@@ -24,11 +23,11 @@ class Publicaties extends React.Component {
         <h2>Publicaties</h2>
         <h3>Spinnakerkrant</h3>
         {this.state.kranten.map(krant => (
-          <a href={pdf} target="_blank" rel="noopener noreferrer" key={krant}>{krant}</a>
+          <a href={process.env.REACT_APP_API_HOST + "/example.pdf"} target="_blank" rel="noopener noreferrer" key={krant}>{krant}</a>
         ))}
         <h3>Folders</h3>
         {this.state.folders.map(folder => (
-          <a href={pdf} target="_blank" rel="noopener noreferrer" key={folder}>{folder}</a>
+          <a href={process.env.REACT_APP_API_HOST + "/example.pdf"} target="_blank" rel="noopener noreferrer" key={folder}>{folder}</a>
         ))}
       </div>
     );

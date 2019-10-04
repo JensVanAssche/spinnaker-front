@@ -1,47 +1,32 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { selectContent } from 'app/selectors';
 
 class CompetitieIndex extends React.Component {
   state = {
     title: ['Parantee Competitie', 'Scholencompetitie', 'Interclub', 'Competitie Nederland'],
-    content: [`<p>Parantee v.z.w. (voorheen Vlaamse Liga voor Gehandicaptensport) organiseert de officiële Belgische competitie boccia.</p>
-    <p>Deze bestaat uit een Vlaamse Kampioenschap individueel, een Vlaams Kampioenschap per pair/team, een Belgisch Kampioenschap individueel en een Belgisch Kampioenschap per pair/team. Elk tornooi gaat over een volledig weekend. Op de eerste dag worden de poule-wedstrijden afgewerkt. Op de tweede dag eventueel de laatste poulewedstrijden en de verschillende finalerondes. Op het einde van het weekend is de kampioen gekend.</p>
-    <p>Aangezien er een grote diversiteit aan handicaps bestaat zijn er in boccia een aantal categorieën. Zo strijden de spelers met gelijke handicaps tegen elkaar.</p>
-    <p>Er zijn in boccia 4 categorieën:</p>
-    <p>·  BC1: dit zijn spelers met cerebral palsy die een iets moeizamere grip op de bal hebben en dus moeilijker kunnen werpen of spelers met cerebral palsy die met de voeten spelen; zij mogen gebruik maken van een assistent die achter hen staat om hen de bal te geven vooraleer ze gooien</p>
-    <p>·  BC2: dit zijn spelers met cerebral palsy die een goeie grip op de bal hebben en dus makkelijker kunnen werpen; zij mogen geen gebruik maken van een assistent</p>
-    <p>·  BC3: dit zijn spelers met cerebral palsy of spelers met een spierziekte die de bal niet kunnen gooien en gebruik maken van een hulpstuk en een sportassistent die dit hulpstuk bedient; de assistent zit met zijn rug naar het veld en voert de bevelen van de speler uit</p>
-    <p>·  BC4: dit zijn spelers met een evolutieve aandoening of spelers die geen cerebral palsy hebben en die een goeie grip op de bal hebben; ook zij mogen geen gebruik maken van een assistent. Voor elk individueel kampioenschap (Vlaams en Belgisch) is er voor elke categorie een competitie. De resultaten van de laatste twee Vlaamse en de laatste twee Belgische kampioenschappen worden steeds samengeteld en leveren een ranking (of klassement) op. Dit is zo’n beetje zoals bij het tennis. De bovenste spelers uit de ranking worden geselecteerd voor de nationale ploeg. Zij nemen deel aan Europese en Wereldkampioenschappen, World Cup en Paralympics.</p>
-    <p>Naast de individuele kampioenschappen zijn er ook de ploegenkampioenschappen. Zij lopen volgens hetzelfde systeem als de individuele kampioenschappen. Er is ook één Vlaams kampioenschap en één Belgisch kampioenschap. Ook deze duren een volledig weekend en leveren op zondagavond een kampioen op. De resultaten van de laatste twee Vlaamse en Belgische kampioenschappen leveren een ranking op. Ook de ploegen nemen deel aan internationale kampioenschappen en tornooien.</p>
-    <p>In boccia zijn er drie verschillende ploegencompetities:</p>
-    <p>·  Team BC1/BC2: een ploeg bestaat uit drie spelers (met eventueel twee wisselspelers).</p>
-    <p>·  Pair BC3: een ploeg bestaat uit twee spelers (met eventueel één wisselspeler).</p>
-    <p>·  Pair BC4: een ploeg bestaat uit twee spelers (met eventueel één wisselspeler) dit wordt niet zo frequent georganiseerd in België wegens het beperkte aantal deelnemers.</p>`,
-    `<p>Sinds ruim vijftien jaar bestaat er voor diverse sporten een samenwerking tussen zes grote Vlaamse instituten. Zij organiseren over het hele land diverse tornooien voor een aantal sporten. Dit is voor voetbal, tafeltennis, zwemmen, netbal en ook boccia.</p>
-    <p>De scholencompetitie boccia bestaat sinds 1997. De vijf instituten die hieraan deelnemen zijn: Sint-Gerardus uit Diepenbeek, Sint-Jozef uit Antwerpen, Sint-Lodewijk uit Kwatrecht, Ten Dries uit Landegem en Dominiek Savio uit Gits. De scholencompetitie boccia loopt over vier tornooien. Zij worden in elke provincie georganiseerd op een woensdagnamiddag. Het eerste tornooi is steeds te Gits in oktober, het tweede in november te Gentbrugge, het derde in maart te Antwerpen en het vierde en laatste in mei te Diepenbeek. Elk instelling vaardigt ploegen af: voor het seizoen 2014-2015 zijn er vier team-ploegen (BC1/2) en zes pair-ploegen (BC3). De team-ploeg bestaat uit drie spelers (met eventueel twee wisselspelers) die de bal kunnen werpen. De pair-ploeg bestaat uit twee spelers (met eventueel één wisselspelers) die de bal niet kunnen gooien en die gebruik maken van een hulpstuk (een soort goot) en een sportassistent die de goot op commando van de speler beweegt maar niet naar het veld mag kijken. De teamwedstrijden worden gespeeld naar drie ends (of sets). Officieel is dit zes, maar dit is in deze competitie niet mogelijk omdat de competitie anders te lang zou uitlopen. De pairwedstrijden worden gespeeld naar twee ends (of sets). Officieel is dit vier. Alle teamploegen spelen tijdens een tornooi één keer tegen elkaar. Elke ploeg speelt dus vier wedstrijden. Elke gewonnen match levert twee punten op, een verloren match geen en een gelijkspel één punt. Als alle wedstrijden gespeeld zijn, levert dit het eindklassement van het tornooi op. Bij de teamcompetitie tellen de beste drie van de vier resultaten mee voor het eindklassement. Er is ook altijd een dagwinnaar (tornooiwinnaar) met bijhorende wisselbeker en medailles. Bij de paircompetitie spelen alle ploegen - verdeeld over de vier competitienamiddagen - twee keer tegen elkaar. De ploeg met de meeste punten wint het eindklassement. Bij de paircompetitie tellen alle wedstrijden mee.</p>`,
-    `<p>Vanaf het sportjaar 2010-2011 wordt het provinciaal interclubkampioenschap georganiseerd.</p>
-    <p>Een vijftal jaren ervoor waren Wapper en Spinnaker reeds een mini-tornooi tegen elkaar gestart, gespreid over twee avonden. Sinds 2010 sloot IE-sport (uit Herentals) zich bij dit tornooi aan en neemt het de vormen van een heus interclubkampioenschap aan, met drie clubs uit de provincie Antwerpen.</p>  
-    <p>Een jaar later is ook M.G.J. uit Brasschaat in het kampioenschap gestapt.</p>   
-    <p>Elke club speelt één keer tegen elke andere club. Het ene jaar speelt de club thuis, het andere jaar speelt de club uit. Elke tornooidag of – avond bestaat uit drie wedstrijden: twee individuele wedstrijden en één teamwedstrijd. Alle categorieën kunnen meespelen. Er wordt gespeeld naar volledige wedstrijden (vier ends voor individuele wedstrijden, zes ends voor teamwedstrijden).</p>
-    <p>Elke tornooi levert een einduitslag én bijhorende punten op voor het klassement. Na het laatste tornooi wordt de beker aan de eindwinnaar overhandigd. Dus elke 2 jaar is er een eindwinnaar nadat elke ploeg eens een heen- en een terugwedstrijd tegen elke andere ploeg heeft gespeeld.</p>
-    <p>Voor 2014 wordt op vraag van enkele clubs een sabbatjaar ingelast. Er worden wel enkele vriendschappelijke ontmoetingen voorzien.</p>
-    <p>De tornooien worden in het najaar georganiseerd om niet in het vaarwater te komen van de reguliere Vlaamse en Belgische tornooien. Dit interclubkampioenschap vormt een mooie voorbereiding voor deze tornooien.</p>`,
-    `<p>Ook in Nederland (net als in 60 andere landen op onze aardbol) wordt boccia gespeeld. Hun competitie ziet er wel engzins anders uit. Terwijl onze nationale (Vlaamse en Belgische) competitie naar het voorbeeld van de internationale tornooien is gemodelleerd (iedereen speelt tegen spelers uit zijn categorie) is dit in Nederland niet het geval. Zij organiseren een competitie, verdeeld over 9 wedstrijddagen. Elke speler moet 7 wedstrijddagen meespelen.</p>
-    <p>Een ander verschil is dat men enkel onderscheid maakt tussen spelers die een classificatie (BC1-2-3-4) hebben gekregen en diegenen die deze niet hebben gekregen. De eerste groep noemt men de Paralympische Klasse (omdat dit type spelers ook aan de internationale competitie mag deelnemen), de overige spelers spelen in de Open Klasse.</p>
-    <p>In de Paralympische Klasse bestaan er dan nog eens twee afdelingen, de A en de B-divisie. In 2014 starten de spelers met een hele competitie (eerste vijf wedstrijddagen, 14 wedstrijden per speler - 7 tegenstanders). Daarna wordt er een nieuwe indeling gemaakt, waarbij de speler die voorlaatste en laatste eindigde in de A-klasse in de B-klasse spelen en de spelers die eerste en tweede eindigden in de B-klasse naar de A-klasse promoveren. Daarna wordt er in beide divisies een halve competitie gespeeld (7 wedstrijden per speler). Na deze reeks wedstrijden ontvangen de winnaars van beide reeksen de beker. De laatste speler van de A-divisie degradeert naar de B-divisie, de winnaar van de B-divisie stijgt naar de A-divisie.</p>
-    <p>In de Open Klasse spelen alle spelers de eerste tornooien tegen elkaar. Zij starten met een halve competitie (13 spelers dus 12 wedstrijden tijdens de eerste vier wedstrijddagen). Daarna spelen de eerste zeven spelers een hele competitie (6 tegenstanders dus 12 wedstrijden per speler) om het kampioenschap en de overige spelers in een B-poule een hele competitie (5 tegenstanders dus 10 wedstrijden) voor ranking Nederlands Kampioenschap.</p>
-    <p>Er zijn enkele Belgische spelers die meedoen in de Nederlandse competitie. Dit om extra wedstrijdritme op te doen en om nieuwe ervaringen te beleven. Sinds 2014 neemt ook Spinnaker deel aan deze competitie.</p>
-    <p>Daarnaast wordt er ook nog een Nederlands Kampioenschap georganiseerd waaraan ook Belgen mogen deelnemen.</p>`],
+    content: ['bocciaParantee', 'bocciaScholen', 'bocciaInterclub', 'bocciaNederland'],
   };
 
   render() {
-    const { league } = this.props;
+    const { league, content } = this.props;
+
+    if (!content) return null;
+
     return (
       <div>
         <h2>{this.state.title[league]}</h2>
-        <div dangerouslySetInnerHTML={{__html: this.state.content[league]}} />
+        <div dangerouslySetInnerHTML={{__html: content[this.state.content[league]] }} />
       </div>
     );
   }
 }
 
-export default CompetitieIndex;
+const mapStateToProps = state => ({
+  content: selectContent(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(CompetitieIndex);

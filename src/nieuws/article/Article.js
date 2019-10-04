@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Photo from 'assets/images/header.jpg';
 import './article.scss';
 
 class Artikel extends React.Component {
@@ -12,7 +11,7 @@ class Artikel extends React.Component {
         <Link to="/nieuws">Terug naar nieuws</Link>
         <h2>{this.state.title}</h2>
         <span className="date">{this.state.date}</span>
-        <img src={Photo} alt="article" />
+        <img src={process.env.REACT_APP_API_HOST + "header.jpg"} alt="article" />
         <div dangerouslySetInnerHTML={{__html: this.state.body}} />
       </div>
     );
