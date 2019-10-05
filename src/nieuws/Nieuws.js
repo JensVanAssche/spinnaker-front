@@ -1,12 +1,13 @@
 import React from 'react';
 import Network from 'utils/network';
 import Entry from './nieuwsentry/Entry';
+import './nieuws.scss';
 
 class Nieuws extends React.Component {
   state = { loading: true, news: null };
 
   componentDidMount() {
-    Network.get('api/news/all/' + 0).then((res) =>    
+    Network.get('api/news/all/' + 0).then((res) =>
       this.setState({ loading: false, news: res })
     );
   }
