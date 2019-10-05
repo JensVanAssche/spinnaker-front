@@ -1,11 +1,10 @@
 import React from 'react';
-import Photo from 'assets/images/sport.png';
 import './player.scss';
 
-function Player({ name, photo }) {
+function Player({ name, image }) {
   return (
     <div className="player">
-      <img src={Photo} alt='player' />
+      <img src={process.env.REACT_APP_API_HOST + image} alt='player' />
       <p>{name}</p>
     </div>
   );

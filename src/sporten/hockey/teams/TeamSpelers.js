@@ -1,42 +1,33 @@
 import React from 'react';
+import Network from 'utils/network';
 import Player from 'sporten/player/Player';
 
 class TeamSpelers extends React.Component {
   state = {
     title: ['Wheelblazers 1 Spelers', 'Wheelblazers 1 Spelers', 'Wheelblazers 1 Spelers', 'Wheelblazers 4 Spelers', 'Competitie Nederland Spelers'],
-    players: [
-      [
-        { name: 'speler1', photo: 'sport.png' },
-        { name: 'speler2', photo: 'sport.png' }
-      ],
-      [
-        { name: 'speler1', photo: 'sport.png' },
-        { name: 'speler2', photo: 'sport.png' },
-        { name: 'speler3', photo: 'sport.png' },
-        { name: 'speler4', photo: 'sport.png' },
-        { name: 'speler5', photo: 'sport.png' },
-      ],
-      [
-        { name: 'speler1', photo: 'sport.png' },
-        { name: 'speler2', photo: 'sport.png' },
-      ],
-      [
-        { name: 'speler1', photo: 'sport.png' },
-      ],
-      [
-        { name: 'speler1', photo: 'sport.png' },
-      ]
-    ],
+    types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
+    loading: true,
+    data: null
   };
+
+  componentDidMount() {
+    const { types } = this.state;
+    const { team } = this.props;
+    Network.get('api/players/' + types[team]).then((res) =>  
+      this.setState({ loading: false, data: res })
+    );
+  }
 
   render() {
     const { team } = this.props;
+    const { data, loading } = this.state;
+
     return (
       <div className="players">
         <h2>{this.state.title[team]}</h2>
         <div>
-          {this.state.players[team].map(player => (
-            <Player key={player.name} name={player.name} photo={player.photo} />
+        {!loading && data.map(player => (
+            <Player key={player.id} name={player.name} image={player.image} />
           ))}
         </div>
       </div>
