@@ -1,24 +1,32 @@
 import React from 'react';
+import Network from 'utils/network';
 
 class CompetitieStand extends React.Component {
   state = {
     title: ['Parantee Competitie Stand', 'Scholencompetitie Stand', 'Interclub Stand', 'Competitie Nederland Stand'],
-    standings: [
-      ['spel 1', 'spel 2'],
-      ['spel 1'],
-      ['spel 1', 'spel 2', 'spel 3'],
-      ['spel 1', 'spel 2', 'spel 3'],
-    ]
+    types: ['parantee', 'scholen', 'interclub', 'boccianederland'],
+    loading: true,
+    data: null
+  }
+
+  componentDidMount() {
+    const { types } = this.state;
+    const { league } = this.props;
+    Network.get('api/placements/' + types[league]).then((res) =>  
+      this.setState({ loading: false, data: res })
+    );
   }
 
   render() {
     const { league } = this.props;
+    const { data, loading } = this.state;
+
     return (
       <div>
         <h2>{this.state.title[league]}</h2>
-        {this.state.standings[league].map(standing => (
-          <div className="entry" key={standing}>
-            <a href={process.env.REACT_APP_API_HOST + "/example.pdf"} target="_blank" rel="noopener noreferrer">{standing}</a>
+        {!loading && data.map(standing => (
+          <div className="entry" key={standing.id}>
+            <a href={process.env.REACT_APP_API_HOST + standing.pdf} target="_blank" rel="noopener noreferrer">{standing.title}</a>
           </div>
         ))}
       </div>
