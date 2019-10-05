@@ -1,27 +1,25 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getAll } from './actions';
-import { selectData, selectLoading } from './selectors';
+import Network from 'utils/network';
 import Entry from './nieuwsentry/Entry';
 
 class Nieuws extends React.Component {
-  state = { loading: true };
+  state = { loading: true, news: null };
 
-  componentDidMount() {  
-    this.props.getAll().then(
-      this.setState({ loading: false })
+  componentDidMount() {
+    Network.get('api/news/all/' + 0).then((res) =>    
+      this.setState({ loading: false, news: res })
     );
   }
 
   render() {
-    const { data, loading } = this.props;
+    const { loading, news } = this.state;
 
     if (loading) return null;
 
     return (
       <div className="nieuws content ui container">
         <h2>Nieuws</h2>
-        {!this.state.loading && data.map(entry => (
+        {news.map(entry => (
           <Entry id={entry.id} title={entry.title} date={entry.date} body={entry.body} key={entry.id} />
         ))}
       </div>
@@ -29,16 +27,4 @@ class Nieuws extends React.Component {
   }
 }
 
-const mapDispatchToProps = {
-  getAll,
-};
-
-const mapStateToProps = state => ({
-  data: selectData(state),
-  loading: selectLoading(state),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Nieuws);
+export default Nieuws;

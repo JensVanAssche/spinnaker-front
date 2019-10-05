@@ -13,7 +13,7 @@ class Artikel extends React.Component {
   }
 
   componentDidMount() {
-    Network.get('api/news/' + this.props.match.params.id).then((res) => {
+    Network.get('api/news/article/' + this.props.match.params.id).then((res) => {
       this.setState({
         loading: false,
         title: res.title,
@@ -27,7 +27,7 @@ class Artikel extends React.Component {
   render() {
     const { loading, title, body, image, date } = this.state;
 
-    if (loading) return null;   
+    if (loading) return null;
 
     return (
       <div className="news-article ui container content">

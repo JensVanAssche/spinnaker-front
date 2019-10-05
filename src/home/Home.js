@@ -1,4 +1,5 @@
 import React from 'react';
+import Network from 'utils/network';
 import { Link } from 'react-router-dom';
 import Sport from './sport/Sport';
 import Nieuws from './nieuws/Nieuws';
@@ -7,14 +8,22 @@ import './home.scss';
 
 class Home extends React.Component {
   state = {
-    nieuws: [
-      { id: '1', title: "Eerste versie hockey- en bocciakalender gelanceerd", date: "3 juli 2019" },
-      { id: '2', title: "Nieuwe Spinnaker krant is er", date: "24 juli 2019" },
-      { id: '3', title: "Nederlandse competitie boccia eindigt - Spinnaker missie volbracht", date: "23 juli 2019" },
-    ],
-  };
+    loading: true,
+    nieuws: null,
+  }
+
+  componentDidMount() {
+    Network.get('api/news/latest').then((res) => {
+      this.setState({
+        loading: false,
+        nieuws: res,
+      })
+    });
+  }
 
   render() {
+    const { loading, nieuws } = this.state;
+
     return (
       <div className="home">
         <div className="welcome">
@@ -39,7 +48,7 @@ class Home extends React.Component {
           </div>
           <div className="nieuws">
             <h2>Nieuws</h2>
-            {this.state.nieuws.map(item => (
+            {!loading && nieuws.map(item => (
               <Nieuws id={item.id} title={item.title} date={item.date} key={item.id} />
             ))}
             <div className="cta">
