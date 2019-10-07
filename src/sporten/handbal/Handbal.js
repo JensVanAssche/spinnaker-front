@@ -1,30 +1,25 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { selectData } from 'app/selectors';
+import { NavLink, Route, Switch } from 'react-router-dom';
+import HandbalIndex from "./HandbalIndex";
+import HandbalKalender from './HandbalKalender';
 
-class Handbal extends React.Component {
-  render() {
-    const { content } = this.props;
-
-    if (!content) return null;
-
-    return (
-      <div className="content ui container">
-        <div className="sport-header">
-          <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST}/handbal.jpg)`}} />
-          <div><h1>Rolstoelhandbal</h1></div>
-        </div>
-        <div dangerouslySetInnerHTML={{__html: content.handbal}} />
+function Handbal({match}) {
+  return (
+    <div className="handbal">
+      <nav className="subnav">
+        <ul className="ui container">
+          <li><NavLink to={match.path} exact={true}>HANDBAL</NavLink></li>
+          <li><NavLink to={`${match.path}/kalender`}>handbal kalender</NavLink></li>
+        </ul>
+      </nav>
+      <div className="ui container">
+        <Switch>
+          <Route exact path={match.path} component={HandbalIndex} />
+          <Route path={`${match.path}/kalender`} component={HandbalKalender} />
+        </Switch>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-const mapStateToProps = state => ({
-  content: selectData(state),
-});
-
-export default connect(
-  mapStateToProps,
-  null,
-)(Handbal);
+export default Handbal;

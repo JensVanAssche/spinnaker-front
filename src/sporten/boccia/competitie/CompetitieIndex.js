@@ -4,8 +4,8 @@ import { selectData } from 'app/selectors';
 
 class CompetitieIndex extends React.Component {
   state = {
-    title: ['Parantee Competitie', 'Scholencompetitie', 'Interclub', 'Competitie Nederland'],
-    content: ['bocciaParantee', 'bocciaScholen', 'bocciaInterclub', 'bocciaNederland'],
+    title: ['Parantee Competitie', 'Scholencompetitie', 'Competitie Nederland'],
+    content: ['bocciaParantee', 'bocciaScholen', 'bocciaNederland'],
   };
 
   render() {

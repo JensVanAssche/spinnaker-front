@@ -3,8 +3,8 @@ import Network from 'utils/network';
 
 class CompetitieStand extends React.Component {
   state = {
-    title: ['Parantee Competitie Stand', 'Scholencompetitie Stand', 'Interclub Stand', 'Competitie Nederland Stand'],
-    types: ['parantee', 'scholen', 'interclub', 'boccianederland'],
+    title: ['Parantee Competitie Stand', 'Scholencompetitie Stand', 'Competitie Nederland Stand'],
+    types: ['parantee', 'scholen', 'boccianederland'],
     loading: true,
     data: null
   }

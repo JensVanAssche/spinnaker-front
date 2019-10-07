@@ -4,8 +4,8 @@ import Player from 'sporten/player/Player';
 
 class CompetitieSpelers extends React.Component {
   state = {
-    title: ['Parantee Competitie Spelers', 'Scholencompetitie Spelers', 'Interclub Spelers', 'Competitie Nederland Spelers'],
-    types: ['parantee', 'scholen', 'interclub', 'boccianederland'],
+    title: ['Parantee Competitie Spelers', 'Scholencompetitie Spelers', 'Competitie Nederland Spelers'],
+    types: ['parantee', 'scholen', 'boccianederland'],
     loading: true,
     data: null
   };
@@ -27,7 +27,7 @@ class CompetitieSpelers extends React.Component {
         <h2>{this.state.title[league]}</h2>
         <div>
           {!loading && data.map(player => (
-            <Player key={player.id} name={player.name} image={player.image} />
+            <Player key={player.id} name={player.name} subtitle={player.subtitle} image={player.image} />
           ))}
         </div>
       </div>

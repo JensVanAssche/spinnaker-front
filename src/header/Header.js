@@ -34,6 +34,7 @@ function Header() {
                 <Link to="/boccia/kalender">BOCCIA KALENDER</Link>
                 <Link to="/hockey/kalender">HOCKEY KALENDER</Link>
                 <Link to="/handbal/kalender">HANDBAL KALENDER</Link>
+                <Link to="/zwemmen/kalender">ZWEMMEN KALENDER</Link>
               </div>
             </div>
           </li>

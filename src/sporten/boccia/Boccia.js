@@ -13,9 +13,8 @@ function Boccia({match}) {
           <li><NavLink to={match.path} exact={true}>BOCCIA</NavLink></li>
           <li><NavLink to={`${match.path}/paranteecompetitie`}>parantee competitie</NavLink></li>
           <li><NavLink to={`${match.path}/scholencompetitie`}>scholencompetitie</NavLink></li>
-          <li><NavLink to={`${match.path}/interclub`}>interclub</NavLink></li>
-          <li><NavLink to={`${match.path}/kalender`}>kalender</NavLink></li>
           <li><NavLink to={`${match.path}/nederland`}>competitie nederland</NavLink></li>
+          <li><NavLink to={`${match.path}/kalender`}>boccia kalender</NavLink></li>
         </ul>
       </nav>
       <div className="ui container">
@@ -23,9 +22,8 @@ function Boccia({match}) {
           <Route exact path={match.path} component={BocciaIndex} />
           <Route path={`${match.path}/paranteecompetitie`} component={(props) => <Competitie league={0} {...props} />} />
           <Route path={`${match.path}/scholencompetitie`} component={(props) => <Competitie league={1} {...props} /> } />
-          <Route path={`${match.path}/interclub`} component={(props) => <Competitie league={2} {...props} /> } />
+          <Route path={`${match.path}/nederland`} component={(props) => <Competitie league={2} {...props} /> } />
           <Route path={`${match.path}/kalender`} component={BocciaKalender} />
-          <Route path={`${match.path}/nederland`} component={(props) => <Competitie league={3} {...props} /> } />
         </Switch>
       </div>
     </div>

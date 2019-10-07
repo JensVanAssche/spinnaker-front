@@ -2,7 +2,7 @@ import React from 'react';
 
 class CompetitieStand extends React.Component {
   state = {
-    title: ['Parantee Competitie Historiek', 'Scholencompetitie Historiek', 'Interclub Historiek', 'Competitie Nederland Historiek'],
+    title: ['Parantee Competitie Historiek', 'Scholencompetitie Historiek', 'Competitie Nederland Historiek'],
     content: [
       `<h3>2010 - Vlaams Kampioenschap Merksem</h3>
       <p>- Nicky Fontaine (BC1): 5e plaats</p>

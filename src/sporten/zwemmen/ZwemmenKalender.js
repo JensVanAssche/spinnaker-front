@@ -1,14 +1,14 @@
 import React from 'react';
 import Network from 'utils/network';
 
-class HandbalKalender extends React.Component {
+class ZwemmenKalender extends React.Component {
   state = {
     data: null,
     loading: true,
   }
 
   componentDidMount() {
-    Network.get('api/calendar/handbal').then((res) =>
+    Network.get('api/calendar/zwemmen').then((res) =>
       this.setState({ loading: false, data: res })
     );
   }
@@ -18,7 +18,7 @@ class HandbalKalender extends React.Component {
 
     return (
       <div className="content">
-        <h2>Rolstoelhandbal Kalender</h2>
+        <h2>Zwemmen Kalender</h2>
         <div className="calendar">
           <h3>Wanneer</h3>
           <h3>Wat</h3>
@@ -36,4 +36,4 @@ class HandbalKalender extends React.Component {
   }
 }
 
-export default HandbalKalender;
+export default ZwemmenKalender;

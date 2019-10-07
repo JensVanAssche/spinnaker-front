@@ -10,7 +10,7 @@ import './competitie.scss';
 
 class Competitie extends React.Component {
   state = {
-    league: ['PARANTEE COMPETITIE', 'SCHOLENCOMPETITIE', 'INTERCLUB', 'COMPETITIE NEDERLAND'],
+    league: ['PARANTEE COMPETITIE', 'SCHOLENCOMPETITIE', 'COMPETITIE NEDERLAND'],
   };
 
   render() {

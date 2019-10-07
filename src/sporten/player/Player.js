@@ -1,11 +1,12 @@
 import React from 'react';
 import './player.scss';
 
-function Player({ name, image }) {
+function Player({ name, subtitle, image }) {
   return (
     <div className="player">
       <img src={process.env.REACT_APP_API_HOST + image} alt='player' />
       <p>{name}</p>
+      <span>{subtitle}</span>
     </div>
   );
 }

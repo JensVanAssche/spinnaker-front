@@ -12,11 +12,11 @@ function Hockey({match}) {
       <nav className="subnav">
         <ul className="ui container">
           <li><NavLink to={match.path} exact={true}>HOCKEY</NavLink></li>
-          <li><NavLink to={`${match.path}/wheelblazers1/spelers`}>wheelblazers 1</NavLink></li>
-          <li><NavLink to={`${match.path}/wheelblazers2/spelers`}>wheelblazers 2</NavLink></li>
-          <li><NavLink to={`${match.path}/wheelblazers3/spelers`}>wheelblazers 3</NavLink></li>
-          <li><NavLink to={`${match.path}/wheelblazers4/spelers`}>wheelblazers 4</NavLink></li>
-          <li><NavLink to={`${match.path}/nederland/spelers`}>competitie nederland</NavLink></li>
+          <li><NavLink to={`${match.path}/wheelblazers1`}>wheelblazers 1</NavLink></li>
+          <li><NavLink to={`${match.path}/wheelblazers2`}>wheelblazers 2</NavLink></li>
+          <li><NavLink to={`${match.path}/wheelblazers3`}>wheelblazers 3</NavLink></li>
+          <li><NavLink to={`${match.path}/wheelblazers4`}>wheelblazers 4</NavLink></li>
+          <li><NavLink to={`${match.path}/nederland`}>competitie nederland</NavLink></li>
           <li><NavLink to={`${match.path}/kalender`}>kalender</NavLink></li>
           <li><NavLink to={`${match.path}/historiek`}>historiek uitslagen</NavLink></li>
         </ul>

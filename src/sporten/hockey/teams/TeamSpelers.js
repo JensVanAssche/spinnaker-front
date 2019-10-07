@@ -27,7 +27,7 @@ class TeamSpelers extends React.Component {
         <h2>{this.state.title[team]}</h2>
         <div>
         {!loading && data.map(player => (
-            <Player key={player.id} name={player.name} image={player.image} />
+            <Player key={player.id} name={player.name} subtitle={player.subtitle} image={player.image} />
           ))}
         </div>
       </div>
