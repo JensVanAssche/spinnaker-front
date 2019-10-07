@@ -32,11 +32,18 @@ class CompetitieSpelers extends React.Component {
     }
 
     return (
-      <div className="players">
+      <div>
         <h2>{this.state.title[league]}</h2>
-        <div>
-          {!loading && data.map(player => (
-            <Player key={player.id} name={player.name} subtitle={player.subtitle} image={player.image} />
+        <div className="players">
+          {!loading && data.map(type => (
+            <div key={type.name}>
+              <h3>{type.name}</h3>
+              <div>
+                {type.players.map(player => (
+                  <Player key={player.id} name={player.name} subtitle={player.subtitle} image={player.image} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

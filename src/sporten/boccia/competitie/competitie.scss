@@ -23,8 +23,15 @@
     }
   }
 
-  .players > div {
-    display: flex;
-    flex-wrap: wrap;
+  .players {
+    h3 {
+      font-size: 3rem;
+    }
+
+    > div > div {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
   }
 }

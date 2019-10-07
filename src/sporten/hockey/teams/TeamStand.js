@@ -3,7 +3,7 @@ import Network from 'utils/network';
 
 class CompetitieStand extends React.Component {
   state = {
-    title: ['Wheelblazers 1 Klassement', 'Wheelblazers 2 Klassement', 'Wheelblazers 3 Klassement', 'Wheelblazers 4 Klassement', 'Competitie Nederland Klassement'],
+    title: ['Wheelblazers 1 Stand', 'Wheelblazers 2 Stand', 'Wheelblazers 3 Stand', 'Wheelblazers 4 Stand', 'Competitie Nederland Stand'],
     types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
     loading: true,
     data: null

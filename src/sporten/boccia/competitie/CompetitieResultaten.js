@@ -1,9 +1,9 @@
 import React from 'react';
 import Network from 'utils/network';
 
-class CompetitieUitslagen extends React.Component {
+class CompetitieResultaten extends React.Component {
   state = {
-    title: ['Parantee Competitie Uitslagen', 'Scholencompetitie Uitslagen', 'Competitie Nederland Uitslagen'],
+    title: ['Parantee Competitie Resultaten', 'Scholencompetitie Resultaten', 'Competitie Nederland Resultaten'],
     types: ['parantee', 'scholen', 'boccianederland'],
     loading: true,
     data: null
@@ -68,4 +68,4 @@ class CompetitieUitslagen extends React.Component {
   }
 }
 
-export default CompetitieUitslagen;
+export default CompetitieResultaten;
