@@ -16,6 +16,15 @@ class HockeyKalender extends React.Component {
   render() {
     const { data, loading } = this.state;
 
+    if (!loading && data.length === 0) {
+      return (
+        <div>
+          <h2>Hockey Kalender</h2>
+          <p>Geen data op deze kalender gevonden</p>
+        </div>
+      );
+    }
+
     return (
       <div className="content">
         <h2>Hockey Kalender</h2>

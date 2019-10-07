@@ -16,7 +16,7 @@ function Header() {
           <li><NavLink to="/" exact={true} >HOME</NavLink></li>
           <li><NavLink to="/spinnaker">SPINNAKER</NavLink></li>
           <li>
-            <div className="ui simple dropdown item">
+            <div className="ui simple dropdown">
               <span>SPORTEN</span>
               <div className="menu">
                 <Link to="/boccia">BOCCIA</Link>
@@ -28,7 +28,7 @@ function Header() {
             </div>
           </li>
           <li>
-            <div className="ui simple dropdown item">
+            <div className="ui simple dropdown">
               <span>KALENDER</span>
               <div className="menu">
                 <Link to="/boccia/kalender">BOCCIA KALENDER</Link>
@@ -39,7 +39,7 @@ function Header() {
             </div>
           </li>
           <li>
-            <div className="ui simple dropdown item">
+            <div className="ui simple dropdown">
               <span>GALLERIJ</span>
               <div className="menu">
                 <Link to="/fotos">FOTO'S</Link>

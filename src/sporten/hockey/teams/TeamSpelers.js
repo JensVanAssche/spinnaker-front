@@ -22,6 +22,15 @@ class TeamSpelers extends React.Component {
     const { team } = this.props;
     const { data, loading } = this.state;
 
+    if (!loading && data.length === 0) {
+      return (
+        <div>
+          <h2>{this.state.title[team]}</h2>
+          <p>Geen spelers gevonden</p>
+        </div>
+      );
+    }
+
     return (
       <div className="players">
         <h2>{this.state.title[team]}</h2>

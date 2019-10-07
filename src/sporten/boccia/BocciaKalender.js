@@ -16,6 +16,15 @@ class CompetitieKalender extends React.Component {
   render() {
     const { data, loading } = this.state;
 
+    if (!loading && data.length === 0) {
+      return (
+        <div>
+          <h2>Boccia Kalender</h2>
+          <p>Geen data op deze kalender gevonden</p>
+        </div>
+      );
+    }
+
     return (
       <div className="content">
         <h2>Boccia Kalender</h2>

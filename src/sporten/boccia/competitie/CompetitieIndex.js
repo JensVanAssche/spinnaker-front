@@ -11,7 +11,15 @@ class CompetitieIndex extends React.Component {
   render() {
     const { league, content } = this.props;
 
-    if (!content) return null;
+
+    if (!content) {
+      return (
+        <div>
+          <h2>{this.state.title[league]}</h2>
+          <p>Geen info gevonden</p>
+        </div>
+      );
+    }
 
     return (
       <div>

@@ -22,6 +22,15 @@ class CompetitieSpelers extends React.Component {
     const { league } = this.props;
     const { data, loading } = this.state;
 
+    if (!loading && data.length === 0) {
+      return (
+        <div>
+          <h2>{this.state.title[league]}</h2>
+          <p>Geen spelers gevonden</p>
+        </div>
+      );
+    }
+
     return (
       <div className="players">
         <h2>{this.state.title[league]}</h2>

@@ -12,7 +12,7 @@ class CompetitieStand extends React.Component {
   componentDidMount() {
     const { types } = this.state;
     const { team } = this.props;
-    Network.get('api/placements/' + types[team]).then((res) =>  
+    Network.get('api/standings/' + types[team]).then((res) =>  
       this.setState({ loading: false, data: res })
     );
   }
@@ -20,6 +20,15 @@ class CompetitieStand extends React.Component {
   render() {
     const { team } = this.props;
     const { data, loading } = this.state;
+
+    if (!loading && data.length === 0) {
+      return (
+        <div>
+          <h2>{this.state.title[team]}</h2>
+          <p>Geen standen gevonden</p>
+        </div>
+      );
+    }
 
     return (
       <div>
