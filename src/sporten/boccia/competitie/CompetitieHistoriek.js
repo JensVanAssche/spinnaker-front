@@ -1,50 +1,32 @@
 import React from 'react';
+import Network from 'utils/network';
 
 class CompetitieStand extends React.Component {
   state = {
     title: ['Parantee Competitie Historiek', 'Scholencompetitie Historiek', 'Competitie Nederland Historiek'],
-    content: [
-      `<h3>2010 - Vlaams Kampioenschap Merksem</h3>
-      <p>- Nicky Fontaine (BC1): 5e plaats</p>
-      <p>- Philippe Goyvaerts (BC2): 16e plaats</p>
-      <p>- Achille Elsmoortel (BC3): 15e plaats</p>
-      <h3>2010 - Belgisch Kampioenschap Waregem</h3>
-      <p>- Nicky Fontaine (BC1): 6e plaats</p>
-      <p>- Philippe Goyvaerts (BC2): 10e plaats</p>
-      <p>- Achille Elsmoortel (BC3): 11e plaats</p>`,
-      `<h3>2010 - Vlaams Kampioenschap Merksem</h3>
-      <p>- Nicky Fontaine (BC1): 5e plaats</p>
-      <p>- Philippe Goyvaerts (BC2): 16e plaats</p>
-      <p>- Achille Elsmoortel (BC3): 15e plaats</p>
-      <h3>2010 - Belgisch Kampioenschap Waregem</h3>
-      <p>- Nicky Fontaine (BC1): 6e plaats</p>
-      <p>- Philippe Goyvaerts (BC2): 10e plaats</p>
-      <p>- Achille Elsmoortel (BC3): 11e plaats</p>`,
-      `<h3>2010 - Vlaams Kampioenschap Merksem</h3>
-      <p>- Nicky Fontaine (BC1): 5e plaats</p>
-      <p>- Philippe Goyvaerts (BC2): 16e plaats</p>
-      <p>- Achille Elsmoortel (BC3): 15e plaats</p>
-      <h3>2010 - Belgisch Kampioenschap Waregem</h3>
-      <p>- Nicky Fontaine (BC1): 6e plaats</p>
-      <p>- Philippe Goyvaerts (BC2): 10e plaats</p>
-      <p>- Achille Elsmoortel (BC3): 11e plaats</p>`,
-      `<h3>2010 - Vlaams Kampioenschap Merksem</h3>
-      <p>- Nicky Fontaine (BC1): 5e plaats</p>
-      <p>- Philippe Goyvaerts (BC2): 16e plaats</p>
-      <p>- Achille Elsmoortel (BC3): 15e plaats</p>
-      <h3>2010 - Belgisch Kampioenschap Waregem</h3>
-      <p>- Nicky Fontaine (BC1): 6e plaats</p>
-      <p>- Philippe Goyvaerts (BC2): 10e plaats</p>
-      <p>- Achille Elsmoortel (BC3): 11e plaats</p>`,
-    ]
+    types: ['parantee', 'scholen', 'nederland'],
+    data: null,
+    loading: true,
+  }
+
+  componentDidMount() {
+    const { types } = this.state;
+    const { league } = this.props;
+    Network.get('api/history/' + types[league]).then((res) =>
+      this.setState({ loading: false, data: res })
+    );
   }
 
   render() {
     const { league } = this.props;
+    const { data, loading } = this.state;
+
+    if (loading) return null;
+
     return (
-      <div>
+      <div className="historiek">
         <h2>{this.state.title[league]}</h2>
-        <div dangerouslySetInnerHTML={{__html: this.state.content[league]}} />
+        <div dangerouslySetInnerHTML={{__html: data.value }} />
       </div>
     );
   }
