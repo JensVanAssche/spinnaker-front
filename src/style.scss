@@ -123,4 +123,12 @@ main {
     display: inline-block;
     width: 250px;
   }
+
+  .small {
+    width: 150px !important;
+  }
+
+  .medium {
+    width: 200px !important;
+  }
 }

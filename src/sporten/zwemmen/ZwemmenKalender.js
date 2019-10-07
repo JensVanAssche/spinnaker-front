@@ -20,12 +20,12 @@ class ZwemmenKalender extends React.Component {
       <div className="content">
         <h2>Zwemmen Kalender</h2>
         <div className="calendar">
-          <h3>Wanneer</h3>
+          <h3 className="medium">Wanneer</h3>
           <h3>Wat</h3>
           <h3>Waar</h3>
           {!loading && data.map(entry => (
             <div className="entry" key={entry.id}>
-              <p>{entry.date}</p>
+              <p className="medium">{entry.date}</p>
               <p>{entry.title}</p>
               <p>{entry.location}</p>
             </div>
