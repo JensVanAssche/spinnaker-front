@@ -74,6 +74,10 @@ header {
               background-color: $darkblue;
             }
           }
+
+          &.hidden {
+            display: none;
+          }
         }
       }
     }
