@@ -7,7 +7,7 @@ class CompetitieStand extends React.Component {
     types: ['parantee', 'scholen', 'boccianederland'],
     loading: true,
     data: null
-  }
+  };
 
   componentDidMount() {
     const { types } = this.state;
@@ -25,7 +25,45 @@ class CompetitieStand extends React.Component {
       return (
         <div>
           <h2>{this.state.title[league]}</h2>
-          <p>Geen standen gevonden</p>
+          <p>Geen stand gevonden</p>
+        </div>
+      );
+    }
+
+    if (league === 1) {
+      return (
+        <div>
+          <h2>{this.state.title[league]}</h2>
+          {!loading && data.map(result => (
+            <div className="standings" key={result.id}>
+              <div className="header">
+                <h1>{result.title}</h1>
+                <h2>{result.subtitle}</h2>
+              </div>
+              <div className="subheader">
+                <div>
+                  <p>Team</p>
+                </div>
+                <div>
+                  <p>Punten</p>
+                  <p>???</p>
+                </div>
+              </div>
+              <div className="body">
+                {result.scores.map(score => (
+                  <div className="entry" key={score.id}>
+                    <div>
+                      <p>{score.name}</p>
+                    </div>
+                    <div>
+                      <p>{score.points1}</p>
+                      <p>{score.points2}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       );
     }
@@ -33,9 +71,9 @@ class CompetitieStand extends React.Component {
     return (
       <div>
         <h2>{this.state.title[league]}</h2>
-        {!loading && data.map(standing => (
-          <div className="entry" key={standing.id}>
-            <a href={process.env.REACT_APP_API_HOST + standing.pdf} target="_blank" rel="noopener noreferrer">{standing.title}</a>
+        {!loading && data.map(result => (
+          <div key={result.id}>
+            <a href={process.env.REACT_APP_API_HOST + result.pdf} target="_blank" rel="noopener noreferrer">{result.title}</a>
           </div>
         ))}
       </div>

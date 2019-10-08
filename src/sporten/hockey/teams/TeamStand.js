@@ -1,12 +1,12 @@
 import React from 'react';
 import Network from 'utils/network';
 
-class CompetitieStand extends React.Component {
+class TeamStand extends React.Component {
   state = {
     title: ['Wheelblazers 1 Stand', 'Wheelblazers 2 Stand', 'Wheelblazers 3 Stand', 'Wheelblazers 4 Stand', 'Competitie Nederland Stand'],
     types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
     loading: true,
-    data: null
+    data: []
   }
 
   componentDidMount() {
@@ -25,7 +25,7 @@ class CompetitieStand extends React.Component {
       return (
         <div>
           <h2>{this.state.title[team]}</h2>
-          <p>Geen standen gevonden</p>
+          <p>Geen stand gevonden</p>
         </div>
       );
     }
@@ -33,9 +33,36 @@ class CompetitieStand extends React.Component {
     return (
       <div>
         <h2>{this.state.title[team]}</h2>
-        {!loading && data.map(standing => (
-          <div className="entry" key={standing.id}>
-            <a href={process.env.REACT_APP_API_HOST + standing.pdf} target="_blank" rel="noopener noreferrer">{standing.title}</a>
+        {!loading && data.map(result => (
+          <div className="standings" key={result.id}>
+            <div className="header">
+              <h1>{result.title}</h1>
+              <h2>{result.subtitle}</h2>
+            </div>
+            <div className="subheader">
+              <div>
+                <p>Team</p>
+              </div>
+              <div>
+                <p>Gespeeld</p>
+                <p>Goal Verschil</p>
+                <p>Punten</p>
+              </div>
+            </div>
+            <div className="body">
+              {result.scores.map(score => (
+                <div className="entry" key={score.id}>
+                <div>
+                  <p>{score.name}</p>
+                </div>
+                <div>
+                  <p>{score.points1}</p>
+                  <p>{score.points2}</p>
+                  <p>{score.points3}</p>
+                </div>
+              </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
@@ -43,4 +70,4 @@ class CompetitieStand extends React.Component {
   }
 }
 
-export default CompetitieStand;
+export default TeamStand;
