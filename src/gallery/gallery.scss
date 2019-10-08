@@ -132,6 +132,10 @@
       &:hover {
         color: $blue;
       }
+
+      &.hidden {
+        visibility: hidden;
+      }
     }
   }
 }

@@ -57,8 +57,15 @@ class Photos extends React.Component {
         </Modal.Content>
         <Modal.Actions>
           <div>
-            <FontAwesomeIcon icon={faArrowLeft} onClick={() => this.slideDown()} />
-            <FontAwesomeIcon icon={faArrowRight} onClick={() => this.slideUp()} />
+            {currentSlide > 0 && (
+              <FontAwesomeIcon icon={faArrowLeft} onClick={() => this.slideDown()} />
+            )}
+            {currentSlide === 0 && (
+              <FontAwesomeIcon icon={faArrowLeft} className="hidden" />
+            )}
+            {currentSlide < data.length - 1 && (
+              <FontAwesomeIcon icon={faArrowRight} onClick={() => this.slideUp()} />
+            )}
           </div>
           <div><p>Foto {currentSlide + 1} van {data.length}</p></div>
           <div>
