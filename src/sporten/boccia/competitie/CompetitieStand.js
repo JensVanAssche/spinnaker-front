@@ -45,8 +45,8 @@ class CompetitieStand extends React.Component {
                   <p>Team</p>
                 </div>
                 <div>
+                  <p>Totaal Punten</p>
                   <p>Punten</p>
-                  <p>???</p>
                 </div>
               </div>
               <div className="body">

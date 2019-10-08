@@ -294,3 +294,11 @@ main {
     }
   }
 }
+
+.error {
+  padding: 50px;
+
+  img {
+    filter: brightness(0);
+  }
+}

@@ -21,16 +21,34 @@ import Article from 'nieuws/article/Article';
 import Footer from 'footer/Footer';
 import NotFound from "notFound/NotFound";
 
+import Logo from "assets/images/logo_white.png";
+
 class App extends React.Component {
+  state = {
+    error: false
+  }
+
   componentDidMount() {
-    this.props.getAll();
+    this.props.getAll().then(res => {
+      if (res.error) {
+        this.setState({ error: true });
+      }
+    });
   }
 
   render() {
+    const { error } = this.state;
     const { loading } = this.props;
 
     if (loading) {
-      return ( <div>loading</div> );
+      return ( <div /> );
+    }
+
+    if (!loading && error) {
+      return ( <div className="error">
+        <img src={Logo} alt="logo" />
+        <h2>Sorry, onze servers zijn momenteel niet beschikbaar. Probeer later nog eens opnieuw!</h2>
+      </div> );
     }
 
     return (
