@@ -3,6 +3,7 @@ import { NavLink, Route, Switch, Redirect } from 'react-router-dom';
 import TeamSpelers from "./TeamSpelers";
 import TeamResultaten from "./TeamResultaten";
 import TeamStand from "./TeamStand";
+import NotFound from "notFound/NotFound";
 import './team.scss';
 
 class Team extends React.Component {
@@ -26,9 +27,10 @@ class Team extends React.Component {
         <div className="content">
           <Switch>
             <Route exact path={match.path}><Redirect to={{ pathname: `${match.path}/spelers` }} /></Route>
-            <Route path={`${match.path}/spelers`} component={(props) => <TeamSpelers team={team} {...props} />} />
-            <Route path={`${match.path}/resultaten`} component={(props) => <TeamResultaten team={team} {...props} />} />
-            <Route path={`${match.path}/stand`} component={(props) => <TeamStand team={team} {...props} />} />
+            <Route exact path={`${match.path}/spelers`} component={(props) => <TeamSpelers team={team} {...props} />} />
+            <Route exact path={`${match.path}/resultaten`} component={(props) => <TeamResultaten team={team} {...props} />} />
+            <Route exact path={`${match.path}/stand`} component={(props) => <TeamStand team={team} {...props} />} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </div>

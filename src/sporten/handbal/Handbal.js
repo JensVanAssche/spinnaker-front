@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import HandbalIndex from "./HandbalIndex";
 import HandbalKalender from './HandbalKalender';
+import NotFound from "notFound/NotFound";
 
 function Handbal({match}) {
   return (
@@ -15,7 +16,8 @@ function Handbal({match}) {
       <div className="ui container">
         <Switch>
           <Route exact path={match.path} component={HandbalIndex} />
-          <Route path={`${match.path}/kalender`} component={HandbalKalender} />
+          <Route exact path={`${match.path}/kalender`} component={HandbalKalender} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </div>

@@ -6,6 +6,7 @@ import CompetitieKalender from "./CompetitieKalender";
 import CompetitieResultaten from "./CompetitieResultaten";
 import CompetitieStand from "./CompetitieStand";
 import CompetitieHistoriek from "./CompetitieHistoriek";
+import NotFound from "notFound/NotFound";
 import './competitie.scss';
 
 class Competitie extends React.Component {
@@ -31,11 +32,12 @@ class Competitie extends React.Component {
         <div className="content">
           <Switch>
             <Route exact path={match.path} component={(props) => <CompetitieIndex league={league} {...props} />} />
-            <Route path={`${match.path}/spelers`} component={(props) => <CompetitieSpelers league={league} {...props} />} />
-            <Route path={`${match.path}/kalender`} component={(props) => <CompetitieKalender league={league} {...props} />} />
-            <Route path={`${match.path}/resultaten`} component={(props) => <CompetitieResultaten league={league} {...props} />} />
-            <Route path={`${match.path}/stand`} component={(props) => <CompetitieStand league={league} {...props} />} />
-            <Route path={`${match.path}/historiek`} component={(props) => <CompetitieHistoriek league={league} {...props} />} />
+            <Route exact path={`${match.path}/spelers`} component={(props) => <CompetitieSpelers league={league} {...props} />} />
+            <Route exact path={`${match.path}/kalender`} component={(props) => <CompetitieKalender league={league} {...props} />} />
+            <Route exact path={`${match.path}/resultaten`} component={(props) => <CompetitieResultaten league={league} {...props} />} />
+            <Route exact path={`${match.path}/stand`} component={(props) => <CompetitieStand league={league} {...props} />} />
+            <Route exact path={`${match.path}/historiek`} component={(props) => <CompetitieHistoriek league={league} {...props} />} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </div>

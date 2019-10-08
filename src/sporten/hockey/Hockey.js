@@ -4,6 +4,7 @@ import HockeyIndex from "./HockeyIndex";
 import Team from './teams/Team';
 import HockeyKalender from './HockeyKalender';
 import HockeyHistoriek from './HockeyHistoriek';
+import NotFound from "notFound/NotFound";
 import './hockey.scss';
 
 function Hockey({match}) {
@@ -29,8 +30,9 @@ function Hockey({match}) {
           <Route path={`${match.path}/wheelblazers3`} component={(props) => <Team team={2} {...props} /> } />
           <Route path={`${match.path}/wheelblazers4`} component={(props) => <Team team={3} {...props} /> } />
           <Route path={`${match.path}/nederland`} component={(props) => <Team team={4} {...props} /> } />
-          <Route path={`${match.path}/kalender`} component={HockeyKalender} />
-          <Route path={`${match.path}/historiek`} component={HockeyHistoriek} />
+          <Route exact path={`${match.path}/kalender`} component={HockeyKalender} />
+          <Route exact path={`${match.path}/historiek`} component={HockeyHistoriek} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </div>

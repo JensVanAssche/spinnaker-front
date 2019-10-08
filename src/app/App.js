@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getAll } from './actions';
 import { selectLoading } from './selectors';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Header from 'header/Header';
 import Home from 'home/Home';
@@ -19,6 +19,7 @@ import Publicaties from 'publicaties/Publicaties';
 import Nieuws from 'nieuws/Nieuws';
 import Article from 'nieuws/article/Article';
 import Footer from 'footer/Footer';
+import NotFound from "notFound/NotFound";
 
 class App extends React.Component {
   componentDidMount() {
@@ -36,19 +37,22 @@ class App extends React.Component {
       <div>
         <Route path="/" component={Header} />
           <main>
-            <Route exact path="/" component={Home} />
-            <Route path="/spinnaker" component={Spinnaker} />
-            <Route path="/boccia" component={Boccia} />
-            <Route path="/dansen" component={Dansen} />
-            <Route path="/hockey" component={Hockey} />
-            <Route path="/handbal" component={Handbal} />
-            <Route path="/zwemmen" component={Zwemmen} />
-            <Route exact path="/fotos" component={Fotos} />
-            <Route path="/fotos/:id" component={Album} />
-            <Route path="/videos" component={Videos} />
-            <Route path="/publicaties" component={Publicaties} />
-            <Route exact path="/nieuws" component={Nieuws} />
-            <Route path="/nieuws/:id" component={Article} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/spinnaker" component={Spinnaker} />
+              <Route path="/boccia" component={Boccia} />
+              <Route exact path="/dansen" component={Dansen} />
+              <Route path="/hockey" component={Hockey} />
+              <Route path="/handbal" component={Handbal} />
+              <Route path="/zwemmen" component={Zwemmen} />
+              <Route exact path="/fotos" component={Fotos} />
+              <Route exact path="/fotos/:id" component={Album} />
+              <Route exact path="/videos" component={Videos} />
+              <Route exact path="/publicaties" component={Publicaties} />
+              <Route exact path="/nieuws" component={Nieuws} />
+              <Route exact path="/nieuws/:id" component={Article} />
+              <Route component={NotFound} />
+            </Switch>
           </main>
         <Route path="/" component={Footer} />
       </div>

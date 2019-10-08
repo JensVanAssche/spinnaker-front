@@ -3,6 +3,7 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import BocciaIndex from "./BocciaIndex";
 import Competitie from './competitie/Competitie';
 import BocciaKalender from './BocciaKalender';
+import NotFound from "notFound/NotFound";
 import './boccia.scss';
 
 function Boccia({match}) {
@@ -23,7 +24,8 @@ function Boccia({match}) {
           <Route path={`${match.path}/paranteecompetitie`} component={(props) => <Competitie league={0} {...props} />} />
           <Route path={`${match.path}/scholencompetitie`} component={(props) => <Competitie league={1} {...props} /> } />
           <Route path={`${match.path}/nederland`} component={(props) => <Competitie league={2} {...props} /> } />
-          <Route path={`${match.path}/kalender`} component={BocciaKalender} />
+          <Route exact path={`${match.path}/kalender`} component={BocciaKalender} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </div>
