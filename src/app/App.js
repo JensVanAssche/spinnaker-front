@@ -13,6 +13,7 @@ import Hockey from 'sporten/hockey/Hockey';
 import Handbal from 'sporten/handbal/Handbal';
 import Zwemmen from 'sporten/zwemmen/Zwemmen';
 import Fotos from 'gallery/Fotos';
+import Album from 'gallery/Album';
 import Videos from 'gallery/Videos';
 import Publicaties from 'publicaties/Publicaties';
 import Nieuws from 'nieuws/Nieuws';
@@ -43,7 +44,8 @@ class App extends React.Component {
             <Route path="/hockey" component={Hockey} />
             <Route path="/handbal" component={Handbal} />
             <Route path="/zwemmen" component={Zwemmen} />
-            <Route path="/fotos" component={Fotos} />
+            <Route exact path="/fotos" component={Fotos} />
+            <Route path="/fotos/:id" component={Album} />
             <Route path="/videos" component={Videos} />
             <Route path="/publicaties" component={Publicaties} />
             <Route exact path="/nieuws" component={Nieuws} />
