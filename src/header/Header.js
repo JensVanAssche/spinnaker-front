@@ -16,7 +16,12 @@ function Header() {
           <li><NavLink to="/" exact={true} >HOME</NavLink></li>
           <li><NavLink to="/spinnaker">SPINNAKER</NavLink></li>
           <li>
-            <div className="ui simple dropdown">
+            <div className={"ui simple dropdown " +
+            (window.location.pathname.split("/")[1] === "boccia" ? 'aaaaa' : "") +
+            (window.location.pathname.split("/")[1] === "dansen" ? 'aaaaa' : "") +
+            (window.location.pathname.split("/")[1] === "hockey" ? 'aaaaa' : "") +
+            (window.location.pathname.split("/")[1] === "handbal" ? 'aaaaa' : "") +
+            (window.location.pathname.split("/")[1] === "zwemmen" ? 'aaaaa' : "")}>
               <span>SPORTEN</span>
               <div className="menu">
                 <Link to="/boccia">BOCCIA</Link>
@@ -39,7 +44,9 @@ function Header() {
             </div>
           </li>
           <li>
-            <div className="ui simple dropdown">
+            <div className={"ui simple dropdown " +
+            (window.location.pathname.split("/")[1] === "fotos" ? 'aaaaa' : "") +
+            (window.location.pathname.split("/")[1] === "videos" ? 'aaaaa' : "")}>
               <span>GALLERIJ</span>
               <div className="menu">
                 <Link to="/fotos">FOTO'S</Link>

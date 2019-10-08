@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getAll } from './actions';
 import { selectLoading } from './selectors';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Header from 'header/Header';
 import Home from 'home/Home';
@@ -34,9 +34,8 @@ class App extends React.Component {
 
     return (
       <div>
-        <Header></Header>
-        <main>
-          <Switch>
+        <Route path="/" component={Header} />
+          <main>
             <Route exact path="/" component={Home} />
             <Route path="/spinnaker" component={Spinnaker} />
             <Route path="/boccia" component={Boccia} />
@@ -50,9 +49,8 @@ class App extends React.Component {
             <Route path="/publicaties" component={Publicaties} />
             <Route exact path="/nieuws" component={Nieuws} />
             <Route path="/nieuws/:id" component={Article} />
-          </Switch>
-        </main>
-        <Footer></Footer>
+          </main>
+        <Route path="/" component={Footer} />
       </div>
     );
   }

@@ -48,11 +48,12 @@ header {
       .ui.dropdown {
         font-size: 1.8rem;
         color: $white;
-        padding: 15px;
+        padding: 15px 15px 16px 15px;
         border: none;
         background-color: $blue;
         margin: -15px 0;
 
+        &.aaaaa,
         &:hover {
           background-color: $darkblue;
         }
