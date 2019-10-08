@@ -68,7 +68,8 @@ class App extends React.Component {
               <Route exact path="/videos" component={Videos} />
               <Route exact path="/publicaties" component={Publicaties} />
               <Route exact path="/nieuws" component={Nieuws} />
-              <Route exact path="/nieuws/:id" component={Article} />
+              <Route exact path="/nieuws/page/:page" component={Nieuws} />
+              <Route exact path="/nieuws/article/:id" component={Article} />
               <Route component={NotFound} />
             </Switch>
           </main>
