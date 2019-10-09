@@ -47,7 +47,7 @@ class App extends React.Component {
     if (!loading && error) {
       return ( <div className="error">
         <img src={Logo} alt="logo" />
-        <h2>Sorry, onze servers zijn momenteel niet beschikbaar. Probeer later nog eens opnieuw!</h2>
+        <h2>Sorry, onze servers zijn momenteel niet beschikbaar.<br />Probeer later nog eens opnieuw!</h2>
       </div> );
     }
 
