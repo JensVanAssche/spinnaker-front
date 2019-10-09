@@ -9,10 +9,7 @@ class Zwemmen extends React.Component {
     if (!content) {
       return (
         <div>
-          <div className="sport-header">
-          <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST}/zwemmen.jpg)`}} />
-          <div><h1>Zwemmen</h1></div>
-        </div>
+          <h2>Zwemmen</h2>
           <p>Geen info gevonden</p>
         </div>
       );
@@ -21,10 +18,10 @@ class Zwemmen extends React.Component {
     return (
       <div className="content ui container">
         <div className="sport-header">
-          <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST}/zwemmen.jpg)`}} />
+          <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST + content.zwemmenImg})`}} />
           <div><h1>Zwemmen</h1></div>
         </div>
-        <div dangerouslySetInnerHTML={{__html: content.zwemmen}} />
+        <div dangerouslySetInnerHTML={{__html: content.zwemmenOver}} />
       </div>
     );
   }

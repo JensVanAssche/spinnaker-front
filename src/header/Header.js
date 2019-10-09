@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { selectData } from 'app/selectors';
 import './header.scss';
-import logoWhite from 'assets/images/logo_white.png';
 
 class Header extends React.Component {
   onMenuClick() {
@@ -19,11 +20,15 @@ class Header extends React.Component {
   }
 
   render() {
+    const { content } = this.props;
+
+    if (!content) return null;
+
     return (
       <header>
-        <div className="header-image" style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST}/header.jpg)`}}>
+        <div className="header-image" style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST + content.headerImg}`}}>
           <div className="ui container">
-          <Link to="/"><img src={logoWhite} alt="Logo" /></Link>
+          <Link to="/"><img src={process.env.REACT_APP_API_HOST + content.logoImg} alt="Logo" /></Link>
           </div>
         </div>
         <nav>
@@ -80,4 +85,11 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  content: selectData(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(Header);

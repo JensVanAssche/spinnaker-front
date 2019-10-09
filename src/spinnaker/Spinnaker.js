@@ -9,7 +9,7 @@ class Spinnaker extends React.Component {
 
     if (!content) return null;
 
-    return(
+    return (
       <div className="spinnaker ui container">
         <h2>Over Spinnaker</h2>
         <div dangerouslySetInnerHTML={{__html: content.spinnakerOver}} />

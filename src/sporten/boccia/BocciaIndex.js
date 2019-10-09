@@ -9,10 +9,7 @@ class BocciaIndex extends React.Component {
     if (!content) {
       return (
         <div>
-          <div className="sport-header">
-            <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST}/boccia.jpg)`}} />
-            <div><h1>Boccia</h1></div>
-          </div>
+          <h2>Boccia</h2>
           <p>Geen info gevonden</p>
         </div>
       );
@@ -21,7 +18,7 @@ class BocciaIndex extends React.Component {
     return (
       <div className="content">
         <div className="sport-header">
-          <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST}/boccia.jpg)`}} />
+          <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST + content.bocciaImg})`}} />
           <div><h1>Boccia</h1></div>
         </div>
         <div dangerouslySetInnerHTML={{__html: content.bocciaOver}} />
