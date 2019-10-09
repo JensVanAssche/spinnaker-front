@@ -16,11 +16,22 @@ class Photos extends React.Component {
     const { match } = this.props;
     const { loading, data } = this.state;
 
+    if (loading) return null;
+
+    if (!loading && data.length === 0) {
+      return (
+        <div className="content ui container">
+          <h2>Foto Albums</h2>
+          <p>Geen albums gevonden</p>
+        </div>
+      );
+    }
+
     return (
       <div className="content ui container">
         <h2>Foto Albums</h2>
         <div className="photo-albums">
-          {!loading && data.map(photo => (
+          {data.map(photo => (
             <div key={photo.id} className="album">
               <Link to={match.path + `/` + photo.id}>{photo.title}</Link>
               <div className="thumbnail">

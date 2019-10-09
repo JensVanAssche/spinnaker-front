@@ -23,6 +23,15 @@ class CompetitieStand extends React.Component {
 
     if (loading) return null;
 
+    if (!loading && data.length === 0) {
+      return (
+        <div>
+          <h2>{this.state.title[league]}</h2>
+          <p>Geen data gevonden</p>
+        </div>
+      );
+    }
+
     return (
       <div className="historiek">
         <h2>{this.state.title[league]}</h2>

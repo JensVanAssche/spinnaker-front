@@ -56,6 +56,15 @@ class Nieuws extends React.Component {
 
     if (loading) return null;
 
+    if (!loading && !pages.length) {
+      return (
+        <div className="content ui container">
+          <h2>Nieuws</h2>
+          <p>Geen nieuws gevonden</p>
+        </div>
+      );
+    }
+
     if (currentPage > pages.length) return (
       <div className="content ui container">
         <h2>Geen artikels op deze pagina...</h2>
@@ -66,12 +75,12 @@ class Nieuws extends React.Component {
     return (
       <div className="nieuws content ui container">
         <h2>Nieuws</h2>
-        {!loading && data.map(entry => (
+        {data.map(entry => (
           <Entry id={entry.id} title={entry.title} date={entry.date} body={entry.body} key={entry.id} />
         ))}
         <div className="pagination">
           {currentPage > 1 && (<Link to={"/nieuws/page/" + (parseInt(currentPage, 10) - 1)}>Terug</Link>)}
-          {!loading && pages.map(page => (
+          {pages.map(page => (
             <Link className={page === parseInt(currentPage, 10) ? "active" : ""} key={page} to={"/nieuws/page/" + page}>{page}</Link>
           ))}
           {currentPage < pages.length && (<Link to={"/nieuws/page/" + (parseInt(currentPage, 10) + 1)}>Verder</Link>)}

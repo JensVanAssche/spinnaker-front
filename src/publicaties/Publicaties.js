@@ -14,15 +14,23 @@ class Publicaties extends React.Component {
   render() {
     const { loading, data } = this.state;
 
+    if (loading) return null;
+    
     return (
       <div className="publicaties content ui container">
         <h2>Publicaties</h2>
         <h3>Spinnakerkrant</h3>
-        {!loading && data.kranten.map(krant => (
+        {!data.kranten.length && (
+          <p>Geen kranten gevonden</p>
+        )}
+        {data.kranten.map(krant => (
           <a href={process.env.REACT_APP_API_HOST + krant.pdf} target="_blank" rel="noopener noreferrer" key={krant.id}>{krant.title}</a>
         ))}
         <h3>Folders</h3>
-        {!loading && data.folders.map(folder => (
+        {!data.kranten.length && (
+          <p>Geen folders gevonden</p>
+        )}
+        {data.folders.map(folder => (
           <a href={process.env.REACT_APP_API_HOST + folder.pdf} target="_blank" rel="noopener noreferrer" key={folder.id}>{folder.title}</a>
         ))}
       </div>

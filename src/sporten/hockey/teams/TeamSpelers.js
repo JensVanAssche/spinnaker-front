@@ -22,6 +22,8 @@ class TeamSpelers extends React.Component {
     const { team } = this.props;
     const { data, loading } = this.state;
 
+    if (loading) return null;
+
     if (!loading && data.length === 0) {
       return (
         <div>
@@ -35,7 +37,7 @@ class TeamSpelers extends React.Component {
       <div>
         <h2>{this.state.title[team]}</h2>
         <div className="players">
-          {!loading && data.map(type => (
+          {data.map(type => (
             <div key={type.name}>
               <h3>{type.name}</h3>
               <div>

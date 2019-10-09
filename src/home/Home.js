@@ -24,6 +24,8 @@ class Home extends React.Component {
   render() {
     const { loading, nieuws } = this.state;
 
+    if (loading) return null;
+
     return (
       <div className="home">
         <div className="welcome">
@@ -48,7 +50,8 @@ class Home extends React.Component {
           </div>
           <div className="nieuws">
             <h2>Nieuws</h2>
-            {!loading && nieuws.map(item => (
+            {!nieuws.length && (<p>Geen nieuws om te weergeven</p>)}
+            {nieuws.map(item => (
               <Nieuws id={item.id} title={item.title} date={item.date} key={item.id} />
             ))}
             <div className="cta">

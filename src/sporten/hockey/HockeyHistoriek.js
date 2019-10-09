@@ -18,6 +18,15 @@ class CompetitieStand extends React.Component {
 
     if (loading) return null;
 
+    if (!loading && data.length === 0) {
+      return (
+        <div className="historiek content">
+          <h2>Hockey Historiek</h2>
+          <p>Geen data gevonden</p>
+        </div>
+      );
+    }
+
     return (
       <div className="historiek content">
         <h2>Hockey Historiek</h2>
