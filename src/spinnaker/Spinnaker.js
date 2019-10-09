@@ -1,13 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectData } from 'app/selectors';
+import Network from 'utils/network';
 import './spinnaker.scss';
 
 class Spinnaker extends React.Component {
+  state = {
+    data: null,
+    loading: true,
+  }
+
+  componentDidMount() {
+    Network.get('api/links').then((res) =>
+      this.setState({ loading: false, data: res })
+    );
+  }
+
   render() {
     const { content } = this.props;
+    const { loading, data } = this.state;
 
-    if (!content) return null;
+    if (!content || loading) return null;
 
     return (
       <div className="spinnaker ui container">
@@ -25,6 +38,13 @@ class Spinnaker extends React.Component {
         <h2>Engagement</h2>
         <a href={process.env.REACT_APP_API_HOST + "/example.pdf"} target="_blank" rel="noopener noreferrer">engagement</a>
         <h2>Links</h2>
+        <div className="links">
+          {data.map(e => (
+            <a href={e.url} target="_blank" rel="noopener noreferrer">
+              <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
+            </a>
+          ))}
+        </div>
       </div>
     );
   }

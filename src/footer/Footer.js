@@ -1,14 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectData } from 'app/selectors';
+import Network from 'utils/network';
 import Wave from 'assets/images/wave_darkblue.png';
 import './footer.scss';
 
 class Footer extends React.Component {
+  state = {
+    data: null,
+    loading: true,
+  }
+
+  componentDidMount() {
+    Network.get('api/links/footer').then((res) =>
+      this.setState({ loading: false, data: res })
+    );
+  }
+  
   render() {
     const { content } = this.props;
+    const { loading, data } = this.state;
 
-    if (!content) return null;
+    if (!content || loading) return null;
 
     return (
       <footer>
@@ -17,15 +30,27 @@ class Footer extends React.Component {
           <div className="ui container logos">
             <div>
               <h1>Met steun van</h1>
-              {content.footerImgSteun.map(e => <img key={e} src={process.env.REACT_APP_API_HOST + e} alt="logo" />)}
+              {data.steun.map(e => (
+                <a href={e.url} target="_blank" rel="noopener noreferrer">
+                  <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
+                </a>
+              ))}
             </div>
             <div>
               <h1>Aangesloten bij</h1>
-              {content.footerImgAangesloten.map(e => <img key={e} src={process.env.REACT_APP_API_HOST + e} alt="logo" />)}
+              {data.aangesloten.map(e => (
+                <a href={e.url} target="_blank" rel="noopener noreferrer">
+                  <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
+                </a>
+              ))}
             </div>
             <div>
               <h1>Onderdeel van</h1>
-              {content.footerImgOnderdeel.map(e => <img key={e} src={process.env.REACT_APP_API_HOST + e} alt="logo" />)}
+              {data.onderdeel.map(e => (
+                <a href={e.url} target="_blank" rel="noopener noreferrer">
+                  <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
+                </a>
+              ))}
             </div>
           </div>
           <div className="ui container contact">

@@ -10,4 +10,15 @@
   a {
     margin-left: 10px;
   }
+
+  .links a {
+    height: 100%;
+    margin: 0 40px 40px 0;
+    display: inline-block;
+
+    img {
+      height: 80px;
+      width: auto;
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getAll } from './actions';
-import { selectLoading, selectData } from './selectors';
+import { selectLoading } from './selectors';
 import { Route, Switch } from 'react-router-dom';
 
 import Header from 'header/Header';
@@ -21,6 +21,8 @@ import Article from 'nieuws/article/Article';
 import Footer from 'footer/Footer';
 import NotFound from "notFound/NotFound";
 
+import Logo from "assets/images/logo_white.png";
+
 class App extends React.Component {
   state = {
     error: false
@@ -36,7 +38,7 @@ class App extends React.Component {
 
   render() {
     const { error } = this.state;
-    const { loading, content } = this.props;
+    const { loading } = this.props;
 
     if (loading) {
       return ( <div /> );
@@ -44,7 +46,7 @@ class App extends React.Component {
 
     if (!loading && error) {
       return ( <div className="error">
-        <img src={process.env.REACT_APP_API_HOST + content.logoImg} alt="logo" />
+        <img src={Logo} alt="logo" />
         <h2>Sorry, onze servers zijn momenteel niet beschikbaar. Probeer later nog eens opnieuw!</h2>
       </div> );
     }
@@ -83,7 +85,6 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   loading: selectLoading(state),
-  content: selectData(state)
 });
 
 export default connect(
