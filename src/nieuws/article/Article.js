@@ -26,16 +26,18 @@ class Artikel extends React.Component {
 
   render() {
     const { loading, title, body, image, date } = this.state;
-
-    if (loading) return null;
-
+    
     return (
       <div className="news-article ui container content">
         <Link to="/nieuws">Terug naar nieuws</Link>
-        <h2>{title}</h2>
-        <span className="date">{date}</span>
-        <img src={process.env.REACT_APP_API_HOST + image} alt="article" />
-        <div dangerouslySetInnerHTML={{__html: body}} />
+        {!loading && (
+          <>
+            <h2>{title}</h2>
+            <span className="date">{date}</span>
+            <img src={process.env.REACT_APP_API_HOST + image} alt="article" />
+            <div dangerouslySetInnerHTML={{__html: body}} />
+          </>
+        )}
       </div>
     );
   }

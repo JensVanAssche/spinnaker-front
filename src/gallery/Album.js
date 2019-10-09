@@ -22,20 +22,22 @@ class Photos extends React.Component {
   render() {
     const { loading, data } = this.state;
 
-    if (!data) return null;
-
     return (
       <div className="photo-album content ui container">
         <Link to="/fotos">Terug naar foto albums</Link>
-        <h2>{data.title}</h2>
-        <div>
-          {!loading && data.content.map((photo, i) => (
-            <div className="photo-thumbnail" key={photo.id} onClick={() => this.openModal(data.content, i)}>
-              <img src={process.env.REACT_APP_API_HOST + photo.image} alt="a o" />
+        {data && (
+          <>
+            <h2>{data.title}</h2>
+            <div>
+              {!loading && data.content.map((photo, i) => (
+                <div className="photo-thumbnail" key={photo.id} onClick={() => this.openModal(data.content, i)}>
+                  <img src={process.env.REACT_APP_API_HOST + photo.image} alt="a o" />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <AlbumModal ref={this.modalRef} />
+            <AlbumModal ref={this.modalRef} />
+          </>
+        )}
       </div>
     );
   }

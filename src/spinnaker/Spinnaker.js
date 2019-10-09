@@ -40,7 +40,7 @@ class Spinnaker extends React.Component {
         <h2>Links</h2>
         <div className="links">
           {data.map(e => (
-            <a href={e.url} target="_blank" rel="noopener noreferrer">
+            <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
               <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
             </a>
           ))}

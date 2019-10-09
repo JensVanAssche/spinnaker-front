@@ -31,7 +31,7 @@ class Footer extends React.Component {
             <div>
               <h1>Met steun van</h1>
               {data.steun.map(e => (
-                <a href={e.url} target="_blank" rel="noopener noreferrer">
+                <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
                   <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
                 </a>
               ))}
@@ -39,7 +39,7 @@ class Footer extends React.Component {
             <div>
               <h1>Aangesloten bij</h1>
               {data.aangesloten.map(e => (
-                <a href={e.url} target="_blank" rel="noopener noreferrer">
+                <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
                   <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
                 </a>
               ))}
@@ -47,7 +47,7 @@ class Footer extends React.Component {
             <div>
               <h1>Onderdeel van</h1>
               {data.onderdeel.map(e => (
-                <a href={e.url} target="_blank" rel="noopener noreferrer">
+                <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
                   <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
                 </a>
               ))}
