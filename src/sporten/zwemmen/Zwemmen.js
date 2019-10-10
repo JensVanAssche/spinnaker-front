@@ -3,14 +3,33 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import ZwemmenIndex from "./ZwemmenIndex";
 import ZwemmenKalender from './ZwemmenKalender';
 import NotFound from "notFound/NotFound";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import '../sport.scss';
+
+function onHamburgerClick() {
+  if(window.innerWidth <= 768) {
+    document.querySelector('.subnav ul').classList.toggle('open');
+  }
+}
+
+function onNavigationClick() {
+  if(window.innerWidth <= 768) {
+    document.querySelector('.subnav ul').classList.remove('open');
+  }
+}
 
 function Zwemmen({match}) {
   return (
     <div className="Zwemmen">
       <nav className="subnav">
+        <div className="hamburger">
+          <span>{window.location.pathname.split("/")[2]}</span>
+          <span><FontAwesomeIcon icon={faBars} onClick={() => onHamburgerClick()} /></span>
+        </div>
         <ul className="ui container">
-          <li><NavLink to={match.path} exact={true}>ZWEMMEN</NavLink></li>
-          <li><NavLink to={`${match.path}/kalender`}>zwemmen kalender</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={match.path} exact={true}>ZWEMMEN</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={`${match.path}/kalender`}>zwemmen kalender</NavLink></li>
         </ul>
       </nav>
       <div className="ui container">

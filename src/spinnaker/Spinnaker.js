@@ -23,7 +23,7 @@ class Spinnaker extends React.Component {
     if (!content || loading) return null;
 
     return (
-      <div className="spinnaker ui container">
+      <div className="spinnaker ui container content">
         <h2>Over Spinnaker</h2>
         <div dangerouslySetInnerHTML={{__html: content.spinnakerOver}} />
         <h2>Sportaanbod</h2>

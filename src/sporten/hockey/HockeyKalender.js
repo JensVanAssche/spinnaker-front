@@ -28,7 +28,7 @@ class HockeyKalender extends React.Component {
     }
 
     return (
-      <div className="content">
+      <div className="content ui container">
         <h2>Hockey Kalender</h2>
         <div className="calendar">
           <h3 className="medium">Wanneer</h3>

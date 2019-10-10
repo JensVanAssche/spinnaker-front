@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, Input, Button, Form } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 import { validateRequired } from 'utils/validate';
 import { login } from 'admin/actions';
+import './login.scss';
 
 class Login extends React.Component {
   state = {
@@ -33,27 +35,27 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login">
-        <div className="login-modal">
-          <Card>
-            <Form onSubmit={this.handleSubmit}>
-              <h2>Login</h2>
-              <Form.Field>
-                <Input
-                  type="password"
-                  name="password"
-                  placeholder="wachtwoord"
-                  value={this.state.password}
-                  onChange={this.handlePasswordChange}
-                />
-              </Form.Field>
-              <Form.Field>
-                <Button primary type="submit">
-                  Login
-                </Button>
-              </Form.Field>
-            </Form>
-          </Card>
-        </div>
+        <Card>
+          <Form onSubmit={this.handleSubmit}>
+            <Link to="/">Terug naar de website</Link>
+            <h2>Login</h2>
+            <Form.Field>
+              <Input
+                type="password"
+                name="password"
+                placeholder="wachtwoord"
+                value={this.state.password}
+                onChange={this.handlePasswordChange}
+              />
+            </Form.Field>
+            <Form.Field>
+              <Button primary type="submit">
+                Login
+              </Button>
+            </Form.Field>
+          </Form>
+        </Card>
+
       </div>
     );
   }

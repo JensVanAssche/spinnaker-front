@@ -2,7 +2,7 @@
 
 .home {
   .welcome {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     > div {
       background-color: $lightblue;
       display: flex;
@@ -51,6 +51,7 @@
     > div {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
 
       a {
         margin: 20px;
@@ -84,6 +85,42 @@
           transition: 0.1s;
         }
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .home {
+    .welcome {
+      img {
+        display: none;
+      }
+
+      > div {
+        padding: 50px 0;
+
+        h1 {
+          font-size: 4rem;
+          margin-bottom: 30px;
+          text-align: center;
+        }
+
+        a {
+          padding: 10px 20px;
+          font-size: 1.8rem;
+        }
+      }
+    }
+
+    .sports {
+      margin-bottom: 50px;
+      h2 {
+        margin-bottom: 10px;
+      }
+    }
+
+    .nieuws {
+      margin: 0;
     }
   }
 }

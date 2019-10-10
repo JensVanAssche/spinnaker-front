@@ -35,7 +35,7 @@ class Home extends React.Component {
           </div>
           <img src={Wave} alt="wave" />
         </div>
-        <div className="ui container">
+        <div className="ui container content">
           <div className="sports">
             <h2>Onze Sporten</h2>
             <div>

@@ -7,6 +7,8 @@ import CompetitieResultaten from "./CompetitieResultaten";
 import CompetitieStand from "./CompetitieStand";
 import CompetitieHistoriek from "./CompetitieHistoriek";
 import NotFound from "notFound/NotFound";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import './competitie.scss';
 
 class Competitie extends React.Component {
@@ -14,13 +16,29 @@ class Competitie extends React.Component {
     league: ['PARANTEE COMPETITIE', 'SCHOLENCOMPETITIE', 'COMPETITIE NEDERLAND'],
   };
 
+  onHamburgerClick() {
+    if(window.innerWidth <= 768) {
+      document.querySelector('.subsubnav ul').classList.toggle('open');
+    }
+  }
+  
+  onNavigationClick() {
+    if(window.innerWidth <= 768) {
+      document.querySelector('.subsubnav ul').classList.remove('open');
+    }
+  }
+
   render() {
     const { match, league } = this.props;
 
     return (
       <div className="competitie">
-        <nav>
-          <ul>
+        <nav className="subsubnav">
+          <div className="hamburger">
+            <span>{window.location.pathname.split("/")[3]}</span>
+            <span><FontAwesomeIcon icon={faBars} onClick={() => this.onHamburgerClick()} /></span>
+          </div>
+          <ul className="ui container">
             <li><NavLink exact={true} to={match.path}>{this.state.league[league]}</NavLink></li>
             <li><NavLink to={`${match.path}/spelers`}>spelers</NavLink></li>
             <li><NavLink to={`${match.path}/kalender`}>kalender</NavLink></li>
@@ -29,7 +47,7 @@ class Competitie extends React.Component {
             <li><NavLink to={`${match.path}/historiek`}>historiek resultaten</NavLink></li>
           </ul>
         </nav>
-        <div className="content">
+        <div className="ui container content">
           <Switch>
             <Route exact path={match.path} component={(props) => <CompetitieIndex league={league} {...props} />} />
             <Route exact path={`${match.path}/spelers`} component={(props) => <CompetitieSpelers league={league} {...props} />} />

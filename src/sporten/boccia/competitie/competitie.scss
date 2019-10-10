@@ -1,18 +1,36 @@
 @import "vars.scss";
 
 .competitie {
-  nav {
-    ul {
+  nav.subsubnav {
+    .hamburger {
+      display: none;
+      padding: 12px 15px;
+      span {
+        cursor: pointer;
+        text-transform: uppercase;
+
+        &:first-child {
+          font-size: 2rem;
+          padding: 3px 0;
+        }
+        &:last-child {
+          font-size: 2.5rem;
+        }
+      }
+    }
+
+    ul.ui.container {
       margin: 0;
       padding: 0;
       list-style-type: none;
       display: flex;
-      padding: 15px 0;
+      flex-wrap: wrap;
 
       li > a {
         color: $blue;
         padding: 15px;
         font-size: 1.8rem;
+        display: block;
 
         &:hover,
         &.active {
@@ -32,6 +50,37 @@
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 50px;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  nav.subsubnav ul.ui.container {
+    li > a {
+      padding: 15px 12px;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .competitie {
+    nav.subsubnav {
+      .hamburger {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      ul.ui.container {
+        flex-direction: column;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        height: 0;
+        overflow: hidden;
+
+        &.open {
+          height: auto;
+        }
+      }
     }
   }
 }

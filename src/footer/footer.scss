@@ -20,6 +20,7 @@ footer {
     .logos,
     .contact {
       display: flex !important;
+      flex-wrap: wrap;
       margin-bottom: 30px;
 
       > div {
@@ -62,6 +63,40 @@ footer {
     .contact {
       h1 {
         margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  footer {
+    margin-top: 50px;
+
+    > img {
+      display: none;
+    }
+
+    .footer-content {
+      .logos,
+      .contact {
+        margin-bottom: 0;
+        > div {
+          width: 50%;
+          margin-bottom: 50px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  footer {
+    .footer-content {
+      .logos,
+      .contact {
+        > div {
+          width: 100%;
+        }
       }
     }
   }

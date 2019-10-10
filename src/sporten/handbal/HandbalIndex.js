@@ -16,10 +16,15 @@ class Handbal extends React.Component {
     }
 
     return (
-      <div className="content ui container">
+      <div className="content">
         <div className="sport-header">
           <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST + content.handbalImg})`}} />
-          <div><h1>Rolstoelhandbal</h1></div>
+          {window.innerWidth <= 460 && (
+            <div><h1>Rolstoel handbal</h1></div>
+          )}
+          {window.innerWidth > 460 && (
+            <div><h1>Rolstoelhandbal</h1></div>
+          )}
         </div>
         <div dangerouslySetInnerHTML={{__html: content.handbalOver}} />
       </div>

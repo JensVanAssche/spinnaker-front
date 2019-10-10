@@ -27,17 +27,35 @@ header {
   nav {
     background-color: $blue;
 
+    .hamburger {
+      display: none;
+      padding: 12px 15px;
+      span {
+        color: white;
+        cursor: pointer;
+        text-transform: uppercase;
+
+        &:first-child {
+          font-size: 2rem;
+          padding: 3px 0;
+        }
+        &:last-child {
+          font-size: 2.5rem;
+        }
+      }
+    }
+
     ul.ui.container {
       margin: 0;
       padding: 0;
       list-style-type: none;
       display: flex;
-      padding: 15px 0;
 
       li > a {
         color: white;
-        padding: 15.5px;
+        padding: 15px;
         font-size: 1.8rem;
+        display: block;
 
         &:hover,
         &.active {
@@ -48,10 +66,14 @@ header {
       .ui.dropdown {
         font-size: 1.8rem;
         color: $white;
-        padding: 15px 15px 16px 15px;
         border: none;
         background-color: $blue;
-        margin: -15px 0;
+        display: block;
+
+        span {
+          display: block;
+          padding: 15px 15px 15px 15px;
+        }
 
         &.aaaaa,
         &:hover {
@@ -78,6 +100,63 @@ header {
           &.hidden {
             display: none;
           }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  header .header-image {
+    height: 200px;
+
+    .ui.container {
+      height: 200px;
+
+      img {
+        height: 125px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  header nav .hamburger {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  header nav ul.ui.container {
+    flex-direction: column;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    height: 0;
+    overflow: hidden;
+
+    &.open {
+      height: auto;
+    }
+
+    .ui.simple.dropdown {
+      .menu {
+        position: static;
+        background-color: $lightblue;
+      }
+
+      &:hover {
+        .menu {
+          width: 0;
+          height: 0;
+          overflow: hidden;
+          opacity: 0;
+        }
+      }
+
+      &.open {
+        .menu {
+          width: auto;
+          height: auto;
+          overflow: visible;
+          opacity: 1;
         }
       }
     }

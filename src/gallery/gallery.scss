@@ -95,14 +95,12 @@
 .album-modal {
   .content {
     margin: 0;
-    height: 600px;
     display: flex !important;
     justify-content: center;
     align-items: center;
 
     img {
-      max-height: 570px;
-      max-width: 870px;
+      width: 100%;
     }
   }
 
@@ -136,6 +134,67 @@
       &.hidden {
         visibility: hidden;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .photo-album {
+    > div {
+      .photo-thumbnail {
+        width: 275px;
+        height: 275px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .photo-album {
+    > div {
+      .photo-thumbnail {
+        width: 220px;
+        height: 220px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .photo-album {
+    > div {
+      .photo-thumbnail {
+        width: 270px;
+        height: 270px;
+      }
+    }
+  }
+
+  .album-modal.ui.modal {
+    > .actions {
+      padding: 1rem !important;
+      svg {
+        font-size: 2.4rem;
+        margin: 0 10px;
+        cursor: pointer;
+
+        &:hover {
+          color: $blue;
+        }
+
+        &.hidden {
+          visibility: hidden;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .videos {
+    iframe {
+      height: auto;
+      width: 100%;
     }
   }
 }

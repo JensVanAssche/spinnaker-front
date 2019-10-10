@@ -1,0 +1,17 @@
+.login {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .ui.card {
+    padding: 20px;
+    width: 400px;
+
+    input,
+    button {
+      font-size: 1.4rem !important;
+    }
+  }
+}

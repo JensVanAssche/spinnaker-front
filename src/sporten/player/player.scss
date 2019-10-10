@@ -17,3 +17,22 @@
     font-size: 1.6rem;
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .player {
+    width: 27%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .player {
+    width: 40%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .player {
+    width: 100%;
+    margin: 0 0px 40px 0;
+  }
+}

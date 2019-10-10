@@ -1,0 +1,393 @@
+@import "vars.scss";
+
+nav.subnav {
+  background-color: $lightblue;
+
+  .hamburger {
+    display: none;
+    padding: 12px 15px;
+    span {
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+      text-transform: uppercase;
+
+      &:first-child {
+        font-size: 2rem;
+        padding: 3px 0;
+      }
+      &:last-child {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  ul.ui.container {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+
+    li > a {
+      color: white;
+      padding: 15px;
+      font-size: 1.8rem;
+      display: block;
+
+      &:hover,
+      &.active {
+        background-color: $darkblue;
+      }
+    }
+  }
+}
+
+.sport-header {
+  width: 100%;
+  height: 250px;
+  margin-bottom: 50px;
+  position: relative;
+
+  div:first-child {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(70%);
+  }
+
+  div:last-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      color: $white;
+      font-size: 8rem;
+      font-weight: 100;
+      text-align: center;
+    }
+  }
+}
+
+.calendar {
+  h3 {
+    display: inline-block;
+    width: 250px;
+  }
+
+  .entry p {
+    margin: 0;
+    display: inline-block;
+    width: 250px;
+  }
+
+  .small {
+    width: 150px !important;
+  }
+
+  .medium {
+    width: 200px !important;
+  }
+}
+
+.historiek {
+  h3 {
+    margin-top: 30px;
+  }
+  p {
+    margin-bottom: 5px;
+  }
+}
+
+.results {
+  margin-top: 25px;
+  margin-bottom: 90px;
+  width: 60%;
+
+  .header {
+    background-color: $blue;
+    width: 100%;
+    padding: 10px 20px;
+
+    h1 {
+      color: white;
+      font-size: 3rem;
+      font-weight: 100;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      color: white;
+      font-size: 1.7rem;
+      margin: 0;
+    }
+  }
+
+  .entry {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &:nth-child(odd) {
+      background-color: #eeeeee;
+
+      span {
+        background-color: $lightblue;
+      }
+    }
+
+    &:nth-child(even) {
+      background-color: #dddddd;
+
+      span {
+        background-color: $lesslightblue;
+      }
+    }
+
+    p {
+      font-size: 2rem;
+      margin: 0;
+      padding: 10px 20px;
+      width: 40%;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+
+    span {
+      padding: 15px 20px;
+      font-size: 2.4rem;
+      color: white;
+    }
+  }
+}
+
+.standings {
+  margin-top: 25px;
+  margin-bottom: 90px;
+  width: 60%;
+
+  .header {
+    background-color: $blue;
+    width: 100%;
+    padding: 10px 20px;
+
+    h1 {
+      color: white;
+      font-size: 3rem;
+      font-weight: 100;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      color: white;
+      font-size: 1.7rem;
+      margin: 0;
+    }
+  }
+
+  .subheader {
+    background-color: $lightblue;
+    display: flex;
+
+    > div {
+      width: 50%;
+      display: flex;
+
+      p {
+        width: 100%;
+        margin: 0;
+        padding: 5px 10px;
+        color: white;
+      }
+    }
+  }
+
+  .entry {
+    width: 100%;
+    display: flex;
+
+    &:nth-child(odd) {
+      background-color: #eeeeee;
+
+      > div:last-child p:nth-child(odd) {
+        background-color: #cccccc;
+      }
+
+      span {
+        background-color: $lightblue;
+      }
+    }
+
+    &:nth-child(even) {
+      background-color: #dddddd;
+
+      > div:last-child p:nth-child(odd) {
+        background-color: #bbbbbb;
+      }
+
+      span {
+        background-color: $lesslightblue;
+      }
+    }
+
+    > div {
+      width: 50%;
+      display: flex;
+    }
+
+    p {
+      font-size: 2rem;
+      margin: 0;
+      padding: 10px 20px;
+      width: 100%;
+    }
+
+    span {
+      padding: 15px 20px;
+      font-size: 2.4rem;
+      color: white;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  nav.subnav ul.ui.container {
+    li > a {
+      padding: 15px 12px;
+    }
+  }
+
+  .results {
+    width: 80%;
+  }
+
+  .standings {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  nav.subnav {
+    .hamburger {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    ul.ui.container {
+      flex-direction: column;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      height: 0;
+      overflow: hidden;
+
+      &.open {
+        height: auto;
+      }
+
+      li > a {
+        color: white;
+        padding: 15px;
+        font-size: 1.8rem;
+        display: block;
+
+        &:hover,
+        &.active {
+          background-color: $darkblue;
+        }
+      }
+    }
+  }
+
+  .content .sport-header {
+    height: 150px;
+    margin-bottom: 30px;
+
+    div:first-child {
+      height: 150px;
+    }
+
+    div:last-child {
+      h1 {
+        font-size: 6rem;
+      }
+    }
+  }
+
+  .calendar {
+    h3,
+    .small,
+    .medium {
+      width: 100% !important;
+      margin: 0;
+    }
+
+    .entry {
+      margin: 20px 0;
+      p {
+        width: 100%;
+      }
+    }
+  }
+
+  .results {
+    width: 100%;
+  }
+
+  .standings {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .results {
+    .header {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .entry {
+      p {
+        font-size: 1.7rem;
+        padding: 5px 10px;
+      }
+
+      span {
+        padding: 5px 10px;
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .standings {
+    .header {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .entry {
+      p {
+        font-size: 1.7rem;
+        padding: 5px 10px;
+      }
+    }
+  }
+}

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectData } from 'app/selectors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import './header.scss';
 
 class Header extends React.Component {
@@ -10,13 +12,35 @@ class Header extends React.Component {
     aaa.forEach(e => {
       e.classList.add('hidden');
     });
+
+    if(window.innerWidth <= 768) {
+      document.querySelector('nav ul').classList.remove('open');
+    }
   }
 
-  onHover() {
+  onDropdownHover() {
     const aaa = document.querySelectorAll('.dropdown .menu');
     aaa.forEach(e => {
       e.classList.remove('hidden');
     });
+  }
+
+  onDropdownClick(dropdown) {
+    if(window.innerWidth <= 768) {
+      document.querySelector('.dropdown.' + dropdown).classList.toggle('open');
+    }
+  }
+
+  onHamburgerClick() {
+    if(window.innerWidth <= 768) {
+      document.querySelector('nav ul').classList.toggle('open');
+    }
+  }
+
+  onNavigationClick() {
+    if(window.innerWidth <= 768) {
+      document.querySelector('nav ul').classList.remove('open');
+    }
   }
 
   render() {
@@ -28,21 +52,26 @@ class Header extends React.Component {
       <header>
         <div className="header-image" style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST + content.headerImg}`}}>
           <div className="ui container">
-          <Link to="/"><img src={process.env.REACT_APP_API_HOST + content.logoImg} alt="Logo" /></Link>
+            <Link to="/" onClick={() => this.onNavigationClick()}><img src={process.env.REACT_APP_API_HOST + content.logoImg} alt="Logo" /></Link>
           </div>
         </div>
         <nav>
+          <div className="hamburger">
+            <span>{window.location.pathname.split("/")[1]}</span>
+            <span><FontAwesomeIcon icon={faBars} onClick={() => this.onHamburgerClick()} /></span>
+          </div>
           <ul className="ui container">
-            <li><NavLink to="/" exact={true} >HOME</NavLink></li>
-            <li><NavLink to="/spinnaker">SPINNAKER</NavLink></li>
+            <li onClick={() => this.onNavigationClick()}><NavLink to="/" exact={true} >HOME</NavLink></li>
+            <li onClick={() => this.onNavigationClick()}><NavLink to="/spinnaker">SPINNAKER</NavLink></li>
             <li>
-              <div className={"ui simple dropdown " +
+              <div className={"ui simple dropdown sporten " +
               (window.location.pathname.split("/")[1] === "boccia" ? 'aaaaa' : "") +
               (window.location.pathname.split("/")[1] === "dansen" ? 'aaaaa' : "") +
               (window.location.pathname.split("/")[1] === "hockey" ? 'aaaaa' : "") +
               (window.location.pathname.split("/")[1] === "handbal" ? 'aaaaa' : "") +
               (window.location.pathname.split("/")[1] === "zwemmen" ? 'aaaaa' : "")}
-              onMouseEnter={() => this.onHover()}>
+              onMouseEnter={() => this.onDropdownHover()}
+              onClick={() => this.onDropdownClick('sporten')}>
                 <span>SPORTEN</span>
                 <div className="menu" onClick={() => this.onMenuClick()}>
                   <Link to="/boccia">BOCCIA</Link>
@@ -54,7 +83,9 @@ class Header extends React.Component {
               </div>
             </li>
             <li>
-              <div className="ui simple dropdown" onMouseEnter={() => this.onHover()}>
+              <div className="ui simple dropdown kalender"
+              onMouseEnter={() => this.onDropdownHover()}
+              onClick={() => this.onDropdownClick('kalender')}>
                 <span>KALENDER</span>
                 <div className="menu" onClick={() => this.onMenuClick()}>
                   <Link to="/boccia/kalender">BOCCIA KALENDER</Link>
@@ -65,10 +96,11 @@ class Header extends React.Component {
               </div>
             </li>
             <li>
-              <div className={"ui simple dropdown " +
+              <div className={"ui simple dropdown gallerij " +
               (window.location.pathname.split("/")[1] === "fotos" ? 'aaaaa' : "") +
               (window.location.pathname.split("/")[1] === "videos" ? 'aaaaa' : "")}
-              onMouseEnter={() => this.onHover()}>
+              onMouseEnter={() => this.onDropdownHover()}
+              onClick={() => this.onDropdownClick('gallerij')}>
                 <span>GALLERIJ</span>
                 <div className="menu" onClick={() => this.onMenuClick()}>
                   <Link to="/fotos">FOTO'S</Link>
@@ -76,8 +108,8 @@ class Header extends React.Component {
                 </div>
               </div>
             </li>
-            <li><NavLink to="/publicaties">PUBLICATIES</NavLink></li>
-            <li><NavLink to="/nieuws">NIEUWS</NavLink></li>
+            <li onClick={() => this.onNavigationClick()}><NavLink to="/publicaties">PUBLICATIES</NavLink></li>
+            <li onClick={() => this.onNavigationClick()}><NavLink to="/nieuws">NIEUWS</NavLink></li>
           </ul>
         </nav>
       </header>

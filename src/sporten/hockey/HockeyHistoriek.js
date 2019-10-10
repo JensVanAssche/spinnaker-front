@@ -28,7 +28,7 @@ class CompetitieStand extends React.Component {
     }
 
     return (
-      <div className="historiek content">
+      <div className="historiek content ui container">
         <h2>Hockey Historiek</h2>
         <div dangerouslySetInnerHTML={{__html: data.value }} />
       </div>

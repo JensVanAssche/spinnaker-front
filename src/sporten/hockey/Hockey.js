@@ -5,24 +5,42 @@ import Team from './teams/Team';
 import HockeyKalender from './HockeyKalender';
 import HockeyHistoriek from './HockeyHistoriek';
 import NotFound from "notFound/NotFound";
-import './hockey.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import '../sport.scss';
+
+function onHamburgerClick() {
+  if(window.innerWidth <= 768) {
+    document.querySelector('.subnav ul').classList.toggle('open');
+  }
+}
+
+function onNavigationClick() {
+  if(window.innerWidth <= 768) {
+    document.querySelector('.subnav ul').classList.remove('open');
+  }
+}
 
 function Hockey({match}) {
   return (
     <div className="hockey">
       <nav className="subnav">
+        <div className="hamburger">
+          <span>{window.location.pathname.split("/")[2]}</span>
+          <span><FontAwesomeIcon icon={faBars} onClick={() => onHamburgerClick()} /></span>
+        </div>
         <ul className="ui container">
-          <li><NavLink to={match.path} exact={true}>HOCKEY</NavLink></li>
-          <li><NavLink to={`${match.path}/wheelblazers1`}>wheelblazers 1</NavLink></li>
-          <li><NavLink to={`${match.path}/wheelblazers2`}>wheelblazers 2</NavLink></li>
-          <li><NavLink to={`${match.path}/wheelblazers3`}>wheelblazers 3</NavLink></li>
-          <li><NavLink to={`${match.path}/wheelblazers4`}>wheelblazers 4</NavLink></li>
-          <li><NavLink to={`${match.path}/nederland`}>competitie nederland</NavLink></li>
-          <li><NavLink to={`${match.path}/kalender`}>kalender</NavLink></li>
-          <li><NavLink to={`${match.path}/historiek`}>historiek uitslagen</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={match.path} exact={true}>HOCKEY</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={`${match.path}/wheelblazers1`}>wheelblazers 1</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={`${match.path}/wheelblazers2`}>wheelblazers 2</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={`${match.path}/wheelblazers3`}>wheelblazers 3</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={`${match.path}/wheelblazers4`}>wheelblazers 4</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={`${match.path}/nederland`}>competitie nederland</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={`${match.path}/kalender`}>kalender</NavLink></li>
+          <li onClick={() => onNavigationClick()}><NavLink to={`${match.path}/historiek`}>historiek uitslagen</NavLink></li>
         </ul>
       </nav>
-      <div className="ui container">
+      <div>
         <Switch>
           <Route exact path={match.path} component={HockeyIndex} />
           <Route path={`${match.path}/wheelblazers1`} component={(props) => <Team team={0} {...props} /> } />
