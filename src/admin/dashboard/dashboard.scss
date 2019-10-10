@@ -1,18 +1,43 @@
 .dashboard {
-  margin-top: 30px;
-  position: relative;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
 
-  .ui.tab {
-    font-size: 1.4rem;
-  }
-
-  .buttons {
-    position: absolute;
-    top: 0;
-    right: 0;
+    h1 {
+      margin-bottom: 0;
+      font-size: 2.8rem;
+    }
 
     button {
       font-size: 1.4rem !important;
+    }
+  }
+
+  .main {
+    margin-top: 20px !important;
+
+    .four.column {
+      padding-right: 0 !important;
+      z-index: 1;
+    }
+
+    .twelve.column {
+      padding-left: 0 !important;
+    }
+
+    .tab {
+      padding: 2em;
+    }
+
+    .no-border {
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    .secondary.menu {
+      flex-wrap: wrap;
+      margin-bottom: 20px;
     }
   }
 }
