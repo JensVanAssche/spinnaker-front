@@ -1,11 +1,109 @@
 import React from 'react';
-import { Tab } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { selectData } from "app/selectors";
+import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
+import Network from 'utils/network';
 
-function Algemeen() {
-  return <Tab.Pane className="no-border">
-    <h1>Algemeen</h1>
-    <p>hockey image en uitleg, kalender, historiek</p>
-  </Tab.Pane>;
+class Algemeen extends React.Component {
+  state = {
+    calendar: null,
+  }
+
+  componentDidMount() {
+    Network.get('api/calendar/hockey').then((res) =>
+      this.setState({ calendar: res })
+    );
+  }
+
+  render() {
+    const { calendar } = this.state;
+    const { openTextareaModal, openFileModal, openKalenderModal, data } = this.props;
+
+    if (!calendar) return null;
+
+    return <Tab.Pane className="no-border">
+      <h1>Algemeen</h1>
+      <div className="dashboard-item">
+        <h2>Hockey Foto</h2>
+        <div className="dashboard-flex">
+          <img src={process.env.REACT_APP_API_HOST + data.hockeyImg} alt="eumm" />
+          <Button icon className="small-button" onClick={() => openFileModal('Hockey Foto')} >
+            <Icon name="edit" />
+          </Button>
+        </div>
+      </div>
+      <div className="dashboard-item">
+        <h2>Hockey Inhoud</h2>
+        <div className="dashboard-flex">
+          <p dangerouslySetInnerHTML={{__html: data.hockeyOver.substring(0,255)+"..."}} />
+          <Button icon className="small-button" onClick={() => openTextareaModal('Hockey Inhoud', data.hockeyOver)} >
+            <Icon name="edit" />
+          </Button>
+        </div>
+      </div>
+      <div className="dashboard-item">
+        <h2>Hockey Kalender</h2>
+        <Grid columns={4}>
+          <Grid.Row className="grid-header">
+            <Grid.Column width={4}>
+              <p>Wanneer</p>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <p>Wat</p>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <p>Waar</p>
+            </Grid.Column>
+            <Grid.Column width={2}>
+            </Grid.Column>
+          </Grid.Row>
+          {!calendar.length && ( <p>Geen kalender items</p> )}
+          {calendar.map(entry => (
+            <Grid.Row key={entry.id}>
+              <Grid.Column width={4}>
+                <p>{entry.date}</p>
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <p>{entry.title}</p>
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <p>{entry.location}</p>
+              </Grid.Column>
+              <Grid.Column width={2} className="grid-button">
+                <Button icon className="small-button" onClick={() => openKalenderModal('Kalender Item', entry)}>
+                  <Icon name="edit" />
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+          ))}
+          <Grid.Row>
+            <Grid.Column width={16} className="grid-button">
+              <Button icon primary className="small-button" onClick={() => openKalenderModal('Item Toevoegen')}>
+                <span>Item</span>
+                <Icon name="add" />
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
+      <div className="dashboard-item">
+        <h2>Hockey Historiek</h2>
+        <div className="dashboard-flex">
+          <p dangerouslySetInnerHTML={{__html: data.hockeyHistory.substring(0,255)+"..."}} />
+          <Button icon className="small-button" onClick={() => openTextareaModal('Hockey Historiek', data.hockeyHistory)} >
+            <Icon name="edit" />
+          </Button>
+        </div>
+      </div>
+    </Tab.Pane>;
+  }
 }
 
-export default Algemeen;
+const mapStateToProps = state => ({
+  data: selectData(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(Algemeen);

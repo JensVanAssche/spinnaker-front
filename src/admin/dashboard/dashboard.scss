@@ -93,6 +93,10 @@
     }
 
     .grid {
+      .row {
+        padding: 5px 0 !important;
+      }
+
       img {
         background-color: lightgrey;
       }

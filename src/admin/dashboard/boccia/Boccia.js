@@ -21,6 +21,7 @@ class Boccia extends React.Component {
         openTextareaModal={this.props.openTextareaModal}
         openPdfModal={this.props.openPdfModal}
         openPlayerModal={this.props.openPlayerModal}
+        openKalenderModal={this.props.openKalenderModal}
       />,
     },
     {
@@ -33,6 +34,7 @@ class Boccia extends React.Component {
         openResultScoreModal={this.props.openResultScoreModal}
         openStandingsTournamentModal={this.props.openStandingsTournamentModal}
         openStandingsScoreModal={this.props.openStandingsScoreModal}
+        openKalenderModal={this.props.openKalenderModal}
       />,
     },
     {
@@ -41,6 +43,7 @@ class Boccia extends React.Component {
         openTextareaModal={this.props.openTextareaModal}
         openPdfModal={this.props.openPdfModal}
         openPlayerModal={this.props.openPlayerModal}
+        openKalenderModal={this.props.openKalenderModal}
       />,
     },
   ];

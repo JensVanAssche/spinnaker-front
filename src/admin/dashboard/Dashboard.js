@@ -26,6 +26,7 @@ import ResultTournamentModal from './modals/ResultTournamentModal';
 import ResultScoreModal from './modals/ResultScoreModal';
 import StandingsTournamentModal from './modals/StandingsTournamentModal';
 import StandingsScoreModal from './modals/StandingsScoreModal';
+import KalenderModal from './modals/KalenderModal';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class Dashboard extends React.Component {
     this.resultScoreModalRef = React.createRef();
     this.standingsTournamentModalRef = React.createRef();
     this.standingsScoreModalRef = React.createRef();
+    this.kalenderModalRef = React.createRef();
   }
 
   panes = [
@@ -72,23 +74,44 @@ class Dashboard extends React.Component {
         openResultScoreModal={this.openResultScoreModal}
         openStandingsTournamentModal={this.openStandingsTournamentModal}
         openStandingsScoreModal={this.openStandingsScoreModal}
+        openKalenderModal={this.openKalenderModal}
       />,
     },
     {
       menuItem: "Hockey",
-      render: () => <Hockey />,
+      render: () => <Hockey
+        openFileModal={this.openFileModal}
+        openTextareaModal={this.openTextareaModal}
+        openKalenderModal={this.openKalenderModal}
+        openPlayerModal={this.openPlayerModal}
+        openResultTournamentModal={this.openResultTournamentModal}
+        openResultScoreModal={this.openResultScoreModal}
+        openStandingsTournamentModal={this.openStandingsTournamentModal}
+        openStandingsScoreModal={this.openStandingsScoreModal}
+      />,
     },
     {
       menuItem: "Handbal",
-      render: () => <Handbal />,
+      render: () => <Handbal
+        openFileModal={this.openFileModal}
+        openTextareaModal={this.openTextareaModal}
+        openKalenderModal={this.openKalenderModal}
+      />,
     },
     {
       menuItem: "Zwemmen",
-      render: () => <Zwemmen />,
+      render: () => <Zwemmen
+        openFileModal={this.openFileModal}
+        openTextareaModal={this.openTextareaModal}
+        openKalenderModal={this.openKalenderModal}
+      />,
     },
     {
       menuItem: "Dansen",
-      render: () => <Dansen />,
+      render: () => <Dansen
+        openFileModal={this.openFileModal}
+        openTextareaModal={this.openTextareaModal}
+      />,
     },
     {
       menuItem: "Foto's",
@@ -152,6 +175,10 @@ class Dashboard extends React.Component {
     this.standingsScoreModalRef.current.openModal(title, data);
   };
 
+  openKalenderModal = (title, data) => {
+    this.kalenderModalRef.current.openModal(title, data);
+  };
+
   logout = () => this.props.logout();
 
   render() {
@@ -181,6 +208,7 @@ class Dashboard extends React.Component {
         <ResultScoreModal ref={this.resultScoreModalRef} />
         <StandingsTournamentModal ref={this.standingsTournamentModalRef} />
         <StandingsScoreModal ref={this.standingsScoreModalRef} />
+        <KalenderModal ref={this.kalenderModalRef} />
       </div>
     );
   }

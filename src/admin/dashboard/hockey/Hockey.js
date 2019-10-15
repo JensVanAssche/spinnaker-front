@@ -12,27 +12,61 @@ class Hockey extends React.Component {
   panes = [
     {
       menuItem: "Algemeen",
-      render: () => <Algemeen />,
+      render: () => <Algemeen
+        openTextareaModal={this.props.openTextareaModal}
+        openFileModal={this.props.openFileModal}
+        openKalenderModal={this.props.openKalenderModal}
+      />,
     },
     {
       menuItem: "Wheelblazers 1",
-      render: () => <Wheelblazers1 />,
+      render: () => <Wheelblazers1
+        openPlayerModal={this.props.openPlayerModal}
+        openResultTournamentModal={this.props.openResultTournamentModal}
+        openResultScoreModal={this.props.openResultScoreModal}
+        openStandingsTournamentModal={this.props.openStandingsTournamentModal}
+        openStandingsScoreModal={this.props.openStandingsScoreModal}
+      />,
     },
     {
       menuItem: "Wheelblazers 2",
-      render: () => <Wheelblazers2 />,
+      render: () => <Wheelblazers2
+        openPlayerModal={this.props.openPlayerModal}
+        openResultTournamentModal={this.props.openResultTournamentModal}
+        openResultScoreModal={this.props.openResultScoreModal}
+        openStandingsTournamentModal={this.props.openStandingsTournamentModal}
+        openStandingsScoreModal={this.props.openStandingsScoreModal}
+      />,
     },
     {
       menuItem: "Wheelblazers 3",
-      render: () => <Wheelblazers3 />,
+      render: () => <Wheelblazers3
+        openPlayerModal={this.props.openPlayerModal}
+        openResultTournamentModal={this.props.openResultTournamentModal}
+        openResultScoreModal={this.props.openResultScoreModal}
+        openStandingsTournamentModal={this.props.openStandingsTournamentModal}
+        openStandingsScoreModal={this.props.openStandingsScoreModal}
+      />,
     },
     {
       menuItem: "Wheelblazers 4",
-      render: () => <Wheelblazers4 />,
+      render: () => <Wheelblazers4
+        openPlayerModal={this.props.openPlayerModal}
+        openResultTournamentModal={this.props.openResultTournamentModal}
+        openResultScoreModal={this.props.openResultScoreModal}
+        openStandingsTournamentModal={this.props.openStandingsTournamentModal}
+        openStandingsScoreModal={this.props.openStandingsScoreModal}
+      />,
     },
     {
       menuItem: "Nederland",
-      render: () => <Nederland />,
+      render: () => <Nederland
+        openPlayerModal={this.props.openPlayerModal}
+        openResultTournamentModal={this.props.openResultTournamentModal}
+        openResultScoreModal={this.props.openResultScoreModal}
+        openStandingsTournamentModal={this.props.openStandingsTournamentModal}
+        openStandingsScoreModal={this.props.openStandingsScoreModal}
+      />,
     },
   ];
 

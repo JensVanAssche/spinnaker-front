@@ -12,7 +12,8 @@ class StandingsTournamentModal extends React.Component {
       id: null,
       name: null,
       points1: null,
-      points2: null
+      points2: null,
+      points3: null
     },
   };
 
@@ -26,6 +27,7 @@ class StandingsTournamentModal extends React.Component {
         name: data ? data.name : '',
         points1: data ? data.points1 : '',
         points2: data ? data.points2 : '',
+        points3: data.points3 ? data.points3 : null,
       },
     });
   };
@@ -65,11 +67,22 @@ class StandingsTournamentModal extends React.Component {
     }));
   };
 
+  handlePoints3Change = event => {
+    const { value } = event.target;
+    this.setState(prevState => ({
+      data: {
+        ...prevState.data,
+        points3: value,
+      },
+    }));
+  };
+
   validate = () => {
     const { data } = this.state;
     if (!validateRequired(data.name)) return false;
     if (!validateRequired(data.points1)) return false;
     if (!validateRequired(data.points2)) return false;
+    if (data.points3 !== null) { if (!validateRequired(data.points3)) return false; }
     return true;
   };
 
@@ -103,11 +116,16 @@ class StandingsTournamentModal extends React.Component {
             </Form.Field>
             <Form.Group inline>
               <Form.Field width={4}>
-                <Form.Input fluid label='Totaal punten' value={data.points1} onChange={this.handlePoints1Change} />
+                <Form.Input fluid label={data.points3 !== null ? 'Gespeeld' : 'Totaal punten'} value={data.points1} onChange={this.handlePoints1Change} />
               </Form.Field>
               <Form.Field width={4}>
-                <Form.Input fluid label='Punten' value={data.points2} onChange={this.handlePoints2Change} />
+                <Form.Input fluid label={data.points3 !== null ? 'Goal Verschil' : 'Punten'} value={data.points2} onChange={this.handlePoints2Change} />
               </Form.Field>
+              {data.points3 !== null && (
+                <Form.Field width={4}>
+                  <Form.Input fluid label='Punten' value={data.points3} onChange={this.handlePoints3Change} />
+                </Form.Field>
+              )}
             </Form.Group>
           </Form>
         </Modal.Content>

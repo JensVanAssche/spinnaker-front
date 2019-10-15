@@ -7,6 +7,7 @@ import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
 class Parantee extends React.Component {
   state = {
     players: null,
+    calendar: null,
     results: null,
     standings: null,
   }
@@ -14,6 +15,10 @@ class Parantee extends React.Component {
   componentDidMount() {
     Network.get('api/players/parantee').then((res) =>
       this.setState({ players: res })
+    );
+
+    Network.get('api/calendar/parantee').then((res) =>
+      this.setState({ calendar: res })
     );
 
     Network.get('api/results/parantee').then((res) =>
@@ -26,10 +31,10 @@ class Parantee extends React.Component {
   }
 
   render() {
-    const { players, results, standings } = this.state;
-    const { openTextareaModal, openPdfModal, openPlayerModal, data } = this.props;
+    const { players, calendar, results, standings } = this.state;
+    const { openTextareaModal, openPdfModal, openPlayerModal, openKalenderModal, data } = this.props;
 
-    if (!players || !results || !standings) return null;
+    if (!players || !calendar || !results || !standings) return null;
 
     return <Tab.Pane className="no-border">
       <h1>Parantee Competitie</h1>
@@ -83,6 +88,51 @@ class Parantee extends React.Component {
             <Grid.Column width={16} className="grid-button">
               <Button icon primary className="small-button" onClick={() => openPlayerModal('Speler toevoegen')}>
                 <span>Speler</span>
+                <Icon name="add" />
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
+      <div className="dashboard-item">
+        <h2>Parantee Kalender</h2>
+        <Grid columns={4}>
+          <Grid.Row className="grid-header">
+            <Grid.Column width={4}>
+              <p>Wanneer</p>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <p>Wat</p>
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <p>Waar</p>
+            </Grid.Column>
+            <Grid.Column width={2}>
+            </Grid.Column>
+          </Grid.Row>
+          {!calendar.length && ( <p>Geen kalender items</p> )}
+          {calendar.map(entry => (
+            <Grid.Row key={entry.id}>
+              <Grid.Column width={4}>
+                <p>{entry.date}</p>
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <p>{entry.title}</p>
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <p>{entry.location}</p>
+              </Grid.Column>
+              <Grid.Column width={2} className="grid-button">
+                <Button icon className="small-button" onClick={() => openKalenderModal('Kalender Item', entry)}>
+                  <Icon name="edit" />
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
+          ))}
+          <Grid.Row>
+            <Grid.Column width={16} className="grid-button">
+              <Button icon primary className="small-button" onClick={() => openKalenderModal('Item Toevoegen')}>
+                <span>Item</span>
                 <Icon name="add" />
               </Button>
             </Grid.Column>
