@@ -39,16 +39,22 @@ class Nederland extends React.Component {
     return <Tab.Pane className="no-border">
       <h1>Competitie Nederland</h1>
       <div className="dashboard-item">
-        <h2>Nederland Inhoud</h2>
+        <h2>Nederland Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.bocciaNederland.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Nederland Inhoud', data.bocciaNederland)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Nederland Tekst', data.bocciaNederland)} >
             <Icon name="edit" />
           </Button>
         </div>
       </div>
       <div className="dashboard-item">
-        <h2>Nederland Spelers</h2>
+        <div className="dashboard-flex">
+          <h2>Nederland Spelers</h2>
+          <Button icon primary className="small-button"  onClick={() => openPlayerModal('Boccia Nederland Speler toevoegen')}>
+            <span>Speler</span>
+            <Icon name="add" />
+          </Button>
+        </div>
         <Grid columns={4}>
           <Grid.Row className="grid-header">
             <Grid.Column width={2}>
@@ -77,25 +83,23 @@ class Nederland extends React.Component {
                   <p>{player.subtitle}</p>
                 </Grid.Column>
                 <Grid.Column width={7} className="grid-button">
-                  <Button icon className="small-button"  onClick={() => openPlayerModal('Nederland Speler aanpassen', player)}>
+                  <Button icon className="small-button"  onClick={() => openPlayerModal('Boccia Nederland Speler aanpassen', player)}>
                     <Icon name="edit" />
                   </Button>
                 </Grid.Column>
               </Grid.Row>
             ))
           ))}
-          <Grid.Row>
-            <Grid.Column width={16} className="grid-button">
-              <Button icon primary className="small-button"  onClick={() => openPlayerModal('Speler toevoegen')}>
-                <span>Speler</span>
-                <Icon name="add" />
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
         </Grid>
       </div>
       <div className="dashboard-item">
-        <h2>Parantee Kalender</h2>
+        <div className="dashboard-flex">
+          <h2>Parantee Kalender</h2>
+          <Button icon primary className="small-button" onClick={() => openKalenderModal('Boccia Nederland Kalender Item toevoegen')}>
+            <span>Item</span>
+            <Icon name="add" />
+          </Button>
+        </div>
         <Grid columns={4}>
           <Grid.Row className="grid-header">
             <Grid.Column width={4}>
@@ -123,24 +127,22 @@ class Nederland extends React.Component {
                 <p>{entry.location}</p>
               </Grid.Column>
               <Grid.Column width={2} className="grid-button">
-                <Button icon className="small-button" onClick={() => openKalenderModal('Kalender Item', entry)}>
+                <Button icon className="small-button" onClick={() => openKalenderModal('Boccia Nederland Kalender Item aanpassen', entry)}>
                   <Icon name="edit" />
                 </Button>
               </Grid.Column>
             </Grid.Row>
           ))}
-          <Grid.Row>
-            <Grid.Column width={16} className="grid-button">
-              <Button icon primary className="small-button" onClick={() => openKalenderModal('Item Toevoegen')}>
-                <span>Item</span>
-                <Icon name="add" />
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
         </Grid>
       </div>
       <div className="dashboard-item">
-        <h2>Nederland Resultaten</h2>
+        <div className="dashboard-flex">
+          <h2>Nederland Resultaten</h2>
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Boccia Nederland Resultaat toevoegen', null)} >
+            <span>Resultaat</span>
+            <Icon name="add" />
+          </Button>
+        </div>
         {!results.length && ( <p>Geen resultaten</p> )}
         {results.map(result => (
           <div className="dashboard-flex" key={result.id}>
@@ -148,21 +150,20 @@ class Nederland extends React.Component {
               <p>{result.title}</p>
               <a href={process.env.REACT_APP_API_HOST + result.pdf} target="_blank" rel="noopener noreferrer">{result.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Nederland Resultaten', { title: result.title, pdf: result.pdf } )}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Boccia Nederland Resultaat aanpassen', { title: result.title, pdf: result.pdf } )}>
               <Icon name="edit" />
             </Button>
           </div>
         ))}
+      </div>
+      <div className="dashboard-item">
         <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Resultaat Toevoegen', null)} >
-            <span>Resultaat</span>
+          <h2>Nederland Stand</h2>
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Boccia Nederland Stand toevoegen', null)} >
+            <span>Stand</span>
             <Icon name="add" />
           </Button>
         </div>
-      </div>
-      <div className="dashboard-item">
-        <h2>Nederland Stand</h2>
         {!standings.length && ( <p>Geen stand</p> )}
         {standings.map(stand => (
           <div className="dashboard-flex" key={stand.id}>
@@ -170,18 +171,11 @@ class Nederland extends React.Component {
               <p>{stand.title}</p>
               <a href={process.env.REACT_APP_API_HOST + stand.pdf} target="_blank" rel="noopener noreferrer">{stand.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Nederland Stand', { title: stand.title, pdf: stand.pdf } )}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Boccia Nederland Stand aanpassen', { title: stand.title, pdf: stand.pdf } )}>
               <Icon name="edit" />
             </Button>
           </div>
         ))}
-        <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Stand Toevoegen', null)} >
-            <span>Stand</span>
-            <Icon name="add" />
-          </Button>
-        </div>
       </div>
       <div className="dashboard-item">
         <h2>Nederland Historiek</h2>

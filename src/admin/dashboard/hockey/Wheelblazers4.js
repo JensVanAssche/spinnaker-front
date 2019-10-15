@@ -32,7 +32,13 @@ class Wheelblazers1 extends React.Component {
     return <Tab.Pane className="no-border">
       <h1>Wheelblazers 4</h1>
       <div className="dashboard-item">
-        <h2>Wheelblazers 4 Spelers</h2>
+        <div className="dashboard-flex">
+          <h2>Wheelblazers 4 Spelers</h2>
+          <Button icon primary className="small-button" onClick={() => openPlayerModal('Wheelblazers 4 Speler toevoegen')}>
+            <span>Speler</span>
+            <Icon name="add" />
+          </Button>
+        </div>
         <Grid columns={4}>
           <Grid.Row className="grid-header">
             <Grid.Column width={2}>
@@ -69,16 +75,15 @@ class Wheelblazers1 extends React.Component {
             ))
           ))}
         </Grid>
+      </div>
+      <div className="dashboard-item">
         <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openPlayerModal('Speler toevoegen')}>
-            <span>Speler</span>
+          <h2>Wheelblazers 4 Resultaten</h2>
+          <Button icon primary className="small-button" onClick={() => openResultTournamentModal('Wheelblazers 4 Tornooi toevoegen')}>
+            <span>Tornooi Resultaat</span>
             <Icon name="add" />
           </Button>
         </div>
-      </div>
-      <div className="dashboard-item">
-        <h2>Wheelblazers 4 Resultaten</h2>
         {!results.length && ( <p>Geen resultaten</p> )}
         {results.map(result => (
           <div key={result.id} className="scores-grid">
@@ -87,7 +92,7 @@ class Wheelblazers1 extends React.Component {
                 <p>{result.title}</p>
                 <p>{result.date}</p>
               </div>
-              <Button icon className="small-button" onClick={() => openResultTournamentModal('Tornooi', result)}>
+              <Button icon className="small-button" onClick={() => openResultTournamentModal('Wheelblazers 4 Tornooi aanpassen', result)}>
                 <Icon name="edit" />
               </Button>
             </div>
@@ -98,30 +103,29 @@ class Wheelblazers1 extends React.Component {
                     <p>{score.team1}: {score.team1Score}</p>
                     <p>{score.team2}: {score.team2Score}</p>
                   </div>
-                  <Button icon className="small-button" onClick={() => openResultScoreModal('Resultaat', score)}>
+                  <Button icon className="small-button" onClick={() => openResultScoreModal('Wheelblazers 4 Resultaat aanpassen', score)}>
                     <Icon name="edit" />
                   </Button>
                 </div>
               ))}
               <div className="scores-content-entry">
                 <div />
-                <Button icon primary className="small-button" onClick={() => openResultScoreModal('Resultaat toevoegen')}>
+                <Button icon primary className="small-button" onClick={() => openResultScoreModal('Wheelblazers 4 Resultaat toevoegen')}>
                   <Icon name="add" />
                 </Button>
               </div>
             </div>
           </div>
         ))}
+      </div>
+      <div className="dashboard-item">
         <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openResultTournamentModal('Tornooi toevoegen')}>
-            <span>Tornooi Resultaat</span>
+          <h2>Wheelblazers 4 Stand</h2>
+          <Button icon primary className="small-button" onClick={() => openStandingsTournamentModal('Wheelblazers 4 Tornooi toevoegen')} >
+            <span>Tornooi Stand</span>
             <Icon name="add" />
           </Button>
         </div>
-      </div>
-      <div className="dashboard-item">
-        <h2>Wheelblazers 4 Stand</h2>
         {!standings.length && ( <p>Geen stand</p> )}
         {standings.map(stand => (
           <div key={stand.id} className="scores-grid">
@@ -130,7 +134,7 @@ class Wheelblazers1 extends React.Component {
                 <p>{stand.title}</p>
                 <p>{stand.subtitle}</p>
               </div>
-              <Button icon className="small-button" onClick={() => openStandingsTournamentModal('Tornooi', stand)}>
+              <Button icon className="small-button" onClick={() => openStandingsTournamentModal('Wheelblazers 4 Tornooi aanpassen', stand)}>
                 <Icon name="edit" />
               </Button>
             </div>
@@ -140,27 +144,20 @@ class Wheelblazers1 extends React.Component {
                   <div>
                     <p>{score.name}: {score.points1} - {score.points2} - {score.points3}</p>
                   </div>
-                  <Button icon className="small-button" onClick={() => openStandingsScoreModal('Stand', score)}>
+                  <Button icon className="small-button" onClick={() => openStandingsScoreModal('Wheelblazers 4 Stand aanpassen', score)}>
                     <Icon name="edit" />
                   </Button>
                 </div>
               ))}
               <div className="scores-content-entry">
                 <div />
-                <Button icon primary className="small-button" onClick={() => openStandingsScoreModal('Stand toevoegen')}>
+                <Button icon primary className="small-button" onClick={() => openStandingsScoreModal('Wheelblazers 4 Stand toevoegen')}>
                   <Icon name="add" />
                 </Button>
               </div>
             </div>
           </div>
         ))}
-        <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openStandingsTournamentModal('Tornooi Toevoegen')} >
-            <span>Tornooi Stand</span>
-            <Icon name="add" />
-          </Button>
-        </div>
       </div>
     </Tab.Pane>;
   }

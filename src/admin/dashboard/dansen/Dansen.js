@@ -16,10 +16,10 @@ function Dansen({ openTextareaModal, openFileModal, data }) {
       </div>
     </div>
     <div className="dashboard-item">
-      <h2>Dansen Inhoud</h2>
+      <h2>Dansen Tekst</h2>
       <div className="dashboard-flex">
         <p dangerouslySetInnerHTML={{__html: data.dansenOver.substring(0,255)+"..."}} />
-        <Button icon className="small-button" onClick={() => openTextareaModal('Dansen Inhoud', data.dansenOver)} >
+        <Button icon className="small-button" onClick={() => openTextareaModal('Dansen Tekst', data.dansenOver)} >
           <Icon name="edit" />
         </Button>
       </div>

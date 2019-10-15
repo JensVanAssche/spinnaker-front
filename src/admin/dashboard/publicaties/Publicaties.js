@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
+import { Tab, Button, Icon } from 'semantic-ui-react';
 import Network from 'utils/network';
 
 class Publicaties extends React.Component {
@@ -22,7 +22,13 @@ class Publicaties extends React.Component {
     return <Tab.Pane>
       <h1>Publicaties</h1>
       <div className="dashboard-item">
-        <h2>Spinnaker Kranten</h2>
+        <div className="dashboard-flex">
+          <h2>Spinnaker Kranten</h2>
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Krant toevoegen')} >
+            <span>Krant</span>
+            <Icon name="add" />
+          </Button>
+        </div>
         {!publicaties.kranten.length && ( <p>Geen kranten</p> )}
         {publicaties.kranten.map(krant => (
           <div className="dashboard-flex" key={krant.id}>
@@ -30,21 +36,20 @@ class Publicaties extends React.Component {
               <p>{krant.title}</p>
               <a href={process.env.REACT_APP_API_HOST + krant.pdf} target="_blank" rel="noopener noreferrer">{krant.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Krant', krant)}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Krant aanpassen', krant)}>
               <Icon name="edit" />
             </Button>
           </div>
         ))}
+      </div>
+      <div className="dashboard-item">
         <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Krant toevoegen')} >
-            <span>Krant</span>
+          <h2>Folders</h2>
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Folder toevoegen')} >
+            <span>Folder</span>
             <Icon name="add" />
           </Button>
         </div>
-      </div>
-      <div className="dashboard-item">
-        <h2>Folders</h2>
         {!publicaties.folders.length && ( <p>Geen folders</p> )}
         {publicaties.folders.map(folder => (
           <div className="dashboard-flex" key={folder.id}>
@@ -52,18 +57,11 @@ class Publicaties extends React.Component {
               <p>{folder.title}</p>
               <a href={process.env.REACT_APP_API_HOST + folder.pdf} target="_blank" rel="noopener noreferrer">{folder.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Folder', folder)}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Folder aanpassen', folder)}>
               <Icon name="edit" />
             </Button>
           </div>
         ))}
-        <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Folder toevoegen')} >
-            <span>Folder</span>
-            <Icon name="add" />
-          </Button>
-        </div>
       </div>
     </Tab.Pane>;
   }

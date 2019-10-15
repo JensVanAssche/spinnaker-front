@@ -29,6 +29,7 @@ import StandingsScoreModal from './modals/StandingsScoreModal';
 import KalenderModal from './modals/KalenderModal';
 import AlbumModal from './modals/AlbumModal';
 import VideoModal from './modals/VideoModal';
+import ArtikelModal from './modals/ArtikelModal';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class Dashboard extends React.Component {
     this.kalenderModalRef = React.createRef();
     this.albumModalRef = React.createRef();
     this.videoModalRef = React.createRef();
+    this.artikelModalRef = React.createRef();
   }
 
   panes = [
@@ -138,7 +140,9 @@ class Dashboard extends React.Component {
     },
     {
       menuItem: "Nieuws",
-      render: () => <Nieuws />,
+      render: () => <Nieuws 
+        openArtikelModal={this.openArtikelModal}
+      />,
     },
   ];
 
@@ -156,6 +160,7 @@ class Dashboard extends React.Component {
   openKalenderModal = (title, data) => this.kalenderModalRef.current.openModal(title, data);
   openAlbumModal = (title, data) => this.albumModalRef.current.openModal(title, data);
   openVideoModal = (title, data) => this.videoModalRef.current.openModal(title, data);
+  openArtikelModal = (title, data) => this.artikelModalRef.current.openModal(title, data);
 
   logout = () => this.props.logout();
 
@@ -189,6 +194,7 @@ class Dashboard extends React.Component {
         <KalenderModal ref={this.kalenderModalRef} />
         <AlbumModal ref={this.albumModalRef} />
         <VideoModal ref={this.videoModalRef} />
+        <ArtikelModal ref={this.artikelModalRef} />
       </div>
     );
   }

@@ -26,18 +26,26 @@ class Fotos extends React.Component {
     if (!albums) return null;
 
     return <Tab.Pane>
-      <h1>Foto's</h1>
+      <div className="dashboard-item">
+        <div className="dashboard-flex">
+          <h1>Foto's</h1>
+          <Button icon primary className="small-button" onClick={() => openAlbumModal('Fotoalbum toevoegen')}>
+            <span>Album</span>
+            <Icon name="add" />
+          </Button>
+        </div>
+      </div>
       {!albums.length && ( <p>Geen albums</p> )}
       {albums.map(album => (
         <div className="dashboard-item" key={album.id}>
           <div className="dashboard-flex">
             <h2>{album.title}</h2>
             <div>
-              <Button icon className="small-button" onClick={() => openAlbumModal('Fotoalbum', album)}>
+              <Button icon className="small-button" onClick={() => openAlbumModal('Fotoalbum aanpassen', album)}>
                 <Icon name="edit" />
               </Button>
               <Button icon primary className="small-button" onClick={() => openFileModal('Foto toevoegen')}>
-                <span>Foto Toevoegen</span>
+                <span>Foto</span>
                 <Icon name="add" />
               </Button>
             </div>
@@ -55,15 +63,6 @@ class Fotos extends React.Component {
           </div>
         </div>
       ))}
-      <div className="dashboard-item">
-        <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openAlbumModal('Fotoalbum toevoegen')}>
-            <span>Album Toevoegen</span>
-            <Icon name="add" />
-          </Button>
-        </div>
-      </div>
     </Tab.Pane>;
   }
 }

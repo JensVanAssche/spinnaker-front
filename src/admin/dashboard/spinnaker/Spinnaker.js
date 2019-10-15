@@ -79,19 +79,25 @@ class Spinnaker extends React.Component {
         </div>
       </div>
       <div className="dashboard-item">
-        <h2>Engagement</h2>
+        <h2>Engagementsverklaring</h2>
         <div className="dashboard-flex">
           <div>
             <p>{data.spinnakerEngagementTitle}</p>
             <a href={process.env.REACT_APP_API_HOST + data.spinnakerEngagementPdf} target="_blank" rel="noopener noreferrer">{data.spinnakerEngagementPdf}</a>
           </div>
-          <Button icon className="small-button" onClick={() => openPdfModal('Engagement', { title: data.spinnakerEngagementTitle, pdf: data.spinnakerEngagementPdf } )}>
+          <Button icon className="small-button" onClick={() => openPdfModal('Engagementsverklaring', { title: data.spinnakerEngagementTitle, pdf: data.spinnakerEngagementPdf } )}>
             <Icon name="edit" />
           </Button>
         </div>
       </div>
       <div className="dashboard-item">
-        <h2>Links (en footer opties)</h2>
+        <div className="dashboard-flex">
+          <h2>Links (en footer opties)</h2>
+          <Button icon primary className="small-button" onClick={() => openLinkModal('Link toevoegen', null)} >
+            <span>Link</span>
+            <Icon name="add" />
+          </Button>
+        </div>
         <Grid columns={4}>
           <Grid.Row className="grid-header">
             <Grid.Column width={4}>
@@ -124,14 +130,6 @@ class Spinnaker extends React.Component {
               </Grid.Column>
             </Grid.Row>
           ))}
-          <Grid.Row>
-            <Grid.Column width={16} className="grid-button">
-              <Button icon primary className="small-button" onClick={() => openLinkModal('Link toevoegen', null)} >
-                <span>Link</span>
-                <Icon name="add" />
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
         </Grid>
       </div>
     </Tab.Pane>;

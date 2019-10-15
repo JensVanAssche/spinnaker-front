@@ -7,10 +7,10 @@ function Algemeen({ openTextareaModal, openFileModal, data }) {
   return <Tab.Pane>
     <h1>Algemeen</h1>
     <div className="dashboard-item">
-      <h2>Logo</h2>
+      <h2>Spinnaker Logo</h2>
       <div className="dashboard-flex">
         <img src={process.env.REACT_APP_API_HOST + data.logoImg} alt="eumm" />
-        <Button icon className="small-button" onClick={() => openFileModal('Logo')} >
+        <Button icon className="small-button" onClick={() => openFileModal('Spinnaker Logo')} >
           <Icon name="edit" />
         </Button>
       </div>

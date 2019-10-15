@@ -33,16 +33,22 @@ class Handbal extends React.Component {
         </div>
       </div>
       <div className="dashboard-item">
-        <h2>Handbal Inhoud</h2>
+        <h2>Handbal Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.handbalOver.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Handbal Inhoud', data.handbalOver)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Handbal Tekst', data.handbalOver)} >
             <Icon name="edit" />
           </Button>
         </div>
       </div>
       <div className="dashboard-item">
-        <h2>Handbal Kalender</h2>
+        <div className="dashboard-flex">
+          <h2>Handbal Kalender</h2>
+          <Button icon primary className="small-button" onClick={() => openKalenderModal('Handbal Kalender Item toevoegen')}>
+            <span>Item</span>
+            <Icon name="add" />
+          </Button>
+        </div>
         <Grid columns={4}>
           <Grid.Row className="grid-header">
             <Grid.Column width={4}>
@@ -70,20 +76,12 @@ class Handbal extends React.Component {
                 <p>{entry.location}</p>
               </Grid.Column>
               <Grid.Column width={2} className="grid-button">
-                <Button icon className="small-button" onClick={() => openKalenderModal('Kalender Item', entry)}>
+                <Button icon className="small-button" onClick={() => openKalenderModal('Handbal Kalender Item aanpassen', entry)}>
                   <Icon name="edit" />
                 </Button>
               </Grid.Column>
             </Grid.Row>
           ))}
-          <Grid.Row>
-            <Grid.Column width={16} className="grid-button">
-              <Button icon primary className="small-button" onClick={() => openKalenderModal('Item Toevoegen')}>
-                <span>Item</span>
-                <Icon name="add" />
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
         </Grid>
       </div>
     </Tab.Pane>;

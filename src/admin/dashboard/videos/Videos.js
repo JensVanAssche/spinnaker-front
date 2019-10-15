@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
+import { Tab, Button, Icon } from 'semantic-ui-react';
 import Network from 'utils/network';
 
 class Videos extends React.Component {
@@ -20,7 +20,15 @@ class Videos extends React.Component {
     if (!videos) return null;
 
     return <Tab.Pane>
-      <h1>Video's</h1>
+      <div className="dashboard-item">
+        <div className="dashboard-flex">
+          <h1>Video's</h1>
+          <Button icon primary className="small-button" onClick={() => openVideoModal('Video toevoegen')} >
+            <span>Video</span>
+            <Icon name="add" />
+          </Button>
+        </div>
+      </div>
       <div className="dashboard-item">
         {!videos.length && ( <p>Geen video's</p> )}
         {videos.map(video => (
@@ -34,13 +42,6 @@ class Videos extends React.Component {
             </Button>
           </div>
         ))}
-        <div className="dashboard-flex">
-          <div />
-          <Button icon primary className="small-button" onClick={() => openVideoModal('Video')} >
-            <span>Video</span>
-            <Icon name="add" />
-          </Button>
-        </div>
       </div>
     </Tab.Pane>;
   }

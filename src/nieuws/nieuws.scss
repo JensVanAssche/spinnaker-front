@@ -4,21 +4,24 @@
   h2 {
     margin-bottom: 30px;
   }
+}
 
-  .pagination {
-    display: flex;
-    justify-content: center;
+.pagination {
+  display: flex;
+  justify-content: center;
 
-    a {
-      font-size: 2rem;
-      padding: 10px 15px;
-      background-color: $blue;
+  a,
+  p {
+    font-size: 2rem;
+    padding: 10px 15px;
+    background-color: $blue;
+    color: white;
+    cursor: pointer;
+
+    &:hover,
+    &.active {
+      background-color: $darkblue;
       color: white;
-
-      &:hover,
-      &.active {
-        background-color: $darkblue;
-      }
     }
   }
 }
