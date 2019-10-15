@@ -12,7 +12,7 @@ class Photos extends React.Component {
   }
 
   componentDidMount() {
-    Network.get('api/photos/' + this.props.match.params.id).then((res) =>
+    Network.get('api/photos/album/' + this.props.match.params.id).then((res) =>
       this.setState({ loading: false, data: res })
     );
   }

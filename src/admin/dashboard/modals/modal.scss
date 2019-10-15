@@ -31,4 +31,14 @@
       font-size: 1.4rem !important;
     }
   }
+
+  .video-flex {
+    display: flex;
+    align-items: center;
+
+    span {
+      font-size: 1.7rem;
+      width: 100%;
+    }
+  }
 }

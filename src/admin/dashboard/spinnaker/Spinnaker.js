@@ -98,7 +98,7 @@ class Spinnaker extends React.Component {
               <p>Foto</p>
             </Grid.Column>
             <Grid.Column width={8}>
-              <p>Url</p>
+              <p>URL</p>
             </Grid.Column>
             <Grid.Column width={2}>
               <p>Footer</p>

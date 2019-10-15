@@ -7,7 +7,7 @@ class Photos extends React.Component {
   state = { loading: true, data: null };
 
   componentDidMount() {
-    Network.get('api/photos/').then((res) =>  
+    Network.get('api/photos/albums').then((res) =>  
       this.setState({ loading: false, data: res })
     );
   }

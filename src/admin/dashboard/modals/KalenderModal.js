@@ -116,7 +116,7 @@ class KalenderModal extends React.Component {
       console.log(this.state.data);
       this.closeModal();
     } else {
-      this.setState({ error: "Gelieve de velden correct in te vullen" });
+      this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 

@@ -25,7 +25,7 @@ class Wheelblazers1 extends React.Component {
 
   render() {
     const { players, results, standings } = this.state;
-    const { openPlayerModal, openResultTournamentModal, openResultScoreModal, openStandingsTournamentModal, openStandingsScoreModal, data } = this.props;
+    const { openPlayerModal, openResultTournamentModal, openResultScoreModal, openStandingsTournamentModal, openStandingsScoreModal } = this.props;
 
     if (!players || !results || !standings) return null;
 

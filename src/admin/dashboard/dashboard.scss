@@ -157,5 +157,47 @@
         }
       }
     }
+
+    .dashboard-photos {
+      display: flex;
+      flex-wrap: wrap;
+
+      .dashboard-photo {
+        width: 140px;
+        height: 140px;
+        margin: 0 20px 20px 0;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+
+        &:hover .overlay {
+          visibility: visible;
+        }
+
+        > .overlay {
+          visibility: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-color: rgba($color: red, $alpha: 0.4);
+
+          svg {
+            color: white;
+            font-size: 6rem;
+          }
+        }
+
+        > img {
+          height: 100%;
+        }
+      }
+    }
   }
 }

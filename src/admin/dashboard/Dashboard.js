@@ -27,6 +27,8 @@ import ResultScoreModal from './modals/ResultScoreModal';
 import StandingsTournamentModal from './modals/StandingsTournamentModal';
 import StandingsScoreModal from './modals/StandingsScoreModal';
 import KalenderModal from './modals/KalenderModal';
+import AlbumModal from './modals/AlbumModal';
+import VideoModal from './modals/VideoModal';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -42,6 +44,8 @@ class Dashboard extends React.Component {
     this.standingsTournamentModalRef = React.createRef();
     this.standingsScoreModalRef = React.createRef();
     this.kalenderModalRef = React.createRef();
+    this.albumModalRef = React.createRef();
+    this.videoModalRef = React.createRef();
   }
 
   panes = [
@@ -115,11 +119,16 @@ class Dashboard extends React.Component {
     },
     {
       menuItem: "Foto's",
-      render: () => <Fotos />,
+      render: () => <Fotos
+        openFileModal={this.openFileModal}
+        openAlbumModal={this.openAlbumModal}
+      />,
     },
     {
       menuItem: "Video's",
-      render: () => <Videos />,
+      render: () => <Videos
+        openVideoModal={this.openVideoModal}
+      />,
     },
     {
       menuItem: "Publicaties",
@@ -131,53 +140,20 @@ class Dashboard extends React.Component {
     },
   ];
 
-  openInputModal = (title, data) => {
-    this.inputModalRef.current.openModal(title, data);
-  };
-
-  openTextareaModal = (title, data) => {
-    this.textareaModalRef.current.openModal(title, data);
-  };
-
-  openFileModal = (title) => {
-    this.fileModalRef.current.openModal(title);
-  };
-
-  openPdfModal = (title, data) => {
-    this.pdfModalRef.current.openModal(title, data);
-  };
-
-  openLinkModal = (title, data) => {
-    this.linkModalRef.current.openModal(title, data);
-  };
-
-  openPlayerModal = (title, data) => {
-    this.playerModalRef.current.openModal(title, data);
-  };
-
-  openResultModal = (title, data) => {
-    this.resultModalRef.current.openModal(title, data);
-  };
-
-  openResultTournamentModal = (title, data) => {
-    this.resultTournamentModalRef.current.openModal(title, data);
-  };
-
-  openResultScoreModal = (title, data) => {
-    this.resultScoreModalRef.current.openModal(title, data);
-  };
-
-  openStandingsTournamentModal = (title, data) => {
-    this.standingsTournamentModalRef.current.openModal(title, data);
-  };
-
-  openStandingsScoreModal = (title, data) => {
-    this.standingsScoreModalRef.current.openModal(title, data);
-  };
-
-  openKalenderModal = (title, data) => {
-    this.kalenderModalRef.current.openModal(title, data);
-  };
+  openInputModal = (title, data) => this.inputModalRef.current.openModal(title, data);
+  openTextareaModal = (title, data) => this.textareaModalRef.current.openModal(title, data);
+  openFileModal = (title) => this.fileModalRef.current.openModal(title);
+  openPdfModal = (title, data) => this.pdfModalRef.current.openModal(title, data);
+  openLinkModal = (title, data) => this.linkModalRef.current.openModal(title, data);
+  openPlayerModal = (title, data) => this.playerModalRef.current.openModal(title, data);
+  openResultModal = (title, data) => this.resultModalRef.current.openModal(title, data);
+  openResultTournamentModal = (title, data) => this.resultTournamentModalRef.current.openModal(title, data);
+  openResultScoreModal = (title, data) => this.resultScoreModalRef.current.openModal(title, data);
+  openStandingsTournamentModal = (title, data) => this.standingsTournamentModalRef.current.openModal(title, data);
+  openStandingsScoreModal = (title, data) => this.standingsScoreModalRef.current.openModal(title, data);
+  openKalenderModal = (title, data) => this.kalenderModalRef.current.openModal(title, data);
+  openAlbumModal = (title, data) => this.albumModalRef.current.openModal(title, data);
+  openVideoModal = (title, data) => this.videoModalRef.current.openModal(title, data);
 
   logout = () => this.props.logout();
 
@@ -209,6 +185,8 @@ class Dashboard extends React.Component {
         <StandingsTournamentModal ref={this.standingsTournamentModalRef} />
         <StandingsScoreModal ref={this.standingsScoreModalRef} />
         <KalenderModal ref={this.kalenderModalRef} />
+        <AlbumModal ref={this.albumModalRef} />
+        <VideoModal ref={this.videoModalRef} />
       </div>
     );
   }
