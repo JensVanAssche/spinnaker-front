@@ -26,9 +26,7 @@ class App extends React.Component {
     const { error } = this.state;
     const { loading } = this.props;
 
-    if (loading) {
-      return <div />;
-    }
+    if (loading) return null;
 
     if (!loading && error) {
       return (
@@ -44,12 +42,10 @@ class App extends React.Component {
     }
 
     return (
-      <div>
-        <Switch>
-          <Route path="/admin" component={Admin} />
-          <Route path="/" component={Website} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/admin" component={Admin} />
+        <Route path="/" component={Website} />
+      </Switch>
     );
   }
 }

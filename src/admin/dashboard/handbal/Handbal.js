@@ -1,8 +1,8 @@
 import React from 'react';
 import { Tab } from 'semantic-ui-react';
 
-import Algemeen from './algemeen/Algemeen';
-import Kalender from './kalender/Kalender';
+import Algemeen from './Algemeen';
+import Kalender from './Kalender';
 
 class Hockey extends React.Component {
   panes = [

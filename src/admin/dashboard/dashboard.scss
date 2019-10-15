@@ -1,3 +1,5 @@
+@import "vars.scss";
+
 .dashboard {
   .header {
     display: flex;
@@ -17,7 +19,36 @@
   .main {
     margin-top: 20px !important;
 
-    .four.column {
+    h1 {
+      font-size: 3rem;
+      font-weight: 100;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 5px;
+      color: $blue;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    input,
+    textarea,
+    button {
+      font-size: 1.4rem !important;
+    }
+
+    button.icon span {
+      margin-right: 5px;
+    }
+
+    > .ui.grid > .four.column {
       padding-right: 0 !important;
       z-index: 1;
     }
@@ -38,6 +69,89 @@
     .secondary.menu {
       flex-wrap: wrap;
       margin-bottom: 20px;
+    }
+
+    .dashboard-item {
+      margin-bottom: 50px;
+
+      > .dashboard-flex {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: 10px;
+
+        img {
+          height: 200px;
+          margin-right: 20px;
+          background-color: lightgrey;
+        }
+
+        p {
+          margin-right: 20px;
+        }
+      }
+    }
+
+    .grid {
+      img {
+        background-color: lightgrey;
+      }
+
+      .grid-header p {
+        font-weight: bold;
+      }
+
+      .grid-button {
+        display: flex !important;
+        justify-content: flex-end;
+        align-items: flex-start;
+      }
+    }
+
+    .scores-grid {
+      margin-bottom: 30px;
+      .scores-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $blue;
+        color: white;
+        font-weight: bold;
+        padding: 5px 10px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      .scores-content {
+        margin-bottom: 10px;
+        .scores-content-entry {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 5px 10px;
+
+          > div {
+            display: flex;
+
+            p {
+              margin-right: 10px;
+            }
+          }
+
+          &:nth-child(odd) {
+            background-color: #eeeeee;
+          }
+
+          &:nth-child(even) {
+            background-color: #dddddd;
+          }
+
+          &:last-child {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+          }
+        }
+      }
     }
   }
 }

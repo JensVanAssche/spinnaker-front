@@ -115,6 +115,8 @@ nav.subnav {
     background-color: $blue;
     width: 100%;
     padding: 10px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 
     h1 {
       color: white;
@@ -151,6 +153,11 @@ nav.subnav {
       }
     }
 
+    &:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
     p {
       font-size: 2rem;
       margin: 0;
@@ -179,6 +186,8 @@ nav.subnav {
     background-color: $blue;
     width: 100%;
     padding: 10px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 
     h1 {
       color: white;
@@ -237,6 +246,11 @@ nav.subnav {
       span {
         background-color: $lesslightblue;
       }
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
     }
 
     > div {

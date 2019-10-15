@@ -1,24 +1,12 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectData } from 'app/selectors';
 
-class CompetitieStand extends React.Component {
-  state = {
-    data: null,
-    loading: true,
-  }
-
-  componentDidMount() {
-    Network.get('api/history/hockey').then((res) =>
-      this.setState({ loading: false, data: res })
-    );
-  }
-
+class HockeyHistoriek extends React.Component {
   render() {
-    const { data, loading } = this.state;
+    const { content } = this.props;
 
-    if (loading) return null;
-
-    if (!loading && data.length === 0) {
+    if (!content) {
       return (
         <div className="historiek content">
           <h2>Hockey Historiek</h2>
@@ -30,10 +18,18 @@ class CompetitieStand extends React.Component {
     return (
       <div className="historiek content ui container">
         <h2>Hockey Historiek</h2>
-        <div dangerouslySetInnerHTML={{__html: data.value }} />
+        <div dangerouslySetInnerHTML={{__html: content.hockeyHistory }} />
       </div>
     );
   }
 }
 
-export default CompetitieStand;
+const mapStateToProps = state => ({
+  content: selectData(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(HockeyHistoriek);
+

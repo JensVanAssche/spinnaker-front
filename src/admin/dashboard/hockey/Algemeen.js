@@ -1,11 +1,11 @@
 import React from 'react';
 import { Tab } from 'semantic-ui-react';
 
-function Kalender() {
+function Algemeen() {
   return <Tab.Pane className="no-border">
-    <h1>Kalender</h1>
-    <p>hockey Kalender</p>
+    <h1>Algemeen</h1>
+    <p>hockey image en uitleg, kalender, historiek</p>
   </Tab.Pane>;
 }
 
-export default Kalender;
+export default Algemeen;

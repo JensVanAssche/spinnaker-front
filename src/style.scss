@@ -16,16 +16,6 @@ h3 {
   font-family: "TW Cen MT" !important;
 }
 
-h2 {
-  color: $blue;
-  font-weight: 100;
-  font-size: 4rem;
-}
-
-h3 {
-  font-size: 2rem;
-}
-
 p,
 a {
   font-size: 1.7rem;
@@ -38,8 +28,28 @@ main {
 .content {
   margin-top: 50px;
 
+  h2 {
+    color: $blue;
+    font-weight: 100;
+    font-size: 4rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
   p {
     margin-left: 10px;
+    margin-bottom: 0;
+    min-height: 24px;
+
+    &.bold {
+      font-weight: bold;
+    }
+
+    &.underline {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -86,6 +96,12 @@ main {
 
 .error {
   padding: 50px;
+
+  h2 {
+    color: $blue;
+    font-weight: 100;
+    font-size: 4rem;
+  }
 
   img {
     filter: brightness(0);

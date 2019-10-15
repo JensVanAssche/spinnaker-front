@@ -1,29 +1,17 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectData } from 'app/selectors';
 
-class CompetitieStand extends React.Component {
+class CompetitieHistoriek extends React.Component {
   state = {
     title: ['Parantee Competitie Historiek', 'Scholencompetitie Historiek', 'Competitie Nederland Historiek'],
-    types: ['parantee', 'scholen', 'nederland'],
-    data: null,
-    loading: true,
-  }
-
-  componentDidMount() {
-    const { types } = this.state;
-    const { league } = this.props;
-    Network.get('api/history/' + types[league]).then((res) =>
-      this.setState({ loading: false, data: res })
-    );
+    content: ['paranteeHistory', 'scholenHistory', 'nederlandHistory'],
   }
 
   render() {
-    const { league } = this.props;
-    const { data, loading } = this.state;
+    const { league, content } = this.props;
 
-    if (loading) return null;
-
-    if (!loading && data.length === 0) {
+    if (!content) {
       return (
         <div>
           <h2>{this.state.title[league]}</h2>
@@ -35,10 +23,17 @@ class CompetitieStand extends React.Component {
     return (
       <div className="historiek">
         <h2>{this.state.title[league]}</h2>
-        <div dangerouslySetInnerHTML={{__html: data.value }} />
+        <div dangerouslySetInnerHTML={{__html: content[this.state.content[league]] }} />
       </div>
     );
   }
 }
 
-export default CompetitieStand;
+const mapStateToProps = state => ({
+  content: selectData(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(CompetitieHistoriek);

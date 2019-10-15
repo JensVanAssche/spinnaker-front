@@ -11,3 +11,8 @@ export const selectLoading = createSelector(
   selectNode,
   node => node.loading,
 );
+
+export const selectError = createSelector(
+  selectNode,
+  node => node.error,
+);

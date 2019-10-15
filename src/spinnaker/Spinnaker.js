@@ -36,7 +36,7 @@ class Spinnaker extends React.Component {
         <h2>Contact</h2>
         <div dangerouslySetInnerHTML={{__html: content.spinnakerContact}} />
         <h2>Engagement</h2>
-        <a href={process.env.REACT_APP_API_HOST + "/example.pdf"} target="_blank" rel="noopener noreferrer">engagement</a>
+        <a href={process.env.REACT_APP_API_HOST + content.spinnakerEngagementPdf} target="_blank" rel="noopener noreferrer" dangerouslySetInnerHTML={{__html: content.spinnakerEngagementTitle}} />
         {data.length && (<h2>Links</h2>)}
         <div className="links">
           {data.map(e => (

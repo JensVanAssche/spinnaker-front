@@ -13,6 +13,7 @@ import {
 const initialState = {
   isLoggedIn: false,
   loading: false,
+  error: false,
 };
 
 export default function reducer(state = initialState, action) {
@@ -29,7 +30,12 @@ export default function reducer(state = initialState, action) {
         isLoggedIn: true,
       };
     case LOGIN_REJECTED:
-      return initialState;
+      return {
+        ...state,
+        loading: false,
+        isLoggedIn: false,
+        error: true,
+      };
     case LOGOUT_PENDING:
       return {
         ...state,

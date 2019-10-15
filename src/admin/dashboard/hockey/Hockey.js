@@ -1,14 +1,12 @@
 import React from 'react';
 import { Tab } from 'semantic-ui-react';
 
-import Algemeen from './algemeen/Algemeen';
-import Wheelblazers1 from './wheelblazers1/Wheelblazers1';
-import Wheelblazers2 from './wheelblazers2/Wheelblazers2';
-import Wheelblazers3 from './wheelblazers3/Wheelblazers3';
-import Wheelblazers4 from './wheelblazers4/Wheelblazers4';
-import Nederland from './nederland/Nederland';
-import Kalender from './kalender/Kalender';
-import Historiek from './historiek/Historiek';
+import Algemeen from './Algemeen';
+import Wheelblazers1 from './Wheelblazers1';
+import Wheelblazers2 from './Wheelblazers2';
+import Wheelblazers3 from './Wheelblazers3';
+import Wheelblazers4 from './Wheelblazers4';
+import Nederland from './Nederland';
 
 class Hockey extends React.Component {
   panes = [
@@ -35,14 +33,6 @@ class Hockey extends React.Component {
     {
       menuItem: "Nederland",
       render: () => <Nederland />,
-    },
-    {
-      menuItem: "Kalender",
-      render: () => <Kalender />,
-    },
-    {
-      menuItem: "Historiek",
-      render: () => <Historiek />,
     },
   ];
 
