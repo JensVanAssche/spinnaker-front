@@ -132,7 +132,9 @@ class Dashboard extends React.Component {
     },
     {
       menuItem: "Publicaties",
-      render: () => <Publicaties />,
+      render: () => <Publicaties
+        openPdfModal={this.openPdfModal}
+      />,
     },
     {
       menuItem: "Nieuws",

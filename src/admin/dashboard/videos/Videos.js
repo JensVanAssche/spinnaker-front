@@ -21,42 +21,27 @@ class Videos extends React.Component {
 
     return <Tab.Pane>
       <h1>Video's</h1>
-      <Grid columns={4}>
-        <Grid.Row className="grid-header">
-          <Grid.Column width={5}>
-            <p>Naam</p>
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <p>URL</p>
-          </Grid.Column>
-          <Grid.Column width={6}>
-          </Grid.Column>
-        </Grid.Row>
-        {!videos.length && ( <p>Geen videos</p> )}
+      <div className="dashboard-item">
+        {!videos.length && ( <p>Geen video's</p> )}
         {videos.map(video => (
-          <Grid.Row key={video.id}>
-            <Grid.Column width={5}>
+          <div className="dashboard-flex" key={video.id}>
+            <div>
               <p>{video.title}</p>
-            </Grid.Column>
-            <Grid.Column width={9}>
-              <p>{'https://www.youtube.com/watch?v=' + video.url}</p>
-            </Grid.Column>
-            <Grid.Column width={2} className="grid-button">
-              <Button icon className="small-button" onClick={() => openVideoModal('Video', video)}>
-                <Icon name="edit" />
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-        ))}
-        <Grid.Row>
-          <Grid.Column width={16} className="grid-button">
-            <Button icon primary className="small-button" onClick={() => openVideoModal('Video toevoegen')}>
-              <span>Video Toevoegen</span>
-              <Icon name="add" />
+              <a href={'https://www.youtube.com/watch?v=' + video.url} target="_blank" rel="noopener noreferrer">{'https://www.youtube.com/watch?v=' + video.url}</a>
+            </div>
+            <Button icon className="small-button" onClick={() => openVideoModal('Video aanpassen', video)}>
+              <Icon name="edit" />
             </Button>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+          </div>
+        ))}
+        <div className="dashboard-flex">
+          <div />
+          <Button icon primary className="small-button" onClick={() => openVideoModal('Video')} >
+            <span>Video</span>
+            <Icon name="add" />
+          </Button>
+        </div>
+      </div>
     </Tab.Pane>;
   }
 }

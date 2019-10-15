@@ -9,6 +9,7 @@ class PdfModal extends React.Component {
     error: null,
     title: null,
     data: {
+      id: null,
       title: null,
       pdfData: null,
       pdfName: null,
@@ -21,6 +22,7 @@ class PdfModal extends React.Component {
       error: null,
       title,
       data: {
+        id: data ? data.id : null,
         title: data ? data.title : '',
         pdfData: null,
         pdfName: data ? data.pdf : null,
@@ -72,6 +74,11 @@ class PdfModal extends React.Component {
     }
   }
 
+  delete = () => {
+    console.log(this.state.data.id);
+    this.closeModal();
+  }
+
   render() {
     const { modalOpen, error, title, data } = this.state;
     
@@ -92,7 +99,11 @@ class PdfModal extends React.Component {
           </Form>
         </Modal.Content>
         <Modal.Actions>
-          <div></div>
+          <div>
+            {data.id && (
+              <Button color="red" onClick={() => this.delete()}>Verwijderen</Button>
+            )}
+          </div>
           <div>
             <Button onClick={() => this.closeModal()}>Annuleren</Button>
             <Button primary onClick={() => this.save()}>Bevestig</Button>
