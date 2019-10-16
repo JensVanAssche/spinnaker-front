@@ -51,7 +51,7 @@ class Scholen extends React.Component {
         <h2>Scholen Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.bocciaScholen.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Scholen Tekst', data.bocciaScholen)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Scholen Tekst', 'content/data/bocciaScholen', data.bocciaScholen)} >
             <Icon name="edit" />
           </Button>
         </div>
@@ -231,7 +231,7 @@ class Scholen extends React.Component {
         <h2>Scholen Historiek</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.scholenHistory.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Scholen Historiek', data.scholenHistory)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Scholen Historiek', 'content/data/scholenHistory', data.scholenHistory)} >
             <Icon name="edit" />
           </Button>
         </div>

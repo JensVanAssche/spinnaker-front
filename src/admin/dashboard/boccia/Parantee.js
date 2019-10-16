@@ -42,7 +42,7 @@ class Parantee extends React.Component {
         <h2>Parantee Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.bocciaParantee.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Parantee Tekst', data.bocciaParantee)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Parantee Tekst', 'content/data/bocciaParantee', data.bocciaParantee)} >
             <Icon name="edit" />
           </Button>
         </div>
@@ -181,7 +181,7 @@ class Parantee extends React.Component {
         <h2>Parantee Historiek</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.paranteeHistory.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Parantee Historiek', data.paranteeHistory)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Parantee Historiek', 'content/data/paranteeHistory', data.paranteeHistory)} >
             <Icon name="edit" />
           </Button>
         </div>

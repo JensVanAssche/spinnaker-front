@@ -36,7 +36,7 @@ class Handbal extends React.Component {
         <h2>Handbal Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.handbalOver.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Handbal Tekst', data.handbalOver)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Handbal Tekst', 'content/data/handbalOver', data.handbalOver)} >
             <Icon name="edit" />
           </Button>
         </div>

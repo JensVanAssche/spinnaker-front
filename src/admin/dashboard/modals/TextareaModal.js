@@ -1,5 +1,7 @@
 import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { updateContent } from 'app/actions';
+import { connect } from 'react-redux';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
@@ -8,14 +10,16 @@ class TextareaModal extends React.Component {
     modalOpen: false,
     error: null,
     title: null,
+    api: null,
     data: null,
   };
 
-  openModal = (title, data) => {
+  openModal = (title, api, data) => {
     this.setState({
       modalOpen: true,
       error: null,
       title,
+      api,
       data: data ? this.convertToString(data) : null
     });
   };
@@ -78,9 +82,9 @@ class TextareaModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { api, data } = this.state;
     if (isValid) {
-      console.log(this.convertToHtml(this.state.data));
-      this.closeModal();
+      this.props.updateContent(api, { value: this.convertToHtml(data) }).then(() => this.closeModal())
     } else {
       this.setState({ error: "Gelieve iets in te vullen" });
     }
@@ -110,4 +114,13 @@ class TextareaModal extends React.Component {
   }
 }
 
-export default TextareaModal;
+const mapDispatchToProps = {
+  updateContent,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(TextareaModal);

@@ -42,7 +42,7 @@ class Nederland extends React.Component {
         <h2>Nederland Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.bocciaNederland.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Nederland Tekst', data.bocciaNederland)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Nederland Tekst', 'content/data/bocciaNederland', data.bocciaNederland)} >
             <Icon name="edit" />
           </Button>
         </div>
@@ -181,7 +181,7 @@ class Nederland extends React.Component {
         <h2>Nederland Historiek</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.nederlandHistory.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Nederland Historiek', data.nederlandHistory)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Nederland Historiek', 'content/data/nederlandHistory', data.nederlandHistory)} >
             <Icon name="edit" />
           </Button>
         </div>

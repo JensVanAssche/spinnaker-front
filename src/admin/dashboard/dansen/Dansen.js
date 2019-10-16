@@ -19,7 +19,7 @@ function Dansen({ openTextareaModal, openFileModal, data }) {
       <h2>Dansen Tekst</h2>
       <div className="dashboard-flex">
         <p dangerouslySetInnerHTML={{__html: data.dansenOver.substring(0,255)+"..."}} />
-        <Button icon className="small-button" onClick={() => openTextareaModal('Dansen Tekst', data.dansenOver)} >
+        <Button icon className="small-button" onClick={() => openTextareaModal('Dansen Tekst', 'content/data/dansenOver', data.dansenOver)} >
           <Icon name="edit" />
         </Button>
       </div>

@@ -3,6 +3,10 @@
 footer {
   margin-top: 100px;
 
+  p {
+    min-height: 24px;
+  }
+
   > img {
     width: 100%;
     transform: translateY(6px);

@@ -19,7 +19,7 @@ function Algemeen({ openTextareaModal, openFileModal, data }) {
       <h2>Boccia Tekst</h2>
       <div className="dashboard-flex">
         <p dangerouslySetInnerHTML={{__html: data.bocciaOver.substring(0,255)+"..."}} />
-        <Button icon className="small-button" onClick={() => openTextareaModal('Boccia Tekst', data.bocciaOver)} >
+        <Button icon className="small-button" onClick={() => openTextareaModal('Boccia Tekst', 'content/data/bocciaOver', data.bocciaOver)} >
           <Icon name="edit" />
         </Button>
       </div>

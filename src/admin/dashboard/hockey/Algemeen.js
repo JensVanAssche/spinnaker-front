@@ -36,7 +36,7 @@ class Algemeen extends React.Component {
         <h2>Hockey Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.hockeyOver.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Hockey Tekst', data.hockeyOver)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Hockey Tekst', 'content/data/hockeyOver', data.hockeyOver)} >
             <Icon name="edit" />
           </Button>
         </div>
@@ -88,7 +88,7 @@ class Algemeen extends React.Component {
         <h2>Hockey Historiek</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.hockeyHistory.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Hockey Historiek', data.hockeyHistory)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Hockey Historiek', 'content/data/hockeyHistory', data.hockeyHistory)} >
             <Icon name="edit" />
           </Button>
         </div>

@@ -2,12 +2,15 @@ import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
+import { updatePdf } from 'app/actions';
+import { connect } from 'react-redux';
 
 class PdfModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
     title: null,
+    api: null,
     data: {
       id: null,
       title: null,
@@ -16,11 +19,12 @@ class PdfModal extends React.Component {
     },
   };
 
-  openModal = (title, data) => {
+  openModal = (title, api, data) => {
     this.setState({
       modalOpen: true,
       error: null,
       title,
+      api,
       data: {
         id: data ? data.id : null,
         title: data ? data.title : '',
@@ -66,9 +70,11 @@ class PdfModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { api, data } = this.state;
     if (isValid) {
-      console.log(this.state.data);
-      this.closeModal();
+      if (api === 'content/pdf') {
+        this.props.updatePdf(api, data).then(() => this.closeModal());
+      }
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
@@ -114,4 +120,13 @@ class PdfModal extends React.Component {
   }
 }
 
-export default PdfModal;
+const mapDispatchToProps = {
+  updatePdf,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(PdfModal);

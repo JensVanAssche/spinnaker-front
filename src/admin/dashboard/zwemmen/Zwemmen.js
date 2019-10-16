@@ -36,7 +36,7 @@ class Zwemmen extends React.Component {
         <h2>Zwemmen Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.zwemmenOver.substring(0,255)+"..."}} />
-          <Button icon className="small-button" onClick={() => openTextareaModal('Zwemmen Tekst', data.zwemmenOver)} >
+          <Button icon className="small-button" onClick={() => openTextareaModal('Zwemmen Tekst', 'content/data/zwemmenOver', data.zwemmenOver)} >
             <Icon name="edit" />
           </Button>
         </div>

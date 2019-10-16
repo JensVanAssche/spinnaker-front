@@ -1,6 +1,8 @@
 import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
+import { updateContent } from 'app/actions';
+import { connect } from 'react-redux';
 import './modal.scss';
 
 class FileModal extends React.Component {
@@ -8,18 +10,17 @@ class FileModal extends React.Component {
     modalOpen: false,
     error: null,
     title: null,
+    api: null,
     data: null,
   };
 
-  openModal = (title) => {
+  openModal = (title, api) => {
     this.setState({
       modalOpen: true,
       error: null,
       title,
-      data: {
-        imageData: null,
-        imageName: null,
-      }
+      api,
+      data: null
     });
   };
 
@@ -32,24 +33,21 @@ class FileModal extends React.Component {
     const file = event.target.files[0];
     event.persist();
     this.setState({
-      data: {
-        imageData: file,
-        imageName: file.name,
-      },
+      data: file,
     });
   };
 
   validate = () => {
     const { data } = this.state;
-    if (!validateRequired(data.imageData)) return false;
+    if (!validateRequired(data)) return false;
     return true;
   };
 
   save = () => {
     const isValid = this.validate();
+    const { api, data } = this.state;
     if (isValid) {
-      console.log(this.state.data);
-      this.closeModal();
+      this.props.updateContent(api, data).then(() => this.closeModal());
     } else {
       this.setState({ error: "Gelieve een bestand te uploaden" });
     }
@@ -57,7 +55,7 @@ class FileModal extends React.Component {
 
   render() {
     const { modalOpen, error, title } = this.state;
-    
+
     return (
       <Modal size="mini" open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
         <Modal.Header>{title}</Modal.Header>
@@ -81,4 +79,13 @@ class FileModal extends React.Component {
   }
 }
 
-export default FileModal;
+const mapDispatchToProps = {
+  updateContent,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(FileModal);
