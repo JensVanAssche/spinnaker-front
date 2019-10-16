@@ -6,6 +6,8 @@ import {
   UPDATE_LINK_REJECTED,
   ADD_LINK_FULFILLED,
   ADD_LINK_REJECTED,
+  DELETE_LINK_FULFILLED,
+  DELETE_LINK_REJECTED
 } from './actions';
 
 const initialState = {
@@ -46,6 +48,15 @@ export default function reducer(state = initialState, action) {
           .concat(action.payload),
       };
     case ADD_LINK_REJECTED:
+      return initialState;
+    case DELETE_LINK_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        data: state.data
+          .filter(link => link.id !== action.payload.id)
+      };
+    case DELETE_LINK_REJECTED:
       return initialState;
     default:
       return state;

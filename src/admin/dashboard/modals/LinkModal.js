@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import Network from 'utils/network';
 import { connect } from 'react-redux';
-import { updateLink, addLink } from "spinnaker/actions";
+import { updateLink, addLink, deleteLink } from "spinnaker/actions";
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
@@ -98,8 +98,7 @@ class LinkModal extends React.Component {
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteLink(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -148,7 +147,8 @@ class LinkModal extends React.Component {
 
 const mapDispatchToProps = {
   updateLink,
-  addLink
+  addLink,
+  deleteLink
 };
 
 export default connect(

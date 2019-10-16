@@ -16,4 +16,6 @@ api.addLink = (data) => Network.post('api/links/', {
   footer: data.footer
 });
 
+api.deleteLink = (id) => Network.delete('api/links/' + id).then(() => ({ id }));
+
 export default api;

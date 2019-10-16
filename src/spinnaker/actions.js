@@ -15,6 +15,11 @@ export const ADD_LINK_REJECTED = 'ADD_LINK_REJECTED';
 export const ADD_LINK_PENDING = 'ADD_LINK_PENDING';
 export const ADD_LINK_FULFILLED = 'ADD_LINK_FULFILLED';
 
+export const DELETE_LINK = 'DELETE_LINK';
+export const DELETE_LINK_REJECTED = 'DELETE_LINK_REJECTED';
+export const DELETE_LINK_PENDING = 'DELETE_LINK_PENDING';
+export const DELETE_LINK_FULFILLED = 'DELETE_LINK_FULFILLED';
+
 export function getLinks() {
   return {
     type: GET_LINKS,
@@ -33,5 +38,12 @@ export function addLink(data) {
   return {
     type: ADD_LINK,
     payload: api.addLink(data),
+  };
+}
+
+export function deleteLink(id) {
+  return {
+    type: DELETE_LINK,
+    payload: api.deleteLink(id),
   };
 }
