@@ -1,26 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectData } from 'app/selectors';
-import Network from 'utils/network';
+import { selectLinks } from './selectors';
 import './spinnaker.scss';
 
 class Spinnaker extends React.Component {
-  state = {
-    data: null,
-    loading: true,
-  }
-
-  componentDidMount() {
-    Network.get('api/links').then((res) =>
-      this.setState({ loading: false, data: res })
-    );
-  }
-
   render() {
-    const { content } = this.props;
-    const { loading, data } = this.state;
+    const { content, links } = this.props;
 
-    if (!content || loading) return null;
+    if (!content || !links) return null;
 
     return (
       <div className="spinnaker ui container content">
@@ -37,9 +25,9 @@ class Spinnaker extends React.Component {
         <div dangerouslySetInnerHTML={{__html: content.spinnakerContact}} />
         <h2>Engagementsverklaring</h2>
         <a href={process.env.REACT_APP_API_HOST + content.spinnakerEngagementPdf} target="_blank" rel="noopener noreferrer" dangerouslySetInnerHTML={{__html: content.spinnakerEngagementTitle}} />
-        {data.length && (<h2>Links</h2>)}
+        {links.length && (<h2>Links</h2>)}
         <div className="links">
-          {data.map(e => (
+          {links.map(e => (
             <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
               <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
             </a>
@@ -52,6 +40,7 @@ class Spinnaker extends React.Component {
 
 const mapStateToProps = state => ({
   content: selectData(state),
+  links: selectLinks(state)
 });
 
 export default connect(

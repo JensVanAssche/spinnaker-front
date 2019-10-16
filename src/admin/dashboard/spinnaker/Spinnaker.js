@@ -1,27 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectData } from "app/selectors";
-import Network from 'utils/network';
+import { selectLinks } from "spinnaker/selectors";
+import { getLinks } from "spinnaker/actions";
 import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
 
 class Spinnaker extends React.Component {
-  state = {
-    loading: true,
-    links: null,
-  }
-
   componentDidMount() {
-    Network.get('api/links').then((res) =>
-      this.setState({ loading: false, links: res })
-    );
+    this.props.getLinks();
   }
 
   render() {
-    const { loading, links } = this.state;
-    const { openInputModal, openTextareaModal, openPdfModal, openLinkModal, data } = this.props;
+    const { openInputModal, openTextareaModal, openPdfModal, openLinkModal, data, links } = this.props;
 
-    if (loading) return null;
-
+    if (!links) return null;
+    
     return <Tab.Pane>
       <h1>Spinnaker</h1>
       <div className="dashboard-item">
@@ -63,7 +56,7 @@ class Spinnaker extends React.Component {
       <div className="dashboard-item">
         <h2>Locatie (google maps url)</h2>
         <div className="dashboard-flex">
-          <p dangerouslySetInnerHTML={{__html: data.spinnakerLocatieMaps.substring(0,100)+"..."}} />
+          <p dangerouslySetInnerHTML={{__html: data.spinnakerLocatieMaps.substring(0,80)+"..."}} />
           <Button icon className="small-button" onClick={() => openInputModal('Locatie (google maps url)', 'content/data/spinnakerLocatieMaps', data.spinnakerLocatieMaps)} >
             <Icon name="edit" />
           </Button>
@@ -136,11 +129,16 @@ class Spinnaker extends React.Component {
   }
 }
 
+const mapDispatchToProps = {
+  getLinks
+};
+
 const mapStateToProps = state => ({
   data: selectData(state),
+  links: selectLinks(state),
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Spinnaker);

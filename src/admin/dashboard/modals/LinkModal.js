@@ -1,5 +1,8 @@
 import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { updateLink, addLink } from "spinnaker/actions";
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
@@ -78,8 +81,16 @@ class LinkModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
+    const { updateLink, addLink } = this.props;
     if (isValid) {
-      console.log(this.state.data);
+      if (data.id) {
+        updateLink(data);
+        if (data.imageData) Network.uploadImage('api/upload', data.imageData);
+      } else {
+        addLink(data);
+        Network.uploadImage('api/upload', data.imageData);
+      }
       this.closeModal();
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
@@ -135,4 +146,14 @@ class LinkModal extends React.Component {
   }
 }
 
-export default LinkModal;
+const mapDispatchToProps = {
+  updateLink,
+  addLink
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(LinkModal);

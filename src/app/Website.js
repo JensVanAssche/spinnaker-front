@@ -1,5 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import { getLinks } from "spinnaker/actions";
+import { selectLoading } from "spinnaker/selectors";
 
 import Header from "header/Header";
 import Home from "home/Home";
@@ -19,7 +22,15 @@ import Footer from "footer/Footer";
 import NotFound from "notFound/NotFound";
 
 class Website extends React.Component {
+  componentDidMount() {
+    this.props.getLinks()
+  }
+
   render() {
+    const { loading } = this.props;
+
+    if (loading) return null;
+    
     return (
       <div>
         <Route path="/" component={Header} />
@@ -48,4 +59,15 @@ class Website extends React.Component {
   }
 }
 
-export default Website;
+const mapDispatchToProps = {
+  getLinks
+};
+
+const mapStateToProps = state => ({
+  loading: selectLoading(state)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Website);

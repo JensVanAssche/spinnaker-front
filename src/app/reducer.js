@@ -38,15 +38,25 @@ export default function reducer(state = initialState, action) {
       };
     case UPDATE_CONTENT_REJECTED:
       return initialState;
-    case UPDATE_PDF_FULFILLED:
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          [action.payload[0].key]: action.payload[0].value,
-          [action.payload[1].key]: action.payload[1].value
-        }
-      };
+    case UPDATE_PDF_FULFILLED:     
+      if (action.payload.length === 1) {
+        return {
+          ...state,
+          data: {
+            ...state.data,
+            [action.payload[0].key]: action.payload[0].value,
+          }
+        };
+      } else {
+        return {
+          ...state,
+          data: {
+            ...state.data,
+            [action.payload[0].key]: action.payload[0].value,
+            [action.payload[1].key]: action.payload[1].value
+          }
+        };
+      }      
     case UPDATE_PDF_REJECTED:
       return initialState;
     default:
