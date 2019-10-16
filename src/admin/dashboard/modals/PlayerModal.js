@@ -1,5 +1,8 @@
 import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { updatePlayer, addPlayer, deletePlayer } from "redux/players/actions";
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
@@ -10,6 +13,7 @@ class PlayerModal extends React.Component {
     title: null,
     data: {
       id: null,
+      type: null,
       name: null,
       subtitle: null,
       imageData: null,
@@ -17,13 +21,14 @@ class PlayerModal extends React.Component {
     },
   };
 
-  openModal = (title, data) => {
+  openModal = (title, data, type) => {
     this.setState({
       modalOpen: true,
       error: null,
       title,
       data: {
         id: data ? data.id : null,
+        type: data ? data.type : type,
         name: data ? data.name : '',
         subtitle: data ? data.subtitle : '',
         imageData: null,
@@ -79,8 +84,16 @@ class PlayerModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
+    const { updatePlayer, addPlayer } = this.props;
     if (isValid) {
-      console.log(this.state.data);
+      if (data.id) {
+        updatePlayer(data);
+        if (data.imageData) Network.uploadImage('api/upload', data.imageData);
+      } else {
+        addPlayer(data);
+        Network.uploadImage('api/upload', data.imageData);
+      }
       this.closeModal();
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
@@ -88,8 +101,7 @@ class PlayerModal extends React.Component {
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deletePlayer(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -131,4 +143,15 @@ class PlayerModal extends React.Component {
   }
 }
 
-export default PlayerModal;
+const mapDispatchToProps = {
+  updatePlayer,
+  addPlayer,
+  deletePlayer
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(PlayerModal);

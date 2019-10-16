@@ -33,7 +33,6 @@ export default function reducer(state = initialState, action) {
     case UPDATE_LINK_FULFILLED:
       return {
         ...state,
-        loading: false,
         data: state.data
           .filter(link => link.id !== action.payload.id)
           .concat(action.payload),
@@ -43,7 +42,6 @@ export default function reducer(state = initialState, action) {
     case ADD_LINK_FULFILLED:
       return {
         ...state,
-        loading: false,
         data: state.data
           .concat(action.payload),
       };
@@ -52,7 +50,6 @@ export default function reducer(state = initialState, action) {
     case DELETE_LINK_FULFILLED:
       return {
         ...state,
-        loading: false,
         data: state.data
           .filter(link => link.id !== action.payload.id)
       };

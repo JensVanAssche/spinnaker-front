@@ -1,5 +1,7 @@
 import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { updateCalendar, addCalendar, deleteCalendar } from "redux/calendar/actions";
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
@@ -10,6 +12,7 @@ class KalenderModal extends React.Component {
     title: null,
     data: {
       id: null,
+      type: null,
       day: null,
       month: null,
       year: null,
@@ -18,7 +21,7 @@ class KalenderModal extends React.Component {
     },
   };
 
-  openModal = (title, data) => {
+  openModal = (title, data, type) => {
     if (data) {
       const arr = data.date.split(' ');
       var day;
@@ -39,6 +42,7 @@ class KalenderModal extends React.Component {
       title,
       data: {
         id: data ? data.id : null,
+        type: data ? data.type : type,
         day: data ? day : '01',
         month: data ? month : 'januari',
         year: data ? year : '2000',
@@ -112,8 +116,14 @@ class KalenderModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
+    const { updateCalendar, addCalendar } = this.props;
     if (isValid) {
-      console.log(this.state.data);
+      if (data.id) {
+        updateCalendar(data);
+      } else {
+        addCalendar(data);
+      }
       this.closeModal();
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
@@ -121,8 +131,7 @@ class KalenderModal extends React.Component {
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteCalendar(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -219,4 +228,15 @@ class KalenderModal extends React.Component {
   }
 }
 
-export default KalenderModal;
+const mapDispatchToProps = {
+  updateCalendar,
+  addCalendar,
+  deleteCalendar
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(KalenderModal);

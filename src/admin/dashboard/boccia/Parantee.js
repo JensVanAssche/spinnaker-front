@@ -1,38 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Network from 'utils/network';
 import { selectData } from "redux/content/selectors";
+import { getPlayers } from "redux/players/actions";
+import { getCalendar } from "redux/calendar/actions";
+import { getResults } from "redux/results/actions";
+import { getStandings } from "redux/standings/actions";
+import { selectPlayers } from "redux/players/selectors";
+import { selectCalendar } from "redux/calendar/selectors";
+import { selectResults } from "redux/results/selectors";
+import { selectStandings } from "redux/standings/selectors";
 import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
 
 class Parantee extends React.Component {
-  state = {
-    players: null,
-    calendar: null,
-    results: null,
-    standings: null,
-  }
-
   componentDidMount() {
-    Network.get('api/players/parantee').then((res) =>
-      this.setState({ players: res })
-    );
-
-    Network.get('api/calendar/parantee').then((res) =>
-      this.setState({ calendar: res })
-    );
-
-    Network.get('api/results/parantee').then((res) =>
-      this.setState({ results: res })
-    );
-
-    Network.get('api/standings/parantee').then((res) =>
-      this.setState({ standings: res })
-    );
+    this.props.getPlayers('parantee');
+    this.props.getCalendar('parantee');
+    this.props.getResults('parantee');
+    this.props.getStandings('parantee');
   }
 
   render() {
-    const { players, calendar, results, standings } = this.state;
-    const { openTextareaModal, openPdfModal, openPlayerModal, openKalenderModal, data } = this.props;
+    const {
+      openTextareaModal,
+      openPdfModal,
+      openPlayerModal,
+      openKalenderModal,
+      data,
+      players,
+      calendar,
+      results,
+      standings
+    } = this.props;
 
     if (!players || !calendar || !results || !standings) return null;
 
@@ -50,7 +48,7 @@ class Parantee extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Parantee Spelers</h2>
-          <Button icon primary className="small-button" onClick={() => openPlayerModal('Parantee Speler toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openPlayerModal('Parantee Speler toevoegen', null, 'parantee')}>
             <span>Speler</span>
             <Icon name="add" />
           </Button>
@@ -70,32 +68,30 @@ class Parantee extends React.Component {
             </Grid.Column>
           </Grid.Row>
           {!players.length && ( <p>Geen spelers</p> )}
-          {players.map(type => (
-            type.players.map(player => (
-              <Grid.Row key={player.id}>
-                <Grid.Column width={2}>
-                  <img src={process.env.REACT_APP_API_HOST + player.image} alt="eumm" />
-                </Grid.Column>
-                <Grid.Column width={5}>
-                  <p>{player.name}</p>
-                </Grid.Column>
-                <Grid.Column width={2}>
-                  <p>{player.subtitle}</p>
-                </Grid.Column>
-                <Grid.Column width={7} className="grid-button">
-                  <Button icon className="small-button" onClick={() => openPlayerModal('Parantee Speler aanpassen', player)}>
-                    <Icon name="edit" />
-                  </Button>
-                </Grid.Column>
-              </Grid.Row>
-            ))
+          {players.map(player => (
+            <Grid.Row key={player.id}>
+              <Grid.Column width={2}>
+                <img src={process.env.REACT_APP_API_HOST + player.image} alt="eumm" />
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <p>{player.name}</p>
+              </Grid.Column>
+              <Grid.Column width={2}>
+                <p>{player.subtitle}</p>
+              </Grid.Column>
+              <Grid.Column width={7} className="grid-button">
+                <Button icon className="small-button" onClick={() => openPlayerModal('Parantee Speler aanpassen', player, null)}>
+                  <Icon name="edit" />
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
           ))}
         </Grid>
       </div>
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Parantee Kalender</h2>
-          <Button icon primary className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item toevoegen', null, 'parantee')}>
             <span>Item</span>
             <Icon name="add" />
           </Button>
@@ -127,7 +123,7 @@ class Parantee extends React.Component {
                 <p>{entry.location}</p>
               </Grid.Column>
               <Grid.Column width={2} className="grid-button">
-                <Button icon className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item aanpassen', entry)}>
+                <Button icon className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item aanpassen', entry, null)}>
                   <Icon name="edit" />
                 </Button>
               </Grid.Column>
@@ -190,11 +186,22 @@ class Parantee extends React.Component {
   }
 }
 
+const mapDispatchToProps = {
+  getPlayers,
+  getCalendar,
+  getResults,
+  getStandings
+};
+
 const mapStateToProps = state => ({
   data: selectData(state),
+  players: selectPlayers(state),
+  calendar: selectCalendar(state),
+  results: selectResults(state),
+  standings: selectStandings(state)
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Parantee);

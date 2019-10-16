@@ -151,13 +151,13 @@ class Dashboard extends React.Component {
   openFileModal = (title, api) => this.fileModalRef.current.openModal(title, api);
   openPdfModal = (title, api, data) => this.pdfModalRef.current.openModal(title, api, data);
   openLinkModal = (title, data) => this.linkModalRef.current.openModal(title, data);
-  openPlayerModal = (title, data) => this.playerModalRef.current.openModal(title, data);
+  openPlayerModal = (title, data, type) => this.playerModalRef.current.openModal(title, data, type);
   openResultModal = (title, data) => this.resultModalRef.current.openModal(title, data);
   openResultTournamentModal = (title, data) => this.resultTournamentModalRef.current.openModal(title, data);
   openResultScoreModal = (title, data) => this.resultScoreModalRef.current.openModal(title, data);
   openStandingsTournamentModal = (title, data) => this.standingsTournamentModalRef.current.openModal(title, data);
   openStandingsScoreModal = (title, data) => this.standingsScoreModalRef.current.openModal(title, data);
-  openKalenderModal = (title, data) => this.kalenderModalRef.current.openModal(title, data);
+  openKalenderModal = (title, data, type) => this.kalenderModalRef.current.openModal(title, data, type);
   openAlbumModal = (title, data) => this.albumModalRef.current.openModal(title, data);
   openVideoModal = (title, data) => this.videoModalRef.current.openModal(title, data);
   openArtikelModal = (title, data) => this.artikelModalRef.current.openModal(title, data);
