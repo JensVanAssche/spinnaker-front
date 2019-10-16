@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getAll } from "./actions";
-import { selectLoading } from "./selectors";
+import { getAll } from "redux/content/actions";
+import { selectLoading } from "redux/content/selectors";
 import { Route, Switch } from "react-router-dom";
 
 import Website from "app/Website";

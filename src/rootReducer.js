@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import authReducer from 'admin/reducer';
-import contentReducer from 'app/reducer';
-import linksReducer from 'spinnaker/reducer';
+import authReducer from 'redux/auth/reducer';
+import contentReducer from 'redux/content/reducer';
+import linksReducer from 'redux/links/reducer';
 
 export default combineReducers({
   auth: authReducer,

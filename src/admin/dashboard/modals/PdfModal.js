@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
-import { updatePdf } from 'app/actions';
+import { updatePdf } from 'redux/content/actions';
 import { connect } from 'react-redux';
 
 class PdfModal extends React.Component {

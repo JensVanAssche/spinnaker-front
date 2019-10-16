@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Network from 'utils/network';
-import { selectData } from "app/selectors";
+import { selectData } from "redux/content/selectors";
 import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
 
 class Nederland extends React.Component {

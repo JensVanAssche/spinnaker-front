@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
-import { updateContent } from 'app/actions';
+import { updateContent } from 'redux/content/actions';
 import { connect } from 'react-redux';
 import './modal.scss';
 

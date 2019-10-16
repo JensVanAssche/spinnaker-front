@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Tab } from 'semantic-ui-react';
-import { logout } from 'admin/actions';
+import { logout } from 'redux/auth/actions';
 import './dashboard.scss';
 
 import Algemeen from './algemeen/Algemeen';

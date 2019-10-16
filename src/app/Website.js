@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { getLinks } from "spinnaker/actions";
-import { selectLoading } from "spinnaker/selectors";
+import { getLinks } from "redux/links/actions";
+import { selectLoading } from "redux/links/selectors";
 
 import Header from "header/Header";
 import Home from "home/Home";

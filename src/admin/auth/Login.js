@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Card, Input, Button, Form, Message } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import { validateRequired } from 'utils/validate';
-import { login } from 'admin/actions';
-import { selectError } from 'admin/selectors';
+import { login } from 'redux/auth/actions';
+import { selectError } from 'redux/auth/selectors';
 import './login.scss';
 
 class Login extends React.Component {

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { selectIsLoggedIn, selectLoading } from "admin/selectors";
-import { me } from "admin/actions";
+import { selectIsLoggedIn, selectLoading } from "redux/auth/selectors";
+import { me } from "redux/auth/actions";
 
 import NonAuthRoute from "routing/NonAuthRoute";
 import AuthRoute from "routing/AuthRoute";

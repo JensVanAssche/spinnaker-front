@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectData } from "app/selectors";
+import { selectData } from "redux/content/selectors";
 import { Tab, Button, Icon } from 'semantic-ui-react';
 
 function Dansen({ openTextareaModal, openFileModal, data }) {

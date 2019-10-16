@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectData } from "app/selectors";
-import { selectLinks } from "spinnaker/selectors";
-import { getLinks } from "spinnaker/actions";
+import { selectData } from "redux/content/selectors";
+import { selectLinks } from "redux/links/selectors";
+import { getLinks } from "redux/links/actions";
 import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
 
 class Spinnaker extends React.Component {

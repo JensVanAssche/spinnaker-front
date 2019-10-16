@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectData } from 'app/selectors';
-import { selectLinks } from './selectors';
+import { selectData } from 'redux/content/selectors';
+import { selectLinks } from 'redux/links/selectors';
 import './spinnaker.scss';
 
 class Spinnaker extends React.Component {

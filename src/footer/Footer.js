@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectData } from 'app/selectors';
+import { selectData } from 'redux/content/selectors';
 import Network from 'utils/network';
 import Wave from 'assets/images/wave_darkblue.png';
 import './footer.scss';

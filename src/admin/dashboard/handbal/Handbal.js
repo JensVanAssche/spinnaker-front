@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectData } from "app/selectors";
+import { selectData } from "redux/content/selectors";
 import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
 import Network from 'utils/network';
 

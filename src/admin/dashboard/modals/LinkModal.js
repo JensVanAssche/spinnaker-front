@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import Network from 'utils/network';
 import { connect } from 'react-redux';
-import { updateLink, addLink, deleteLink } from "spinnaker/actions";
+import { updateLink, addLink, deleteLink } from "redux/links/actions";
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
