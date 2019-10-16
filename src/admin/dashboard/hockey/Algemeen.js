@@ -27,7 +27,7 @@ class Algemeen extends React.Component {
         <h2>Hockey Foto</h2>
         <div className="dashboard-flex">
           <img src={process.env.REACT_APP_API_HOST + data.hockeyImg} alt="eumm" />
-          <Button icon className="small-button" onClick={() => openFileModal('Hockey Foto')} >
+          <Button icon className="small-button" onClick={() => openFileModal('Hockey Foto', 'content/img/hockeyImg')} >
             <Icon name="edit" />
           </Button>
         </div>

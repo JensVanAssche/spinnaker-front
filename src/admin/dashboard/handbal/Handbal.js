@@ -27,7 +27,7 @@ class Handbal extends React.Component {
         <h2>Handbal Foto</h2>
         <div className="dashboard-flex">
           <img src={process.env.REACT_APP_API_HOST + data.handbalImg} alt="eumm" />
-          <Button icon className="small-button" onClick={() => openFileModal('Handbal Foto')} >
+          <Button icon className="small-button" onClick={() => openFileModal('Handbal Foto', 'content/img/handbalImg')} >
             <Icon name="edit" />
           </Button>
         </div>

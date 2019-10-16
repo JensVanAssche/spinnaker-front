@@ -27,7 +27,7 @@ class Zwemmen extends React.Component {
         <h2>Zwemmen Foto</h2>
         <div className="dashboard-flex">
           <img src={process.env.REACT_APP_API_HOST + data.zwemmenImg} alt="eumm" />
-          <Button icon className="small-button" onClick={() => openFileModal('Zwemmen Foto')} >
+          <Button icon className="small-button" onClick={() => openFileModal('Zwemmen Foto', 'content/img/zwemmenImg')} >
             <Icon name="edit" />
           </Button>
         </div>

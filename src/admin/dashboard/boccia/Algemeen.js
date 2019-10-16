@@ -10,7 +10,7 @@ function Algemeen({ openTextareaModal, openFileModal, data }) {
       <h2>Boccia Foto</h2>
       <div className="dashboard-flex">
         <img src={process.env.REACT_APP_API_HOST + data.bocciaImg} alt="eumm" />
-        <Button icon className="small-button" onClick={() => openFileModal('Boccia Foto')} >
+        <Button icon className="small-button" onClick={() => openFileModal('Boccia Foto', 'content/img/bocciaImg')} >
           <Icon name="edit" />
         </Button>
       </div>

@@ -10,7 +10,7 @@ function Dansen({ openTextareaModal, openFileModal, data }) {
       <h2>Dansen Foto</h2>
       <div className="dashboard-flex">
         <img src={process.env.REACT_APP_API_HOST + data.dansenImg} alt="eumm" />
-        <Button icon className="small-button" onClick={() => openFileModal('Dansen Foto')} >
+        <Button icon className="small-button" onClick={() => openFileModal('Dansen Foto', 'content/img/dansenImg')} >
           <Icon name="edit" />
         </Button>
       </div>
