@@ -167,6 +167,8 @@ class Network {
     const formData = new FormData();
     formData.append('file', body.pdfData);
     formData.append('text', body.title);
+    formData.append('text', body.pdfName);
+    if (body.type) formData.append('text', body.type);
 
     try {
       const headers = {

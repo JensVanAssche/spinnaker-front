@@ -78,7 +78,7 @@ class Spinnaker extends React.Component {
             <p>{data.spinnakerEngagementTitle}</p>
             <a href={process.env.REACT_APP_API_HOST + data.spinnakerEngagementPdf} target="_blank" rel="noopener noreferrer">{data.spinnakerEngagementPdf}</a>
           </div>
-          <Button icon className="small-button" onClick={() => openPdfModal('Engagementsverklaring', 'content/pdf', { title: data.spinnakerEngagementTitle, pdf: data.spinnakerEngagementPdf } )}>
+          <Button icon className="small-button" onClick={() => openPdfModal('Engagementsverklaring', 'content/pdf', { title: data.spinnakerEngagementTitle, pdf: data.spinnakerEngagementPdf }, null)}>
             <Icon name="edit" />
           </Button>
         </div>

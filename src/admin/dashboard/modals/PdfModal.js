@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updatePdf } from 'redux/content/actions';
+import { updatePdfResult, addPdfResult, deletePdfResult } from 'redux/results/actions';
+import { updatePdfStanding, addPdfStanding, deletePdfStanding } from 'redux/standings/actions';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
-import { updatePdf } from 'redux/content/actions';
-import { connect } from 'react-redux';
 
 class PdfModal extends React.Component {
   state = {
@@ -13,13 +15,14 @@ class PdfModal extends React.Component {
     api: null,
     data: {
       id: null,
+      type: null,
       title: null,
       pdfData: null,
       pdfName: null,
     },
   };
 
-  openModal = (title, api, data) => {
+  openModal = (title, api, data, type) => {
     this.setState({
       modalOpen: true,
       error: null,
@@ -27,6 +30,7 @@ class PdfModal extends React.Component {
       api,
       data: {
         id: data ? data.id : null,
+        type: data ? data.type : type,
         title: data ? data.title : '',
         pdfData: null,
         pdfName: data ? data.pdf : null,
@@ -75,14 +79,40 @@ class PdfModal extends React.Component {
       if (api === 'content/pdf') {
         this.props.updatePdf(api, data).then(() => this.closeModal());
       }
+
+      if (data.id) {
+        // PUT
+        if (api === 'results/pdf') {
+          this.props.updatePdfResult(data).then(() => this.closeModal());
+        } 
+        
+        if (api === 'standings/pdf') {
+          this.props.updatePdfStanding(data).then(() => this.closeModal());
+        }
+      } else {
+        // POST
+        if (api === 'results/pdf') {
+          this.props.addPdfResult(data).then(() => this.closeModal());
+        } 
+        
+        if (api === 'standings/pdf') {
+          this.props.addPdfStanding(data).then(() => this.closeModal());
+        }
+      }
+      
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    if (this.state.api === 'results/pdf') {
+      this.props.deletePdfResult(this.state.data.id).then(() => this.closeModal());
+    }
+    
+    if (this.state.api === 'standings/pdf') {
+      this.props.deletePdfStanding(this.state.data.id).then(() => this.closeModal());
+    }
   }
 
   render() {
@@ -122,6 +152,12 @@ class PdfModal extends React.Component {
 
 const mapDispatchToProps = {
   updatePdf,
+  updatePdfResult,
+  addPdfResult,
+  deletePdfResult,
+  updatePdfStanding,
+  addPdfStanding,
+  deletePdfStanding
 };
 
 export default connect(

@@ -134,7 +134,7 @@ class Parantee extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Parantee Resultaten</h2>
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Parantee Kalender Item toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Parantee Resultaat toevoegen', 'results/pdf', null, 'parantee')}>
             <span>Resultaat</span>
             <Icon name="add" />
           </Button>
@@ -146,7 +146,7 @@ class Parantee extends React.Component {
               <p>{result.title}</p>
               <a href={process.env.REACT_APP_API_HOST + result.pdf} target="_blank" rel="noopener noreferrer">{result.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Parantee Resultaat aanpassen', result)}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Parantee Resultaat aanpassen', 'results/pdf', result, null)}>
               <Icon name="edit" />
             </Button>
           </div>
@@ -155,7 +155,7 @@ class Parantee extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Parantee Stand</h2>
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Parantee Kalender Item toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Parantee Stand toevoegen', 'standings/pdf', null, 'parantee')}>
             <span>Stand</span>
             <Icon name="add" />
           </Button>
@@ -167,7 +167,7 @@ class Parantee extends React.Component {
               <p>{stand.title}</p>
               <a href={process.env.REACT_APP_API_HOST + stand.pdf} target="_blank" rel="noopener noreferrer">{stand.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Parantee Stand aanpassen', stand)}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Parantee Stand aanpassen', 'standings/pdf', stand, null)}>
               <Icon name="edit" />
             </Button>
           </div>

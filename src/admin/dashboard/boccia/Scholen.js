@@ -13,7 +13,7 @@ class Scholen extends React.Component {
   }
 
   componentDidMount() {
-    Network.get('api/players/scholen').then((res) =>
+    Network.get('api/players/ordered/scholen').then((res) =>
       this.setState({ players: res })
     );
 
