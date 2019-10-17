@@ -9,14 +9,19 @@ import { selectPlayers } from "redux/players/selectors";
 import { selectCalendar } from "redux/calendar/selectors";
 import { selectResults } from "redux/results/selectors";
 import { selectStandings } from "redux/standings/selectors";
-import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
+import { Tab, Button, Icon, Grid, Dimmer, Loader } from 'semantic-ui-react';
 
 class Parantee extends React.Component {
-  componentDidMount() {
-    this.props.getPlayers('parantee');
-    this.props.getCalendar('parantee');
-    this.props.getResults('parantee');
-    this.props.getStandings('parantee');
+  state = {
+    loading: true,
+  }
+
+  async componentDidMount() {
+    await this.props.getPlayers('parantee');
+    await this.props.getCalendar('parantee');
+    await this.props.getResults('parantee');
+    await this.props.getStandings('parantee');
+    this.setState({ loading: false })
   }
 
   render() {
@@ -32,7 +37,15 @@ class Parantee extends React.Component {
       standings
     } = this.props;
 
-    if (!players || !calendar || !results || !standings) return null;
+    if (this.state.loading) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
+
+    if (!players || !calendar || !results || !standings) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
 
     return <Tab.Pane className="no-border">
       <h1>Parantee Competitie</h1>

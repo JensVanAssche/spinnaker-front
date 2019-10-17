@@ -199,7 +199,7 @@ class KalenderModal extends React.Component {
                 </select>
               </Form.Field>
               <Form.Field width={3}>
-                <input value={data.year} onChange={this.handleYearChange} />
+                <input value={data.year} onChange={this.handleYearChange} maxLength="4" />
               </Form.Field>
             </Form.Group>
             <Form.Field>

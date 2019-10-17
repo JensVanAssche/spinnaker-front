@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { selectData } from "redux/content/selectors";
 import { selectLinks } from "redux/links/selectors";
 import { getLinks } from "redux/links/actions";
-import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
+import { Tab, Button, Icon, Grid, Dimmer, Loader } from 'semantic-ui-react';
 
 class Spinnaker extends React.Component {
   componentDidMount() {
@@ -13,7 +13,10 @@ class Spinnaker extends React.Component {
   render() {
     const { openInputModal, openTextareaModal, openPdfModal, openLinkModal, data, links } = this.props;
 
-    if (!links) return null;
+    if (!links) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
     
     return <Tab.Pane>
       <h1>Spinnaker</h1>

@@ -4,7 +4,7 @@ const selectNode = state => state.calendar;
 
 export const selectCalendar = createSelector(
   selectNode,
-  node => node.data && node.data.sort((a, b) => a.date - b.date),
+  node => node.data,
 );
 
 export const selectLoading = createSelector(

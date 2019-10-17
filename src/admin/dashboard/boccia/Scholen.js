@@ -1,37 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Network from 'utils/network';
 import { selectData } from "redux/content/selectors";
-import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
+import { getPlayers } from "redux/players/actions";
+import { getCalendar } from "redux/calendar/actions";
+import { getResults } from "redux/results/actions";
+import { getStandings } from "redux/standings/actions";
+import { selectPlayers } from "redux/players/selectors";
+import { selectCalendar } from "redux/calendar/selectors";
+import { selectResults } from "redux/results/selectors";
+import { selectStandings } from "redux/standings/selectors";
+import { Tab, Button, Icon, Grid, Dimmer, Loader } from 'semantic-ui-react';
 
 class Scholen extends React.Component {
   state = {
-    players: null,
-    calendar: null,
-    results: null,
-    standings: null,
+    loading: true,
   }
 
-  componentDidMount() {
-    Network.get('api/players/ordered/scholen').then((res) =>
-      this.setState({ players: res })
-    );
-
-    Network.get('api/calendar/scholen').then((res) =>
-      this.setState({ calendar: res })
-    );
-
-    Network.get('api/results/scholen').then((res) =>
-      this.setState({ results: res })
-    );
-
-    Network.get('api/standings/scholen').then((res) =>
-      this.setState({ standings: res })
-    );
+  async componentDidMount() {
+    await this.props.getPlayers('scholen');
+    await this.props.getCalendar('scholen');
+    await this.props.getResults('scholen');
+    await this.props.getStandings('scholen');
+    this.setState({ loading: false })
   }
 
   render() {
-    const { players, calendar, results, standings } = this.state;
     const {
       openTextareaModal,
       openPlayerModal,
@@ -40,10 +33,22 @@ class Scholen extends React.Component {
       openStandingsTournamentModal,
       openStandingsScoreModal,
       openKalenderModal,
-      data
+      data,
+      players,
+      calendar,
+      results,
+      standings
     } = this.props;
 
-    if (!players || !calendar || !results || !standings) return null;
+    if (this.state.loading) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
+
+    if (!players || !calendar || !results || !standings) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
 
     return <Tab.Pane className="no-border">
       <h1>Scholen Competitie</h1>
@@ -59,7 +64,7 @@ class Scholen extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Scholen Spelers</h2>
-          <Button icon primary className="small-button" onClick={() => openPlayerModal('Scholen Speler toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openPlayerModal('Scholen Speler toevoegen', null, 'scholen')}>
             <span>Speler</span>
             <Icon name="add" />
           </Button>
@@ -79,32 +84,30 @@ class Scholen extends React.Component {
             </Grid.Column>
           </Grid.Row>
           {!players.length && ( <p>Geen spelers</p> )}
-          {players.map(type => (
-            type.players.map(player => (
-              <Grid.Row key={player.id}>
-                <Grid.Column width={2}>
-                  <img src={process.env.REACT_APP_API_HOST + player.image} alt="eumm" />
-                </Grid.Column>
-                <Grid.Column width={5}>
-                  <p>{player.name}</p>
-                </Grid.Column>
-                <Grid.Column width={2}>
-                  <p>{player.subtitle}</p>
-                </Grid.Column>
-                <Grid.Column width={7} className="grid-button">
-                  <Button icon className="small-button" onClick={() => openPlayerModal('Scholen Speler aanpassen', player)}>
-                    <Icon name="edit" />
-                  </Button>
-                </Grid.Column>
-              </Grid.Row>
-            ))
+          {players.map(player => (
+            <Grid.Row key={player.id}>
+              <Grid.Column width={2}>
+                <img src={process.env.REACT_APP_API_HOST + player.image} alt="eumm" />
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <p>{player.name}</p>
+              </Grid.Column>
+              <Grid.Column width={2}>
+                <p>{player.subtitle}</p>
+              </Grid.Column>
+              <Grid.Column width={7} className="grid-button">
+                <Button icon className="small-button" onClick={() => openPlayerModal('Scholen Speler aanpassen', player, null)}>
+                  <Icon name="edit" />
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
           ))}
         </Grid>
       </div>
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Parantee Kalender</h2>
-          <Button icon primary className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item toevoegen', null, 'scholen')}>
             <span>Item</span>
             <Icon name="add" />
           </Button>
@@ -136,7 +139,7 @@ class Scholen extends React.Component {
                 <p>{entry.location}</p>
               </Grid.Column>
               <Grid.Column width={2} className="grid-button">
-                <Button icon className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item aanpassen', entry)}>
+                <Button icon className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item aanpassen', entry, null)}>
                   <Icon name="edit" />
                 </Button>
               </Grid.Column>
@@ -147,7 +150,7 @@ class Scholen extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Scholen Resultaten</h2>
-          <Button icon primary className="small-button" onClick={() => openResultTournamentModal('Scholen Tornooi toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openResultTournamentModal('Scholen Tornooi toevoegen', null, 'scholen')}>
             <span>Tornooi Resultaat</span>
             <Icon name="add" />
           </Button>
@@ -160,7 +163,7 @@ class Scholen extends React.Component {
                 <p>{result.title}</p>
                 <p>{result.date}</p>
               </div>
-              <Button icon className="small-button" onClick={() => openResultTournamentModal('Scholen Tornooi aanpassen', result)}>
+              <Button icon className="small-button" onClick={() => openResultTournamentModal('Scholen Tornooi aanpassen', result, 'scholen')}>
                 <Icon name="edit" />
               </Button>
             </div>
@@ -171,14 +174,14 @@ class Scholen extends React.Component {
                     <p>{score.team1}: {score.team1Score}</p>
                     <p>{score.team2}: {score.team2Score}</p>
                   </div>
-                  <Button icon className="small-button" onClick={() => openResultScoreModal('Scholen Resultaat aanpassen', score)}>
+                  <Button icon className="small-button" onClick={() => openResultScoreModal('Scholen Resultaat aanpassen', score, null)}>
                     <Icon name="edit" />
                   </Button>
                 </div>
               ))}
               <div className="scores-content-entry">
                 <div />
-                <Button icon primary className="small-button" onClick={() => openResultScoreModal('Scholen Resultaat toevoegen')}>
+                <Button icon primary className="small-button" onClick={() => openResultScoreModal('Scholen Resultaat toevoegen', null, result.id)}>
                   <Icon name="add" />
                 </Button>
               </div>
@@ -240,11 +243,22 @@ class Scholen extends React.Component {
   }
 }
 
+const mapDispatchToProps = {
+  getPlayers,
+  getCalendar,
+  getResults,
+  getStandings
+};
+
 const mapStateToProps = state => ({
   data: selectData(state),
+  players: selectPlayers(state),
+  calendar: selectCalendar(state),
+  results: selectResults(state),
+  standings: selectStandings(state)
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Scholen);

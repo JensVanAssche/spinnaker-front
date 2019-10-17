@@ -1,15 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateTournamentResult, addTournamentResult, deleteTournamentResult } from 'redux/results/actions';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
-class InputModal extends React.Component {
+class ResultTournamentModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
     title: null,
     data: {
       id: null,
+      type: null,
       title: null,
       day: null,
       month: null,
@@ -17,7 +20,7 @@ class InputModal extends React.Component {
     },
   };
 
-  openModal = (title, data) => {
+  openModal = (title, data, type) => {
     if (data) {
       const arr = data.date.split(' ');
       var day;
@@ -38,6 +41,7 @@ class InputModal extends React.Component {
       title,
       data: {
         id: data ? data.id : null,
+        type: data ? data.type : type,
         title: data ? data.title : '',
         day: data ? day : '01',
         month: data ? month : 'januari',
@@ -49,7 +53,7 @@ class InputModal extends React.Component {
   closeModal = () =>
     this.setState({
       modalOpen: false,
-  });
+    });
 
   handleTitleChange = event => {
     const { value } = event.target;
@@ -99,17 +103,20 @@ class InputModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
     if (isValid) {
-      console.log(this.state.data);
-      this.closeModal();
+      if (data.id) {
+        this.props.updateTournamentResult(data).then(() => this.closeModal());
+      } else {       
+        this.props.addTournamentResult(data).then(() => this.closeModal());
+      }
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteTournamentResult(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -202,4 +209,15 @@ class InputModal extends React.Component {
   }
 }
 
-export default InputModal;
+const mapDispatchToProps = {
+  updateTournamentResult,
+  addTournamentResult,
+  deleteTournamentResult
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(ResultTournamentModal);

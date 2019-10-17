@@ -5,6 +5,7 @@ const api = {};
 api.getCalendar = type => Network.get('api/calendar/' + type);
 
 api.updateCalendar = data => Network.put('api/calendar/' + data.id, {
+  type: data.type,
   day: data.day,
   month: data.month,
   year: data.year,

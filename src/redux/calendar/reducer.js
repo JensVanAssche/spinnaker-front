@@ -33,17 +33,14 @@ export default function reducer(state = initialState, action) {
     case UPDATE_CALENDAR_FULFILLED:
       return {
         ...state,
-        data: state.data
-          .filter(e => e.id !== action.payload.id)
-          .concat(action.payload),
+        data: action.payload,
       };
     case UPDATE_CALENDAR_REJECTED:
       return initialState;
     case ADD_CALENDAR_FULFILLED:
       return {
         ...state,
-        data: state.data
-          .concat(action.payload),
+        data: action.payload
       };
     case ADD_CALENDAR_REJECTED:
       return initialState;

@@ -1,15 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateScoreResult, addScoreResult, deleteScoreResult } from 'redux/results/actions';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired, validateNumber } from 'utils/validate';
 import './modal.scss';
 
-class InputModal extends React.Component {
+class ResultScoreModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
     title: null,
     data: {
       id: null,
+      tournamentId: null,
       team1: null,
       team1Score: null,
       team2: null,
@@ -17,13 +20,14 @@ class InputModal extends React.Component {
     },
   };
 
-  openModal = (title, data) => {
+  openModal = (title, data, tournamentId) => {
     this.setState({
       modalOpen: true,
       error: null,
       title,
       data: {
         id: data ? data.id : null,
+        tournamentId: data ? data.tournamentId : tournamentId,
         team1: data ? data.team1 : '',
         team1Score: data ? data.team1Score : '',
         team2: data ? data.team2 : '',
@@ -90,17 +94,20 @@ class InputModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
     if (isValid) {
-      console.log(this.state.data);
-      this.closeModal();
+      if (data.id) {
+        this.props.updateScoreResult(data).then(() => this.closeModal());
+      } else {
+        this.props.addScoreResult(data).then(() => this.closeModal());
+      }
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteScoreResult(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -146,4 +153,15 @@ class InputModal extends React.Component {
   }
 }
 
-export default InputModal;
+const mapDispatchToProps = {
+  updateScoreResult,
+  addScoreResult,
+  deleteScoreResult
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(ResultScoreModal);

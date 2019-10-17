@@ -5,17 +5,22 @@ const api = {};
 api.getResults = type => Network.get('api/results/' + type);
 
 api.updatePdfResult = data => Network.uploadPdf('api/results/pdf/' + data.id, {
+  type: data.type,
   title: data.title,
   pdfData: data.pdfData,
   pdfName: data.pdfName,
 });
 
 api.updateTournamentResult = data => Network.put('api/results/tournament/' + data.id, {
+  type: data.type,
   title: data.title,
-  date: data.date,
+  day: data.day,
+  month: data.month,
+  year: data.year
 });
 
 api.updateScoreResult = data => Network.put('api/results/score/' + data.id, {
+  tournamentId: data.tournamentId,
   team1: data.team1,
   team1Score: data.team1Score,
   team2: data.team2,
@@ -32,7 +37,9 @@ api.addPdfResult = data => Network.uploadPdf('api/results/pdf', {
 api.addTournamentResult = data => Network.post('api/results/tournament', {
   type: data.type,
   title: data.title,
-  date: data.date,
+  day: data.day,
+  month: data.month,
+  year: data.year
 });
 
 api.addScoreResult = data => Network.post('api/results/score', {

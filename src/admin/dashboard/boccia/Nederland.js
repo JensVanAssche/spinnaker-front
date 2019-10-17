@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Network from 'utils/network';
 import { selectData } from "redux/content/selectors";
-import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
+import { Tab, Button, Icon, Grid, Dimmer, Loader } from 'semantic-ui-react';
 
 class Nederland extends React.Component {
   state = {
@@ -34,7 +34,15 @@ class Nederland extends React.Component {
     const { players, calendar, results, standings } = this.state;
     const { openTextareaModal, openPdfModal, openPlayerModal, openKalenderModal, data } = this.props;
 
-    if (!players || !calendar || !results || !standings) return null;
+    if (this.state.loading) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
+
+    if (!players || !calendar || !results || !standings) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
 
     return <Tab.Pane className="no-border">
       <h1>Competitie Nederland</h1>

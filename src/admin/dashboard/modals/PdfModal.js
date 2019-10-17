@@ -85,7 +85,7 @@ class PdfModal extends React.Component {
         if (api === 'results/pdf') {
           this.props.updatePdfResult(data).then(() => this.closeModal());
         } 
-        
+
         if (api === 'standings/pdf') {
           this.props.updatePdfStanding(data).then(() => this.closeModal());
         }
