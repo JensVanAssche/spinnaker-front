@@ -1,25 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectData } from "redux/content/selectors";
-import { Tab, Button, Icon, Grid } from 'semantic-ui-react';
-import Network from 'utils/network';
+import { getCalendar } from "redux/calendar/actions";
+import { selectCalendar } from "redux/calendar/selectors";
+import { Tab, Button, Icon, Grid, Dimmer, Loader } from 'semantic-ui-react';
 
 class Handbal extends React.Component {
   state = {
-    calendar: null,
+    loading: true,
   }
 
-  componentDidMount() {
-    Network.get('api/calendar/handbal').then((res) =>
-      this.setState({ calendar: res })
-    );
+  async componentDidMount() {
+    await this.props.getCalendar('handbal');
+    this.setState({ loading: false })
   }
 
   render() {
-    const { calendar } = this.state;
-    const { openTextareaModal, openFileModal, openKalenderModal, data } = this.props;
+    const { openTextareaModal, openFileModal, openKalenderModal, data, calendar } = this.props;
 
-    if (!calendar) return null;
+    if (this.state.loading) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
+
+    if (!calendar) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
 
     return <Tab.Pane>
       <h1>Handbal</h1>
@@ -44,7 +51,7 @@ class Handbal extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Handbal Kalender</h2>
-          <Button icon primary className="small-button" onClick={() => openKalenderModal('Handbal Kalender Item toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openKalenderModal('Handbal Kalender Item toevoegen', null, 'handbal')}>
             <span>Item</span>
             <Icon name="add" />
           </Button>
@@ -76,7 +83,7 @@ class Handbal extends React.Component {
                 <p>{entry.location}</p>
               </Grid.Column>
               <Grid.Column width={2} className="grid-button">
-                <Button icon className="small-button" onClick={() => openKalenderModal('Handbal Kalender Item aanpassen', entry)}>
+                <Button icon className="small-button" onClick={() => openKalenderModal('Handbal Kalender Item aanpassen', entry, null)}>
                   <Icon name="edit" />
                 </Button>
               </Grid.Column>
@@ -88,11 +95,16 @@ class Handbal extends React.Component {
   }
 }
 
+const mapDispatchToProps = {
+  getCalendar,
+};
+
 const mapStateToProps = state => ({
   data: selectData(state),
+  calendar: selectCalendar(state),
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Handbal);
