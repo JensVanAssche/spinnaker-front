@@ -13,7 +13,7 @@ class TeamSpelers extends React.Component {
   componentDidMount() {
     const { types } = this.state;
     const { team } = this.props;
-    Network.get('api/players/' + types[team]).then((res) =>  
+    Network.get('api/players/ordered/' + types[team]).then((res) =>  
       this.setState({ loading: false, data: res })
     );
   }

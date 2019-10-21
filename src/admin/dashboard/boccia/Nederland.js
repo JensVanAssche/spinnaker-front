@@ -103,7 +103,7 @@ class Nederland extends React.Component {
       </div>
       <div className="dashboard-item">
         <div className="dashboard-flex">
-          <h2>Parantee Kalender</h2>
+          <h2>Nederland Kalender</h2>
           <Button icon primary className="small-button" onClick={() => openKalenderModal('Boccia Nederland Kalender Item toevoegen', null, 'nederland')}>
             <span>Item</span>
             <Icon name="add" />

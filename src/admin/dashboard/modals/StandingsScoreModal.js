@@ -31,7 +31,7 @@ class StandingsTournamentModal extends React.Component {
         name: data ? data.name : '',
         points1: data ? data.points1 : '',
         points2: data ? data.points2 : '',
-        points3: p3 ? data.points3 : null,
+        points3: p3 ? (data ? data.points3 : '') : null,
       },
     });
   };
