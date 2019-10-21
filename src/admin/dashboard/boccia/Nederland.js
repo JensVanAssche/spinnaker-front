@@ -1,38 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Network from 'utils/network';
 import { selectData } from "redux/content/selectors";
+import { getPlayers } from "redux/players/actions";
+import { getCalendar } from "redux/calendar/actions";
+import { getResults } from "redux/results/actions";
+import { getStandings } from "redux/standings/actions";
+import { selectPlayers } from "redux/players/selectors";
+import { selectCalendar } from "redux/calendar/selectors";
+import { selectResults } from "redux/results/selectors";
+import { selectStandings } from "redux/standings/selectors";
 import { Tab, Button, Icon, Grid, Dimmer, Loader } from 'semantic-ui-react';
 
 class Nederland extends React.Component {
   state = {
-    players: null,
-    calendar: null,
-    results: null,
-    standings: null,
+    loading: true,
   }
 
-  componentDidMount() {
-    Network.get('api/players/boccianederland').then((res) =>
-      this.setState({ players: res })
-    );
-
-    Network.get('api/calendar/nederland').then((res) =>
-      this.setState({ calendar: res })
-    );
-
-    Network.get('api/results/boccianederland').then((res) =>
-      this.setState({ results: res })
-    );
-
-    Network.get('api/standings/boccianederland').then((res) =>
-      this.setState({ standings: res })
-    );
+  async componentDidMount() {
+    await this.props.getPlayers('boccianederland');
+    await this.props.getCalendar('nederland');
+    await this.props.getResults('boccianederland');
+    await this.props.getStandings('boccianederland');
+    this.setState({ loading: false })
   }
 
   render() {
-    const { players, calendar, results, standings } = this.state;
-    const { openTextareaModal, openPdfModal, openPlayerModal, openKalenderModal, data } = this.props;
+    const {
+      openTextareaModal,
+      openPdfModal,
+      openPlayerModal,
+      openKalenderModal,
+      data,
+      players,
+      calendar,
+      results,
+      standings
+    } = this.props;
 
     if (this.state.loading) return (
       <Dimmer active inverted>
@@ -58,7 +61,7 @@ class Nederland extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Nederland Spelers</h2>
-          <Button icon primary className="small-button"  onClick={() => openPlayerModal('Boccia Nederland Speler toevoegen')}>
+          <Button icon primary className="small-button"  onClick={() => openPlayerModal('Boccia Nederland Speler toevoegen', null, 'boccianederland')}>
             <span>Speler</span>
             <Icon name="add" />
           </Button>
@@ -78,32 +81,30 @@ class Nederland extends React.Component {
             </Grid.Column>
           </Grid.Row>
           {!players.length && ( <p>Geen spelers</p> )}
-          {players.map(type => (
-            type.players.map(player => (
-              <Grid.Row key={player.id}>
-                <Grid.Column width={2}>
-                  <img src={process.env.REACT_APP_API_HOST + player.image} alt="eumm" />
-                </Grid.Column>
-                <Grid.Column width={5}>
-                  <p>{player.name}</p>
-                </Grid.Column>
-                <Grid.Column width={2}>
-                  <p>{player.subtitle}</p>
-                </Grid.Column>
-                <Grid.Column width={7} className="grid-button">
-                  <Button icon className="small-button"  onClick={() => openPlayerModal('Boccia Nederland Speler aanpassen', player)}>
-                    <Icon name="edit" />
-                  </Button>
-                </Grid.Column>
-              </Grid.Row>
-            ))
+          {players.map(player => (
+            <Grid.Row key={player.id}>
+              <Grid.Column width={2}>
+                <img src={process.env.REACT_APP_API_HOST + player.image} alt="eumm" />
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <p>{player.name}</p>
+              </Grid.Column>
+              <Grid.Column width={2}>
+                <p>{player.subtitle}</p>
+              </Grid.Column>
+              <Grid.Column width={7} className="grid-button">
+                <Button icon className="small-button"  onClick={() => openPlayerModal('Boccia Nederland Speler aanpassen', player, null)}>
+                  <Icon name="edit" />
+                </Button>
+              </Grid.Column>
+            </Grid.Row>
           ))}
         </Grid>
       </div>
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Parantee Kalender</h2>
-          <Button icon primary className="small-button" onClick={() => openKalenderModal('Boccia Nederland Kalender Item toevoegen')}>
+          <Button icon primary className="small-button" onClick={() => openKalenderModal('Boccia Nederland Kalender Item toevoegen', null, 'nederland')}>
             <span>Item</span>
             <Icon name="add" />
           </Button>
@@ -135,7 +136,7 @@ class Nederland extends React.Component {
                 <p>{entry.location}</p>
               </Grid.Column>
               <Grid.Column width={2} className="grid-button">
-                <Button icon className="small-button" onClick={() => openKalenderModal('Boccia Nederland Kalender Item aanpassen', entry)}>
+                <Button icon className="small-button" onClick={() => openKalenderModal('Boccia Nederland Kalender Item aanpassen', entry, null)}>
                   <Icon name="edit" />
                 </Button>
               </Grid.Column>
@@ -146,7 +147,7 @@ class Nederland extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Nederland Resultaten</h2>
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Boccia Nederland Resultaat toevoegen', null)} >
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Boccia Nederland Resultaat toevoegen', 'results/pdf', null, 'boccianederland')} >
             <span>Resultaat</span>
             <Icon name="add" />
           </Button>
@@ -158,7 +159,7 @@ class Nederland extends React.Component {
               <p>{result.title}</p>
               <a href={process.env.REACT_APP_API_HOST + result.pdf} target="_blank" rel="noopener noreferrer">{result.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Boccia Nederland Resultaat aanpassen', { title: result.title, pdf: result.pdf } )}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Boccia Nederland Resultaat aanpassen', 'results/pdf', result, null )}>
               <Icon name="edit" />
             </Button>
           </div>
@@ -167,7 +168,7 @@ class Nederland extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Nederland Stand</h2>
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Boccia Nederland Stand toevoegen', null)} >
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Boccia Nederland Stand toevoegen', 'standings/pdf', null, 'boccianederland')} >
             <span>Stand</span>
             <Icon name="add" />
           </Button>
@@ -179,7 +180,7 @@ class Nederland extends React.Component {
               <p>{stand.title}</p>
               <a href={process.env.REACT_APP_API_HOST + stand.pdf} target="_blank" rel="noopener noreferrer">{stand.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Boccia Nederland Stand aanpassen', { title: stand.title, pdf: stand.pdf } )}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Boccia Nederland Stand aanpassen', 'standings/pdf', stand, null )}>
               <Icon name="edit" />
             </Button>
           </div>
@@ -198,11 +199,22 @@ class Nederland extends React.Component {
   }
 }
 
+const mapDispatchToProps = {
+  getPlayers,
+  getCalendar,
+  getResults,
+  getStandings
+};
+
 const mapStateToProps = state => ({
   data: selectData(state),
+  players: selectPlayers(state),
+  calendar: selectCalendar(state),
+  results: selectResults(state),
+  standings: selectStandings(state)
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Nederland);

@@ -5,17 +5,20 @@ const api = {};
 api.getStandings = type => Network.get('api/standings/' + type);
 
 api.updatePdfStanding = data => Network.uploadPdf('api/standings/pdf/' + data.id, {
+  type: data.type,
   title: data.title,
   pdfData: data.pdfData,
   pdfName: data.pdfName,
 });
 
 api.updateTournamentStanding = data => Network.put('api/standings/tournament/' + data.id, {
+  type: data.type,
   title: data.title,
   subtitle: data.subtitle,
 });
 
 api.updateScoreStanding = data => Network.put('api/standings/score/' + data.id, {
+  tournamentId: data.tournamentId,
   name: data.name,
   points1: data.points1,
   points2: data.points2,

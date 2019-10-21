@@ -163,7 +163,7 @@ class Scholen extends React.Component {
                 <p>{result.title}</p>
                 <p>{result.date}</p>
               </div>
-              <Button icon className="small-button" onClick={() => openResultTournamentModal('Scholen Tornooi aanpassen', result, 'scholen')}>
+              <Button icon className="small-button" onClick={() => openResultTournamentModal('Scholen Tornooi aanpassen', result, null)}>
                 <Icon name="edit" />
               </Button>
             </div>
@@ -174,14 +174,14 @@ class Scholen extends React.Component {
                     <p>{score.team1}: {score.team1Score}</p>
                     <p>{score.team2}: {score.team2Score}</p>
                   </div>
-                  <Button icon className="small-button" onClick={() => openResultScoreModal('Scholen Resultaat aanpassen', score, null)}>
+                  <Button icon className="small-button" onClick={() => openResultScoreModal('Scholen Resultaat aanpassen', score, null, false)}>
                     <Icon name="edit" />
                   </Button>
                 </div>
               ))}
               <div className="scores-content-entry">
                 <div />
-                <Button icon primary className="small-button" onClick={() => openResultScoreModal('Scholen Resultaat toevoegen', null, result.id)}>
+                <Button icon primary className="small-button" onClick={() => openResultScoreModal('Scholen Resultaat toevoegen', null, result.id, false)}>
                   <Icon name="add" />
                 </Button>
               </div>
@@ -192,7 +192,7 @@ class Scholen extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Scholen Stand</h2>
-          <Button icon primary className="small-button" onClick={() => openStandingsTournamentModal('Scholen Tornooi toevoegen')} >
+          <Button icon primary className="small-button" onClick={() => openStandingsTournamentModal('Scholen Tornooi toevoegen', null, 'scholen')} >
             <span>Tornooi Stand</span>
             <Icon name="add" />
           </Button>
@@ -205,7 +205,7 @@ class Scholen extends React.Component {
                 <p>{stand.title}</p>
                 <p>{stand.subtitle}</p>
               </div>
-              <Button icon className="small-button" onClick={() => openStandingsTournamentModal('Scholen Tornooi aanpassen', stand)}>
+              <Button icon className="small-button" onClick={() => openStandingsTournamentModal('Scholen Tornooi aanpassen', stand, null)}>
                 <Icon name="edit" />
               </Button>
             </div>
@@ -215,14 +215,14 @@ class Scholen extends React.Component {
                   <div>
                     <p>{score.name}: {score.points1} - {score.points2}</p>
                   </div>
-                  <Button icon className="small-button" onClick={() => openStandingsScoreModal('Scholen Stand aanpassen', score)}>
+                  <Button icon className="small-button" onClick={() => openStandingsScoreModal('Scholen Stand aanpassen', score, null)}>
                     <Icon name="edit" />
                   </Button>
                 </div>
               ))}
               <div className="scores-content-entry">
                 <div />
-                <Button icon primary className="small-button" onClick={() => openStandingsScoreModal('Scholen Stand toevoegen')}>
+                <Button icon primary className="small-button" onClick={() => openStandingsScoreModal('Scholen Stand toevoegen', null, stand.id)}>
                   <Icon name="add" />
                 </Button>
               </div>

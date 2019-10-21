@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateScoreStanding, addScoreStanding, deleteScoreStanding } from 'redux/standings/actions';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
@@ -10,6 +12,7 @@ class StandingsTournamentModal extends React.Component {
     title: null,
     data: {
       id: null,
+      tournamentId: null,
       name: null,
       points1: null,
       points2: null,
@@ -17,17 +20,18 @@ class StandingsTournamentModal extends React.Component {
     },
   };
 
-  openModal = (title, data) => {
+  openModal = (title, data, tournamentId, p3) => {
     this.setState({
       modalOpen: true,
       error: null,
       title,
       data: {
         id: data ? data.id : null,
+        tournamentId: data ? data.tournamentId : tournamentId,
         name: data ? data.name : '',
         points1: data ? data.points1 : '',
         points2: data ? data.points2 : '',
-        points3: data.points3 ? data.points3 : null,
+        points3: p3 ? data.points3 : null,
       },
     });
   };
@@ -82,23 +86,26 @@ class StandingsTournamentModal extends React.Component {
     if (!validateRequired(data.name)) return false;
     if (!validateRequired(data.points1)) return false;
     if (!validateRequired(data.points2)) return false;
-    if (data.points3 !== null) { if (!validateRequired(data.points3)) return false; }
+    if (this.props.p3) { if (!validateRequired(data.points3)) return false };
     return true;
   };
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
     if (isValid) {
-      console.log(this.state.data);
-      this.closeModal();
+      if (data.id) {
+        this.props.updateScoreStanding(data).then(() => this.closeModal());
+      } else {
+        this.props.addScoreStanding(data).then(() => this.closeModal());
+      }
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteScoreStanding(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -145,4 +152,15 @@ class StandingsTournamentModal extends React.Component {
   }
 }
 
-export default StandingsTournamentModal;
+const mapDispatchToProps = {
+  updateScoreStanding,
+  addScoreStanding,
+  deleteScoreStanding
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(StandingsTournamentModal);

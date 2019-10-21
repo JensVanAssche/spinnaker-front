@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateTournamentStanding, addTournamentStanding, deleteTournamentStanding } from 'redux/standings/actions';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
@@ -10,18 +12,20 @@ class StandingsTournamentModal extends React.Component {
     title: null,
     data: {
       id: null,
+      type: null,
       title: null,
       subtitle: null
     },
   };
 
-  openModal = (title, data) => {
+  openModal = (title, data, type) => {
     this.setState({
       modalOpen: true,
       error: null,
       title,
       data: {
         id: data ? data.id : null,
+        type: data ? data.type : type,
         title: data ? data.title : '',
         subtitle: data ? data.subtitle : '',
       },
@@ -62,17 +66,20 @@ class StandingsTournamentModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
     if (isValid) {
-      console.log(this.state.data);
-      this.closeModal();
+      if (data.id) {
+        this.props.updateTournamentStanding(data).then(() => this.closeModal());
+      } else {
+        this.props.addTournamentStanding(data).then(() => this.closeModal());
+      }
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteTournamentStanding(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -110,4 +117,15 @@ class StandingsTournamentModal extends React.Component {
   }
 }
 
-export default StandingsTournamentModal;
+const mapDispatchToProps = {
+  updateTournamentStanding,
+  addTournamentStanding,
+  deleteTournamentStanding
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(StandingsTournamentModal);

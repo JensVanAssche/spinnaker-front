@@ -107,7 +107,7 @@ class ResultTournamentModal extends React.Component {
     if (isValid) {
       if (data.id) {
         this.props.updateTournamentResult(data).then(() => this.closeModal());
-      } else {       
+      } else {
         this.props.addTournamentResult(data).then(() => this.closeModal());
       }
     } else {
