@@ -103,7 +103,12 @@ export default function reducer(state = initialState, action) {
     case DELETE_SCORE_RESULT_FULFILLED:
       return {
         ...state,
-        data: state.data.filter(e => e.id !== action.payload.id)
+        data: state.data.map(t => {
+          return {
+            ...t,
+            scores: t.scores.filter(s => s.id !== action.payload.id)
+          }
+        })
       };
     case DELETE_SCORE_RESULT_REJECTED:
       return initialState;
