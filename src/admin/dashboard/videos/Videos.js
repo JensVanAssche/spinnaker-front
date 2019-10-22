@@ -1,23 +1,31 @@
 import React from 'react';
-import { Tab, Button, Icon } from 'semantic-ui-react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectVideos } from "redux/videos/selectors";
+import { getVideos } from "redux/videos/actions";
+import { Tab, Button, Icon, Dimmer, Loader } from 'semantic-ui-react';
 
 class Videos extends React.Component {
   state = {
-    videos: null,
+    loading: true,
   }
 
-  componentDidMount() {
-    Network.get('api/videos').then((res) => 
-      this.setState({ videos: res })
-    );
+  async componentDidMount() {
+    await this.props.getVideos();
+    this.setState({ loading: false })
   }
 
   render() {
-    const { videos } = this.state;
-    const { openVideoModal } = this.props;
+    const { openVideoModal, videos } = this.props;
 
-    if (!videos) return null;
+    if (this.state.loading) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
+
+    if (!videos) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
 
     return <Tab.Pane>
       <div className="dashboard-item">
@@ -47,4 +55,15 @@ class Videos extends React.Component {
   }
 }
 
-export default Videos;
+const mapDispatchToProps = {
+  getVideos,
+};
+
+const mapStateToProps = state => ({
+  videos: selectVideos(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Videos);

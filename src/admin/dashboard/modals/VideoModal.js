@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateVideo, addVideo, deleteVideo } from "redux/videos/actions";
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
-class AlbumModal extends React.Component {
+class VideoModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
@@ -62,8 +64,13 @@ class AlbumModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
     if (isValid) {
-      console.log(this.state.data);
+      if (data.id) {
+        this.props.updateVideo(data);
+      } else {
+        this.props.addVideo(data);
+      }
       this.closeModal();
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
@@ -71,8 +78,7 @@ class AlbumModal extends React.Component {
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteVideo(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -113,4 +119,15 @@ class AlbumModal extends React.Component {
   }
 }
 
-export default AlbumModal;
+const mapDispatchToProps = {
+  updateVideo,
+  addVideo,
+  deleteVideo
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(VideoModal);
