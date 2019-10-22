@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { updatePdf } from 'redux/content/actions';
 import { updatePdfResult, addPdfResult, deletePdfResult } from 'redux/results/actions';
 import { updatePdfStanding, addPdfStanding, deletePdfStanding } from 'redux/standings/actions';
+import { updatePublication, addPublication, deletePublication } from 'redux/publications/actions';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
@@ -76,43 +77,28 @@ class PdfModal extends React.Component {
     const isValid = this.validate();
     const { api, data } = this.state;
     if (isValid) {
-      if (api === 'content/pdf') {
-        this.props.updatePdf(api, data).then(() => this.closeModal());
-      }
+      if (api === 'content/pdf') this.props.updatePdf(api, data).then(() => this.closeModal());
 
       if (data.id) {
         // PUT
-        if (api === 'results/pdf') {
-          this.props.updatePdfResult(data).then(() => this.closeModal());
-        } 
-
-        if (api === 'standings/pdf') {
-          this.props.updatePdfStanding(data).then(() => this.closeModal());
-        }
+        if (api === 'results/pdf') this.props.updatePdfResult(data).then(() => this.closeModal()); 
+        if (api === 'standings/pdf') this.props.updatePdfStanding(data).then(() => this.closeModal());
+        if (api === 'publications') this.props.updatePublication(data).then(() => this.closeModal());
       } else {
         // POST
-        if (api === 'results/pdf') {
-          this.props.addPdfResult(data).then(() => this.closeModal());
-        } 
-        
-        if (api === 'standings/pdf') {
-          this.props.addPdfStanding(data).then(() => this.closeModal());
-        }
+        if (api === 'results/pdf') this.props.addPdfResult(data).then(() => this.closeModal()); 
+        if (api === 'standings/pdf') this.props.addPdfStanding(data).then(() => this.closeModal());
+        if (api === 'publications') this.props.addPublication(data).then(() => this.closeModal());
       }
-      
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
-    if (this.state.api === 'results/pdf') {
-      this.props.deletePdfResult(this.state.data.id).then(() => this.closeModal());
-    }
-    
-    if (this.state.api === 'standings/pdf') {
-      this.props.deletePdfStanding(this.state.data.id).then(() => this.closeModal());
-    }
+    if (this.state.api === 'results/pdf') this.props.deletePdfResult(this.state.data.id).then(() => this.closeModal());
+    if (this.state.api === 'standings/pdf') this.props.deletePdfStanding(this.state.data.id).then(() => this.closeModal());
+    if (this.state.api === 'publications') this.props.deletePublication(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -157,7 +143,10 @@ const mapDispatchToProps = {
   deletePdfResult,
   updatePdfStanding,
   addPdfStanding,
-  deletePdfStanding
+  deletePdfStanding,
+  updatePublication,
+  addPublication,
+  deletePublication 
 };
 
 export default connect(

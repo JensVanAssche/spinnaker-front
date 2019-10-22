@@ -1,30 +1,38 @@
 import React from 'react';
-import { Tab, Button, Icon } from 'semantic-ui-react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectPublications } from "redux/publications/selectors";
+import { getPublications } from "redux/publications/actions";
+import { Tab, Button, Icon, Dimmer, Loader } from 'semantic-ui-react';
 
 class Publicaties extends React.Component {
   state = {
-    publicaties: null,
+    loading: true,
   }
 
-  componentDidMount() {
-    Network.get('api/publications').then((res) => 
-      this.setState({ publicaties: res })
-    );
+  async componentDidMount() {
+    await this.props.getPublications();
+    this.setState({ loading: false })
   }
 
   render() {
-    const { publicaties } = this.state;
-    const { openPdfModal } = this.props;
+    const { openPdfModal, publicaties } = this.props;
 
-    if (!publicaties) return null;
+    if (this.state.loading) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
+
+    if (!publicaties) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
 
     return <Tab.Pane>
       <h1>Publicaties</h1>
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Spinnaker Kranten</h2>
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Krant toevoegen')} >
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Krant toevoegen', "publications", null, "krant")} >
             <span>Krant</span>
             <Icon name="add" />
           </Button>
@@ -36,7 +44,7 @@ class Publicaties extends React.Component {
               <p>{krant.title}</p>
               <a href={process.env.REACT_APP_API_HOST + krant.pdf} target="_blank" rel="noopener noreferrer">{krant.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Krant aanpassen', krant)}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Krant aanpassen', "publications", krant, null)}>
               <Icon name="edit" />
             </Button>
           </div>
@@ -45,7 +53,7 @@ class Publicaties extends React.Component {
       <div className="dashboard-item">
         <div className="dashboard-flex">
           <h2>Folders</h2>
-          <Button icon primary className="small-button" onClick={() => openPdfModal('Folder toevoegen')} >
+          <Button icon primary className="small-button" onClick={() => openPdfModal('Folder toevoegen', "publications", null, "folder")} >
             <span>Folder</span>
             <Icon name="add" />
           </Button>
@@ -57,7 +65,7 @@ class Publicaties extends React.Component {
               <p>{folder.title}</p>
               <a href={process.env.REACT_APP_API_HOST + folder.pdf} target="_blank" rel="noopener noreferrer">{folder.pdf}</a>
             </div>
-            <Button icon className="small-button" onClick={() => openPdfModal('Folder aanpassen', folder)}>
+            <Button icon className="small-button" onClick={() => openPdfModal('Folder aanpassen', "publications", folder, null)}>
               <Icon name="edit" />
             </Button>
           </div>
@@ -67,4 +75,15 @@ class Publicaties extends React.Component {
   }
 }
 
-export default Publicaties;
+const mapDispatchToProps = {
+  getPublications,
+};
+
+const mapStateToProps = state => ({
+  publicaties: selectPublications(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Publicaties);
