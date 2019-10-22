@@ -35,7 +35,7 @@ class App extends React.Component {
           <h2>
             Sorry, onze servers zijn momenteel niet beschikbaar.
             <br />
-            Probeer later nog eens opnieuw!
+            Probeer later opnieuw!
           </h2>
         </div>
       );

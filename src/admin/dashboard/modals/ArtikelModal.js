@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateArticle, addArticle, deleteArticle } from "redux/news/actions";
+import Network from 'utils/network';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
@@ -132,13 +135,19 @@ class ArtikelModal extends React.Component {
   }
 
   send = () => {
-    console.log(this.state.data);
+    const { data } = this.state;
+    if (data.id) {
+      this.props.updateArticle(data);
+      if (data.imageData) Network.uploadImage('api/upload', data.imageData);
+    } else {
+      this.props.addArticle(data);
+      Network.uploadImage('api/upload', data.imageData);
+    }
     this.closeModal();
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteArticle(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -177,4 +186,15 @@ class ArtikelModal extends React.Component {
   }
 }
 
-export default ArtikelModal;
+const mapDispatchToProps = {
+  updateArticle,
+  addArticle,
+  deleteArticle
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(ArtikelModal);

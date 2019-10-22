@@ -1,5 +1,8 @@
 import React from 'react';
-import { Tab, Button, Icon } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { selectNews } from "redux/news/selectors";
+import { getNews } from "redux/news/actions";
+import { Tab, Button, Icon, Dimmer, Loader } from 'semantic-ui-react';
 import Network from 'utils/network';
 
 class Nieuws extends React.Component {
@@ -7,29 +10,26 @@ class Nieuws extends React.Component {
     lastPage: 1,
     currentPage: 1,
     pages: null,
-    nieuws: null,
+    loading: true,
   }
 
-  componentDidMount() {
-    Network.get('api/news/all/' + ((this.state.currentPage - 1) * 10)).then((res) => 
-      this.setState({ nieuws: res })
-    );
-
+  async componentDidMount() {
+    await this.props.getNews((this.state.currentPage - 1) * 10);
     Network.get('api/news/count/').then((res) => {
       var ele = []
       for (let i = 0; i < Math.ceil(res.length / 10); i++) {
         ele.push(i + 1);
       }
-      this.setState({ pages: ele });
+      this.setState({ loading: false, pages: ele });
     });
   }
 
   componentDidUpdate() {
     const { lastPage, currentPage } = this.state;
     if (lastPage !== currentPage) {
-      Network.get('api/news/all/' + ((currentPage - 1) * 10)).then((res) => 
-        this.setState({ nieuws: res, lastPage: currentPage })
-      );
+      this.props.getNews((currentPage - 1) * 10).then(() => {
+        this.setState({ lastPage: currentPage })
+      });
     }
   }
 
@@ -50,10 +50,18 @@ class Nieuws extends React.Component {
   }
 
   render() {
-    const { currentPage, pages, nieuws } = this.state;
-    const { openArtikelModal } = this.props;
+    const { currentPage, pages } = this.state;
+    const { openArtikelModal, nieuws } = this.props;
 
-    if (!nieuws || !pages) return null;
+    if (this.state.loading) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
+
+    if (!nieuws) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
 
     return <Tab.Pane>
       <div className="dashboard-item">
@@ -66,7 +74,7 @@ class Nieuws extends React.Component {
         </div>
       </div>
       <div>
-        {!nieuws.length && ( <p>Geen nieuws</p> )}
+        {!nieuws.length && ( <p>Geen nieuws artikels</p> )}
         {nieuws.map(artikel => (
           <div className="dashboard-item" key={artikel.id}>
             <div className="dashboard-flex">
@@ -85,7 +93,7 @@ class Nieuws extends React.Component {
       </div>
       <div className="pagination">
         {currentPage > 1 && (<p onClick={() => this.pageDown()}>Terug</p>)}
-        {pages.map(page => (
+        {pages.length > 1 && pages.map(page => (
           <p className={page === parseInt(currentPage, 10) ? "active" : ""} key={page} onClick={() => this.pageSet(page)}>{page}</p>
         ))}
         {currentPage < pages.length && (<p onClick={() => this.pageUp()}>Verder</p>)}
@@ -94,4 +102,15 @@ class Nieuws extends React.Component {
   }
 }
 
-export default Nieuws;
+const mapDispatchToProps = {
+  getNews,
+};
+
+const mapStateToProps = state => ({
+  nieuws: selectNews(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Nieuws);
