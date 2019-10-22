@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateAlbum, addAlbum, deleteAlbum } from "redux/photos/actions";
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
@@ -49,8 +51,13 @@ class AlbumModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
+    const { data } = this.state;
     if (isValid) {
-      console.log(this.state.data);
+      if (data.id) {
+        this.props.updateAlbum(data);
+      } else {
+        this.props.addAlbum(data);
+      }
       this.closeModal();
     } else {
       this.setState({ error: "Gelieve iets in te vullen" });
@@ -58,8 +65,7 @@ class AlbumModal extends React.Component {
   }
 
   delete = () => {
-    console.log(this.state.data.id);
-    this.closeModal();
+    this.props.deleteAlbum(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
@@ -93,4 +99,15 @@ class AlbumModal extends React.Component {
   }
 }
 
-export default AlbumModal;
+const mapDispatchToProps = {
+  updateAlbum,
+  addAlbum,
+  deleteAlbum
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+  null,
+  { forwardRef: true },
+)(AlbumModal);

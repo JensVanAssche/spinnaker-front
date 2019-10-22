@@ -1,29 +1,37 @@
 import React from 'react';
-import { Tab, Button, Icon } from 'semantic-ui-react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { getPhotos, deletePhoto } from "redux/photos/actions";
+import { selectPhotos } from "redux/photos/selectors";
+import { Tab, Button, Icon, Dimmer, Loader } from 'semantic-ui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 class Fotos extends React.Component {
   state = {
-    albums: null,
+    loading: true,
   }
 
-  componentDidMount() {
-    Network.get('api/photos/all').then((res) => 
-      this.setState({ albums: res })
-    );
+  async componentDidMount() {
+    await this.props.getPhotos();
+    this.setState({ loading: false })
   }
 
   deletePhoto = id => {
-    console.log(id);
+    this.props.deletePhoto(id);
   }
 
   render() {
-    const { albums } = this.state;
-    const { openFileModal, openAlbumModal } = this.props;
+    const { openAlbumModal, openFileModal, albums } = this.props;
 
-    if (!albums) return null;
+    if (this.state.loading) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
+
+    if (!albums) return (
+      <Dimmer active inverted>
+        <Loader inverted />
+      </Dimmer>);
 
     return <Tab.Pane>
       <div className="dashboard-item">
@@ -44,14 +52,14 @@ class Fotos extends React.Component {
               <Button icon className="small-button" onClick={() => openAlbumModal('Fotoalbum aanpassen', album)}>
                 <Icon name="edit" />
               </Button>
-              <Button icon primary className="small-button" onClick={() => openFileModal('Foto toevoegen')}>
+              <Button icon primary className="small-button" onClick={() => openFileModal('Foto toevoegen', null, album.id)}>
                 <span>Foto</span>
                 <Icon name="add" />
               </Button>
             </div>
           </div>
           <div className="dashboard-photos">
-            {!album.photos.length && ( <p>Geen foto's</p> )}
+            {!album.photos.length && ( <p>Dit album heeft geen foto's</p> )}
             {album.photos.map(photo => (
               <div className="dashboard-photo" key={photo.id}>
                 <div className="overlay" onClick={() => this.deletePhoto(photo.id)} >
@@ -67,4 +75,16 @@ class Fotos extends React.Component {
   }
 }
 
-export default Fotos;
+const mapDispatchToProps = {
+  getPhotos,
+  deletePhoto
+};
+
+const mapStateToProps = state => ({
+  albums: selectPhotos(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Fotos);

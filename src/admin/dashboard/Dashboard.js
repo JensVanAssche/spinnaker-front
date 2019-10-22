@@ -148,7 +148,7 @@ class Dashboard extends React.Component {
 
   openInputModal = (title, api, data) => this.inputModalRef.current.openModal(title, api, data);
   openTextareaModal = (title, api, data) => this.textareaModalRef.current.openModal(title, api, data);
-  openFileModal = (title, api) => this.fileModalRef.current.openModal(title, api);
+  openFileModal = (title, api, albumId) => this.fileModalRef.current.openModal(title, api, albumId);
   openPdfModal = (title, api, data, type) => this.pdfModalRef.current.openModal(title, api, data, type);
   openLinkModal = (title, data) => this.linkModalRef.current.openModal(title, data);
   openPlayerModal = (title, data, type) => this.playerModalRef.current.openModal(title, data, type);

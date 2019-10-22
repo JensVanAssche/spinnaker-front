@@ -2,7 +2,9 @@ import React from 'react';
 import { Modal, Form, Button, Message } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import { updateContent } from 'redux/content/actions';
+import { addPhoto } from 'redux/photos/actions';
 import { connect } from 'react-redux';
+import Network from 'utils/network';
 import './modal.scss';
 
 class FileModal extends React.Component {
@@ -11,15 +13,17 @@ class FileModal extends React.Component {
     error: null,
     title: null,
     api: null,
+    albumId: null,
     data: null,
   };
 
-  openModal = (title, api) => {
+  openModal = (title, api, albumId) => {
     this.setState({
       modalOpen: true,
       error: null,
       title,
       api,
+      albumId,
       data: null
     });
   };
@@ -47,7 +51,13 @@ class FileModal extends React.Component {
     const isValid = this.validate();
     const { api, data } = this.state;
     if (isValid) {
-      this.props.updateContent(api, data).then(() => this.closeModal());
+      if (api) {
+        this.props.updateContent(api, data).then(() => this.closeModal());
+      } else {
+        this.props.addPhoto({ albumId: this.state.albumId, image: data.name });
+        Network.uploadImage('api/upload', data);
+        this.closeModal();
+      }
     } else {
       this.setState({ error: "Gelieve een bestand te uploaden" });
     }
@@ -81,6 +91,7 @@ class FileModal extends React.Component {
 
 const mapDispatchToProps = {
   updateContent,
+  addPhoto
 };
 
 export default connect(
