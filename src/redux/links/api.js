@@ -4,6 +4,8 @@ const api = {};
 
 api.getLinks = () => Network.get('api/links');
 
+api.getFooter = () => Network.get('api/links/footer');
+
 api.updateLink = (data) => Network.put('api/links/' + data.id, {
   url: data.url,
   image: data.imageName,

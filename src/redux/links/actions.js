@@ -27,6 +27,13 @@ export function getLinks() {
   };
 }
 
+export function getFooter() {
+  return {
+    type: GET_LINKS,
+    payload: api.getFooter(),
+  };
+}
+
 export function updateLink(data) {
   return {
     type: UPDATE_LINK,

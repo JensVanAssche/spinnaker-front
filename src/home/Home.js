@@ -1,5 +1,7 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectNews } from "redux/news/selectors";
+import { getLatest } from "redux/news/actions";
 import { Link } from 'react-router-dom';
 import Sport from './sport/Sport';
 import Nieuws from './nieuws/Nieuws';
@@ -9,22 +11,18 @@ import './home.scss';
 class Home extends React.Component {
   state = {
     loading: true,
-    nieuws: null,
   }
 
-  componentDidMount() {
-    Network.get('api/news/latest').then((res) => {
-      this.setState({
-        loading: false,
-        nieuws: res,
-      })
-    });
+  async componentDidMount() {
+    await this.props.getLatest();
+    this.setState({ loading: false })
   }
 
   render() {
-    const { loading, nieuws } = this.state;
+    const { loading } = this.state;
+    const { news } = this.props;
 
-    if (loading) return null;
+    if (loading || !news) return null;
 
     return (
       <div className="home">
@@ -50,8 +48,8 @@ class Home extends React.Component {
           </div>
           <div className="nieuws">
             <h2>Nieuws</h2>
-            {!nieuws.length && (<p>Geen nieuws om te weergeven</p>)}
-            {nieuws.map(item => (
+            {!news.length && (<p>Geen nieuws om te weergeven</p>)}
+            {news.map(item => (
               <Nieuws id={item.id} title={item.title} date={item.date} key={item.id} />
             ))}
             <div className="cta">
@@ -64,4 +62,15 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapDispatchToProps = {
+  getLatest,
+};
+
+const mapStateToProps = state => ({
+  news: selectNews(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Home);

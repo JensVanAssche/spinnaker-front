@@ -1,14 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getLinks } from "redux/links/actions";
 import { selectData } from 'redux/content/selectors';
 import { selectLinks } from 'redux/links/selectors';
 import './spinnaker.scss';
 
 class Spinnaker extends React.Component {
-  render() {
-    const { content, links } = this.props;
+  state = {
+    loading: true,
+  }
 
-    if (!content || !links) return null;
+  async componentDidMount() {
+    await this.props.getLinks();
+    this.setState({ loading: false })
+  }
+
+  render() {
+    const { loading } = this.state;
+    const { links, content } = this.props;
+
+    if (loading) return null;
+    if (!links) return null;
 
     return (
       <div className="spinnaker ui container content">
@@ -38,6 +50,10 @@ class Spinnaker extends React.Component {
   }
 }
 
+const mapDispatchToProps = {
+  getLinks,
+};
+
 const mapStateToProps = state => ({
   content: selectData(state),
   links: selectLinks(state)
@@ -45,5 +61,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Spinnaker);

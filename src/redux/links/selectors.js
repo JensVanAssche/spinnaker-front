@@ -9,6 +9,11 @@ export const selectLinks = createSelector(
   ),
 );
 
+export const selectFooter = createSelector(
+  selectNode,
+  node => node.data
+);
+
 export const selectLoading = createSelector(
   selectNode,
   node => node.loading,

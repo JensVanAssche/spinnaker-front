@@ -27,6 +27,13 @@ export function getNews(offset) {
   };
 }
 
+export function getLatest() {
+  return {
+    type: GET_NEWS,
+    payload: api.getLatest(),
+  };
+}
+
 export function updateArticle(id, body) {
   return {
     type: UPDATE_ARTICLE,

@@ -4,6 +4,8 @@ const api = {};
 
 api.getNews = offset => Network.get('api/news/all/' + offset);
 
+api.getLatest = () => Network.get('api/news/latest');
+
 api.updateArticle = data => Network.put('api/news/' + data.id, {
   title: data.title,
   body: data.body,

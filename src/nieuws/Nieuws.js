@@ -80,7 +80,7 @@ class Nieuws extends React.Component {
         ))}
         <div className="pagination">
           {currentPage > 1 && (<Link to={"/nieuws/page/" + (parseInt(currentPage, 10) - 1)}>Terug</Link>)}
-          {pages.map(page => (
+          {pages.length > 1 && pages.map(page => (
             <Link className={page === parseInt(currentPage, 10) ? "active" : ""} key={page} to={"/nieuws/page/" + page}>{page}</Link>
           ))}
           {currentPage < pages.length && (<Link to={"/nieuws/page/" + (parseInt(currentPage, 10) + 1)}>Verder</Link>)}
