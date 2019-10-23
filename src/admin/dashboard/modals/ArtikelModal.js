@@ -133,7 +133,7 @@ class ArtikelModal extends React.Component {
         loading: true
       }), this.send);
     } else {
-      this.setState({ error: "Gelieve alles in te vullen" });
+      this.setState({ error: "Gelieve alle velden correct in te vullen" });
     }
   }
 

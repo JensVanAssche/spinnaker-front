@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updateVideo, addVideo, deleteVideo } from "redux/videos/actions";
 import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import { validateRequired } from 'utils/validate';
+import { validateRequired, validateUrl } from 'utils/validate';
 import './modal.scss';
 
 class VideoModal extends React.Component {
@@ -27,7 +27,7 @@ class VideoModal extends React.Component {
       data: {
         id: data ? data.id : null,
         title: data ? data.title : '',
-        url: data ? data.url : ''
+        url: data ? this.convertToUrl(data.url) : ''
       },
     });
   };
@@ -61,21 +61,41 @@ class VideoModal extends React.Component {
     const { data } = this.state;
     if (!validateRequired(data.title)) return false;
     if (!validateRequired(data.url)) return false;
+    if (!validateUrl(data.url)) return false;
     return true;
   };
 
+  convertToId = url => {
+    const id = url.split('?v=')[1];
+    return id;
+  }
+
+  convertToUrl = id => {
+    return "https://www.youtube.com/watch?v=" + id;
+  }
+
   save = () => {
     const isValid = this.validate();
-    const { data } = this.state;
     if (isValid) {
-      this.setState({ loading: true });
-      if (data.id) {
-        this.props.updateVideo(data).then(() => this.closeModal());
-      } else {
-        this.props.addVideo(data).then(() => this.closeModal());
-      }
+      this.setState(prevState => ({
+        data: {
+          ...prevState.data,
+          url: this.convertToId(prevState.data.url),
+        },
+        loading: true
+      }), this.send);
+      
     } else {
-      this.setState({ error: "Gelieve alles in te vullen" });
+      this.setState({ error: "Gelieve alle velden correct in te vullen" });
+    }
+  }
+
+  send = () => {
+    const { data } = this.state;
+    if (data.id) {
+      this.props.updateVideo(data).then(() => this.closeModal());
+    } else {
+      this.props.addVideo(data).then(() => this.closeModal());
     }
   }
 
@@ -101,9 +121,8 @@ class VideoModal extends React.Component {
               <input value={data.title} onChange={this.handleTitleChange} />
             </Form.Field>
             <Form.Field>
-              <label>Video URL</label>
+              <label>Youtube URL</label>
               <div className="video-flex">
-                <span>https://www.youtube.com/watch?v=</span>
                 <input value={data.url} onChange={this.handleUrlChange} />
               </div>
             </Form.Field>

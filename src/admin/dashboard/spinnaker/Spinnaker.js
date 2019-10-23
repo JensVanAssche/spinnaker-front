@@ -108,6 +108,7 @@ class Spinnaker extends React.Component {
             <Grid.Column width={2}>
             </Grid.Column>
           </Grid.Row>
+          {links.length === 0 && (<p>Geen links</p>)}
           {links.map(link => (
             <Grid.Row key={link.id}>
               <Grid.Column width={4}>

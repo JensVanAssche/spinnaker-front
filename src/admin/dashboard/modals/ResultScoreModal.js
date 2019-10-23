@@ -105,7 +105,7 @@ class ResultScoreModal extends React.Component {
         this.props.addScoreResult(data).then(() => this.closeModal());
       }
     } else {
-      this.setState({ error: "Gelieve alles in te vullen" });
+      this.setState({ error: "Gelieve alle velden correct in te vullen" });
     }
   }
 

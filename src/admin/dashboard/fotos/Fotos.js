@@ -43,7 +43,7 @@ class Fotos extends React.Component {
           </Button>
         </div>
       </div>
-      {!albums.length && ( <p>Geen albums</p> )}
+      {!albums.length && ( <p>Geen fotoalbums</p> )}
       {albums.map(album => (
         <div className="dashboard-item" key={album.id}>
           <div className="dashboard-flex">
@@ -59,7 +59,7 @@ class Fotos extends React.Component {
             </div>
           </div>
           <div className="dashboard-photos">
-            {!album.photos.length && ( <p>Dit album heeft geen foto's</p> )}
+            {!album.photos.length && ( <p>Dit album heeft nog geen foto's</p> )}
             {album.photos.map(photo => (
               <div className="dashboard-photo" key={photo.id}>
                 <div className="overlay" onClick={() => this.deletePhoto(photo.id)} >

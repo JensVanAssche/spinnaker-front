@@ -17,3 +17,7 @@ export function validateRequiredArray(array) {
 export function validateNumber(number) {
   return !isNaN(number);
 }
+
+export function validateUrl(url) {
+  return /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/.test(url)
+}

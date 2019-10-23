@@ -103,7 +103,7 @@ class StandingsTournamentModal extends React.Component {
         this.props.addScoreStanding(data).then(() => this.closeModal());
       }
     } else {
-      this.setState({ error: "Gelieve alles in te vullen" });
+      this.setState({ error: "Gelieve alle velden correct in te vullen" });
     }
   }
 

@@ -15,7 +15,7 @@ class HockeyKalender extends React.Component {
 
     if (data.length === 0) {
       return (
-        <div className="content">
+        <div className="content ui container">
           <h2>Hockey Kalender</h2>
           <p>Geen data gevonden</p>
         </div>

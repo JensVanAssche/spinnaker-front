@@ -98,7 +98,7 @@ class PlayerModal extends React.Component {
         Network.uploadImage('api/upload', data.imageData);
       }
     } else {
-      this.setState({ error: "Gelieve alles in te vullen" });
+      this.setState({ error: "Gelieve alle velden correct in te vullen" });
     }
   }
 

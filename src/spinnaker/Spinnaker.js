@@ -30,14 +30,16 @@ class Spinnaker extends React.Component {
         <div dangerouslySetInnerHTML={{__html: content.spinnakerContact}} />
         <h2>Engagementsverklaring</h2>
         <a href={process.env.REACT_APP_API_HOST + content.spinnakerEngagementPdf} target="_blank" rel="noopener noreferrer" dangerouslySetInnerHTML={{__html: content.spinnakerEngagementTitle}} />
-        {links.length && (<h2>Links</h2>)}
-        <div className="links">
-          {links.map(e => (
-            <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
-              <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
-            </a>
-          ))}
-        </div>
+        {links.length && (<>
+          <h2>Links</h2>
+          <div className="links">
+            {links.map(e => (
+              <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
+                <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
+              </a>
+            ))}
+          </div>
+        </>)}
       </div>
     );
   }

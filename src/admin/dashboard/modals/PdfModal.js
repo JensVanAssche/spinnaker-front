@@ -94,7 +94,7 @@ class PdfModal extends React.Component {
         if (api === 'publications') this.props.addPublication(data).then(() => this.closeModal());
       }
     } else {
-      this.setState({ error: "Gelieve alles in te vullen" });
+      this.setState({ error: "Gelieve alle velden correct in te vullen" });
     }
   }
 

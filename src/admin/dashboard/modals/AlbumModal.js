@@ -62,7 +62,7 @@ class AlbumModal extends React.Component {
         this.props.addAlbum(data).then(() => this.closeModal());
       }
     } else {
-      this.setState({ error: "Gelieve iets in te vullen" });
+      this.setState({ error: "Gelieve het veld in te vullen" });
     }
   }
 
