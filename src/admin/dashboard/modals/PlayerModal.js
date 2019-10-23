@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import Network from 'utils/network';
 import { connect } from 'react-redux';
 import { updatePlayer, addPlayer, deletePlayer } from "redux/players/actions";
@@ -10,6 +10,7 @@ class PlayerModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
+    loading: false,
     title: null,
     data: {
       id: null,
@@ -25,6 +26,7 @@ class PlayerModal extends React.Component {
     this.setState({
       modalOpen: true,
       error: null,
+      loading: false,
       title,
       data: {
         id: data ? data.id : null,
@@ -87,25 +89,26 @@ class PlayerModal extends React.Component {
     const { data } = this.state;
     const { updatePlayer, addPlayer } = this.props;
     if (isValid) {
+      this.setState({ loading: true });
       if (data.id) {
-        updatePlayer(data);
+        updatePlayer(data).then(() => this.closeModal());
         if (data.imageData) Network.uploadImage('api/upload', data.imageData);
       } else {
-        addPlayer(data);
+        addPlayer(data).then(() => this.closeModal());
         Network.uploadImage('api/upload', data.imageData);
       }
-      this.closeModal();
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
+    this.setState({ loading: true });
     this.props.deletePlayer(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
-    const { modalOpen, error, title, data } = this.state;
+    const { modalOpen, error, loading, title, data } = this.state;
     
     return (
       <Modal size="tiny" open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
@@ -113,6 +116,9 @@ class PlayerModal extends React.Component {
         <Modal.Content>
           {error && (<Message error><p>{error}</p></Message>)}
           <Form>
+            {loading && (<Dimmer active inverted>
+              <Loader inverted />
+            </Dimmer>)}
             <Form.Field>
               <label>Naam</label>
               <input value={data.name} onChange={this.handleNameChange} />

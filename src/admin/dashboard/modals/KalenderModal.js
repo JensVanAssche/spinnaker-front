@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { updateCalendar, addCalendar, deleteCalendar } from "redux/calendar/actions";
 import { validateRequired } from 'utils/validate';
@@ -9,6 +9,7 @@ class KalenderModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
+    loading: false,
     title: null,
     data: {
       id: null,
@@ -39,6 +40,7 @@ class KalenderModal extends React.Component {
     this.setState({
       modalOpen: true,
       error: null,
+      loading: false,
       title,
       data: {
         id: data ? data.id : null,
@@ -117,25 +119,25 @@ class KalenderModal extends React.Component {
   save = () => {
     const isValid = this.validate();
     const { data } = this.state;
-    const { updateCalendar, addCalendar } = this.props;
     if (isValid) {
+      this.setState({ loading: true });
       if (data.id) {
-        updateCalendar(data);
+        this.props.updateCalendar(data).then(() => this.closeModal());
       } else {
-        addCalendar(data);
+        this.props.addCalendar(data).then(() => this.closeModal());
       }
-      this.closeModal();
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
+    this.setState({ loading: true });
     this.props.deleteCalendar(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
-    const { modalOpen, error, title, data } = this.state;
+    const { modalOpen, error, loading, title, data } = this.state;
     
     return (
       <Modal size='tiny' open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
@@ -143,6 +145,9 @@ class KalenderModal extends React.Component {
         <Modal.Content>
           {error && (<Message error><p>{error}</p></Message>)}
           <Form>
+            {loading && (<Dimmer active inverted>
+              <Loader inverted />
+            </Dimmer>)}
             <Form.Field>
               <label>Wanneer</label>
             </Form.Field>

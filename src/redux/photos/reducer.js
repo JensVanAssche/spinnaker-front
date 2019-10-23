@@ -1,4 +1,7 @@
 import {
+  GET_ALL_PENDING,
+  GET_ALL_FULFILLED,
+  GET_ALL_REJECTED,
   GET_ALBUMS_PENDING,
   GET_ALBUMS_FULFILLED,
   GET_ALBUMS_REJECTED,
@@ -25,6 +28,19 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case GET_ALL_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_ALL_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+    case GET_ALL_REJECTED:
+      return initialState;
     case GET_ALBUMS_PENDING:
       return {
         ...state,

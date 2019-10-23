@@ -1,5 +1,10 @@
 import api from './api';
 
+export const GET_ALL = 'GET_ALL';
+export const GET_ALL_REJECTED = 'GET_ALL_REJECTED';
+export const GET_ALL_PENDING = 'GET_ALL_PENDING';
+export const GET_ALL_FULFILLED = 'GET_ALL_FULFILLED';
+
 export const GET_ALBUMS = 'GET_ALBUMS';
 export const GET_ALBUMS_REJECTED = 'GET_ALBUMS_REJECTED';
 export const GET_ALBUMS_PENDING = 'GET_ALBUMS_PENDING';
@@ -34,6 +39,13 @@ export const DELETE_PHOTO = 'DELETE_PHOTO';
 export const DELETE_PHOTO_REJECTED = 'DELETE_PHOTO_REJECTED';
 export const DELETE_PHOTO_PENDING = 'DELETE_PHOTO_PENDING';
 export const DELETE_PHOTO_FULFILLED = 'DELETE_PHOTO_FULFILLED';
+
+export function getAll() {
+  return {
+    type: GET_ALL,
+    payload: api.getAll(),
+  };
+}
 
 export function getAlbums() {
   return {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateVideo, addVideo, deleteVideo } from "redux/videos/actions";
-import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
@@ -9,6 +9,7 @@ class VideoModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
+    loading: false,
     title: null,
     data: {
       id: null,
@@ -21,6 +22,7 @@ class VideoModal extends React.Component {
     this.setState({
       modalOpen: true,
       error: null,
+      loading: false,
       title,
       data: {
         id: data ? data.id : null,
@@ -66,23 +68,24 @@ class VideoModal extends React.Component {
     const isValid = this.validate();
     const { data } = this.state;
     if (isValid) {
+      this.setState({ loading: true });
       if (data.id) {
-        this.props.updateVideo(data);
+        this.props.updateVideo(data).then(() => this.closeModal());
       } else {
-        this.props.addVideo(data);
+        this.props.addVideo(data).then(() => this.closeModal());
       }
-      this.closeModal();
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
+    this.setState({ loading: true });
     this.props.deleteVideo(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
-    const { modalOpen, error, title, data } = this.state;
+    const { modalOpen, error, loading, title, data } = this.state;
     
     return (
       <Modal size='tiny' open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
@@ -90,6 +93,9 @@ class VideoModal extends React.Component {
         <Modal.Content>
           {error && (<Message error><p>{error}</p></Message>)}
           <Form>
+            {loading && (<Dimmer active inverted>
+              <Loader inverted />
+            </Dimmer>)}
             <Form.Field>
               <label>Video Naam</label>
               <input value={data.title} onChange={this.handleTitleChange} />

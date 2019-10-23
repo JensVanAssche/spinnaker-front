@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import { updateContent } from 'redux/content/actions';
 import { addPhoto } from 'redux/photos/actions';
@@ -11,6 +11,7 @@ class FileModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
+    loading: false,
     title: null,
     api: null,
     albumId: null,
@@ -21,6 +22,7 @@ class FileModal extends React.Component {
     this.setState({
       modalOpen: true,
       error: null,
+      loading: false,
       title,
       api,
       albumId,
@@ -51,12 +53,12 @@ class FileModal extends React.Component {
     const isValid = this.validate();
     const { api, data } = this.state;
     if (isValid) {
+      this.setState({ loading: true });
       if (api) {
         this.props.updateContent(api, data).then(() => this.closeModal());
       } else {
-        this.props.addPhoto({ albumId: this.state.albumId, image: data.name });
-        Network.uploadImage('api/upload', data);
-        this.closeModal();
+        this.props.addPhoto({ albumId: this.state.albumId, image: data.name })
+        Network.uploadImage('api/upload', data).then(() => this.closeModal());
       }
     } else {
       this.setState({ error: "Gelieve een bestand te uploaden" });
@@ -64,7 +66,7 @@ class FileModal extends React.Component {
   }
 
   render() {
-    const { modalOpen, error, title } = this.state;
+    const { modalOpen, error, loading, title } = this.state;
 
     return (
       <Modal size="mini" open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
@@ -72,6 +74,9 @@ class FileModal extends React.Component {
         <Modal.Content>
           {error && (<Message error><p>{error}</p></Message>)}
           <Form>
+            {loading && (<Dimmer active inverted>
+              <Loader inverted />
+            </Dimmer>)}
             <Form.Field>
               <input type="file" onChange={this.handleImageChange} />
             </Form.Field>

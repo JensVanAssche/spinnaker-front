@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getPhotos, deletePhoto } from "redux/photos/actions";
-import { selectPhotos } from "redux/photos/selectors";
+import { getAll, deletePhoto } from "redux/photos/actions";
+import { selectAlbums } from "redux/photos/selectors";
 import { Tab, Button, Icon, Dimmer, Loader } from 'semantic-ui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ class Fotos extends React.Component {
   }
 
   async componentDidMount() {
-    await this.props.getPhotos();
+    await this.props.getAll();
     this.setState({ loading: false })
   }
 
@@ -76,12 +76,12 @@ class Fotos extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getPhotos,
+  getAll,
   deletePhoto
 };
 
 const mapStateToProps = state => ({
-  albums: selectPhotos(state),
+  albums: selectAlbums(state),
 });
 
 export default connect(

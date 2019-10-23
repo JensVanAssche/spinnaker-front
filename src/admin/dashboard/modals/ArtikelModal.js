@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { updateArticle, addArticle, deleteArticle } from "redux/news/actions";
 import Network from 'utils/network';
-import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import './modal.scss';
 
@@ -10,6 +10,7 @@ class ArtikelModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
+    loading: false,
     title: null,
     data: {
       id: null,
@@ -24,6 +25,7 @@ class ArtikelModal extends React.Component {
     this.setState({
       modalOpen: true,
       error: null,
+      loading: false,
       title,
       data: {
         id: data ? data.id : null,
@@ -128,6 +130,7 @@ class ArtikelModal extends React.Component {
           ...prevState.data,
           body: this.convertToHtml(prevState.data.body),
         },
+        loading: true
       }), this.send);
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
@@ -137,21 +140,21 @@ class ArtikelModal extends React.Component {
   send = () => {
     const { data } = this.state;
     if (data.id) {
-      this.props.updateArticle(data);
+      this.props.updateArticle(data).then(() => this.closeModal());
       if (data.imageData) Network.uploadImage('api/upload', data.imageData);
     } else {
-      this.props.addArticle(data);
+      this.props.addArticle(data).then(() => this.closeModal());
       Network.uploadImage('api/upload', data.imageData);
     }
-    this.closeModal();
   }
 
   delete = () => {
+    this.setState({ loading: true })
     this.props.deleteArticle(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
-    const { modalOpen, error, title, data } = this.state;
+    const { modalOpen, error, loading, title, data } = this.state;
     
     return (
       <Modal open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
@@ -159,6 +162,9 @@ class ArtikelModal extends React.Component {
         <Modal.Content>
           {error && (<Message error><p>{error}</p></Message>)}
           <Form>
+            {loading && (<Dimmer active inverted>
+              <Loader inverted />
+            </Dimmer>)}
             <Form.Field>
               <label>Titel</label>
               <input value={data.title} onChange={this.handleTitleChange} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateScoreResult, addScoreResult, deleteScoreResult } from 'redux/results/actions';
-import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import { validateRequired, validateNumber } from 'utils/validate';
 import './modal.scss';
 
@@ -9,6 +9,7 @@ class ResultScoreModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
+    loading: false,
     title: null,
     data: {
       id: null,
@@ -24,6 +25,7 @@ class ResultScoreModal extends React.Component {
     this.setState({
       modalOpen: true,
       error: null,
+      loading: false,
       title,
       data: {
         id: data ? data.id : null,
@@ -96,6 +98,7 @@ class ResultScoreModal extends React.Component {
     const isValid = this.validate();
     const { data } = this.state;
     if (isValid) {
+      this.setState({ loading: true });
       if (data.id) {
         this.props.updateScoreResult(data).then(() => this.closeModal());
       } else {
@@ -107,11 +110,12 @@ class ResultScoreModal extends React.Component {
   }
 
   delete = () => {
+    this.setState({ loading: true });
     this.props.deleteScoreResult(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
-    const { modalOpen, error, title, data } = this.state;
+    const { modalOpen, error, loading, title, data } = this.state;
     
     return (
       <Modal size='tiny' open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
@@ -119,6 +123,9 @@ class ResultScoreModal extends React.Component {
         <Modal.Content>
           {error && (<Message error><p>{error}</p></Message>)}
           <Form>
+            {loading && (<Dimmer active inverted>
+              <Loader inverted />
+            </Dimmer>)}
             <Form.Group inline>
               <Form.Field width={12}>
                 <Form.Input fluid label='Team 1' value={data.team1} onChange={this.handleTeam1Change} />

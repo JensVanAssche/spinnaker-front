@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import Network from 'utils/network';
 import { connect } from 'react-redux';
 import { updateLink, addLink, deleteLink } from "redux/links/actions";
@@ -10,6 +10,7 @@ class LinkModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
+    loading: false,
     title: null,
     data: {
       id: null,
@@ -24,6 +25,7 @@ class LinkModal extends React.Component {
     this.setState({
       modalOpen: true,
       error: null,
+      loading: false,
       title,
       data: {
         id: data ? data.id : null,
@@ -84,25 +86,26 @@ class LinkModal extends React.Component {
     const { data } = this.state;
     const { updateLink, addLink } = this.props;
     if (isValid) {
+      this.setState({ loading: true });
       if (data.id) {
-        updateLink(data);
+        updateLink(data).then(() => this.closeModal());
         if (data.imageData) Network.uploadImage('api/upload', data.imageData);
       } else {
-        addLink(data);
+        addLink(data).then(() => this.closeModal());
         Network.uploadImage('api/upload', data.imageData);
       }
-      this.closeModal();
     } else {
       this.setState({ error: "Gelieve alles in te vullen" });
     }
   }
 
   delete = () => {
+    this.setState({ loading: true });
     this.props.deleteLink(this.state.data.id).then(() => this.closeModal());
   }
 
   render() {
-    const { modalOpen, error, title, data } = this.state;
+    const { modalOpen, error, loading, title, data } = this.state;
     
     return (
       <Modal size="tiny" open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
@@ -110,6 +113,9 @@ class LinkModal extends React.Component {
         <Modal.Content>
           {error && (<Message error><p>{error}</p></Message>)}
           <Form>
+            {loading && (<Dimmer active inverted>
+              <Loader inverted />
+            </Dimmer>)}
             <Form.Field>
               <label>URL</label>
               <input value={data.url} onChange={this.handleUrlChange} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Button, Message } from 'semantic-ui-react';
+import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import { updateContent } from 'redux/content/actions';
 import { connect } from 'react-redux';
 import { validateRequired } from 'utils/validate';
@@ -9,6 +9,7 @@ class TextareaModal extends React.Component {
   state = {
     modalOpen: false,
     error: null,
+    loading: false,
     title: null,
     api: null,
     data: null,
@@ -18,6 +19,7 @@ class TextareaModal extends React.Component {
     this.setState({
       modalOpen: true,
       error: null,
+      loading: false,
       title,
       api,
       data: data ? this.convertToString(data) : null
@@ -84,6 +86,7 @@ class TextareaModal extends React.Component {
     const isValid = this.validate();
     const { api, data } = this.state;
     if (isValid) {
+      this.setState({ loading: true });
       this.props.updateContent(api, { value: this.convertToHtml(data) }).then(() => this.closeModal())
     } else {
       this.setState({ error: "Gelieve iets in te vullen" });
@@ -91,7 +94,7 @@ class TextareaModal extends React.Component {
   }
 
   render() {
-    const { modalOpen, error, title, data } = this.state;
+    const { modalOpen, error, loading, title, data } = this.state;
     
     return (
       <Modal open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
@@ -99,6 +102,9 @@ class TextareaModal extends React.Component {
         <Modal.Content>
           {error && (<Message error><p>{error}</p></Message>)}
           <Form>
+            {loading && (<Dimmer active inverted>
+              <Loader inverted />
+            </Dimmer>)}
             <Form.Field><textarea value={data} onChange={this.handleTextareaChange} /></Form.Field>
           </Form>
         </Modal.Content>
