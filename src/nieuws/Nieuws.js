@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { selectNews } from "redux/news/selectors";
+import { getNews } from "redux/news/actions";
 import Network from 'utils/network';
 import Entry from './nieuwsentry/Entry';
 import { Link } from 'react-router-dom';
@@ -6,8 +9,6 @@ import './nieuws.scss';
 
 class Nieuws extends React.Component {
   state = {
-    loading: true,
-    data: null,
     pages: null,
     currentPage: null
   };
@@ -22,41 +23,40 @@ class Nieuws extends React.Component {
       page = 1;
     }
 
-    Network.get('api/news/all/' + ((page - 1) * 10)).then((res) => {
-      this.setState({ data: res, currentPage: page });
-      Network.get('api/news/count/').then((res) => {
-        var ele = []
-        for (let i = 0; i < Math.ceil(res.length / 10); i++) {
-          ele.push(i + 1);
-        }
-        this.setState({ loading: false, pages: ele });
-      });
+    this.setState({ currentPage: page });
+    this.props.getNews((page - 1) * 10);
+    Network.get('api/news/count/').then((res) => {
+      var ele = []
+      for (let i = 0; i < Math.ceil(res.length / 10); i++) {
+        ele.push(i + 1);
+      }
+      this.setState({ pages: ele });
     });
   }
 
-  componentDidUpdate() {   
-    if (this.props.match.params.page !== this.state.currentPage) {
-      const { match } = this.props;
-      var page;
+  componentDidUpdate() {
+    const { match } = this.props;
+    var page;
 
-      if (match.params.page) {
-        page = match.params.page
-      } else {
-        page = 1;
-      }
-
-      Network.get('api/news/all/' + ((page - 1) * 10)).then((res) =>
-        this.setState({ data: res, currentPage: page})
-      );
+    if (match.params.page) {
+      page = match.params.page
+    } else {
+      page = 1;
+    }
+    
+    if (page !== this.state.currentPage) {
+      this.props.getNews((page - 1) * 10);
+      this.setState({ currentPage: page });
     }
   }
 
   render() {
-    const { loading, data, pages, currentPage } = this.state;
+    const { pages, currentPage } = this.state;
+    const { data } = this.props;
 
-    if (loading) return null;
+    if (!data || !pages) return null;
 
-    if (!loading && !pages.length) {
+    if (!pages.length) {
       return (
         <div className="content ui container">
           <h2>Nieuws</h2>
@@ -90,4 +90,15 @@ class Nieuws extends React.Component {
   }
 }
 
-export default Nieuws;
+const mapDispatchToProps = {
+  getNews,
+};
+
+const mapStateToProps = state => ({
+  data: selectNews(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Nieuws);

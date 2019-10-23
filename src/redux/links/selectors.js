@@ -11,7 +11,7 @@ export const selectLinks = createSelector(
 
 export const selectFooter = createSelector(
   selectNode,
-  node => node.data
+  node => node.footer
 );
 
 export const selectLoading = createSelector(

@@ -12,6 +12,11 @@ export const selectPlayers = createSelector(
   ),
 );
 
+export const selectPlayersOrdered = createSelector(
+  selectNode,
+  node => node.data,
+);
+
 export const selectLoading = createSelector(
   selectNode,
   node => node.loading,

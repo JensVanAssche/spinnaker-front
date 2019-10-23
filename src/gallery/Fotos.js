@@ -1,24 +1,21 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectAlbums } from "redux/photos/selectors";
+import { getAlbums } from "redux/photos/actions";
 import { Link } from 'react-router-dom';
 import './gallery.scss';
 
 class Photos extends React.Component {
-  state = { loading: true, data: null };
-
   componentDidMount() {
-    Network.get('api/photos/albums').then((res) =>  
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getAlbums();
   }
 
   render() {
-    const { match } = this.props;
-    const { loading, data } = this.state;
+    const { match, data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div className="content ui container">
           <h2>Foto Albums</h2>
@@ -49,4 +46,15 @@ class Photos extends React.Component {
   }
 }
 
-export default Photos;
+const mapDispatchToProps = {
+  getAlbums,
+};
+
+const mapStateToProps = state => ({
+  data: selectAlbums(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Photos);

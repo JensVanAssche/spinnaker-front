@@ -1,4 +1,7 @@
 import {
+  GET_ALBUMS_PENDING,
+  GET_ALBUMS_FULFILLED,
+  GET_ALBUMS_REJECTED,
   GET_PHOTOS_PENDING,
   GET_PHOTOS_FULFILLED,
   GET_PHOTOS_REJECTED,
@@ -16,11 +19,25 @@ import {
 
 const initialState = {
   data: null,
+  photos: null,
   loading: false,
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case GET_ALBUMS_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_ALBUMS_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        data: action.payload,
+      };
+    case GET_ALBUMS_REJECTED:
+      return initialState;
     case GET_PHOTOS_PENDING:
       return {
         ...state,
@@ -30,7 +47,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        photos: action.payload,
       };
     case GET_PHOTOS_REJECTED:
       return initialState;

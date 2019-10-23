@@ -1,41 +1,29 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectArticle } from "redux/news/selectors";
+import { getArticle } from "redux/news/actions";
 import { Link } from 'react-router-dom';
 import './article.scss';
 
 class Artikel extends React.Component {
-  state = {
-    loading: true,
-    title: '',
-    body: '',
-    image: '',
-    date: ''
-  }
-
   componentDidMount() {
-    Network.get('api/news/article/' + this.props.match.params.id).then((res) => {
-      this.setState({
-        loading: false,
-        title: res.title,
-        body: res.body,
-        image: res.image,
-        date: res.date
-      })
-    });
+    this.props.getArticle(this.props.match.params.id);
   }
 
   render() {
-    const { loading, title, body, image, date } = this.state;
+    const { data } = this.props;
+
+    if (!data) return null;
     
     return (
       <div className="news-article ui container content">
         <Link to="/nieuws">Terug naar nieuws</Link>
-        {!loading && (
+        {data.id && (
           <>
-            <h2>{title}</h2>
-            <span className="date">{date}</span>
-            <img src={process.env.REACT_APP_API_HOST + image} alt="article" />
-            <div dangerouslySetInnerHTML={{__html: body}} />
+            <h2>{data.title}</h2>
+            <span className="date">{data.date}</span>
+            <img src={process.env.REACT_APP_API_HOST + data.image} alt="article" />
+            <div dangerouslySetInnerHTML={{__html: data.body}} />
           </>
         )}
       </div>
@@ -44,4 +32,15 @@ class Artikel extends React.Component {
   
 }
 
-export default Artikel;
+const mapDispatchToProps = {
+  getArticle,
+};
+
+const mapStateToProps = state => ({
+  data: selectArticle(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Artikel);

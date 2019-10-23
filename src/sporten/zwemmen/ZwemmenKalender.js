@@ -1,24 +1,19 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectCalendar } from "redux/calendar/selectors";
+import { getCalendar } from "redux/calendar/actions";
 
 class ZwemmenKalender extends React.Component {
-  state = {
-    data: null,
-    loading: true,
-  }
-
   componentDidMount() {
-    Network.get('api/calendar/zwemmen').then((res) =>
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getCalendar('zwemmen');
   }
 
   render() {
-    const { data, loading } = this.state;
+    const { data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div className="content">
           <h2>Zwemmen Kalender</h2>
@@ -47,4 +42,15 @@ class ZwemmenKalender extends React.Component {
   }
 }
 
-export default ZwemmenKalender;
+const mapDispatchToProps = {
+  getCalendar,
+};
+
+const mapStateToProps = state => ({
+  data: selectCalendar(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ZwemmenKalender);

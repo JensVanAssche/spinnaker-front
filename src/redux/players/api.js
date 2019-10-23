@@ -4,6 +4,8 @@ const api = {};
 
 api.getPlayers = type => Network.get('api/players/unordered/' + type);
 
+api.getPlayersOrdered = type => Network.get('api/players/ordered/' + type);
+
 api.updatePlayer = data => Network.put('api/players/' + data.id, {
   name: data.name,
   subtitle: data.subtitle,

@@ -1,5 +1,7 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectPhotos } from "redux/photos/selectors";
+import { getPhotos } from "redux/photos/actions";
 import { Link } from 'react-router-dom';
 import AlbumModal from './AlbumModal';
 import './gallery.scss';
@@ -7,20 +9,19 @@ import './gallery.scss';
 class Photos extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { loading: true, data: null };
     this.modalRef = React.createRef();
   }
 
   componentDidMount() {
-    Network.get('api/photos/album/' + this.props.match.params.id).then((res) =>
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getPhotos(this.props.match.params.id)
   }
 
   openModal = (data, i) => this.modalRef.current.openModal(data, i);
 
   render() {
-    const { loading, data } = this.state;
+    const { data } = this.props;
+
+    if (!data) return null;
 
     return (
       <div className="photo-album content ui container">
@@ -29,7 +30,7 @@ class Photos extends React.Component {
           <>
             <h2>{data.title}</h2>
             <div>
-              {!loading && data.content.map((photo, i) => (
+              {data.content.map((photo, i) => (
                 <div className="photo-thumbnail" key={photo.id} onClick={() => this.openModal(data.content, i)}>
                   <img src={process.env.REACT_APP_API_HOST + photo.image} alt="a o" />
                 </div>
@@ -43,4 +44,15 @@ class Photos extends React.Component {
   }
 }
 
-export default Photos;
+const mapDispatchToProps = {
+  getPhotos,
+};
+
+const mapStateToProps = state => ({
+  data: selectPhotos(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Photos);

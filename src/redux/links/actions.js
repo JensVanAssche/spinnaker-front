@@ -5,6 +5,11 @@ export const GET_LINKS_REJECTED = 'GET_LINKS_REJECTED';
 export const GET_LINKS_PENDING = 'GET_LINKS_PENDING';
 export const GET_LINKS_FULFILLED = 'GET_LINKS_FULFILLED';
 
+export const GET_FOOTER = 'GET_FOOTER';
+export const GET_FOOTER_REJECTED = 'GET_FOOTER_REJECTED';
+export const GET_FOOTER_PENDING = 'GET_FOOTER_PENDING';
+export const GET_FOOTER_FULFILLED = 'GET_FOOTER_FULFILLED';
+
 export const UPDATE_LINK = 'UPDATE_LINK';
 export const UPDATE_LINK_REJECTED = 'UPDATE_LINK_REJECTED';
 export const UPDATE_LINK_PENDING = 'UPDATE_LINK_PENDING';
@@ -29,7 +34,7 @@ export function getLinks() {
 
 export function getFooter() {
   return {
-    type: GET_LINKS,
+    type: GET_FOOTER,
     payload: api.getFooter(),
   };
 }

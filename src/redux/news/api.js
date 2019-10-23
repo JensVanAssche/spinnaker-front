@@ -6,6 +6,8 @@ api.getNews = offset => Network.get('api/news/all/' + offset);
 
 api.getLatest = () => Network.get('api/news/latest');
 
+api.getArticle = id => Network.get('api/news/article/' + id);
+
 api.updateArticle = data => Network.put('api/news/' + data.id, {
   title: data.title,
   body: data.body,

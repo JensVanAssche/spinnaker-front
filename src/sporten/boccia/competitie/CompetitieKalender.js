@@ -1,29 +1,26 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectCalendar } from "redux/calendar/selectors";
+import { getCalendar } from "redux/calendar/actions";
 
 class CompetitieKalender extends React.Component {
   state = {
     title: ['Parantee Competitie Kalender', 'Scholencompetitie Kalender', 'Competitie Nederland Kalender'],
     types: ['parantee', 'scholen', 'nederland'],
-    data: null,
-    loading: true,
   }
 
   componentDidMount() {
     const { types } = this.state;
     const { league } = this.props;
-    Network.get('api/calendar/' + types[league]).then((res) =>
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getCalendar(types[league]);
   }
 
   render() {
-    const { league } = this.props;
-    const { data, loading } = this.state;
+    const { league, data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div>
           <h2>{this.state.title[league]}</h2>
@@ -52,4 +49,15 @@ class CompetitieKalender extends React.Component {
   }
 }
 
-export default CompetitieKalender;
+const mapDispatchToProps = {
+  getCalendar,
+};
+
+const mapStateToProps = state => ({
+  data: selectCalendar(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CompetitieKalender);

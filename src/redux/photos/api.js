@@ -2,7 +2,9 @@ import Network from 'utils/network';
 
 const api = {};
 
-api.getPhotos = () => Network.get('api/photos/all');
+api.getAlbums = () => Network.get('api/photos/albums');
+
+api.getPhotos = id => Network.get('api/photos/album/' + id);
 
 api.updateAlbum = data => Network.put('api/photos/albums/' + data.id, {
   title: data.title,

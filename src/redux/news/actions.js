@@ -5,6 +5,11 @@ export const GET_NEWS_REJECTED = 'GET_NEWS_REJECTED';
 export const GET_NEWS_PENDING = 'GET_NEWS_PENDING';
 export const GET_NEWS_FULFILLED = 'GET_NEWS_FULFILLED';
 
+export const GET_ARTICLE = 'GET_ARTICLE';
+export const GET_ARTICLE_REJECTED = 'GET_ARTICLE_REJECTED';
+export const GET_ARTICLE_PENDING = 'GET_ARTICLE_PENDING';
+export const GET_ARTICLE_FULFILLED = 'GET_ARTICLE_FULFILLED';
+
 export const UPDATE_ARTICLE = 'UPDATE_ARTICLE';
 export const UPDATE_ARTICLE_REJECTED = 'UPDATE_ARTICLE_REJECTED';
 export const UPDATE_ARTICLE_PENDING = 'UPDATE_ARTICLE_PENDING';
@@ -31,6 +36,13 @@ export function getLatest() {
   return {
     type: GET_NEWS,
     payload: api.getLatest(),
+  };
+}
+
+export function getArticle(id) {
+  return {
+    type: GET_ARTICLE,
+    payload: api.getArticle(id),
   };
 }
 

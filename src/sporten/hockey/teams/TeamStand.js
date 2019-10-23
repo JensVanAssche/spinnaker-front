@@ -1,29 +1,26 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectStandings } from "redux/standings/selectors";
+import { getStandings } from "redux/standings/actions";
 
 class TeamStand extends React.Component {
   state = {
     title: ['Wheelblazers 1 Stand', 'Wheelblazers 2 Stand', 'Wheelblazers 3 Stand', 'Wheelblazers 4 Stand', 'Competitie Nederland Stand'],
     types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
-    loading: true,
-    data: []
   }
 
   componentDidMount() {
     const { types } = this.state;
     const { team } = this.props;
-    Network.get('api/standings/' + types[team]).then((res) =>  
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getStandings(types[team]);
   }
 
   render() {
-    const { team } = this.props;
-    const { data, loading } = this.state;
+    const { team, data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div>
           <h2>{this.state.title[team]}</h2>
@@ -72,4 +69,15 @@ class TeamStand extends React.Component {
   }
 }
 
-export default TeamStand;
+const mapDispatchToProps = {
+  getStandings,
+};
+
+const mapStateToProps = state => ({
+  data: selectStandings(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TeamStand);

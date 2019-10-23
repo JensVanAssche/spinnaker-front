@@ -1,30 +1,27 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectPlayersOrdered } from "redux/players/selectors";
+import { getPlayersOrdered } from "redux/players/actions";
 import Player from 'sporten/player/Player';
 
 class TeamSpelers extends React.Component {
   state = {
     title: ['Wheelblazers 1 Spelers', 'Wheelblazers 1 Spelers', 'Wheelblazers 1 Spelers', 'Wheelblazers 4 Spelers', 'Competitie Nederland Spelers'],
     types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
-    loading: true,
-    data: null
   };
 
   componentDidMount() {
     const { types } = this.state;
     const { team } = this.props;
-    Network.get('api/players/ordered/' + types[team]).then((res) =>  
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getPlayersOrdered(types[team]);
   }
 
   render() {
-    const { team } = this.props;
-    const { data, loading } = this.state;
+    const { team, data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div>
           <h2>{this.state.title[team]}</h2>
@@ -41,7 +38,7 @@ class TeamSpelers extends React.Component {
             <div key={type.name}>
               <h3>{type.name}</h3>
               <div>
-                {type.players.map(player => (
+                {type.players && type.players.map(player => (
                   <Player key={player.id} name={player.name} subtitle={player.subtitle} image={player.image} />
                 ))}
               </div>
@@ -53,4 +50,15 @@ class TeamSpelers extends React.Component {
   }
 }
 
-export default TeamSpelers;
+const mapDispatchToProps = {
+  getPlayersOrdered,
+};
+
+const mapStateToProps = state => ({
+  data: selectPlayersOrdered(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TeamSpelers);

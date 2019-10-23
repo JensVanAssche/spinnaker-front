@@ -1,22 +1,20 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectVideos } from "redux/videos/selectors";
+import { getVideos } from "redux/videos/actions";
 import './gallery.scss';
 
 class Videos extends React.Component {
-  state = { loading: true, data: null };
-
   componentDidMount() {
-    Network.get('api/videos/').then((res) =>  
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getVideos();
   }
 
   render() {
-    const { loading, data } = this.state;
+    const { data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div className="content ui container">
           <h2>Video's</h2>
@@ -39,4 +37,15 @@ class Videos extends React.Component {
   }
 }
 
-export default Videos;
+const mapDispatchToProps = {
+  getVideos,
+};
+
+const mapStateToProps = state => ({
+  data: selectVideos(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Videos);

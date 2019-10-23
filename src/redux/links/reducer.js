@@ -2,6 +2,9 @@ import {
   GET_LINKS_PENDING,
   GET_LINKS_FULFILLED,
   GET_LINKS_REJECTED,
+  GET_FOOTER_PENDING,
+  GET_FOOTER_FULFILLED,
+  GET_FOOTER_REJECTED,
   UPDATE_LINK_FULFILLED,
   UPDATE_LINK_REJECTED,
   ADD_LINK_FULFILLED,
@@ -12,6 +15,7 @@ import {
 
 const initialState = {
   data: null,
+  footer: null,
   loading: false,
 };
 
@@ -29,6 +33,19 @@ export default function reducer(state = initialState, action) {
         data: action.payload,
       };
     case GET_LINKS_REJECTED:
+      return initialState;
+    case GET_FOOTER_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_FOOTER_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        footer: action.payload,
+      };
+    case GET_FOOTER_REJECTED:
       return initialState;
     case UPDATE_LINK_FULFILLED:
       return {

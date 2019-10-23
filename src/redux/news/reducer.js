@@ -2,6 +2,9 @@ import {
   GET_NEWS_PENDING,
   GET_NEWS_FULFILLED,
   GET_NEWS_REJECTED,
+  GET_ARTICLE_PENDING,
+  GET_ARTICLE_FULFILLED,
+  GET_ARTICLE_REJECTED,
   UPDATE_ARTICLE_FULFILLED,
   UPDATE_ARTICLE_REJECTED,
   ADD_ARTICLE_FULFILLED,
@@ -11,7 +14,8 @@ import {
 } from './actions';
 
 const initialState = {
-  data: null,
+  news: null,
+  article: null,
   loading: false,
 };
 
@@ -26,14 +30,27 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        news: action.payload,
       };
     case GET_NEWS_REJECTED:
+      return initialState;
+    case GET_ARTICLE_PENDING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_ARTICLE_FULFILLED:
+      return {
+        ...state,
+        loading: false,
+        article: action.payload,
+      };
+    case GET_ARTICLE_REJECTED:
       return initialState;
     case UPDATE_ARTICLE_FULFILLED:
       return {
         ...state,
-        data: state.data
+        news: state.news
           .filter(player => player.id !== action.payload.id)
           .concat(action.payload),
       };
@@ -42,7 +59,7 @@ export default function reducer(state = initialState, action) {
     case ADD_ARTICLE_FULFILLED:
       return {
         ...state,
-        data: state.data
+        news: state.news
           .concat(action.payload),
       };
     case ADD_ARTICLE_REJECTED:
@@ -50,7 +67,7 @@ export default function reducer(state = initialState, action) {
     case DELETE_ARTICLE_FULFILLED:      
       return {
         ...state,
-        data: state.data
+        news: state.news
           .filter(player => player.id !== action.payload.id)
       };
     case DELETE_ARTICLE_REJECTED:

@@ -1,29 +1,26 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectResults } from "redux/results/selectors";
+import { getResults } from "redux/results/actions";
 
-class TeamUitslagen extends React.Component {
+class TeamResultaten extends React.Component {
   state = {
     title: ['Wheelblazers 1 Resultaten', 'Wheelblazers 2 Resultaten', 'Wheelblazers 3 Resultaten', 'Wheelblazers 4 Resultaten', 'Competitie Nederland Resultaten'],
     types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
-    loading: true,
-    data: []
   }
 
   componentDidMount() {
     const { types } = this.state;
     const { team } = this.props;
-    Network.get('api/results/' + types[team]).then((res) =>  
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getResults(types[team]);
   }
 
   render() {
-    const { team } = this.props;
-    const { data, loading } = this.state;
+    const { team, data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div>
           <h2>{this.state.title[team]}</h2>
@@ -42,7 +39,7 @@ class TeamUitslagen extends React.Component {
               <h2>{result.date}</h2>
             </div>
             <div className="body">
-              {result.scores.map(score => (
+              {result.scores && result.scores.map(score => (
                 <div className="entry" key={score.id}>
                   <p>{score.team1}</p>
                   <span>{score.team1Score} - {score.team2Score}</span>
@@ -57,4 +54,15 @@ class TeamUitslagen extends React.Component {
   }
 }
 
-export default TeamUitslagen;
+const mapDispatchToProps = {
+  getResults,
+};
+
+const mapStateToProps = state => ({
+  data: selectResults(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TeamResultaten);

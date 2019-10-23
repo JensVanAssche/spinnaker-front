@@ -1,21 +1,19 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectPublications } from "redux/publications/selectors";
+import { getPublications } from "redux/publications/actions";
 import './publicaties.scss';
 
 class Publicaties extends React.Component {
-  state = { loading: true, data: null };
-
   componentDidMount() {
-    Network.get('api/publications/').then((res) =>  
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getPublications();
   }
 
   render() {
-    const { loading, data } = this.state;
+    const { data } = this.props;
 
-    if (loading) return null;
-    
+    if (!data) return null;
+
     return (
       <div className="publicaties content ui container">
         <h2>Publicaties</h2>
@@ -38,4 +36,15 @@ class Publicaties extends React.Component {
   }
 }
 
-export default Publicaties;
+const mapDispatchToProps = {
+  getPublications,
+};
+
+const mapStateToProps = state => ({
+  data: selectPublications(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Publicaties);

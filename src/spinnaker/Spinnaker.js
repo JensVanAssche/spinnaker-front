@@ -6,20 +6,13 @@ import { selectLinks } from 'redux/links/selectors';
 import './spinnaker.scss';
 
 class Spinnaker extends React.Component {
-  state = {
-    loading: true,
-  }
-
-  async componentDidMount() {
-    await this.props.getLinks();
-    this.setState({ loading: false })
+  componentDidMount() {
+    this.props.getLinks();
   }
 
   render() {
-    const { loading } = this.state;
     const { links, content } = this.props;
 
-    if (loading) return null;
     if (!links) return null;
 
     return (
@@ -32,7 +25,7 @@ class Spinnaker extends React.Component {
         <div dangerouslySetInnerHTML={{__html: content.spinnakerLidgeld}} />
         <h2>Locatie</h2>
         <div dangerouslySetInnerHTML={{__html: content.spinnakerLocatie}} />
-        <iframe title="map" src={content.spinnakerLocatieMaps} width="400" height="300" frameBorder="0" allowFullScreen=""></iframe>
+        <iframe title="map" src={content.spinnakerLocatieMaps} width="500" height="350" frameBorder="0" allowFullScreen=""></iframe>
         <h2>Contact</h2>
         <div dangerouslySetInnerHTML={{__html: content.spinnakerContact}} />
         <h2>Engagementsverklaring</h2>

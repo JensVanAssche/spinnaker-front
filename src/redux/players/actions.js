@@ -27,6 +27,13 @@ export function getPlayers(type) {
   };
 }
 
+export function getPlayersOrdered(type) {
+  return {
+    type: GET_PLAYERS,
+    payload: api.getPlayersOrdered(type),
+  };
+}
+
 export function updatePlayer(data) {
   return {
     type: UPDATE_PLAYER,

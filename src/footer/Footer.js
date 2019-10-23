@@ -1,27 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectData } from 'redux/content/selectors';
-import Network from 'utils/network';
+import { getFooter } from 'redux/links/actions';
+import { selectFooter } from 'redux/links/selectors';
 import Wave from 'assets/images/wave_darkblue.png';
 import './footer.scss';
 
 class Footer extends React.Component {
-  state = {
-    data: null,
-    loading: true,
-  }
-
   componentDidMount() {
-    Network.get('api/links/footer').then((res) =>
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getFooter();
   }
   
   render() {
-    const { content } = this.props;
-    const { loading, data } = this.state;
+    const { content, links } = this.props;
 
-    if (!content || loading) return null;
+    if (!links) return null;
 
     return (
       <footer>
@@ -29,24 +22,24 @@ class Footer extends React.Component {
         <div className="footer-content">
           <div className="ui container logos">
             <div>
-              {data.steun.length > 0 && (<h1>Met steun van</h1>)}
-              {data.steun.map(e => (
+              {links.steun.length > 0 && (<h1>Met steun van</h1>)}
+              {links.steun.map(e => (
                 <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
                   <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
                 </a>
               ))}
             </div>
             <div>
-              {data.aangesloten.length > 0 && (<h1>Aangesloten bij</h1>)}
-              {data.aangesloten.map(e => (
+              {links.aangesloten.length > 0 && (<h1>Aangesloten bij</h1>)}
+              {links.aangesloten.map(e => (
                 <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
                   <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
                 </a>
               ))}
             </div>
             <div>
-            {data.onderdeel.length > 0 && (<h1>Onderdeel van</h1>)}
-              {data.onderdeel.map(e => (
+            {links.onderdeel.length > 0 && (<h1>Onderdeel van</h1>)}
+              {links.onderdeel.map(e => (
                 <a key={e.url} href={e.url} target="_blank" rel="noopener noreferrer">
                   <img key={e} src={process.env.REACT_APP_API_HOST + e.image} alt="logo" />
                 </a>
@@ -69,11 +62,16 @@ class Footer extends React.Component {
   }
 }
 
+const mapDispatchToProps = {
+  getFooter,
+};
+
 const mapStateToProps = state => ({
   content: selectData(state),
+  links: selectFooter(state)
 });
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Footer);

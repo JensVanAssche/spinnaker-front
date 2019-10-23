@@ -1,29 +1,26 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectResults } from "redux/results/selectors";
+import { getResults } from "redux/results/actions";
 
 class CompetitieResultaten extends React.Component {
   state = {
     title: ['Parantee Competitie Resultaten', 'Scholencompetitie Resultaten', 'Competitie Nederland Resultaten'],
     types: ['parantee', 'scholen', 'boccianederland'],
-    loading: true,
-    data: null
   };
 
   componentDidMount() {
     const { types } = this.state;
     const { league } = this.props;
-    Network.get('api/results/' + types[league]).then((res) =>  
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getResults(types[league]);
   }
 
   render() {
-    const { league } = this.props;
-    const { data, loading } = this.state;
+    const { league, data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div>
           <h2>{this.state.title[league]}</h2>
@@ -43,7 +40,7 @@ class CompetitieResultaten extends React.Component {
                 <h2>{result.date}</h2>
               </div>
               <div className="body">
-                {result.scores.map(score => (
+                {result.scores && result.scores.map(score => (
                   <div className="entry" key={score.id}>
                     <p>{score.team1}</p>
                     <span>{score.team1Score} - {score.team2Score}</span>
@@ -70,4 +67,15 @@ class CompetitieResultaten extends React.Component {
   }
 }
 
-export default CompetitieResultaten;
+const mapDispatchToProps = {
+  getResults,
+};
+
+const mapStateToProps = state => ({
+  data: selectResults(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CompetitieResultaten);

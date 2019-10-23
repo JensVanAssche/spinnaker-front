@@ -1,24 +1,19 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectCalendar } from "redux/calendar/selectors";
+import { getCalendar } from "redux/calendar/actions";
 
-class CompetitieKalender extends React.Component {
-  state = {
-    data: null,
-    loading: true,
-  }
-
+class BocciaKalender extends React.Component {
   componentDidMount() {
-    Network.get('api/calendar/boccia').then((res) =>
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getCalendar('boccia');
   }
 
   render() {
-    const { data, loading } = this.state;
+    const { data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div className="content">
           <h2>Boccia Kalender</h2>
@@ -49,4 +44,15 @@ class CompetitieKalender extends React.Component {
   }
 }
 
-export default CompetitieKalender;
+const mapDispatchToProps = {
+  getCalendar,
+};
+
+const mapStateToProps = state => ({
+  data: selectCalendar(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(BocciaKalender);

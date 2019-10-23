@@ -9,20 +9,14 @@ import Wave from 'assets/images/wave.png';
 import './home.scss';
 
 class Home extends React.Component {
-  state = {
-    loading: true,
-  }
-
-  async componentDidMount() {
-    await this.props.getLatest();
-    this.setState({ loading: false })
+  componentDidMount() {
+    this.props.getLatest();
   }
 
   render() {
-    const { loading } = this.state;
     const { news } = this.props;
 
-    if (loading || !news) return null;
+    if (!news) return null;
 
     return (
       <div className="home">

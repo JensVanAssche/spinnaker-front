@@ -1,29 +1,26 @@
 import React from 'react';
-import Network from 'utils/network';
+import { connect } from 'react-redux';
+import { selectStandings } from "redux/standings/selectors";
+import { getStandings } from "redux/standings/actions";
 
 class CompetitieStand extends React.Component {
   state = {
     title: ['Parantee Competitie Stand', 'Scholencompetitie Stand', 'Competitie Nederland Stand'],
     types: ['parantee', 'scholen', 'boccianederland'],
-    loading: true,
-    data: null
   };
 
   componentDidMount() {
     const { types } = this.state;
     const { league } = this.props;
-    Network.get('api/standings/' + types[league]).then((res) =>  
-      this.setState({ loading: false, data: res })
-    );
+    this.props.getStandings(types[league]);
   }
 
   render() {
-    const { league } = this.props;
-    const { data, loading } = this.state;
+    const { league, data } = this.props;
 
-    if (loading) return null;
+    if (!data) return null;
 
-    if (!loading && data.length === 0) {
+    if (data.length === 0) {
       return (
         <div>
           <h2>{this.state.title[league]}</h2>
@@ -52,7 +49,7 @@ class CompetitieStand extends React.Component {
                 </div>
               </div>
               <div className="body">
-                {result.scores.map(score => (
+                {result.scores && result.scores.map(score => (
                   <div className="entry" key={score.id}>
                     <div>
                       <p>{score.name}</p>
@@ -83,4 +80,15 @@ class CompetitieStand extends React.Component {
   }
 }
 
-export default CompetitieStand;
+const mapDispatchToProps = {
+  getStandings,
+};
+
+const mapStateToProps = state => ({
+  data: selectStandings(state),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CompetitieStand);
