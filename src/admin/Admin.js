@@ -17,7 +17,11 @@ class Admin extends React.Component {
   render() {
     const { isLoggedIn, loading, match } = this.props;
 
-    if (loading) return <div>Loading</div>;
+    if (loading) return (
+      <div className="app-loading">
+        <p>Laden...</p>
+      </div>
+    );
 
     return (
       <div>
