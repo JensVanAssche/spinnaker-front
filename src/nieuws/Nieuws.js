@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectNews } from "redux/news/selectors";
+import { selectNews, selectLoading } from "redux/news/selectors";
 import { getNews } from "redux/news/actions";
 import Network from 'utils/network';
 import Entry from './nieuwsentry/Entry';
@@ -52,9 +52,9 @@ class Nieuws extends React.Component {
 
   render() {
     const { pages, currentPage } = this.state;
-    const { data } = this.props;
+    const { data, loading } = this.props;
 
-    if (!data || !pages) return null;
+    if (!data || !pages || loading) return null;
 
     if (!pages.length) {
       return (
@@ -96,6 +96,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectNews(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectArticle } from "redux/news/selectors";
+import { selectArticle, selectLoading } from "redux/news/selectors";
 import { getArticle } from "redux/news/actions";
 import { Link } from 'react-router-dom';
 import './article.scss';
@@ -11,13 +11,13 @@ class Artikel extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
     
     return (
       <div className="news-article ui container content">
-        <Link to="/nieuws">Terug naar nieuws</Link>
+        <Link to="/nieuws">Terug naar nieuwsoverzicht</Link>
         {data.id && (
           <>
             <h2>{data.title}</h2>
@@ -38,6 +38,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectArticle(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

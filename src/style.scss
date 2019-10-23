@@ -78,14 +78,14 @@ main {
 
   .body {
     margin-left: 0;
+    margin-bottom: 5px;
   }
 
   a:last-child {
     font-size: 1.8rem;
     font-weight: 100;
     text-decoration: none;
-    display: block;
-    margin-top: 0px;
+    display: inline;
 
     &:hover {
       text-decoration: underline;
@@ -106,6 +106,17 @@ main {
   img {
     filter: brightness(0);
     width: 200px;
+  }
+}
+
+.app-loading {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 2rem;
   }
 }
 

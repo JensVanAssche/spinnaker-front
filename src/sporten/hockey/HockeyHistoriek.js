@@ -6,14 +6,7 @@ class HockeyHistoriek extends React.Component {
   render() {
     const { content } = this.props;
 
-    if (!content) {
-      return (
-        <div className="historiek content">
-          <h2>Hockey Historiek</h2>
-          <p>Geen data gevonden</p>
-        </div>
-      );
-    }
+    if (!content) return null;
 
     return (
       <div className="historiek content ui container">

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getLinks } from "redux/links/actions";
 import { selectData } from 'redux/content/selectors';
-import { selectLinks } from 'redux/links/selectors';
+import { selectLinks, selectLoading } from 'redux/links/selectors';
 import './spinnaker.scss';
 
 class Spinnaker extends React.Component {
@@ -11,9 +11,9 @@ class Spinnaker extends React.Component {
   }
 
   render() {
-    const { links, content } = this.props;
+    const { links, content, loading } = this.props;
 
-    if (!links) return null;
+    if (loading || !links) return null;
 
     return (
       <div className="spinnaker ui container content">
@@ -49,7 +49,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   content: selectData(state),
-  links: selectLinks(state)
+  links: selectLinks(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

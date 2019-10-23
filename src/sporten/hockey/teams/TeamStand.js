@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectStandings } from "redux/standings/selectors";
+import { selectStandings, selectLoading } from "redux/standings/selectors";
 import { getStandings } from "redux/standings/actions";
 
 class TeamStand extends React.Component {
@@ -16,9 +16,9 @@ class TeamStand extends React.Component {
   }
 
   render() {
-    const { team, data } = this.props;
+    const { team, data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
 
     if (data.length === 0) {
       return (
@@ -75,6 +75,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectStandings(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

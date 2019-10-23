@@ -26,7 +26,11 @@ class App extends React.Component {
     const { error } = this.state;
     const { loading } = this.props;
 
-    if (loading) return null;
+    if (loading) return (
+      <div className="app-loading">
+        <p>Laden...</p>
+      </div>
+    );
 
     if (!loading && error) {
       return (

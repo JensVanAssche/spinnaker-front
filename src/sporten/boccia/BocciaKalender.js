@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectCalendar } from "redux/calendar/selectors";
+import { selectCalendar, selectLoading } from "redux/calendar/selectors";
 import { getCalendar } from "redux/calendar/actions";
 
 class BocciaKalender extends React.Component {
@@ -9,9 +9,9 @@ class BocciaKalender extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
 
     if (data.length === 0) {
       return (
@@ -50,6 +50,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectCalendar(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

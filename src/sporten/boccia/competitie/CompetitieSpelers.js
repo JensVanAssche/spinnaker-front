@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectPlayersOrdered } from "redux/players/selectors";
+import { selectPlayersOrdered, selectLoading } from "redux/players/selectors";
 import { getPlayersOrdered } from "redux/players/actions";
 import Player from 'sporten/player/Player';
 
@@ -17,9 +17,9 @@ class CompetitieSpelers extends React.Component {
   }
 
   render() {
-    const { league, data } = this.props;
+    const { league, data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
 
     if (data.length === 0) {
       return (
@@ -56,6 +56,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectPlayersOrdered(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectVideos } from "redux/videos/selectors";
+import { selectVideos, selectLoading } from "redux/videos/selectors";
 import { getVideos } from "redux/videos/actions";
 import './gallery.scss';
 
@@ -10,9 +10,9 @@ class Videos extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
 
     if (data.length === 0) {
       return (
@@ -43,6 +43,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectVideos(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

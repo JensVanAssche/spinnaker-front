@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectAlbums } from "redux/photos/selectors";
+import { selectAlbums, selectLoading } from "redux/photos/selectors";
 import { getAlbums } from "redux/photos/actions";
 import { Link } from 'react-router-dom';
 import './gallery.scss';
@@ -11,9 +11,9 @@ class Photos extends React.Component {
   }
 
   render() {
-    const { match, data } = this.props;
+    const { match, data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
 
     if (data.length === 0) {
       return (
@@ -52,6 +52,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectAlbums(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

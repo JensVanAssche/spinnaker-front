@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectNews } from "redux/news/selectors";
+import { selectNews, selectLoading } from "redux/news/selectors";
 import { getLatest } from "redux/news/actions";
 import { Link } from 'react-router-dom';
 import Sport from './sport/Sport';
@@ -14,9 +14,9 @@ class Home extends React.Component {
   }
 
   render() {
-    const { news } = this.props;
+    const { news, loading } = this.props;
 
-    if (!news) return null;
+    if (loading || !news) return null;
 
     return (
       <div className="home">
@@ -62,6 +62,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   news: selectNews(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

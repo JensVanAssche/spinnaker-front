@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectPhotos } from "redux/photos/selectors";
+import { selectPhotos, selectLoading } from "redux/photos/selectors";
 import { getPhotos } from "redux/photos/actions";
 import { Link } from 'react-router-dom';
 import AlbumModal from './AlbumModal';
@@ -19,9 +19,9 @@ class Photos extends React.Component {
   openModal = (data, i) => this.modalRef.current.openModal(data, i);
 
   render() {
-    const { data } = this.props;
+    const { data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
 
     return (
       <div className="photo-album content ui container">
@@ -50,6 +50,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectPhotos(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

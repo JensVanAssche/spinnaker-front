@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectPublications } from "redux/publications/selectors";
+import { selectPublications, selectLoading } from "redux/publications/selectors";
 import { getPublications } from "redux/publications/actions";
 import './publicaties.scss';
 
@@ -10,9 +10,9 @@ class Publicaties extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
 
     return (
       <div className="publicaties content ui container">
@@ -42,6 +42,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectPublications(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

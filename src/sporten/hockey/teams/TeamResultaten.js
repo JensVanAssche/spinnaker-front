@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectResults } from "redux/results/selectors";
+import { selectResults, selectLoading } from "redux/results/selectors";
 import { getResults } from "redux/results/actions";
 
 class TeamResultaten extends React.Component {
@@ -16,9 +16,9 @@ class TeamResultaten extends React.Component {
   }
 
   render() {
-    const { team, data } = this.props;
+    const { team, data, loading } = this.props;
 
-    if (!data) return null;
+    if (loading || !data) return null;
 
     if (data.length === 0) {
       return (
@@ -60,6 +60,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   data: selectResults(state),
+  loading: selectLoading(state)
 });
 
 export default connect(

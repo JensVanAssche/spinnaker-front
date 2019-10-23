@@ -7,14 +7,7 @@ class Dansen extends React.Component {
   render() {
     const { content } = this.props;
 
-    if (!content) {
-      return (
-        <div>
-          <h2>Dansen</h2>
-          <p>Geen info gevonden</p>
-        </div>
-      );
-    }
+    if (!content) return null;
 
     return (
       <div className="content ui container">

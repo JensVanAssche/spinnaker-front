@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectData } from 'redux/content/selectors';
 import { getFooter } from 'redux/links/actions';
-import { selectFooter } from 'redux/links/selectors';
+import { selectFooter, selectLoading } from 'redux/links/selectors';
 import Wave from 'assets/images/wave_darkblue.png';
 import './footer.scss';
 
@@ -12,9 +12,9 @@ class Footer extends React.Component {
   }
   
   render() {
-    const { content, links } = this.props;
+    const { content, links, loading } = this.props;
 
-    if (!links) return null;
+    if (loading || !links) return null;
 
     return (
       <footer>
@@ -68,7 +68,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = state => ({
   content: selectData(state),
-  links: selectFooter(state)
+  links: selectFooter(state),
+  loading: selectLoading(state)
 });
 
 export default connect(
