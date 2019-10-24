@@ -40,17 +40,17 @@ export const DELETE_PHOTO_REJECTED = 'DELETE_PHOTO_REJECTED';
 export const DELETE_PHOTO_PENDING = 'DELETE_PHOTO_PENDING';
 export const DELETE_PHOTO_FULFILLED = 'DELETE_PHOTO_FULFILLED';
 
-export function getAll() {
+export function getAll(offset) {
   return {
     type: GET_ALL,
-    payload: api.getAll(),
+    payload: api.getAll(offset),
   };
 }
 
-export function getAlbums() {
+export function getAlbums(offset) {
   return {
     type: GET_ALBUMS,
-    payload: api.getAlbums(),
+    payload: api.getAlbums(offset),
   };
 }
 

@@ -68,12 +68,18 @@
         overflow: hidden;
         display: flex;
         justify-content: center;
+        align-items: center;
         position: absolute;
         top: 0;
         left: 0;
 
         img {
           height: 100%;
+        }
+
+        p {
+          font-size: 2rem;
+          color: white;
         }
       }
 

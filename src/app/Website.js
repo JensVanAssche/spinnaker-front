@@ -33,7 +33,8 @@ class Website extends React.Component {
             <Route path="/handbal" component={Handbal} />
             <Route path="/zwemmen" component={Zwemmen} />
             <Route exact path="/fotos" component={Fotos} />
-            <Route exact path="/fotos/:id" component={Album} />
+            <Route exact path="/fotos/page/:page" component={Fotos} />
+            <Route exact path="/fotos/album/:id" component={Album} />
             <Route exact path="/videos" component={Videos} />
             <Route exact path="/videos/page/:page" component={Videos} />
             <Route exact path="/publicaties" component={Publicaties} />

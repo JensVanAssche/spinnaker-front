@@ -28,7 +28,7 @@ class Videos extends React.Component {
       </Dimmer>);
 
     return <Tab.Pane>
-      <div className="dashboard-item">
+      <div className="dashboard-item small">
         <div className="dashboard-flex">
           <h1>Video's</h1>
           <Button icon primary className="small-button" onClick={() => openVideoModal('Video toevoegen')} >

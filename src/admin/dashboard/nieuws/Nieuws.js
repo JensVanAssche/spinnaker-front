@@ -64,7 +64,7 @@ class Nieuws extends React.Component {
       </Dimmer>);
 
     return <Tab.Pane>
-      <div className="dashboard-item">
+      <div className="dashboard-item small">
         <div className="dashboard-flex">
           <h1>Nieuws</h1>
           <Button icon primary className="small-button" onClick={() => openArtikelModal('Artikel toevoegen')}>

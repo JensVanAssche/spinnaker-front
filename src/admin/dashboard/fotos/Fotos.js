@@ -5,22 +5,58 @@ import { selectAlbums } from "redux/photos/selectors";
 import { Tab, Button, Icon, Dimmer, Loader } from 'semantic-ui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import Network from 'utils/network';
 
 class Fotos extends React.Component {
   state = {
+    lastPage: 1,
+    currentPage: 1,
+    pages: null,
     loading: true,
   }
 
   async componentDidMount() {
-    await this.props.getAll();
-    this.setState({ loading: false })
+    await this.props.getAll((this.state.currentPage - 1) * 9);
+    Network.get('api/photos/count').then((res) => {
+      var ele = []
+      for (let i = 0; i < Math.ceil(res.length / 9); i++) {
+        ele.push(i + 1);
+      }
+      this.setState({ loading: false, pages: ele });
+    });
   }
 
+  componentDidUpdate() {
+    const { lastPage, currentPage } = this.state;
+    if (lastPage !== currentPage) {
+      this.props.getAll((currentPage - 1) * 9).then(() => {
+        this.setState({ lastPage: currentPage })
+      });
+    }
+  }
+
+  pageSet = page => this.setState({ currentPage: page });
+
+  pageUp = () => {
+    this.setState(prevState => ({
+      ...prevState.data,
+      currentPage: prevState.currentPage + 1,
+    }));
+  }
+
+  pageDown = () => {
+    this.setState(prevState => ({
+      ...prevState.data,
+      currentPage: prevState.currentPage - 1,
+    }));
+  }
+  
   deletePhoto = id => {
     this.props.deletePhoto(id);
   }
 
   render() {
+    const { currentPage, pages } = this.state;
     const { openAlbumModal, openFileModal, albums } = this.props;
 
     if (this.state.loading) return (
@@ -34,7 +70,7 @@ class Fotos extends React.Component {
       </Dimmer>);
 
     return <Tab.Pane>
-      <div className="dashboard-item">
+      <div className="dashboard-item small">
         <div className="dashboard-flex">
           <h1>Foto's</h1>
           <Button icon primary className="small-button" onClick={() => openAlbumModal('Fotoalbum toevoegen')}>
@@ -71,6 +107,13 @@ class Fotos extends React.Component {
           </div>
         </div>
       ))}
+      <div className="pagination">
+        {currentPage > 1 && (<p onClick={() => this.pageDown()}>Terug</p>)}
+        {pages.length > 1 && pages.map(page => (
+          <p className={page === parseInt(currentPage, 10) ? "active" : ""} key={page} onClick={() => this.pageSet(page)}>{page}</p>
+        ))}
+        {currentPage < pages.length && (<p onClick={() => this.pageUp()}>Verder</p>)}
+      </div>
     </Tab.Pane>;
   }
 }

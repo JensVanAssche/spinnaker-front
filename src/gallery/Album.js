@@ -35,6 +35,7 @@ class Photos extends React.Component {
                   <img src={process.env.REACT_APP_API_HOST + photo.image} alt="a o" />
                 </div>
               ))}
+              {data.content.length === 0 && (<p>Dit album heeft geen foto's</p>)}
             </div>
             <AlbumModal ref={this.modalRef} />
           </>
