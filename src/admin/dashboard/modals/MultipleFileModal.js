@@ -2,7 +2,9 @@ import React from 'react';
 import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
 import { validateRequired } from 'utils/validate';
 import { updateContent } from 'redux/content/actions';
+import { addPhotos } from 'redux/photos/actions';
 import { connect } from 'react-redux';
+import Network from 'utils/network';
 import './modal.scss';
 
 class FileModal extends React.Component {
@@ -11,18 +13,16 @@ class FileModal extends React.Component {
     error: null,
     loading: false,
     title: null,
-    api: null,
     albumId: null,
     data: null,
   };
 
-  openModal = (title, api, albumId) => {
+  openModal = (title, albumId) => {
     this.setState({
       modalOpen: true,
       error: null,
       loading: false,
       title,
-      api,
       albumId,
       data: null
     });
@@ -33,11 +33,10 @@ class FileModal extends React.Component {
       modalOpen: false,
     });
 
-  handleImageChange = event => {   
-    const file = event.target.files[0];
+  handleImageChange = event => {
     event.persist();
     this.setState({
-      data: file,
+      data: event.target.files,
     });
   };
 
@@ -49,10 +48,17 @@ class FileModal extends React.Component {
 
   save = () => {
     const isValid = this.validate();
-    const { api, data } = this.state;
+    const { data } = this.state;
     if (isValid) {
       this.setState({ loading: true });
-      this.props.updateContent(api, data).then(() => this.closeModal());
+      var files = [];
+      var names = [];
+      for (let i = 0; i < data.length; i++) {
+        files.push(data[i]);
+        names.push(data[i].name);
+      }
+      this.props.addPhotos({ albumId: this.state.albumId, images: names })
+      Network.uploadImages('api/upload/multiple', files).then(() => this.closeModal());
     } else {
       this.setState({ error: "Gelieve een bestand te uploaden" });
     }
@@ -71,7 +77,7 @@ class FileModal extends React.Component {
               <Loader inverted />
             </Dimmer>)}
             <Form.Field>
-              <input type="file" onChange={this.handleImageChange} />
+              <input type="file" onChange={this.handleImageChange} multiple />
             </Form.Field>
           </Form>
         </Modal.Content>
@@ -88,7 +94,8 @@ class FileModal extends React.Component {
 }
 
 const mapDispatchToProps = {
-  updateContent
+  updateContent,
+  addPhotos
 };
 
 export default connect(

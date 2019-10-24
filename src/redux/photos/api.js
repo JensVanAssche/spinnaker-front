@@ -16,9 +16,9 @@ api.addAlbum = data => Network.post('api/photos/albums', {
   title: data.title,
 });
 
-api.addPhoto = data => Network.post('api/photos/photos', {
+api.addPhotos = data => Network.post('api/photos/photos', {
   albumId: data.albumId,
-  image: data.image,
+  images: data.images,
 });
 
 api.deleteAlbum = id => Network.delete('api/photos/albums/' + id);

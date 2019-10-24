@@ -162,6 +162,28 @@ class Network {
       this.errorHandler(err);
     }
   }
+  
+  static async uploadImages(route, body) {
+    const formData = new FormData();
+
+    body.forEach(e => {
+      formData.append('file', e);
+    });
+
+    try {
+      const headers = {
+        ...this.basicHeaders(),
+        'content-type': 'multipart/form-data',
+      };
+      const result = await axios.post(this.getUrl(route), formData, {
+        headers,
+        withCredentials: true,
+      });
+      return result.data;
+    } catch (err) {
+      this.errorHandler(err);
+    }
+  }
 
   static async uploadPdf(route, body) {
     const formData = new FormData();

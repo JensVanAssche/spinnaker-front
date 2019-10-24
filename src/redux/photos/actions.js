@@ -25,10 +25,10 @@ export const ADD_ALBUM_REJECTED = 'ADD_ALBUM_REJECTED';
 export const ADD_ALBUM_PENDING = 'ADD_ALBUM_PENDING';
 export const ADD_ALBUM_FULFILLED = 'ADD_ALBUM_FULFILLED';
 
-export const ADD_PHOTO = 'ADD_PHOTO';
-export const ADD_PHOTO_REJECTED = 'ADD_PHOTO_REJECTED';
-export const ADD_PHOTO_PENDING = 'ADD_PHOTO_PENDING';
-export const ADD_PHOTO_FULFILLED = 'ADD_PHOTO_FULFILLED';
+export const ADD_PHOTOS = 'ADD_PHOTOS';
+export const ADD_PHOTOS_REJECTED = 'ADD_PHOTOS_REJECTED';
+export const ADD_PHOTOS_PENDING = 'ADD_PHOTOS_PENDING';
+export const ADD_PHOTOS_FULFILLED = 'ADD_PHOTOS_FULFILLED';
 
 export const DELETE_ALBUM = 'DELETE_ALBUM';
 export const DELETE_ALBUM_REJECTED = 'DELETE_ALBUM_REJECTED';
@@ -75,10 +75,10 @@ export function addAlbum(body) {
   };
 }
 
-export function addPhoto(body) {
+export function addPhotos(body) {
   return {
-    type: ADD_PHOTO,
-    payload: api.addPhoto(body),
+    type: ADD_PHOTOS,
+    payload: api.addPhotos(body),
   };
 }
 

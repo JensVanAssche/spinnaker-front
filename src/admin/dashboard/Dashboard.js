@@ -19,6 +19,7 @@ import Nieuws from './nieuws/Nieuws';
 import InputModal from './modals/InputModal';
 import TextareaModal from './modals/TextareaModal';
 import FileModal from './modals/FileModal';
+import MultipleFileModal from './modals/MultipleFileModal';
 import PdfModal from './modals/PdfModal';
 import LinkModal from './modals/LinkModal';
 import PlayerModal from './modals/PlayerModal';
@@ -37,6 +38,7 @@ class Dashboard extends React.Component {
     this.inputModalRef = React.createRef();
     this.textareaModalRef = React.createRef();
     this.fileModalRef = React.createRef();
+    this.multipleFileModalRef = React.createRef();
     this.pdfModalRef = React.createRef();
     this.linkModalRef = React.createRef();
     this.playerModalRef = React.createRef();
@@ -122,7 +124,7 @@ class Dashboard extends React.Component {
     {
       menuItem: "Foto's",
       render: () => <Fotos
-        openFileModal={this.openFileModal}
+        openMultipleFileModal={this.openMultipleFileModal}
         openAlbumModal={this.openAlbumModal}
       />,
     },
@@ -149,6 +151,7 @@ class Dashboard extends React.Component {
   openInputModal = (title, api, data) => this.inputModalRef.current.openModal(title, api, data);
   openTextareaModal = (title, api, data) => this.textareaModalRef.current.openModal(title, api, data);
   openFileModal = (title, api, albumId) => this.fileModalRef.current.openModal(title, api, albumId);
+  openMultipleFileModal = (title, albumId) => this.multipleFileModalRef.current.openModal(title, albumId);
   openPdfModal = (title, api, data, type) => this.pdfModalRef.current.openModal(title, api, data, type);
   openLinkModal = (title, data) => this.linkModalRef.current.openModal(title, data);
   openPlayerModal = (title, data, type) => this.playerModalRef.current.openModal(title, data, type);
@@ -184,6 +187,7 @@ class Dashboard extends React.Component {
         <InputModal ref={this.inputModalRef} />
         <TextareaModal ref={this.textareaModalRef} />
         <FileModal ref={this.fileModalRef} />
+        <MultipleFileModal ref={this.multipleFileModalRef} />
         <PdfModal ref={this.pdfModalRef} />
         <LinkModal ref={this.linkModalRef} />
         <PlayerModal ref={this.playerModalRef} />

@@ -57,7 +57,7 @@ class Fotos extends React.Component {
 
   render() {
     const { currentPage, pages } = this.state;
-    const { openAlbumModal, openFileModal, albums } = this.props;
+    const { openAlbumModal, openMultipleFileModal, albums } = this.props;
 
     if (this.state.loading) return (
       <Dimmer active inverted>
@@ -88,7 +88,7 @@ class Fotos extends React.Component {
               <Button icon className="small-button" onClick={() => openAlbumModal('Fotoalbum aanpassen', album)}>
                 <Icon name="edit" />
               </Button>
-              <Button icon primary className="small-button" onClick={() => openFileModal('Foto toevoegen', null, album.id)}>
+              <Button icon primary className="small-button" onClick={() => openMultipleFileModal("Foto's toevoegen", album.id)}>
                 <span>Foto</span>
                 <Icon name="add" />
               </Button>

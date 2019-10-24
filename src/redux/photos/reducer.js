@@ -12,8 +12,8 @@ import {
   UPDATE_ALBUM_REJECTED,
   ADD_ALBUM_FULFILLED,
   ADD_ALBUM_REJECTED,
-  ADD_PHOTO_FULFILLED,
-  ADD_PHOTO_REJECTED,
+  ADD_PHOTOS_FULFILLED,
+  ADD_PHOTOS_REJECTED,
   DELETE_ALBUM_FULFILLED,
   DELETE_ALBUM_REJECTED,
   DELETE_PHOTO_FULFILLED,
@@ -81,12 +81,12 @@ export default function reducer(state = initialState, action) {
       };
     case ADD_ALBUM_REJECTED:
       return initialState;
-    case ADD_PHOTO_FULFILLED:
+    case ADD_PHOTOS_FULFILLED:
       return {
         ...state,
         data: action.payload,
       };
-    case ADD_PHOTO_REJECTED:
+    case ADD_PHOTOS_REJECTED:
       return initialState;
     case DELETE_ALBUM_FULFILLED:      
     return {
