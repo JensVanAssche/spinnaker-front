@@ -2,7 +2,9 @@ import Network from 'utils/network';
 
 const api = {};
 
-api.getVideos = () => Network.get('api/videos');
+api.getVideos = () => Network.get('api/videos/all');
+
+api.getByOffset = offset => Network.get('api/videos/all/' + offset);
 
 api.updateVideo = data => Network.put('api/videos/' + data.id, {
   title: data.title,

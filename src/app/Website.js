@@ -35,6 +35,7 @@ class Website extends React.Component {
             <Route exact path="/fotos" component={Fotos} />
             <Route exact path="/fotos/:id" component={Album} />
             <Route exact path="/videos" component={Videos} />
+            <Route exact path="/videos/page/:page" component={Videos} />
             <Route exact path="/publicaties" component={Publicaties} />
             <Route exact path="/nieuws" component={Nieuws} />
             <Route exact path="/nieuws/page/:page" component={Nieuws} />

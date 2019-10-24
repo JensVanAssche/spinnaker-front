@@ -9,6 +9,33 @@
       font-size: 3rem;
     }
   }
+
+  .video-thumbnail {
+    cursor: pointer;
+    width: 560px;
+    height: 315px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 560px;
+      height: auto;
+    }
+
+    svg {
+      font-size: 5rem;
+      position: absolute;
+      color: $blue;
+    }
+
+    &:hover {
+      svg {
+        color: $lightblue;
+      }
+    }
+  }
 }
 
 .photo-albums {

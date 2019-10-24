@@ -27,6 +27,13 @@ export function getVideos() {
   };
 }
 
+export function getByOffset(offset) {
+  return {
+    type: GET_VIDEOS,
+    payload: api.getByOffset(offset),
+  };
+}
+
 export function updateVideo(id, body) {
   return {
     type: UPDATE_VIDEO,
