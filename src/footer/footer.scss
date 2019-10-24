@@ -5,6 +5,13 @@ footer {
 
   p {
     min-height: 24px;
+    &.bold {
+      font-weight: bold;
+    }
+
+    &.underline {
+      text-decoration: underline;
+    }
   }
 
   > img {
