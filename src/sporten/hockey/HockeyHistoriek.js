@@ -10,8 +10,13 @@ class HockeyHistoriek extends React.Component {
 
     return (
       <div className="historiek content ui container">
-        <h2>Hockey Historiek</h2>
-        <div dangerouslySetInnerHTML={{__html: content.hockeyHistory }} />
+        <div className="content-flex">
+          <div>
+            <h2>Hockey Historiek</h2>
+            <div dangerouslySetInnerHTML={{__html: content.hockeyHistory }} />
+          </div>
+          <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
+        </div>
       </div>
     );
   }

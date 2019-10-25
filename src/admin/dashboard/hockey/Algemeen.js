@@ -40,6 +40,15 @@ class Algemeen extends React.Component {
         </div>
       </div>
       <div className="dashboard-item">
+        <h2>Wheelblazers Logo</h2>
+        <div className="dashboard-flex">
+          <img src={process.env.REACT_APP_API_HOST + data.wheelblazersImg} alt="eumm" />
+          <Button icon className="small-button" onClick={() => openFileModal('Wheelblazers Logo', 'content/img/wheelblazersImg')} >
+            <Icon name="edit" />
+          </Button>
+        </div>
+      </div>
+      <div className="dashboard-item">
         <h2>Hockey Tekst</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.hockeyOver.substring(0,255)+"..."}} />

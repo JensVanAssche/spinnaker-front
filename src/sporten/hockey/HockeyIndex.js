@@ -14,7 +14,10 @@ class HockeyIndex extends React.Component {
           <div style={{'backgroundImage': `url(${process.env.REACT_APP_API_HOST + content.hockeyImg})`}} />
           <div><h1>Hockey</h1></div>
         </div>
-        <div dangerouslySetInnerHTML={{__html: content.hockeyOver}} />
+        <div className="content-flex">
+          <div dangerouslySetInnerHTML={{__html: content.hockeyOver}} />
+          <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
+        </div>
       </div>
     );
   }

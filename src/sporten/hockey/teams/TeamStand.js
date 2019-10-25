@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectStandings, selectLoading } from "redux/standings/selectors";
 import { getStandings } from "redux/standings/actions";
+import { selectData } from 'redux/content/selectors';
 
 class TeamStand extends React.Component {
   state = {
@@ -16,54 +17,60 @@ class TeamStand extends React.Component {
   }
 
   render() {
-    const { team, data, loading } = this.props;
+    const { content, team, data, loading } = this.props;
 
     if (loading || !data) return null;
 
     if (data.length === 0) {
       return (
-        <div>
-          <h2>{this.state.title[team]}</h2>
-          <p>Geen stand gevonden</p>
+        <div className="content-flex">
+          <div>
+            <h2>{this.state.title[team]}</h2>
+            <p>Geen standen gevonden</p>
+          </div>
+          <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
         </div>
       );
     }
 
     return (
-      <div>
-        <h2>{this.state.title[team]}</h2>
-        {data.map(result => (
-          <div className="standings" key={result.id}>
-            <div className="header">
-              <h1>{result.title}</h1>
-              <h2>{result.subtitle}</h2>
-            </div>
-            <div className="subheader">
-              <div>
-                <p>Team</p>
+      <div className="content-flex">
+        <div>
+          <h2>{this.state.title[team]}</h2>
+          {data.map(result => (
+            <div className="standings" key={result.id}>
+              <div className="header">
+                <h1>{result.title}</h1>
+                <h2>{result.subtitle}</h2>
               </div>
-              <div>
-                <p>Gespeeld</p>
-                <p>Goal Verschil</p>
-                <p>Punten</p>
-              </div>
-            </div>
-            <div className="body">
-              {result.scores.map(score => (
-                <div className="entry" key={score.id}>
+              <div className="subheader">
                 <div>
-                  <p>{score.name}</p>
+                  <p>Team</p>
                 </div>
                 <div>
-                  <p>{score.points1}</p>
-                  <p>{score.points2}</p>
-                  <p>{score.points3}</p>
+                  <p>Gespeeld</p>
+                  <p>Goal Verschil</p>
+                  <p>Punten</p>
                 </div>
               </div>
-              ))}
+              <div className="body">
+                {result.scores.map(score => (
+                  <div className="entry" key={score.id}>
+                  <div>
+                    <p>{score.name}</p>
+                  </div>
+                  <div>
+                    <p>{score.points1}</p>
+                    <p>{score.points2}</p>
+                    <p>{score.points3}</p>
+                  </div>
+                </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
       </div>
     );
   }
@@ -74,6 +81,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
+  content: selectData(state),
   data: selectStandings(state),
   loading: selectLoading(state)
 });

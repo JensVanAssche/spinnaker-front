@@ -6,17 +6,19 @@ nav.subnav {
   .hamburger {
     display: none;
     padding: 12px 15px;
+
     span {
       color: white;
       font-size: 2.5rem;
-      cursor: pointer;
       text-transform: uppercase;
 
       &:first-child {
         font-size: 2rem;
         padding: 3px 0;
       }
+
       &:last-child {
+        cursor: pointer;
         font-size: 2.5rem;
       }
     }
@@ -76,6 +78,21 @@ nav.subnav {
   }
 }
 
+.content-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  > div {
+    width: 100%;
+  }
+
+  img {
+    width: 300px;
+    height: auto;
+  }
+}
+
 .calendar {
   h3 {
     display: inline-block;
@@ -106,10 +123,71 @@ nav.subnav {
   }
 }
 
+.team nav.subsubnav ul.ui.container li:first-child {
+  color: $blue;
+  padding: 15px;
+  font-size: 1.8rem;
+}
+
+.competitie,
+.team {
+  nav.subsubnav {
+    .hamburger {
+      display: none;
+      padding: 12px 15px;
+      span {
+        text-transform: uppercase;
+
+        &:first-child {
+          font-size: 2rem;
+          padding: 3px 0;
+        }
+        &:last-child {
+          cursor: pointer;
+          font-size: 2.5rem;
+        }
+      }
+    }
+
+    ul.ui.container {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
+
+      li > a {
+        color: $blue;
+        padding: 15px;
+        font-size: 1.8rem;
+        display: block;
+
+        &:hover,
+        &.active {
+          color: $white;
+          background-color: $darkblue;
+        }
+      }
+    }
+  }
+
+  .players {
+    h3 {
+      font-size: 3rem;
+    }
+
+    > div > div {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+  }
+}
+
 .results {
   margin-top: 25px;
   margin-bottom: 90px;
-  width: 60%;
+  width: 600px;
 
   .header {
     background-color: $blue;
@@ -180,7 +258,7 @@ nav.subnav {
 .standings {
   margin-top: 25px;
   margin-bottom: 90px;
-  width: 60%;
+  width: 700px;
 
   .header {
     background-color: $blue;
@@ -251,6 +329,10 @@ nav.subnav {
     &:last-child {
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
+
+      > div:last-child p:last-child {
+        border-bottom-right-radius: 10px;
+      }
     }
 
     > div {
@@ -273,19 +355,26 @@ nav.subnav {
   }
 }
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   nav.subnav ul.ui.container {
     li > a {
       padding: 15px 12px;
     }
   }
 
+  .content-flex {
+    img {
+      width: 200px;
+      height: auto;
+    }
+  }
+
   .results {
-    width: 80%;
+    width: 500px;
   }
 
   .standings {
-    width: 80%;
+    width: 500px;
   }
 }
 
@@ -336,6 +425,28 @@ nav.subnav {
     }
   }
 
+  .competitie,
+  .team {
+    nav.subsubnav {
+      .hamburger {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      ul.ui.container {
+        flex-direction: column;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        height: 0;
+        overflow: hidden;
+
+        &.open {
+          height: auto;
+        }
+      }
+    }
+  }
+
   .calendar {
     h3,
     .small,
@@ -349,6 +460,12 @@ nav.subnav {
       p {
         width: 100%;
       }
+    }
+  }
+
+  .content-flex {
+    img {
+      display: none;
     }
   }
 

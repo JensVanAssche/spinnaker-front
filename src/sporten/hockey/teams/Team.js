@@ -6,7 +6,6 @@ import TeamStand from "./TeamStand";
 import NotFound from "notFound/NotFound";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import './team.scss';
 
 class Team extends React.Component {
   state = {

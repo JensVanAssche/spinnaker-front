@@ -9,7 +9,6 @@ import CompetitieHistoriek from "./CompetitieHistoriek";
 import NotFound from "notFound/NotFound";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import './competitie.scss';
 
 class Competitie extends React.Component {
   state = {
