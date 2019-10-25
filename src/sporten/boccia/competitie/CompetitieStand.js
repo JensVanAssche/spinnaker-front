@@ -39,7 +39,7 @@ class CompetitieStand extends React.Component {
                 <h1>{result.title}</h1>
                 <h2>{result.subtitle}</h2>
               </div>
-              <div className="subheader">
+              <div className="subheader desktop">
                 <div>
                   <p>Team</p>
                 </div>
@@ -48,7 +48,21 @@ class CompetitieStand extends React.Component {
                   <p>Punten</p>
                 </div>
               </div>
+              <div className="subheader mobile">
+                <div>
+                  <p>Team</p>
+                </div>
+                <div>
+                  <p>TP</p>
+                  <p>P</p>
+                </div>
+              </div>
               <div className="body">
+                {result.scores.length === 0 && (
+                  <div className="entry empty">
+                    <p>Geen standen in dit tornooi</p>
+                  </div>
+                )}
                 {result.scores && result.scores.map(score => (
                   <div className="entry" key={score.id}>
                     <div>

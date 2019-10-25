@@ -4,6 +4,8 @@ import { selectPhotos, selectLoading } from "redux/photos/selectors";
 import { getPhotos } from "redux/photos/actions";
 import { Link } from 'react-router-dom';
 import AlbumModal from './AlbumModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import './gallery.scss';
 
 class Photos extends React.Component {
@@ -25,7 +27,7 @@ class Photos extends React.Component {
 
     return (
       <div className="photo-album content ui container">
-        <Link to="/fotos">Terug naar foto albums</Link>
+        <Link to="/fotos"><FontAwesomeIcon icon={faArrowLeft} /> Terug naar foto albums</Link>
         {data && (
           <>
             <h2>{data.title}</h2>

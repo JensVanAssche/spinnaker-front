@@ -210,6 +210,10 @@ nav.subnav {
     }
   }
 
+  .subheader.mobile {
+    display: none;
+  }
+
   .entry {
     width: 100%;
     display: flex;
@@ -252,6 +256,13 @@ nav.subnav {
       font-size: 2.4rem;
       color: white;
     }
+
+    &.empty {
+      p {
+        width: 100%;
+        text-align: left;
+      }
+    }
   }
 }
 
@@ -279,6 +290,10 @@ nav.subnav {
       font-size: 1.7rem;
       margin: 0;
     }
+  }
+
+  .subheader.mobile {
+    display: none;
   }
 
   .subheader {
@@ -480,7 +495,9 @@ nav.subnav {
 
 @media only screen and (max-width: 576px) {
   .results {
+    margin-bottom: 30px;
     .header {
+      padding: 10px 15px;
       h1 {
         font-size: 2.5rem;
       }
@@ -490,21 +507,30 @@ nav.subnav {
       }
     }
 
+    .subheader.desktop {
+      display: none;
+    }
+
+    .subheader.mobile {
+      display: flex;
+    }
+
     .entry {
       p {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
         padding: 5px 10px;
       }
 
       span {
         padding: 5px 10px;
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
     }
   }
 
   .standings {
     .header {
+      padding: 5px 10px 10px 10px;
       h1 {
         font-size: 2.5rem;
       }
@@ -512,6 +538,14 @@ nav.subnav {
       h2 {
         font-size: 1.5rem;
       }
+    }
+
+    .subheader.desktop {
+      display: none;
+    }
+
+    .subheader.mobile {
+      display: flex;
     }
 
     .entry {

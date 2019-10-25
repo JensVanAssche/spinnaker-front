@@ -44,7 +44,12 @@ class TeamResultaten extends React.Component {
                 <h2>{result.date}</h2>
               </div>
               <div className="body">
-                {result.scores && result.scores.map(score => (
+                {result.scores.length === 0 && (
+                  <div className="entry empty">
+                    <p>Geen resultaten in dit tornooi</p>
+                  </div>
+                )}
+                {result.scores.map(score => (
                   <div className="entry" key={score.id}>
                     <p>{score.team1}</p>
                     <span>{score.team1Score} - {score.team2Score}</span>

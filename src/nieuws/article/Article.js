@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { selectArticle, selectLoading } from "redux/news/selectors";
 import { getArticle } from "redux/news/actions";
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import './article.scss';
 
 class Artikel extends React.Component {
@@ -17,7 +19,7 @@ class Artikel extends React.Component {
     
     return (
       <div className="news-article ui container content">
-        <Link to="/nieuws">Terug naar nieuwsoverzicht</Link>
+        <Link to="/nieuws"><FontAwesomeIcon icon={faArrowLeft} /> Terug naar nieuwsoverzicht</Link>
         {data.id && (
           <>
             <h2>{data.title}</h2>

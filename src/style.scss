@@ -18,7 +18,11 @@ h3 {
 
 p,
 a {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
+}
+
+a {
+  line-height: initial;
 }
 
 main {
@@ -54,7 +58,7 @@ main {
 }
 
 .news-item {
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 
   .date {
     color: $grey;
@@ -68,7 +72,7 @@ main {
     display: block;
     font-size: 2.8rem;
     text-decoration: none;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
     &:hover {
       text-decoration: underline;
@@ -78,7 +82,7 @@ main {
 
   .body {
     margin-left: 0;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
 
   a:last-child {
@@ -121,11 +125,23 @@ main {
 }
 
 @media only screen and (max-width: 768px) {
-  h2 {
-    font-size: 3.25rem;
-  }
-
   .content {
     margin-top: 15px;
+    h2 {
+      font-size: 3.75rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .content {
+    h2 {
+      font-size: 3.5rem;
+    }
+
+    p,
+    a {
+      margin-left: 0;
+    }
   }
 }
