@@ -30,7 +30,7 @@ class Spinnaker extends React.Component {
         <div dangerouslySetInnerHTML={{__html: content.spinnakerContact}} />
         <h2>Engagementsverklaring</h2>
         <a href={process.env.REACT_APP_API_HOST + content.spinnakerEngagementPdf} target="_blank" rel="noopener noreferrer" dangerouslySetInnerHTML={{__html: content.spinnakerEngagementTitle}} />
-        {links.length && (<>
+        {links.length > 0 && (<>
           <h2>Links</h2>
           <div className="links">
             {links.map(e => (

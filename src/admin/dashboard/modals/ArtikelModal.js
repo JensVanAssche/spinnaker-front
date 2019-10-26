@@ -64,6 +64,16 @@ class ArtikelModal extends React.Component {
     }));
   };
 
+  handleImageDelete = () => {   
+    this.setState(prevState => ({
+      data: {
+        ...prevState.data,
+        imageData: null,
+        imageName: null,
+      },
+    }));
+  };
+
   handleBodyChange = event => {
     const { value } = event.target;
     this.setState(prevState => ({
@@ -78,7 +88,6 @@ class ArtikelModal extends React.Component {
     const { data } = this.state;
     if (!validateRequired(data.title)) return false;
     if (!validateRequired(data.body)) return false;
-    if (!validateRequired(data.imageName)) return false;
     return true;
   };
 
@@ -170,10 +179,20 @@ class ArtikelModal extends React.Component {
               <input value={data.title} onChange={this.handleTitleChange} />
             </Form.Field>
             <Form.Field>
-              <label>Foto</label>
-              <input type="file" onChange={this.handleImageChange} />
+              <label>Foto (optioneel)</label>
+              {(!data.imageName && !data.imageData) || (data.imageName && data.imageData) ? (
+                <input type="file" onChange={this.handleImageChange} />
+              ) : (
+                <>
+                  <img src={process.env.REACT_APP_API_HOST + data.imageName} alt="artikel foto" />
+                  <p onClick={() => this.handleImageDelete()} className="clickable">Foto verwijderen</p>
+                </>
+              )}
             </Form.Field>
-            <Form.Field><textarea value={data.body} onChange={this.handleBodyChange} /></Form.Field>
+            <Form.Field>
+              <label>Tekst</label>
+              <textarea value={data.body} onChange={this.handleBodyChange} />
+            </Form.Field>
           </Form>
         </Modal.Content>
         <Modal.Actions>

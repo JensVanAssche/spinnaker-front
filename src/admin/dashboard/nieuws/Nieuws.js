@@ -80,8 +80,7 @@ class Nieuws extends React.Component {
             <div className="dashboard-flex">
               <div>
                 <h2>{artikel.title}</h2>
-                <p>{artikel.date}</p>
-                <img src={process.env.REACT_APP_API_HOST + artikel.image} alt="eumm" />
+                {artikel.image && (<img src={process.env.REACT_APP_API_HOST + artikel.image} alt="eumm" />)}
                 <p dangerouslySetInnerHTML={{__html: artikel.body.substring(0,255)+"..."}} />
               </div>
               <Button icon className="small-button" onClick={() => openArtikelModal('Artikel aanpassen', artikel)}>

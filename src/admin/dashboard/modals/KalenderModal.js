@@ -149,6 +149,14 @@ class KalenderModal extends React.Component {
               <Loader inverted />
             </Dimmer>)}
             <Form.Field>
+              <label>Wat</label>
+              <input value={data.title} onChange={this.handleTitleChange} />
+            </Form.Field>
+            <Form.Field>
+              <label>Waar</label>
+              <input value={data.location} onChange={this.handleLocationChange} />
+            </Form.Field>
+            <Form.Field>
               <label>Wanneer</label>
             </Form.Field>
             <Form.Group inline>
@@ -207,14 +215,6 @@ class KalenderModal extends React.Component {
                 <input value={data.year} onChange={this.handleYearChange} maxLength="4" />
               </Form.Field>
             </Form.Group>
-            <Form.Field>
-              <label>Wat</label>
-              <input value={data.title} onChange={this.handleTitleChange} />
-            </Form.Field>
-            <Form.Field>
-              <label>Waar</label>
-              <input value={data.location} onChange={this.handleLocationChange} />
-            </Form.Field>
           </Form>
         </Modal.Content>
         <Modal.Actions>

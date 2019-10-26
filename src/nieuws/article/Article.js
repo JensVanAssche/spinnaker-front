@@ -24,7 +24,7 @@ class Artikel extends React.Component {
           <>
             <h2>{data.title}</h2>
             <span className="date">{data.date}</span>
-            <img src={process.env.REACT_APP_API_HOST + data.image} alt="article" />
+            {data.image && <img src={process.env.REACT_APP_API_HOST + data.image} alt="article" />}
             <div dangerouslySetInnerHTML={{__html: data.body}} />
           </>
         )}

@@ -1,3 +1,5 @@
+@import "vars.scss";
+
 .ui.modal {
   input,
   textarea,
@@ -17,6 +19,21 @@
 
     form .field {
       width: 100%;
+    }
+
+    img {
+      height: 100px;
+    }
+
+    .clickable {
+      cursor: pointer;
+      color: $blue;
+      margin: 0;
+
+      &:hover {
+        color: $darkblue;
+        text-decoration: underline;
+      }
     }
 
     .error.message {
