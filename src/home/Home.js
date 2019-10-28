@@ -35,9 +35,9 @@ class Home extends React.Component {
               <Sport name="hockey" />
             </div>
             <div>
+              <Sport name="rolstoel handbal" />
               <Sport name="dansen" />
               <Sport name="zwemmen" />
-              <Sport name="rolstoel handbal" />
             </div>
           </div>
           <div className="nieuws">

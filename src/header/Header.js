@@ -66,18 +66,18 @@ class Header extends React.Component {
             <li>
               <div className={"ui simple dropdown sporten " +
               (window.location.pathname.split("/")[1] === "boccia" ? 'aaaaa' : "") +
-              (window.location.pathname.split("/")[1] === "dansen" ? 'aaaaa' : "") +
               (window.location.pathname.split("/")[1] === "hockey" ? 'aaaaa' : "") +
               (window.location.pathname.split("/")[1] === "handbal" ? 'aaaaa' : "") +
+              (window.location.pathname.split("/")[1] === "dansen" ? 'aaaaa' : "") +
               (window.location.pathname.split("/")[1] === "zwemmen" ? 'aaaaa' : "")}
               onMouseEnter={() => this.onDropdownHover()}
               onClick={() => this.onDropdownClick('sporten')}>
                 <span>SPORTEN</span>
                 <div className="menu" onClick={() => this.onMenuClick()}>
                   <Link to="/boccia">BOCCIA</Link>
-                  <Link to="/dansen">DANSEN</Link>
                   <Link to="/hockey">HOCKEY</Link>
                   <Link to="/handbal">ROLSTOELHANDBAL</Link>
+                  <Link to="/dansen">DANSEN</Link>
                   <Link to="/zwemmen">ZWEMMEN</Link>
                 </div>
               </div>
