@@ -97,13 +97,14 @@ nav.subnav {
 .calendar {
   h3 {
     display: inline-block;
-    width: 300px;
+    width: 350px;
   }
 
   .entry p {
     margin: 0;
     display: inline-block;
-    width: 300px;
+    width: 350px;
+    vertical-align: text-top;
   }
 
   .small {
@@ -382,6 +383,24 @@ nav.subnav {
     img {
       width: 200px;
       height: auto;
+    }
+  }
+
+  .calendar {
+    h3 {
+      width: 300px;
+    }
+
+    .entry p {
+      width: 300px;
+    }
+
+    .small {
+      width: 120px !important;
+    }
+
+    .medium {
+      width: 150px !important;
     }
   }
 
