@@ -162,4 +162,16 @@ main {
       margin-left: 0;
     }
   }
+
+  .error {
+    padding: 20px;
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    img {
+      width: 100px;
+    }
+  }
 }

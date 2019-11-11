@@ -37,9 +37,9 @@ class App extends React.Component {
         <div className="error">
           <img src={Logo} alt="logo" />
           <h2>
-            Sorry, onze servers zijn momenteel niet beschikbaar.
+            Sorry, de website is momenteel niet beschikbaar.
             <br />
-            Probeer later opnieuw!
+            Herlaadt de pagina of probeer later opnieuw.
           </h2>
         </div>
       );
