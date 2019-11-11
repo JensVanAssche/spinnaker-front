@@ -1,14 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { selectResults, selectLoading } from "redux/results/selectors";
-import { selectData } from 'redux/content/selectors';
+import { selectData } from "redux/content/selectors";
 import { getResults } from "redux/results/actions";
 
 class TeamResultaten extends React.Component {
   state = {
-    title: ['Wheelblazers 1 Resultaten', 'Wheelblazers 2 Resultaten', 'Wheelblazers 3 Resultaten', 'Wheelblazers 4 Resultaten', 'Competitie Nederland Resultaten'],
-    types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
-  }
+    title: [
+      "Wheelblazers 1 Resultaten",
+      "Wheelblazers 2 Resultaten",
+      "Wheelblazers 3 Resultaten",
+      "Wheelblazers 4 Resultaten",
+      "Competitie Nederland Resultaten"
+    ],
+    types: ["blazers1", "blazers2", "blazers3", "blazers4", "hockeynederland"]
+  };
 
   componentDidMount() {
     const { types } = this.state;
@@ -28,7 +34,10 @@ class TeamResultaten extends React.Component {
             <h2>{this.state.title[team]}</h2>
             <p>Geen resultaten gevonden</p>
           </div>
-          <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
+          <img
+            src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+            alt="wheelblazers logo"
+          />
         </div>
       );
     }
@@ -43,31 +52,33 @@ class TeamResultaten extends React.Component {
                 <h1>{result.title}</h1>
                 <h2>{result.date}</h2>
               </div>
-              <div className="body">
-                {result.scores.length === 0 && (
-                  <div className="entry empty">
-                    <p>Geen resultaten in dit tornooi</p>
-                  </div>
-                )}
-                {result.scores.map(score => (
-                  <div className="entry" key={score.id}>
-                    <p>{score.team1}</p>
-                    <span>{score.team1Score} - {score.team2Score}</span>
-                    <p>{score.team2}</p>
-                  </div>
-                ))}
-              </div>
+              <table>
+                <tbody>
+                  {result.scores.map(score => (
+                    <tr key={score.id}>
+                      <td className="team">{score.team1}</td>
+                      <td className="score">
+                        {score.team1Score} - {score.team2Score}
+                      </td>
+                      <td className="team">{score.team2}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ))}
         </div>
-        <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
+        <img
+          src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+          alt="wheelblazers logo"
+        />
       </div>
     );
   }
 }
 
 const mapDispatchToProps = {
-  getResults,
+  getResults
 };
 
 const mapStateToProps = state => ({
@@ -76,7 +87,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TeamResultaten);
+export default connect(mapStateToProps, mapDispatchToProps)(TeamResultaten);

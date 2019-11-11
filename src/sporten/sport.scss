@@ -219,54 +219,43 @@ nav.subnav {
     display: none;
   }
 
-  .entry {
+  table {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    border-spacing: 0;
 
-    &:nth-child(odd) {
+    tr:nth-child(odd) {
       background-color: #eeeeee;
 
-      span {
+      td.score {
         background-color: $lightblue;
       }
     }
 
-    &:nth-child(even) {
+    tr:nth-child(even) {
       background-color: #dddddd;
 
-      span {
+      td.score {
         background-color: $lesslightblue;
       }
     }
 
-    &:last-child {
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-    }
-
-    p {
+    td.team {
       font-size: 2rem;
-      margin: 0;
       padding: 10px 20px;
-      width: 40%;
+      width: 50%;
 
       &:last-child {
         text-align: right;
       }
     }
 
-    span {
+    td.score {
       padding: 15px 20px;
       font-size: 2.4rem;
       color: white;
-    }
-
-    &.empty {
-      p {
-        width: 100%;
-        text-align: left;
-      }
+      white-space: pre;
+      width: 10px;
+      text-align: center;
     }
   }
 }
@@ -384,17 +373,8 @@ nav.subnav {
 
   .content-flex {
     img {
-      width: 200px;
-      height: auto;
+      display: none;
     }
-  }
-
-  .results {
-    width: 500px;
-  }
-
-  .standings {
-    width: 500px;
   }
 }
 
@@ -475,12 +455,6 @@ nav.subnav {
     }
   }
 
-  .content-flex {
-    img {
-      display: none;
-    }
-  }
-
   .results {
     width: 100%;
   }
@@ -512,13 +486,13 @@ nav.subnav {
       display: flex;
     }
 
-    .entry {
-      p {
+    table {
+      td.team {
         font-size: 1.5rem;
         padding: 5px 10px;
       }
 
-      span {
+      td.score {
         padding: 5px 10px;
         font-size: 1.5rem;
       }

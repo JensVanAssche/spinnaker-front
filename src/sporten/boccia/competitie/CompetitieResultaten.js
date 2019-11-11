@@ -1,12 +1,16 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { selectResults, selectLoading } from "redux/results/selectors";
 import { getResults } from "redux/results/actions";
 
 class CompetitieResultaten extends React.Component {
   state = {
-    title: ['Parantee Competitie Resultaten', 'Scholencompetitie Resultaten', 'Competitie Nederland Resultaten'],
-    types: ['parantee', 'scholen', 'boccianederland'],
+    title: [
+      "Parantee Competitie Resultaten",
+      "Scholencompetitie Resultaten",
+      "Competitie Nederland Resultaten"
+    ],
+    types: ["parantee", "scholen", "boccianederland"]
   };
 
   componentDidMount() {
@@ -39,20 +43,19 @@ class CompetitieResultaten extends React.Component {
                 <h1>{result.title}</h1>
                 <h2>{result.date}</h2>
               </div>
-              <div className="body">
-                {result.scores.length === 0 && (
-                  <div className="entry empty">
-                    <p>Geen resultaten in dit tornooi</p>
-                  </div>
-                )}
-                {result.scores.map(score => (
-                  <div className="entry" key={score.id}>
-                    <p>{score.team1}</p>
-                    <span>{score.team1Score} - {score.team2Score}</span>
-                    <p>{score.team2}</p>
-                  </div>
-                ))}
-              </div>
+              <table>
+                <tbody>
+                  {result.scores.map(score => (
+                    <tr key={score.id}>
+                      <td className="team">{score.team1}</td>
+                      <td className="score">
+                        {score.team1Score} - {score.team2Score}
+                      </td>
+                      <td className="team">{score.team2}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ))}
         </div>
@@ -64,7 +67,13 @@ class CompetitieResultaten extends React.Component {
         <h2>{this.state.title[league]}</h2>
         {data.map(result => (
           <div key={result.id}>
-            <a href={process.env.REACT_APP_API_HOST + result.pdf} target="_blank" rel="noopener noreferrer">{result.title}</a>
+            <a
+              href={process.env.REACT_APP_API_HOST + result.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {result.title}
+            </a>
           </div>
         ))}
       </div>
@@ -73,7 +82,7 @@ class CompetitieResultaten extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getResults,
+  getResults
 };
 
 const mapStateToProps = state => ({
@@ -83,5 +92,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(CompetitieResultaten);
