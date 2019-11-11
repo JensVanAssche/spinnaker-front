@@ -239,6 +239,23 @@ nav.subnav {
       }
     }
 
+    tr:last-child {
+      td:first-child {
+        border-bottom-left-radius: 10px;
+      }
+
+      td:last-child {
+        border-bottom-right-radius: 10px;
+      }
+    }
+
+    tr.empty {
+      td {
+        font-size: 2rem;
+        padding: 10px 20px;
+      }
+    }
+
     td.team {
       font-size: 2rem;
       padding: 10px 20px;

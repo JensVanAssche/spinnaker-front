@@ -45,6 +45,11 @@ class CompetitieResultaten extends React.Component {
               </div>
               <table>
                 <tbody>
+                  {result.scores.length === 0 && (
+                    <tr className="empty">
+                      <td>Dit tornooi heeft geen resultaten</td>
+                    </tr>
+                  )}
                   {result.scores.map(score => (
                     <tr key={score.id}>
                       <td className="team">{score.team1}</td>
