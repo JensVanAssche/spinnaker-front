@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { selectCalendar, selectLoading } from "redux/calendar/selectors";
 import { getCalendar } from "redux/calendar/actions";
 
 class ZwemmenKalender extends React.Component {
   componentDidMount() {
-    this.props.getCalendar('zwemmen');
+    this.props.getCalendar("zwemmen");
   }
 
   render() {
@@ -25,25 +25,29 @@ class ZwemmenKalender extends React.Component {
     return (
       <div className="content">
         <h2>Zwemmen Kalender</h2>
-        <div className="calendar">
-          <h3 className="medium">Wanneer</h3>
-          <h3>Wat</h3>
-          <h3 className="medium">Waar</h3>
-          {data.map(entry => (
-            <div className="entry" key={entry.id}>
-              <p className="medium">{entry.date}</p>
-              <p>{entry.title}</p>
-              <p className="medium">{entry.location}</p>
-            </div>
-          ))}
-        </div>
+        <table className="calendar">
+          <tbody>
+            <tr>
+              <th>Wanneer</th>
+              <th>Wat</th>
+              <th>Waar</th>
+            </tr>
+            {data.map(entry => (
+              <tr key={entry.id}>
+                <td>{entry.date}</td>
+                <td>{entry.title}</td>
+                <td>{entry.location}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
 }
 
 const mapDispatchToProps = {
-  getCalendar,
+  getCalendar
 };
 
 const mapStateToProps = state => ({
@@ -51,7 +55,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ZwemmenKalender);
+export default connect(mapStateToProps, mapDispatchToProps)(ZwemmenKalender);

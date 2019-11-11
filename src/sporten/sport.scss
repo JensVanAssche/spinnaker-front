@@ -95,24 +95,27 @@ nav.subnav {
 }
 
 .calendar {
-  h3 {
-    display: inline-block;
-    width: 350px;
+  th {
+    font-size: 2rem;
   }
 
-  .entry p {
-    margin: 0;
-    display: inline-block;
-    width: 350px;
-    vertical-align: text-top;
+  td {
+    font-size: 1.7rem;
   }
 
-  .small {
-    width: 150px !important;
+  tr {
+    text-align: left;
   }
 
-  .medium {
-    width: 200px !important;
+  th,
+  td {
+    padding-right: 20px;
+    padding-bottom: 5px;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 0px;
   }
 }
 
@@ -386,24 +389,6 @@ nav.subnav {
     }
   }
 
-  .calendar {
-    h3 {
-      width: 300px;
-    }
-
-    .entry p {
-      width: 300px;
-    }
-
-    .small {
-      width: 120px !important;
-    }
-
-    .medium {
-      width: 150px !important;
-    }
-  }
-
   .results {
     width: 500px;
   }
@@ -483,18 +468,10 @@ nav.subnav {
   }
 
   .calendar {
-    h3,
-    .small,
-    .medium {
-      width: 100% !important;
-      margin: 0;
-    }
-
-    .entry {
-      margin: 20px 0;
-      p {
-        width: 100%;
-      }
+    tr {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
     }
   }
 

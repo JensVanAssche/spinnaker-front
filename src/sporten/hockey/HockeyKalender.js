@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { selectData } from 'redux/content/selectors';
+import React from "react";
+import { connect } from "react-redux";
+import { selectData } from "redux/content/selectors";
 import { selectCalendar, selectLoading } from "redux/calendar/selectors";
 import { getCalendar } from "redux/calendar/actions";
 
 class HockeyKalender extends React.Component {
   componentDidMount() {
-    this.props.getCalendar('hockey');
+    this.props.getCalendar("hockey");
   }
 
   render() {
@@ -18,12 +18,15 @@ class HockeyKalender extends React.Component {
       return (
         <div className="content ui container">
           <div className="content-flex">
-          <div>
-            <h2>Hockey Kalender</h2>
-            <p>Geen data gevonden</p>
+            <div>
+              <h2>Hockey Kalender</h2>
+              <p>Geen data gevonden</p>
+            </div>
+            <img
+              src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+              alt="wheelblazers logo"
+            />
           </div>
-          <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
-        </div>
         </div>
       );
     }
@@ -33,20 +36,27 @@ class HockeyKalender extends React.Component {
         <div className="content-flex">
           <div>
             <h2>Hockey Kalender</h2>
-            <div className="calendar">
-              <h3 className="medium">Wanneer</h3>
-              <h3>Wat</h3>
-              <h3 className="medium">Waar</h3>
-              {data.map(entry => (
-                <div className="entry" key={entry.id}>
-                  <p className="medium">{entry.date}</p>
-                  <p>{entry.title}</p>
-                  <p className="medium">{entry.location}</p>
-                </div>
-              ))}
-            </div>
+            <table className="calendar">
+              <tbody>
+                <tr>
+                  <th>Wanneer</th>
+                  <th>Wat</th>
+                  <th>Waar</th>
+                </tr>
+                {data.map(entry => (
+                  <tr key={entry.id}>
+                    <td>{entry.date}</td>
+                    <td>{entry.title}</td>
+                    <td>{entry.location}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
+          <img
+            src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+            alt="wheelblazers logo"
+          />
         </div>
       </div>
     );
@@ -54,7 +64,7 @@ class HockeyKalender extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getCalendar,
+  getCalendar
 };
 
 const mapStateToProps = state => ({
@@ -63,7 +73,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(HockeyKalender);
+export default connect(mapStateToProps, mapDispatchToProps)(HockeyKalender);
