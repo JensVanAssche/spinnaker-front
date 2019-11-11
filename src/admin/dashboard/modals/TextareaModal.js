@@ -105,6 +105,7 @@ class TextareaModal extends React.Component {
             {loading && (<Dimmer active inverted>
               <Loader inverted />
             </Dimmer>)}
+            <label>[bold] = vet / [underline] = onderlijnd</label>
             <Form.Field><textarea value={data} onChange={this.handleTextareaChange} /></Form.Field>
           </Form>
         </Modal.Content>

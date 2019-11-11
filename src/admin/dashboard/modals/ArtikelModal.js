@@ -191,6 +191,7 @@ class ArtikelModal extends React.Component {
             </Form.Field>
             <Form.Field>
               <label>Tekst</label>
+              <label>[bold] = vet / [underline] = onderlijnd</label>
               <textarea value={data.body} onChange={this.handleBodyChange} />
             </Form.Field>
           </Form>

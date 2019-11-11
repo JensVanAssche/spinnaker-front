@@ -97,13 +97,13 @@ nav.subnav {
 .calendar {
   h3 {
     display: inline-block;
-    width: 250px;
+    width: 300px;
   }
 
   .entry p {
     margin: 0;
     display: inline-block;
-    width: 250px;
+    width: 300px;
   }
 
   .small {
@@ -530,6 +530,7 @@ nav.subnav {
   }
 
   .standings {
+    margin-bottom: 30px;
     .header {
       padding: 5px 10px 10px 10px;
       h1 {

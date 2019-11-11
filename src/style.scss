@@ -1,6 +1,18 @@
 @import "../node_modules/semantic-ui-css/semantic.min.css";
 @import "vars.scss";
 
+@font-face {
+  font-family: "TW";
+  src: url(utils/twcen.TTF);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "TW";
+  src: url(utils/twcen_bold.TTF);
+  font-weight: bold;
+}
+
 html {
   font-size: 10px;
 }
@@ -13,7 +25,7 @@ body,
 h1,
 h2,
 h3 {
-  font-family: "TW Cen MT" !important;
+  font-family: "TW", sans-serif !important;
 }
 
 p,
@@ -129,6 +141,12 @@ main {
     margin-top: 15px;
     h2 {
       font-size: 3.5rem;
+    }
+  }
+
+  .news-item {
+    .title {
+      font-size: 2.25rem;
     }
   }
 }

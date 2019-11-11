@@ -21,7 +21,7 @@
     display: inline-block;
 
     img {
-      height: 100px;
+      max-height: 100px;
       width: auto;
     }
   }
@@ -43,8 +43,8 @@
       margin: 0 0px 20px 0;
 
       img {
-        height: auto;
-        width: 60%;
+        max-height: 125px;
+        max-width: 100%;
       }
     }
   }

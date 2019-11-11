@@ -3,6 +3,7 @@
 .home {
   .welcome {
     margin-bottom: 30px;
+
     > div {
       background-color: $lightblue;
       display: flex;
@@ -67,6 +68,11 @@
       margin-bottom: 30px;
     }
 
+    > p {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
     .cta {
       width: 100%;
       display: flex;
@@ -97,7 +103,7 @@
       }
 
       > div {
-        padding: 50px 0;
+        padding: 50px 10px;
 
         h1 {
           font-size: 4rem;
@@ -121,6 +127,14 @@
 
     .nieuws {
       margin: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 607px) {
+  .home .sports > div {
+    a {
+      margin: 20px 0;
     }
   }
 }

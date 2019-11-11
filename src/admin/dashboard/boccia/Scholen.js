@@ -106,8 +106,8 @@ class Scholen extends React.Component {
       </div>
       <div className="dashboard-item">
         <div className="dashboard-flex">
-          <h2>Parantee Kalender</h2>
-          <Button icon primary className="small-button" onClick={() => openKalenderModal('Parantee Kalender Item toevoegen', null, 'scholen')}>
+          <h2>Scholen Kalender</h2>
+          <Button icon primary className="small-button" onClick={() => openKalenderModal('Scholen Kalender Item toevoegen', null, 'scholen')}>
             <span>Item</span>
             <Icon name="add" />
           </Button>
@@ -230,7 +230,7 @@ class Scholen extends React.Component {
           </div>
         ))}
       </div>
-      <div className="dashboard-item">
+      {/* <div className="dashboard-item">
         <h2>Scholen Historiek</h2>
         <div className="dashboard-flex">
           <p dangerouslySetInnerHTML={{__html: data.scholenHistory.substring(0,255)+"..."}} />
@@ -238,7 +238,7 @@ class Scholen extends React.Component {
             <Icon name="edit" />
           </Button>
         </div>
-      </div>
+      </div> */}
     </Tab.Pane>;
   }
 }

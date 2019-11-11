@@ -43,7 +43,7 @@ class Competitie extends React.Component {
             <li><NavLink to={`${match.path}/kalender`}>kalender</NavLink></li>
             <li><NavLink to={`${match.path}/resultaten`}>resultaten</NavLink></li>
             <li><NavLink to={`${match.path}/stand`}>stand</NavLink></li>
-            <li><NavLink to={`${match.path}/historiek`}>historiek resultaten</NavLink></li>
+            {league !== 1 && <li><NavLink to={`${match.path}/historiek`}>historiek resultaten</NavLink></li>}
           </ul>
         </nav>
         <div className="ui container content">
@@ -53,7 +53,7 @@ class Competitie extends React.Component {
             <Route exact path={`${match.path}/kalender`} component={(props) => <CompetitieKalender league={league} {...props} />} />
             <Route exact path={`${match.path}/resultaten`} component={(props) => <CompetitieResultaten league={league} {...props} />} />
             <Route exact path={`${match.path}/stand`} component={(props) => <CompetitieStand league={league} {...props} />} />
-            <Route exact path={`${match.path}/historiek`} component={(props) => <CompetitieHistoriek league={league} {...props} />} />
+            {league !== 1 && <Route exact path={`${match.path}/historiek`} component={(props) => <CompetitieHistoriek league={league} {...props} />} />}
             <Route component={NotFound} />
           </Switch>
         </div>
