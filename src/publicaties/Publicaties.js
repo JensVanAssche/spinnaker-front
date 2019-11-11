@@ -25,7 +25,7 @@ class Publicaties extends React.Component {
           <a href={process.env.REACT_APP_API_HOST + krant.pdf} target="_blank" rel="noopener noreferrer" key={krant.id}>{krant.title}</a>
         ))}
         <h3>Folders</h3>
-        {!data.kranten.length && (
+        {!data.folders.length && (
           <p>Geen folders gevonden</p>
         )}
         {data.folders.map(folder => (
