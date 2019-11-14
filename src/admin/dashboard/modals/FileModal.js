@@ -1,9 +1,16 @@
-import React from 'react';
-import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import { validateRequired } from 'utils/validate';
-import { updateContent } from 'redux/content/actions';
-import { connect } from 'react-redux';
-import './modal.scss';
+import React from "react";
+import {
+  Modal,
+  Form,
+  Button,
+  Message,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
+import { validateRequired } from "utils/validate";
+import { updateContent } from "redux/content/actions";
+import { connect } from "react-redux";
+import "./modal.scss";
 
 class FileModal extends React.Component {
   state = {
@@ -13,7 +20,7 @@ class FileModal extends React.Component {
     title: null,
     api: null,
     albumId: null,
-    data: null,
+    data: null
   };
 
   openModal = (title, api, albumId) => {
@@ -30,14 +37,14 @@ class FileModal extends React.Component {
 
   closeModal = () =>
     this.setState({
-      modalOpen: false,
+      modalOpen: false
     });
 
-  handleImageChange = event => {   
+  handleImageChange = event => {
     const file = event.target.files[0];
     event.persist();
     this.setState({
-      data: file,
+      data: file
     });
   };
 
@@ -52,24 +59,44 @@ class FileModal extends React.Component {
     const { api, data } = this.state;
     if (isValid) {
       this.setState({ loading: true });
-      this.props.updateContent(api, data).then(() => this.closeModal());
+      this.props.updateContent(api, data).then(res => {
+        if (res.error) {
+          this.setState({
+            loading: false,
+            error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+          });
+        } else {
+          this.closeModal();
+        }
+      });
     } else {
       this.setState({ error: "Gelieve een bestand te uploaden" });
     }
-  }
+  };
 
   render() {
     const { modalOpen, error, loading, title } = this.state;
 
     return (
-      <Modal size="mini" open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
+      <Modal
+        size="mini"
+        open={modalOpen}
+        onOpen={this.openModal}
+        onClose={this.closeModal}
+      >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content>
-          {error && (<Message error><p>{error}</p></Message>)}
+          {error && (
+            <Message error>
+              <p>{error}</p>
+            </Message>
+          )}
           <Form>
-            {loading && (<Dimmer active inverted>
-              <Loader inverted />
-            </Dimmer>)}
+            {loading && (
+              <Dimmer active inverted>
+                <Loader inverted />
+              </Dimmer>
+            )}
             <Form.Field>
               <input type="file" onChange={this.handleImageChange} />
             </Form.Field>
@@ -79,7 +106,9 @@ class FileModal extends React.Component {
           <div></div>
           <div>
             <Button onClick={() => this.closeModal()}>Annuleren</Button>
-            <Button primary onClick={() => this.save()}>Bevestig</Button>
+            <Button primary onClick={() => this.save()}>
+              Bevestig
+            </Button>
           </div>
         </Modal.Actions>
       </Modal>
@@ -91,9 +120,6 @@ const mapDispatchToProps = {
   updateContent
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-  null,
-  { forwardRef: true },
-)(FileModal);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  FileModal
+);

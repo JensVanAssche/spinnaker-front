@@ -1,9 +1,20 @@
-import React from 'react';
-import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import { updateCalendar, addCalendar, deleteCalendar } from "redux/calendar/actions";
-import { validateRequired } from 'utils/validate';
-import './modal.scss';
+import React from "react";
+import {
+  Modal,
+  Form,
+  Button,
+  Message,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
+import { connect } from "react-redux";
+import {
+  updateCalendar,
+  addCalendar,
+  deleteCalendar
+} from "redux/calendar/actions";
+import { validateRequired } from "utils/validate";
+import "./modal.scss";
 
 class KalenderModal extends React.Component {
   state = {
@@ -18,17 +29,17 @@ class KalenderModal extends React.Component {
       month: null,
       year: null,
       title: null,
-      location: null,
-    },
+      location: null
+    }
   };
 
   openModal = (title, data, type) => {
     if (data) {
-      const arr = data.date.split(' ');
+      const arr = data.date.split(" ");
       var day;
 
       if (arr[0].length === 1) {
-        day = '0' + arr[0];
+        day = "0" + arr[0];
       } else {
         day = arr[0];
       }
@@ -45,27 +56,27 @@ class KalenderModal extends React.Component {
       data: {
         id: data ? data.id : null,
         type: data ? data.type : type,
-        day: data ? day : '01',
-        month: data ? month : 'januari',
-        year: data ? year : '2000',
-        title: data ? data.title : '',
-        location: data ? data.location : ''
-      },
+        day: data ? day : "01",
+        month: data ? month : "januari",
+        year: data ? year : "2000",
+        title: data ? data.title : "",
+        location: data ? data.location : ""
+      }
     });
   };
 
   closeModal = () =>
     this.setState({
-      modalOpen: false,
-  });
+      modalOpen: false
+    });
 
   handleDayChange = event => {
     const { value } = event.target;
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        day: value,
-      },
+        day: value
+      }
     }));
   };
 
@@ -74,8 +85,8 @@ class KalenderModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        month: value,
-      },
+        month: value
+      }
     }));
   };
 
@@ -84,8 +95,8 @@ class KalenderModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        year: value,
-      },
+        year: value
+      }
     }));
   };
 
@@ -94,8 +105,8 @@ class KalenderModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        title: value,
-      },
+        title: value
+      }
     }));
   };
 
@@ -104,8 +115,8 @@ class KalenderModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        location: value,
-      },
+        location: value
+      }
     }));
   };
 
@@ -127,34 +138,48 @@ class KalenderModal extends React.Component {
         this.props.addCalendar(data).then(() => this.closeModal());
       }
     } else {
-      this.setState({ error: "Gelieve alle velden correct in te vullen" });
+      this.setState({ error: "Gelieve alle velden in te vullen" });
     }
-  }
+  };
 
   delete = () => {
     this.setState({ loading: true });
     this.props.deleteCalendar(this.state.data.id).then(() => this.closeModal());
-  }
+  };
 
   render() {
     const { modalOpen, error, loading, title, data } = this.state;
-    
+
     return (
-      <Modal size='tiny' open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
+      <Modal
+        size="tiny"
+        open={modalOpen}
+        onOpen={this.openModal}
+        onClose={this.closeModal}
+      >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content>
-          {error && (<Message error><p>{error}</p></Message>)}
+          {error && (
+            <Message error>
+              <p>{error}</p>
+            </Message>
+          )}
           <Form>
-            {loading && (<Dimmer active inverted>
-              <Loader inverted />
-            </Dimmer>)}
+            {loading && (
+              <Dimmer active inverted>
+                <Loader inverted />
+              </Dimmer>
+            )}
             <Form.Field>
               <label>Wat</label>
               <input value={data.title} onChange={this.handleTitleChange} />
             </Form.Field>
             <Form.Field>
               <label>Waar</label>
-              <input value={data.location} onChange={this.handleLocationChange} />
+              <input
+                value={data.location}
+                onChange={this.handleLocationChange}
+              />
             </Form.Field>
             <Form.Field>
               <label>Wanneer</label>
@@ -212,7 +237,11 @@ class KalenderModal extends React.Component {
                 </select>
               </Form.Field>
               <Form.Field width={3}>
-                <input value={data.year} onChange={this.handleYearChange} maxLength="4" />
+                <input
+                  value={data.year}
+                  onChange={this.handleYearChange}
+                  maxLength="4"
+                />
               </Form.Field>
             </Form.Group>
           </Form>
@@ -220,12 +249,16 @@ class KalenderModal extends React.Component {
         <Modal.Actions>
           <div>
             {data.id && (
-              <Button color="red" onClick={() => this.delete()}>Verwijderen</Button>
+              <Button color="red" onClick={() => this.delete()}>
+                Verwijderen
+              </Button>
             )}
           </div>
           <div>
             <Button onClick={() => this.closeModal()}>Annuleren</Button>
-            <Button primary onClick={() => this.save()}>Bevestig</Button>
+            <Button primary onClick={() => this.save()}>
+              Bevestig
+            </Button>
           </div>
         </Modal.Actions>
       </Modal>
@@ -239,9 +272,6 @@ const mapDispatchToProps = {
   deleteCalendar
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-  null,
-  { forwardRef: true },
-)(KalenderModal);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  KalenderModal
+);

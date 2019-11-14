@@ -1,11 +1,18 @@
-import React from 'react';
-import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import { validateRequired } from 'utils/validate';
-import { updateContent } from 'redux/content/actions';
-import { addPhotos } from 'redux/photos/actions';
-import { connect } from 'react-redux';
-import Network from 'utils/network';
-import './modal.scss';
+import React from "react";
+import {
+  Modal,
+  Form,
+  Button,
+  Message,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
+import { validateRequired } from "utils/validate";
+import { updateContent } from "redux/content/actions";
+import { addPhotos } from "redux/photos/actions";
+import { connect } from "react-redux";
+import Network from "utils/network";
+import "./modal.scss";
 
 class FileModal extends React.Component {
   state = {
@@ -14,7 +21,7 @@ class FileModal extends React.Component {
     loading: false,
     title: null,
     albumId: null,
-    data: null,
+    data: null
   };
 
   openModal = (title, albumId) => {
@@ -30,13 +37,13 @@ class FileModal extends React.Component {
 
   closeModal = () =>
     this.setState({
-      modalOpen: false,
+      modalOpen: false
     });
 
   handleImageChange = event => {
     event.persist();
     this.setState({
-      data: event.target.files,
+      data: event.target.files
     });
   };
 
@@ -57,26 +64,48 @@ class FileModal extends React.Component {
         files.push(data[i]);
         names.push(data[i].name);
       }
-      this.props.addPhotos({ albumId: this.state.albumId, images: names })
-      Network.uploadImages('api/upload/multiple', files).then(() => this.closeModal());
+      Network.uploadImages("api/upload/multiple", files)
+        .then(() => {
+          this.props
+            .addPhotos({ albumId: this.state.albumId, images: names })
+            .then(() => this.closeModal());
+        })
+        .catch(() => {
+          this.setState({
+            loading: false,
+            error: "Gelieve PNG, JPG of JPEG bestanden te uploaden"
+          });
+        });
     } else {
       this.setState({ error: "Gelieve een bestand te uploaden" });
     }
-  }
+  };
 
   render() {
     const { modalOpen, error, loading, title } = this.state;
 
     return (
-      <Modal size="mini" open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
+      <Modal
+        size="mini"
+        open={modalOpen}
+        onOpen={this.openModal}
+        onClose={this.closeModal}
+      >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content>
-          {error && (<Message error><p>{error}</p></Message>)}
+          {error && (
+            <Message error>
+              <p>{error}</p>
+            </Message>
+          )}
           <Form>
-            {loading && (<Dimmer active inverted>
-              <Loader inverted />
-            </Dimmer>)}
+            {loading && (
+              <Dimmer active inverted>
+                <Loader inverted />
+              </Dimmer>
+            )}
             <Form.Field>
+              <label>Meerdere foto's selecteren mogelijk</label>
               <input type="file" onChange={this.handleImageChange} multiple />
             </Form.Field>
           </Form>
@@ -85,7 +114,9 @@ class FileModal extends React.Component {
           <div></div>
           <div>
             <Button onClick={() => this.closeModal()}>Annuleren</Button>
-            <Button primary onClick={() => this.save()}>Bevestig</Button>
+            <Button primary onClick={() => this.save()}>
+              Bevestig
+            </Button>
           </div>
         </Modal.Actions>
       </Modal>
@@ -98,9 +129,6 @@ const mapDispatchToProps = {
   addPhotos
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-  null,
-  { forwardRef: true },
-)(FileModal);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  FileModal
+);

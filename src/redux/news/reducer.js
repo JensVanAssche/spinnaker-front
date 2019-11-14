@@ -6,17 +6,14 @@ import {
   GET_ARTICLE_FULFILLED,
   GET_ARTICLE_REJECTED,
   UPDATE_ARTICLE_FULFILLED,
-  UPDATE_ARTICLE_REJECTED,
   ADD_ARTICLE_FULFILLED,
-  ADD_ARTICLE_REJECTED,
-  DELETE_ARTICLE_FULFILLED,
-  DELETE_ARTICLE_REJECTED
-} from './actions';
+  DELETE_ARTICLE_FULFILLED
+} from "./actions";
 
 const initialState = {
   news: null,
   article: null,
-  loading: false,
+  loading: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -24,26 +21,26 @@ export default function reducer(state = initialState, action) {
     case GET_NEWS_PENDING:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     case GET_NEWS_FULFILLED:
       return {
         ...state,
         loading: false,
-        news: action.payload,
+        news: action.payload
       };
     case GET_NEWS_REJECTED:
       return initialState;
     case GET_ARTICLE_PENDING:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     case GET_ARTICLE_FULFILLED:
       return {
         ...state,
         loading: false,
-        article: action.payload,
+        article: action.payload
       };
     case GET_ARTICLE_REJECTED:
       return initialState;
@@ -52,26 +49,18 @@ export default function reducer(state = initialState, action) {
         ...state,
         news: state.news
           .filter(player => player.id !== action.payload.id)
-          .concat(action.payload),
+          .concat(action.payload)
       };
-    case UPDATE_ARTICLE_REJECTED:
-      return initialState;
     case ADD_ARTICLE_FULFILLED:
       return {
         ...state,
-        news: state.news
-          .concat(action.payload),
+        news: state.news.concat(action.payload)
       };
-    case ADD_ARTICLE_REJECTED:
-      return initialState;
-    case DELETE_ARTICLE_FULFILLED:      
+    case DELETE_ARTICLE_FULFILLED:
       return {
         ...state,
-        news: state.news
-          .filter(player => player.id !== action.payload.id)
+        news: state.news.filter(player => player.id !== action.payload.id)
       };
-    case DELETE_ARTICLE_REJECTED:
-      return initialState;
     default:
       return state;
   }

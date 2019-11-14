@@ -1,10 +1,17 @@
-import React from 'react';
-import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import Network from 'utils/network';
-import { connect } from 'react-redux';
+import React from "react";
+import {
+  Modal,
+  Form,
+  Button,
+  Message,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
+import Network from "utils/network";
+import { connect } from "react-redux";
 import { updatePlayer, addPlayer, deletePlayer } from "redux/players/actions";
-import { validateRequired } from 'utils/validate';
-import './modal.scss';
+import { validateRequired } from "utils/validate";
+import "./modal.scss";
 
 class PlayerModal extends React.Component {
   state = {
@@ -18,8 +25,8 @@ class PlayerModal extends React.Component {
       name: null,
       subtitle: null,
       imageData: null,
-      imageName: null,
-    },
+      imageName: null
+    }
   };
 
   openModal = (title, data, type) => {
@@ -31,17 +38,17 @@ class PlayerModal extends React.Component {
       data: {
         id: data ? data.id : null,
         type: data ? data.type : type,
-        name: data ? data.name : '',
-        subtitle: data ? data.subtitle : '',
+        name: data ? data.name : "",
+        subtitle: data ? data.subtitle : "",
         imageData: null,
-        imageName: data ? data.image : null,
-      },
+        imageName: data ? data.image : null
+      }
     });
   };
 
   closeModal = () =>
     this.setState({
-      modalOpen: false,
+      modalOpen: false
     });
 
   handleNameChange = event => {
@@ -49,8 +56,8 @@ class PlayerModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        name: value,
-      },
+        name: value
+      }
     }));
   };
 
@@ -59,20 +66,20 @@ class PlayerModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        subtitle: value,
-      },
+        subtitle: value
+      }
     }));
   };
 
-  handleImageChange = event => {   
+  handleImageChange = event => {
     const file = event.target.files[0];
     event.persist();
     this.setState(prevState => ({
       data: {
         ...prevState.data,
         imageData: file,
-        imageName: file.name,
-      },
+        imageName: file.name
+      }
     }));
   };
 
@@ -90,42 +97,77 @@ class PlayerModal extends React.Component {
     const { updatePlayer, addPlayer } = this.props;
     if (isValid) {
       this.setState({ loading: true });
+
       if (data.id) {
-        updatePlayer(data).then(() => this.closeModal());
-        if (data.imageData) Network.uploadImage('api/upload', data.imageData);
+        if (data.imageData) {
+          Network.uploadImage("api/upload", data.imageData)
+            .then(() => {
+              updatePlayer(data).then(() => this.closeModal());
+            })
+            .catch(() => {
+              this.setState({
+                loading: false,
+                error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+              });
+            });
+        } else {
+          updatePlayer(data).then(() => this.closeModal());
+        }
       } else {
-        addPlayer(data).then(() => this.closeModal());
-        Network.uploadImage('api/upload', data.imageData);
+        Network.uploadImage("api/upload", data.imageData)
+          .then(() => {
+            addPlayer(data).then(() => this.closeModal());
+          })
+          .catch(() => {
+            this.setState({
+              loading: false,
+              error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+            });
+          });
       }
     } else {
-      this.setState({ error: "Gelieve alle velden correct in te vullen" });
+      this.setState({ error: "Gelieve alle velden in te vullen" });
     }
-  }
+  };
 
   delete = () => {
     this.setState({ loading: true });
     this.props.deletePlayer(this.state.data.id).then(() => this.closeModal());
-  }
+  };
 
   render() {
     const { modalOpen, error, loading, title, data } = this.state;
-    
+
     return (
-      <Modal size="tiny" open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
+      <Modal
+        size="tiny"
+        open={modalOpen}
+        onOpen={this.openModal}
+        onClose={this.closeModal}
+      >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content>
-          {error && (<Message error><p>{error}</p></Message>)}
+          {error && (
+            <Message error>
+              <p>{error}</p>
+            </Message>
+          )}
           <Form>
-            {loading && (<Dimmer active inverted>
-              <Loader inverted />
-            </Dimmer>)}
+            {loading && (
+              <Dimmer active inverted>
+                <Loader inverted />
+              </Dimmer>
+            )}
             <Form.Field>
               <label>Naam</label>
               <input value={data.name} onChange={this.handleNameChange} />
             </Form.Field>
             <Form.Field>
               <label>Subtitel</label>
-              <input value={data.subtitle} onChange={this.handleSubtitleChange} />
+              <input
+                value={data.subtitle}
+                onChange={this.handleSubtitleChange}
+              />
             </Form.Field>
             <Form.Field>
               <label>Foto</label>
@@ -136,12 +178,16 @@ class PlayerModal extends React.Component {
         <Modal.Actions>
           <div>
             {data.id && (
-              <Button color="red" onClick={() => this.delete()}>Verwijderen</Button>
+              <Button color="red" onClick={() => this.delete()}>
+                Verwijderen
+              </Button>
             )}
           </div>
           <div>
             <Button onClick={() => this.closeModal()}>Annuleren</Button>
-            <Button primary onClick={() => this.save()}>Bevestig</Button>
+            <Button primary onClick={() => this.save()}>
+              Bevestig
+            </Button>
           </div>
         </Modal.Actions>
       </Modal>
@@ -155,9 +201,6 @@ const mapDispatchToProps = {
   deletePlayer
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-  null,
-  { forwardRef: true },
-)(PlayerModal);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  PlayerModal
+);

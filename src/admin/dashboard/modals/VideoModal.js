@@ -1,9 +1,16 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { updateVideo, addVideo, deleteVideo } from "redux/videos/actions";
-import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import { validateRequired, validateUrl } from 'utils/validate';
-import './modal.scss';
+import {
+  Modal,
+  Form,
+  Button,
+  Message,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
+import { validateRequired, validateUrl } from "utils/validate";
+import "./modal.scss";
 
 class VideoModal extends React.Component {
   state = {
@@ -14,8 +21,8 @@ class VideoModal extends React.Component {
     data: {
       id: null,
       title: null,
-      url: null,
-    },
+      url: null
+    }
   };
 
   openModal = (title, data) => {
@@ -26,15 +33,15 @@ class VideoModal extends React.Component {
       title,
       data: {
         id: data ? data.id : null,
-        title: data ? data.title : '',
-        url: data ? this.convertToUrl(data.url) : ''
-      },
+        title: data ? data.title : "",
+        url: data ? this.convertToUrl(data.url) : ""
+      }
     });
   };
 
   closeModal = () =>
     this.setState({
-      modalOpen: false,
+      modalOpen: false
     });
 
   handleTitleChange = event => {
@@ -42,8 +49,8 @@ class VideoModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        title: value,
-      },
+        title: value
+      }
     }));
   };
 
@@ -52,8 +59,8 @@ class VideoModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        url: value,
-      },
+        url: value
+      }
     }));
   };
 
@@ -66,29 +73,31 @@ class VideoModal extends React.Component {
   };
 
   convertToId = url => {
-    const id = url.split('?v=')[1];
+    const id = url.split("?v=")[1];
     return id;
-  }
+  };
 
   convertToUrl = id => {
     return "https://www.youtube.com/watch?v=" + id;
-  }
+  };
 
   save = () => {
     const isValid = this.validate();
     if (isValid) {
-      this.setState(prevState => ({
-        data: {
-          ...prevState.data,
-          url: this.convertToId(prevState.data.url),
-        },
-        loading: true
-      }), this.send);
-      
+      this.setState(
+        prevState => ({
+          data: {
+            ...prevState.data,
+            url: this.convertToId(prevState.data.url)
+          },
+          loading: true
+        }),
+        this.send
+      );
     } else {
-      this.setState({ error: "Gelieve alle velden correct in te vullen" });
+      this.setState({ error: "Gelieve alle velden in te vullen" });
     }
-  }
+  };
 
   send = () => {
     const { data } = this.state;
@@ -97,25 +106,36 @@ class VideoModal extends React.Component {
     } else {
       this.props.addVideo(data).then(() => this.closeModal());
     }
-  }
+  };
 
   delete = () => {
     this.setState({ loading: true });
     this.props.deleteVideo(this.state.data.id).then(() => this.closeModal());
-  }
+  };
 
   render() {
     const { modalOpen, error, loading, title, data } = this.state;
-    
+
     return (
-      <Modal size='tiny' open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
+      <Modal
+        size="tiny"
+        open={modalOpen}
+        onOpen={this.openModal}
+        onClose={this.closeModal}
+      >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content>
-          {error && (<Message error><p>{error}</p></Message>)}
+          {error && (
+            <Message error>
+              <p>{error}</p>
+            </Message>
+          )}
           <Form>
-            {loading && (<Dimmer active inverted>
-              <Loader inverted />
-            </Dimmer>)}
+            {loading && (
+              <Dimmer active inverted>
+                <Loader inverted />
+              </Dimmer>
+            )}
             <Form.Field>
               <label>Video Naam</label>
               <input value={data.title} onChange={this.handleTitleChange} />
@@ -131,12 +151,16 @@ class VideoModal extends React.Component {
         <Modal.Actions>
           <div>
             {data.id && (
-              <Button color="red" onClick={() => this.delete()}>Verwijderen</Button>
+              <Button color="red" onClick={() => this.delete()}>
+                Verwijderen
+              </Button>
             )}
           </div>
           <div>
             <Button onClick={() => this.closeModal()}>Annuleren</Button>
-            <Button primary onClick={() => this.save()}>Bevestig</Button>
+            <Button primary onClick={() => this.save()}>
+              Bevestig
+            </Button>
           </div>
         </Modal.Actions>
       </Modal>
@@ -150,9 +174,6 @@ const mapDispatchToProps = {
   deleteVideo
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-  null,
-  { forwardRef: true },
-)(VideoModal);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  VideoModal
+);

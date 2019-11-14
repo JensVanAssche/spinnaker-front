@@ -1,10 +1,17 @@
-import React from 'react';
-import { Modal, Form, Button, Message, Dimmer, Loader } from 'semantic-ui-react';
-import Network from 'utils/network';
-import { connect } from 'react-redux';
+import React from "react";
+import {
+  Modal,
+  Form,
+  Button,
+  Message,
+  Dimmer,
+  Loader
+} from "semantic-ui-react";
+import Network from "utils/network";
+import { connect } from "react-redux";
 import { updateLink, addLink, deleteLink } from "redux/links/actions";
-import { validateRequired } from 'utils/validate';
-import './modal.scss';
+import { validateRequired } from "utils/validate";
+import "./modal.scss";
 
 class LinkModal extends React.Component {
   state = {
@@ -17,8 +24,8 @@ class LinkModal extends React.Component {
       url: null,
       footer: null,
       imageData: null,
-      imageName: null,
-    },
+      imageName: null
+    }
   };
 
   openModal = (title, data) => {
@@ -29,17 +36,17 @@ class LinkModal extends React.Component {
       title,
       data: {
         id: data ? data.id : null,
-        url: data ? data.url : '',
-        footer: data ? data.footer : 'none',
+        url: data ? data.url : "",
+        footer: data ? data.footer : "none",
         imageData: null,
-        imageName: data ? data.image : null,
-      },
+        imageName: data ? data.image : null
+      }
     });
   };
 
   closeModal = () =>
     this.setState({
-      modalOpen: false,
+      modalOpen: false
     });
 
   handleUrlChange = event => {
@@ -47,20 +54,20 @@ class LinkModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        url: value,
-      },
+        url: value
+      }
     }));
   };
 
-  handleImageChange = event => {   
+  handleImageChange = event => {
     const file = event.target.files[0];
     event.persist();
     this.setState(prevState => ({
       data: {
         ...prevState.data,
         imageData: file,
-        imageName: file.name,
-      },
+        imageName: file.name
+      }
     }));
   };
 
@@ -69,8 +76,8 @@ class LinkModal extends React.Component {
     this.setState(prevState => ({
       data: {
         ...prevState.data,
-        footer: value,
-      },
+        footer: value
+      }
     }));
   };
 
@@ -88,34 +95,65 @@ class LinkModal extends React.Component {
     if (isValid) {
       this.setState({ loading: true });
       if (data.id) {
-        updateLink(data).then(() => this.closeModal());
-        if (data.imageData) Network.uploadImage('api/upload', data.imageData);
+        if (data.imageData) {
+          Network.uploadImage("api/upload", data.imageData)
+            .then(() => {
+              updateLink(data).then(() => this.closeModal());
+            })
+            .catch(() => {
+              this.setState({
+                loading: false,
+                error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+              });
+            });
+        } else {
+          updateLink(data).then(() => this.closeModal());
+        }
       } else {
-        addLink(data).then(() => this.closeModal());
-        Network.uploadImage('api/upload', data.imageData);
+        Network.uploadImage("api/upload", data.imageData)
+          .then(() => {
+            addLink(data).then(() => this.closeModal());
+          })
+          .catch(() => {
+            this.setState({
+              loading: false,
+              error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+            });
+          });
       }
     } else {
-      this.setState({ error: "Gelieve alle velden correct in te vullen" });
+      this.setState({ error: "Gelieve alle velden in te vullen" });
     }
-  }
+  };
 
   delete = () => {
     this.setState({ loading: true });
     this.props.deleteLink(this.state.data.id).then(() => this.closeModal());
-  }
+  };
 
   render() {
     const { modalOpen, error, loading, title, data } = this.state;
-    
+
     return (
-      <Modal size="tiny" open={modalOpen} onOpen={this.openModal} onClose={this.closeModal}>
+      <Modal
+        size="tiny"
+        open={modalOpen}
+        onOpen={this.openModal}
+        onClose={this.closeModal}
+      >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Content>
-          {error && (<Message error><p>{error}</p></Message>)}
+          {error && (
+            <Message error>
+              <p>{error}</p>
+            </Message>
+          )}
           <Form>
-            {loading && (<Dimmer active inverted>
-              <Loader inverted />
-            </Dimmer>)}
+            {loading && (
+              <Dimmer active inverted>
+                <Loader inverted />
+              </Dimmer>
+            )}
             <Form.Field>
               <label>URL</label>
               <input value={data.url} onChange={this.handleUrlChange} />
@@ -138,12 +176,16 @@ class LinkModal extends React.Component {
         <Modal.Actions>
           <div>
             {data.id && (
-              <Button color="red" onClick={() => this.delete()}>Verwijderen</Button>
+              <Button color="red" onClick={() => this.delete()}>
+                Verwijderen
+              </Button>
             )}
           </div>
           <div>
             <Button onClick={() => this.closeModal()}>Annuleren</Button>
-            <Button primary onClick={() => this.save()}>Bevestig</Button>
+            <Button primary onClick={() => this.save()}>
+              Bevestig
+            </Button>
           </div>
         </Modal.Actions>
       </Modal>
@@ -157,9 +199,6 @@ const mapDispatchToProps = {
   deleteLink
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-  null,
-  { forwardRef: true },
-)(LinkModal);
+export default connect(null, mapDispatchToProps, null, { forwardRef: true })(
+  LinkModal
+);

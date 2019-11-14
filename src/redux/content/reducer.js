@@ -3,14 +3,12 @@ import {
   CONTENT_PENDING,
   CONTENT_REJECTED,
   UPDATE_CONTENT_FULFILLED,
-  UPDATE_CONTENT_REJECTED,
-  UPDATE_PDF_FULFILLED,
-  UPDATE_PDF_REJECTED,
-} from './actions';
+  UPDATE_PDF_FULFILLED
+} from "./actions";
 
 const initialState = {
   data: null,
-  loading: false,
+  loading: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -18,13 +16,13 @@ export default function reducer(state = initialState, action) {
     case CONTENT_PENDING:
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     case CONTENT_FULFILLED:
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        data: action.payload
       };
     case CONTENT_REJECTED:
       return initialState;
@@ -36,15 +34,13 @@ export default function reducer(state = initialState, action) {
           [action.payload.key]: action.payload.value
         }
       };
-    case UPDATE_CONTENT_REJECTED:
-      return initialState;
-    case UPDATE_PDF_FULFILLED:     
+    case UPDATE_PDF_FULFILLED:
       if (action.payload.length === 1) {
         return {
           ...state,
           data: {
             ...state.data,
-            [action.payload[0].key]: action.payload[0].value,
+            [action.payload[0].key]: action.payload[0].value
           }
         };
       } else {
@@ -56,9 +52,7 @@ export default function reducer(state = initialState, action) {
             [action.payload[1].key]: action.payload[1].value
           }
         };
-      }      
-    case UPDATE_PDF_REJECTED:
-      return initialState;
+      }
     default:
       return state;
   }
