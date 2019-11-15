@@ -44,6 +44,7 @@
 
   .album {
     margin: 20px 60px 60px 0;
+    max-width: 320px;
 
     > a:first-child {
       display: block;
@@ -105,6 +106,12 @@
 }
 
 .photo-album {
+  a {
+    font-size: 2rem;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
   > div {
     display: flex;
     flex-wrap: wrap;

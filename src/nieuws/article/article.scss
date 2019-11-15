@@ -1,6 +1,12 @@
 @import "vars.scss";
 
 .news-article {
+  a {
+    font-size: 2rem;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
   .date {
     color: $grey;
     display: block;
