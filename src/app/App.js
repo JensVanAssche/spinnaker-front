@@ -26,11 +26,12 @@ class App extends React.Component {
     const { error } = this.state;
     const { loading } = this.props;
 
-    if (loading) return (
-      <div className="app-loading">
-        <p>Laden...</p>
-      </div>
-    );
+    if (loading)
+      return (
+        <div className="app-loading">
+          <p>Laden...</p>
+        </div>
+      );
 
     if (!loading && error) {
       return (
@@ -39,7 +40,7 @@ class App extends React.Component {
           <h2>
             Sorry, de website is momenteel niet beschikbaar.
             <br />
-            Herlaadt de pagina of probeer later opnieuw.
+            Herlaad de pagina of probeer later opnieuw.
           </h2>
         </div>
       );
@@ -62,7 +63,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
