@@ -26,14 +26,14 @@ class App extends React.Component {
     const { error } = this.state;
     const { data, loading } = this.props;
 
-    if (loading || !data)
+    if (loading || (!data && !error))
       return (
         <div className="app-loading">
           <p>Laden...</p>
         </div>
       );
 
-    if (!loading && error) {
+    if (!data && error) {
       return (
         <div className="error">
           <img src={Logo} alt="logo" />
