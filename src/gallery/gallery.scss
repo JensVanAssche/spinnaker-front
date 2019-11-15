@@ -134,6 +134,7 @@
 
 .album-modal {
   width: auto !important;
+
   .content {
     margin: 0;
     display: flex !important;
@@ -261,6 +262,15 @@
     > div {
       .photo-thumbnail {
         margin-right: 0;
+      }
+    }
+  }
+
+  .album-modal {
+    width: 95% !important;
+    .content {
+      img {
+        max-height: 70vh;
       }
     }
   }
