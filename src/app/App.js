@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getAll } from "redux/content/actions";
-import { selectLoading } from "redux/content/selectors";
+import { selectData, selectLoading } from "redux/content/selectors";
 import { Route, Switch } from "react-router-dom";
 
 import Website from "app/Website";
@@ -24,9 +24,9 @@ class App extends React.Component {
 
   render() {
     const { error } = this.state;
-    const { loading } = this.props;
+    const { data, loading } = this.props;
 
-    if (loading)
+    if (loading || !data)
       return (
         <div className="app-loading">
           <p>Laden...</p>
@@ -60,6 +60,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
+  data: selectData(state),
   loading: selectLoading(state)
 });
 

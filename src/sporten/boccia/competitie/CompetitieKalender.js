@@ -22,7 +22,12 @@ class CompetitieKalender extends React.Component {
   render() {
     const { league, data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div>
+          <h2>{this.state.title[league]}</h2>
+        </div>
+      );
 
     if (data.length === 0) {
       return (

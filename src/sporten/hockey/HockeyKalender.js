@@ -12,7 +12,20 @@ class HockeyKalender extends React.Component {
   render() {
     const { content, data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div className="content ui container">
+          <div className="content-flex">
+            <div>
+              <h2>Hockey Kalender</h2>
+            </div>
+            <img
+              src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+              alt="wheelblazers logo"
+            />
+          </div>
+        </div>
+      );
 
     if (data.length === 0) {
       return (

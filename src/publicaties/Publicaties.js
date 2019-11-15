@@ -1,8 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { selectPublications, selectLoading } from "redux/publications/selectors";
+import React from "react";
+import { connect } from "react-redux";
+import {
+  selectPublications,
+  selectLoading
+} from "redux/publications/selectors";
 import { getPublications } from "redux/publications/actions";
-import './publicaties.scss';
+import "./publicaties.scss";
 
 class Publicaties extends React.Component {
   componentDidMount() {
@@ -12,24 +15,39 @@ class Publicaties extends React.Component {
   render() {
     const { data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div className="publicaties content ui container">
+          <h2>Publicaties</h2>
+        </div>
+      );
 
     return (
       <div className="publicaties content ui container">
         <h2>Publicaties</h2>
         <h3>Spinnakerkrant</h3>
-        {!data.kranten.length && (
-          <p>Geen kranten gevonden</p>
-        )}
+        {!data.kranten.length && <p>Geen kranten gevonden</p>}
         {data.kranten.map(krant => (
-          <a href={process.env.REACT_APP_API_HOST + krant.pdf} target="_blank" rel="noopener noreferrer" key={krant.id}>{krant.title}</a>
+          <a
+            href={process.env.REACT_APP_API_HOST + krant.pdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            key={krant.id}
+          >
+            {krant.title}
+          </a>
         ))}
         <h3>Folders</h3>
-        {!data.folders.length && (
-          <p>Geen folders gevonden</p>
-        )}
+        {!data.folders.length && <p>Geen folders gevonden</p>}
         {data.folders.map(folder => (
-          <a href={process.env.REACT_APP_API_HOST + folder.pdf} target="_blank" rel="noopener noreferrer" key={folder.id}>{folder.title}</a>
+          <a
+            href={process.env.REACT_APP_API_HOST + folder.pdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            key={folder.id}
+          >
+            {folder.title}
+          </a>
         ))}
       </div>
     );
@@ -37,7 +55,7 @@ class Publicaties extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getPublications,
+  getPublications
 };
 
 const mapStateToProps = state => ({
@@ -45,7 +63,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Publicaties);
+export default connect(mapStateToProps, mapDispatchToProps)(Publicaties);

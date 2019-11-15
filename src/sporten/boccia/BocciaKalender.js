@@ -11,7 +11,12 @@ class BocciaKalender extends React.Component {
   render() {
     const { data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div className="content ui container">
+          <h2>Boccia Kalender</h2>
+        </div>
+      );
 
     if (data.length === 0) {
       return (

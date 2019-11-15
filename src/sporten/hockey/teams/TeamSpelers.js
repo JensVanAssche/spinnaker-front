@@ -1,13 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { selectPlayersOrdered, selectLoading } from "redux/players/selectors";
 import { getPlayersOrdered } from "redux/players/actions";
-import Player from 'sporten/player/Player';
+import Player from "sporten/player/Player";
 
 class TeamSpelers extends React.Component {
   state = {
-    title: ['Wheelblazers 1 Spelers', 'Wheelblazers 1 Spelers', 'Wheelblazers 1 Spelers', 'Wheelblazers 4 Spelers', 'Competitie Nederland Spelers'],
-    types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
+    title: [
+      "Wheelblazers 1 Spelers",
+      "Wheelblazers 2 Spelers",
+      "Wheelblazers 3 Spelers",
+      "Wheelblazers 4 Spelers",
+      "Competitie Nederland Spelers"
+    ],
+    types: ["blazers1", "blazers2", "blazers3", "blazers4", "hockeynederland"]
   };
 
   componentDidMount() {
@@ -19,7 +25,12 @@ class TeamSpelers extends React.Component {
   render() {
     const { team, data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div>
+          <h2>{this.state.title[team]}</h2>
+        </div>
+      );
 
     if (data.length === 0) {
       return (
@@ -38,9 +49,15 @@ class TeamSpelers extends React.Component {
             <div key={type.name}>
               <h3>{type.name}</h3>
               <div>
-                {type.players && type.players.map(player => (
-                  <Player key={player.id} name={player.name} subtitle={player.subtitle} image={player.image} />
-                ))}
+                {type.players &&
+                  type.players.map(player => (
+                    <Player
+                      key={player.id}
+                      name={player.name}
+                      subtitle={player.subtitle}
+                      image={player.image}
+                    />
+                  ))}
               </div>
             </div>
           ))}
@@ -51,7 +68,7 @@ class TeamSpelers extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getPlayersOrdered,
+  getPlayersOrdered
 };
 
 const mapStateToProps = state => ({
@@ -59,7 +76,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TeamSpelers);
+export default connect(mapStateToProps, mapDispatchToProps)(TeamSpelers);

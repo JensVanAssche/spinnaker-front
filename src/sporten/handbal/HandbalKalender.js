@@ -11,7 +11,12 @@ class HandbalKalender extends React.Component {
   render() {
     const { data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div className="content">
+          <h2>Rolstoelhandbal Kalender</h2>
+        </div>
+      );
 
     if (data.length === 0) {
       return (

@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { selectVideos, selectLoading } from "redux/videos/selectors";
 import { getByOffset } from "redux/videos/actions";
-import Network from 'utils/network';
-import { Link } from 'react-router-dom';
-import VideoThumbnail from './VideoThumbnail';
-import './gallery.scss';
+import Network from "utils/network";
+import { Link } from "react-router-dom";
+import VideoThumbnail from "./VideoThumbnail";
+import "./gallery.scss";
 
 class Videos extends React.Component {
   state = {
@@ -18,15 +18,15 @@ class Videos extends React.Component {
     var page;
 
     if (match.params.page) {
-      page = match.params.page
+      page = match.params.page;
     } else {
       page = 1;
     }
 
     this.setState({ currentPage: page });
     this.props.getByOffset((page - 1) * 5);
-    Network.get('api/videos/count').then((res) => {
-      var ele = []
+    Network.get("api/videos/count").then(res => {
+      var ele = [];
       for (let i = 0; i < Math.ceil(res.length / 5); i++) {
         ele.push(i + 1);
       }
@@ -39,11 +39,11 @@ class Videos extends React.Component {
     var page;
 
     if (match.params.page) {
-      page = match.params.page
+      page = match.params.page;
     } else {
       page = 1;
     }
-    
+
     if (page !== this.state.currentPage) {
       this.props.getByOffset((page - 1) * 5);
       this.setState({ currentPage: page });
@@ -54,7 +54,12 @@ class Videos extends React.Component {
     const { pages, currentPage } = this.state;
     const { data, loading } = this.props;
 
-    if (!data || !pages || loading) return null;
+    if (!data || !pages || loading)
+      return (
+        <div className="content ui container">
+          <h2>Video's</h2>
+        </div>
+      );
 
     if (!pages.length) {
       return (
@@ -65,12 +70,13 @@ class Videos extends React.Component {
       );
     }
 
-    if (currentPage > pages.length) return (
-      <div className="content ui container">
-        <h2>Geen video's op deze pagina...</h2>
-        <Link to="/videos">Ga terug naar de video pagina</Link>
-      </div>
-    );
+    if (currentPage > pages.length)
+      return (
+        <div className="content ui container">
+          <h2>Geen video's op deze pagina...</h2>
+          <Link to="/videos">Ga terug naar de video pagina</Link>
+        </div>
+      );
 
     return (
       <div className="videos content ui container">
@@ -82,11 +88,26 @@ class Videos extends React.Component {
           </div>
         ))}
         <div className="pagination">
-          {currentPage > 1 && (<Link to={"/videos/page/" + (parseInt(currentPage, 10) - 1)}>Terug</Link>)}
-          {pages.length > 1 && pages.map(page => (
-            <Link className={page === parseInt(currentPage, 10) ? "active" : ""} key={page} to={"/videos/page/" + page}>{page}</Link>
-          ))}
-          {currentPage < pages.length && (<Link to={"/videos/page/" + (parseInt(currentPage, 10) + 1)}>Verder</Link>)}
+          {currentPage > 1 && (
+            <Link to={"/videos/page/" + (parseInt(currentPage, 10) - 1)}>
+              Terug
+            </Link>
+          )}
+          {pages.length > 1 &&
+            pages.map(page => (
+              <Link
+                className={page === parseInt(currentPage, 10) ? "active" : ""}
+                key={page}
+                to={"/videos/page/" + page}
+              >
+                {page}
+              </Link>
+            ))}
+          {currentPage < pages.length && (
+            <Link to={"/videos/page/" + (parseInt(currentPage, 10) + 1)}>
+              Verder
+            </Link>
+          )}
         </div>
       </div>
     );
@@ -94,7 +115,7 @@ class Videos extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getByOffset,
+  getByOffset
 };
 
 const mapStateToProps = state => ({
@@ -102,7 +123,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Videos);
+export default connect(mapStateToProps, mapDispatchToProps)(Videos);

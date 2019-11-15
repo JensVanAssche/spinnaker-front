@@ -1,13 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { selectPlayersOrdered, selectLoading } from "redux/players/selectors";
 import { getPlayersOrdered } from "redux/players/actions";
-import Player from 'sporten/player/Player';
+import Player from "sporten/player/Player";
 
 class CompetitieSpelers extends React.Component {
   state = {
-    title: ['Parantee Competitie Spelers', 'Scholencompetitie Spelers', 'Competitie Nederland Spelers'],
-    types: ['parantee', 'scholen', 'boccianederland'],
+    title: [
+      "Parantee Competitie Spelers",
+      "Scholencompetitie Spelers",
+      "Competitie Nederland Spelers"
+    ],
+    types: ["parantee", "scholen", "boccianederland"]
   };
 
   componentDidMount() {
@@ -19,7 +23,12 @@ class CompetitieSpelers extends React.Component {
   render() {
     const { league, data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div>
+          <h2>{this.state.title[league]}</h2>
+        </div>
+      );
 
     if (data.length === 0) {
       return (
@@ -38,9 +47,15 @@ class CompetitieSpelers extends React.Component {
             <div key={type.name}>
               <h3>{type.name}</h3>
               <div>
-                {type.players && type.players.map(player => (
-                  <Player key={player.id} name={player.name} subtitle={player.subtitle} image={player.image} />
-                ))}
+                {type.players &&
+                  type.players.map(player => (
+                    <Player
+                      key={player.id}
+                      name={player.name}
+                      subtitle={player.subtitle}
+                      image={player.image}
+                    />
+                  ))}
               </div>
             </div>
           ))}
@@ -51,7 +66,7 @@ class CompetitieSpelers extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getPlayersOrdered,
+  getPlayersOrdered
 };
 
 const mapStateToProps = state => ({
@@ -59,7 +74,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CompetitieSpelers);
+export default connect(mapStateToProps, mapDispatchToProps)(CompetitieSpelers);

@@ -25,7 +25,18 @@ class TeamResultaten extends React.Component {
   render() {
     const { content, team, data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div className="content-flex">
+          <div>
+            <h2>{this.state.title[team]}</h2>
+          </div>
+          <img
+            src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+            alt="wheelblazers logo"
+          />
+        </div>
+      );
 
     if (data.length === 0) {
       return (

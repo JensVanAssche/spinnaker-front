@@ -1,14 +1,20 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { selectStandings, selectLoading } from "redux/standings/selectors";
 import { getStandings } from "redux/standings/actions";
-import { selectData } from 'redux/content/selectors';
+import { selectData } from "redux/content/selectors";
 
 class TeamStand extends React.Component {
   state = {
-    title: ['Wheelblazers 1 Stand', 'Wheelblazers 2 Stand', 'Wheelblazers 3 Stand', 'Wheelblazers 4 Stand', 'Competitie Nederland Stand'],
-    types: ['blazers1', 'blazers2', 'blazers3', 'blazers4', 'hockeynederland'],
-  }
+    title: [
+      "Wheelblazers 1 Stand",
+      "Wheelblazers 2 Stand",
+      "Wheelblazers 3 Stand",
+      "Wheelblazers 4 Stand",
+      "Competitie Nederland Stand"
+    ],
+    types: ["blazers1", "blazers2", "blazers3", "blazers4", "hockeynederland"]
+  };
 
   componentDidMount() {
     const { types } = this.state;
@@ -19,7 +25,18 @@ class TeamStand extends React.Component {
   render() {
     const { content, team, data, loading } = this.props;
 
-    if (loading || !data) return null;
+    if (loading || !data)
+      return (
+        <div className="content-flex">
+          <div>
+            <h2>{this.state.title[team]}</h2>
+          </div>
+          <img
+            src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+            alt="wheelblazers logo"
+          />
+        </div>
+      );
 
     if (data.length === 0) {
       return (
@@ -28,7 +45,10 @@ class TeamStand extends React.Component {
             <h2>{this.state.title[team]}</h2>
             <p>Geen standen gevonden</p>
           </div>
-          <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
+          <img
+            src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+            alt="wheelblazers logo"
+          />
         </div>
       );
     }
@@ -71,28 +91,31 @@ class TeamStand extends React.Component {
                 )}
                 {result.scores.map(score => (
                   <div className="entry" key={score.id}>
-                  <div>
-                    <p>{score.name}</p>
+                    <div>
+                      <p>{score.name}</p>
+                    </div>
+                    <div>
+                      <p>{score.points1}</p>
+                      <p>{score.points2}</p>
+                      <p>{score.points3}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p>{score.points1}</p>
-                    <p>{score.points2}</p>
-                    <p>{score.points3}</p>
-                  </div>
-                </div>
                 ))}
               </div>
             </div>
           ))}
         </div>
-        <img src={process.env.REACT_APP_API_HOST + content.wheelblazersImg} alt="wheelblazers logo" />
+        <img
+          src={process.env.REACT_APP_API_HOST + content.wheelblazersImg}
+          alt="wheelblazers logo"
+        />
       </div>
     );
   }
 }
 
 const mapDispatchToProps = {
-  getStandings,
+  getStandings
 };
 
 const mapStateToProps = state => ({
@@ -101,7 +124,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TeamStand);
+export default connect(mapStateToProps, mapDispatchToProps)(TeamStand);

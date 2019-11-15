@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import { selectNews, selectLoading } from "redux/news/selectors";
 import { getLatest } from "redux/news/actions";
-import { Link } from 'react-router-dom';
-import Sport from './sport/Sport';
-import Nieuws from './nieuws/Nieuws';
-import Wave from 'assets/images/wave.png';
-import './home.scss';
+import { Link } from "react-router-dom";
+import Sport from "./sport/Sport";
+import Nieuws from "./nieuws/Nieuws";
+import Wave from "assets/images/wave.png";
+import "./home.scss";
 
 class Home extends React.Component {
   componentDidMount() {
@@ -15,8 +15,6 @@ class Home extends React.Component {
 
   render() {
     const { news, loading } = this.props;
-
-    if (loading || !news) return null;
 
     return (
       <div className="home">
@@ -42,10 +40,17 @@ class Home extends React.Component {
           </div>
           <div className="nieuws">
             <h2>Nieuws</h2>
-            {!news.length && (<p>Geen nieuws om te weergeven</p>)}
-            {news.map(item => (
-              <Nieuws id={item.id} title={item.title} date={item.date} key={item.id} />
-            ))}
+            {!loading &&
+              news &&
+              (!news.length && <p>Geen nieuws om te weergeven</p>,
+              news.map(item => (
+                <Nieuws
+                  id={item.id}
+                  title={item.title}
+                  date={item.date}
+                  key={item.id}
+                />
+              )))}
             <div className="cta">
               <Link to="/nieuws">Meer nieuws</Link>
             </div>
@@ -57,7 +62,7 @@ class Home extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getLatest,
+  getLatest
 };
 
 const mapStateToProps = state => ({
@@ -65,7 +70,4 @@ const mapStateToProps = state => ({
   loading: selectLoading(state)
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
