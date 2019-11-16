@@ -84,23 +84,24 @@ class TeamStand extends React.Component {
                 </div>
               </div>
               <div className="body">
-                {result.scores.length === 0 && (
+                {result.scores && result.scores.length === 0 && (
                   <div className="entry empty">
                     <p>Geen standen in dit tornooi</p>
                   </div>
                 )}
-                {result.scores.map(score => (
-                  <div className="entry" key={score.id}>
-                    <div>
-                      <p>{score.name}</p>
+                {result.scores &&
+                  result.scores.map(score => (
+                    <div className="entry" key={score.id}>
+                      <div>
+                        <p>{score.name}</p>
+                      </div>
+                      <div>
+                        <p>{score.points1}</p>
+                        <p>{score.points2}</p>
+                        <p>{score.points3}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p>{score.points1}</p>
-                      <p>{score.points2}</p>
-                      <p>{score.points3}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
           ))}

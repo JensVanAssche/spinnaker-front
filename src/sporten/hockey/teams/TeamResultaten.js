@@ -65,15 +65,16 @@ class TeamResultaten extends React.Component {
               </div>
               <table>
                 <tbody>
-                  {result.scores.map(score => (
-                    <tr key={score.id}>
-                      <td className="team">{score.team1}</td>
-                      <td className="score">
-                        {score.team1Score} - {score.team2Score}
-                      </td>
-                      <td className="team">{score.team2}</td>
-                    </tr>
-                  ))}
+                  {result.scores &&
+                    result.scores.map(score => (
+                      <tr key={score.id}>
+                        <td className="team">{score.team1}</td>
+                        <td className="score">
+                          {score.team1Score} - {score.team2Score}
+                        </td>
+                        <td className="team">{score.team2}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
