@@ -105,7 +105,8 @@ class LinkModal extends React.Component {
     const { updateLink, addLink } = this.props;
     if (isValid) {
       this.setState({ loading: true });
-      data.imageName = this.makeid(32) + ".jpg";
+
+      if (data.imageData) data.imageName = this.makeid(32) + ".jpg";
 
       if (data.id) {
         if (data.imageData) {

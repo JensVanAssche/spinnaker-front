@@ -108,7 +108,8 @@ class PlayerModal extends React.Component {
     const { updatePlayer, addPlayer } = this.props;
     if (isValid) {
       this.setState({ loading: true });
-      data.imageName = this.makeid(32) + ".jpg";
+
+      if (data.imageData) data.imageName = this.makeid(32) + ".jpg";
 
       if (data.id) {
         if (data.imageData) {
