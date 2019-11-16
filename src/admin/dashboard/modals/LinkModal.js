@@ -96,7 +96,7 @@ class LinkModal extends React.Component {
       this.setState({ loading: true });
       if (data.id) {
         if (data.imageData) {
-          Network.uploadImage("api/upload/single/300", data.imageData)
+          Network.uploadImage("api/upload/single/500", data.imageData)
             .then(() => {
               updateLink(data).then(() => this.closeModal());
             })
@@ -110,7 +110,7 @@ class LinkModal extends React.Component {
           updateLink(data).then(() => this.closeModal());
         }
       } else {
-        Network.uploadImage("api/upload/single/300", data.imageData)
+        Network.uploadImage("api/upload/single/500", data.imageData)
           .then(() => {
             addLink(data).then(() => this.closeModal());
           })
