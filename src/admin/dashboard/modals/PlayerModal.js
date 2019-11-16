@@ -100,7 +100,7 @@ class PlayerModal extends React.Component {
 
       if (data.id) {
         if (data.imageData) {
-          Network.uploadImage("api/upload/single/300", data.imageData)
+          Network.uploadImage("api/upload/single/600", data.imageData)
             .then(() => {
               updatePlayer(data).then(() => this.closeModal());
             })
@@ -114,7 +114,7 @@ class PlayerModal extends React.Component {
           updatePlayer(data).then(() => this.closeModal());
         }
       } else {
-        Network.uploadImage("api/upload/single/300", data.imageData)
+        Network.uploadImage("api/upload/single/600", data.imageData)
           .then(() => {
             addPlayer(data).then(() => this.closeModal());
           })
