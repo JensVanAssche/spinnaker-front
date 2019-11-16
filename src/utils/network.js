@@ -190,11 +190,11 @@ class Network {
     }
   }
 
-  static async uploadPdf(route, body, name) {
+  static async uploadPdf(route, body) {
     const formData = new FormData();
     formData.append("file", body.pdfData);
     formData.append("text", body.title);
-    formData.append("text", name);
+    formData.append("text", body.pdfName);
     if (body.type) formData.append("text", body.type);
 
     try {
