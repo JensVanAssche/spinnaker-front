@@ -34,6 +34,10 @@ class Header extends React.Component {
   onHamburgerClick() {
     if (window.innerWidth <= 768) {
       document.querySelector("nav ul").classList.toggle("open");
+      if (document.querySelector("nav.subnav ul"))
+        document.querySelector("nav.subnav ul").classList.remove("open");
+      if (document.querySelector("nav.subsubnav ul"))
+        document.querySelector("nav.subsubnav ul").classList.remove("open");
     }
   }
 
