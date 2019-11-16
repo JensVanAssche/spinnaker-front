@@ -44,6 +44,17 @@ class ArtikelModal extends React.Component {
     });
   };
 
+  makeid = length => {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
   closeModal = () =>
     this.setState({
       modalOpen: false
@@ -156,9 +167,15 @@ class ArtikelModal extends React.Component {
 
     if (isValid) {
       this.setState({ loading: true });
+      data.imageName = this.makeid(32) + ".jpg";
+
       if (data.id) {
         if (data.imageData) {
-          Network.uploadImage("api/upload/single/900", data.imageData)
+          Network.uploadImage(
+            "api/upload/single/900",
+            data.imageData,
+            data.imageName
+          )
             .then(() => {
               this.setState(
                 prevState => ({

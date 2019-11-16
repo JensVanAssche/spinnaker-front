@@ -91,16 +91,32 @@ class PlayerModal extends React.Component {
     return true;
   };
 
+  makeid = length => {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
   save = () => {
     const isValid = this.validate();
     const { data } = this.state;
     const { updatePlayer, addPlayer } = this.props;
     if (isValid) {
       this.setState({ loading: true });
+      data.imageName = this.makeid(32) + ".jpg";
 
       if (data.id) {
         if (data.imageData) {
-          Network.uploadImage("api/upload/single/600", data.imageData)
+          Network.uploadImage(
+            "api/upload/single/600",
+            data.imageData,
+            data.imageName
+          )
             .then(() => {
               updatePlayer(data).then(() => this.closeModal());
             })
@@ -114,7 +130,11 @@ class PlayerModal extends React.Component {
           updatePlayer(data).then(() => this.closeModal());
         }
       } else {
-        Network.uploadImage("api/upload/single/600", data.imageData)
+        Network.uploadImage(
+          "api/upload/single/600",
+          data.imageData,
+          data.imageName
+        )
           .then(() => {
             addPlayer(data).then(() => this.closeModal());
           })

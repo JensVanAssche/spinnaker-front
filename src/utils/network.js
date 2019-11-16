@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 class Network {
   static getUrl(route) {
     if (
-      route.indexOf('http://') === 0 ||
-      route.indexOf('https://') === 0 ||
-      route.indexOf('www.') === 0
+      route.indexOf("http://") === 0 ||
+      route.indexOf("https://") === 0 ||
+      route.indexOf("www.") === 0
     ) {
       return route;
     }
@@ -16,8 +16,8 @@ class Network {
     const headers = {};
 
     // ONLY USE THIS IF YOU WORK IN A BROWSER
-    headers['Content-Type'] = 'application/json';
-    headers.Accept = 'application/json';
+    headers["Content-Type"] = "application/json";
+    headers.Accept = "application/json";
 
     return headers;
   }
@@ -28,12 +28,12 @@ class Network {
       throw {
         errors: (error.response.data && error.response.data.errors) || [
           {
-            code: '0',
+            code: "0",
             status: 500,
-            title: 'Unknown error',
-            meta: error.response,
-          },
-        ],
+            title: "Unknown error",
+            meta: error.response
+          }
+        ]
       };
     } else if (error.request) {
       // The request was made but no response was received
@@ -41,12 +41,12 @@ class Network {
       throw {
         errors: [
           {
-            code: '0',
+            code: "0",
             status: 500,
-            title: 'Unknown error',
-            meta: error.request,
-          },
-        ],
+            title: "Unknown error",
+            meta: error.request
+          }
+        ]
       };
     } else {
       // Something happened in setting up the request that triggered an Error
@@ -54,12 +54,12 @@ class Network {
       throw {
         errors: [
           {
-            code: '0',
+            code: "0",
             status: 500,
-            title: 'Unknown error',
-            meta: error.message,
-          },
-        ],
+            title: "Unknown error",
+            meta: error.message
+          }
+        ]
       };
     }
   }
@@ -69,7 +69,7 @@ class Network {
       const headers = this.basicHeaders();
       const result = await axios.get(this.getUrl(route), {
         headers,
-        withCredentials: true,
+        withCredentials: true
       });
       return result.data;
     } catch (err) {
@@ -80,11 +80,11 @@ class Network {
   static async getWithoutCredentials(route) {
     try {
       const headers = {
-        ...this.basicHeaders(),
+        ...this.basicHeaders()
       };
       const result = await axios.get(this.getUrl(route), {
         headers,
-        withCredentials: false,
+        withCredentials: false
       });
       return result.data;
     } catch (err) {
@@ -97,7 +97,7 @@ class Network {
       const headers = this.basicHeaders();
       const result = await axios.put(this.getUrl(route), body, {
         headers,
-        withCredentials: true,
+        withCredentials: true
       });
       return result.data;
     } catch (err) {
@@ -110,7 +110,7 @@ class Network {
       const headers = this.basicHeaders();
       const result = await axios.patch(this.getUrl(route), body, {
         headers,
-        withCredentials: true,
+        withCredentials: true
       });
       return result.data;
     } catch (err) {
@@ -123,7 +123,7 @@ class Network {
       const headers = this.basicHeaders();
       const result = await axios.post(this.getUrl(route), body, {
         headers,
-        withCredentials: true,
+        withCredentials: true
       });
       return result.data;
     } catch (err) {
@@ -136,7 +136,7 @@ class Network {
       const headers = this.basicHeaders();
       const result = await axios.delete(this.getUrl(route), {
         headers,
-        withCredentials: true,
+        withCredentials: true
       });
       return result.data || true;
     } catch (err) {
@@ -144,40 +144,45 @@ class Network {
     }
   }
 
-  static async uploadImage(route, body) {
+  static async uploadImage(route, body, name) {
     const formData = new FormData();
-    formData.append('file', body);
+    formData.append("file", body);
+    formData.append("text", name);
 
     try {
       const headers = {
         ...this.basicHeaders(),
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data"
       };
       const result = await axios.post(this.getUrl(route), formData, {
         headers,
-        withCredentials: true,
+        withCredentials: true
       });
       return result.data;
     } catch (err) {
       this.errorHandler(err);
     }
   }
-  
-  static async uploadImages(route, body) {
+
+  static async uploadImages(route, body, names) {
     const formData = new FormData();
 
     body.forEach(e => {
-      formData.append('file', e);
+      formData.append("file", e);
+    });
+
+    names.forEach(e => {
+      formData.append("text", e);
     });
 
     try {
       const headers = {
         ...this.basicHeaders(),
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data"
       };
       const result = await axios.post(this.getUrl(route), formData, {
         headers,
-        withCredentials: true,
+        withCredentials: true
       });
       return result.data;
     } catch (err) {
@@ -185,21 +190,21 @@ class Network {
     }
   }
 
-  static async uploadPdf(route, body) {
+  static async uploadPdf(route, body, name) {
     const formData = new FormData();
-    formData.append('file', body.pdfData);
-    formData.append('text', body.title);
-    formData.append('text', body.pdfName);
-    if (body.type) formData.append('text', body.type);
+    formData.append("file", body.pdfData);
+    formData.append("text", body.title);
+    formData.append("text", name);
+    if (body.type) formData.append("text", body.type);
 
     try {
       const headers = {
         ...this.basicHeaders(),
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data"
       };
       const result = await axios.post(this.getUrl(route), formData, {
         headers,
-        withCredentials: true,
+        withCredentials: true
       });
       return result.data;
     } catch (err) {

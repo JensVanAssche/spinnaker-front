@@ -88,15 +88,32 @@ class LinkModal extends React.Component {
     return true;
   };
 
+  makeid = length => {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
   save = () => {
     const isValid = this.validate();
     const { data } = this.state;
     const { updateLink, addLink } = this.props;
     if (isValid) {
       this.setState({ loading: true });
+      data.imageName = this.makeid(32) + ".jpg";
+
       if (data.id) {
         if (data.imageData) {
-          Network.uploadImage("api/upload/single/500", data.imageData)
+          Network.uploadImage(
+            "api/upload/single/500",
+            data.imageData,
+            data.imageName
+          )
             .then(() => {
               updateLink(data).then(() => this.closeModal());
             })
@@ -110,7 +127,11 @@ class LinkModal extends React.Component {
           updateLink(data).then(() => this.closeModal());
         }
       } else {
-        Network.uploadImage("api/upload/single/500", data.imageData)
+        Network.uploadImage(
+          "api/upload/single/500",
+          data.imageData,
+          data.imageName
+        )
           .then(() => {
             addLink(data).then(() => this.closeModal());
           })

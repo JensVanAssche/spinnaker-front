@@ -20,7 +20,10 @@ class FileModal extends React.Component {
     loading: false,
     title: null,
     api: null,
-    data: null
+    data: {
+      imageData: null,
+      imageName: null
+    }
   };
 
   openModal = (title, api) => {
@@ -30,7 +33,10 @@ class FileModal extends React.Component {
       loading: false,
       title,
       api,
-      data: null
+      data: {
+        imageData: null,
+        imageName: null
+      }
     });
   };
 
@@ -42,15 +48,29 @@ class FileModal extends React.Component {
   handleImageChange = event => {
     const file = event.target.files[0];
     event.persist();
-    this.setState({
-      data: file
-    });
+    this.setState(prevState => ({
+      data: {
+        ...prevState.data,
+        imageData: file
+      }
+    }));
   };
 
   validate = () => {
     const { data } = this.state;
-    if (!validateRequired(data)) return false;
+    if (!validateRequired(data.imageData)) return false;
     return true;
+  };
+
+  makeid = length => {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
   };
 
   save = () => {
@@ -58,15 +78,20 @@ class FileModal extends React.Component {
     const { api, data } = this.state;
     if (isValid) {
       this.setState({ loading: true });
+      data.imageName = this.makeid(32) + ".jpg";
 
       if (
         api === "content/data/logoImg" ||
         api === "content/data/wheelblazersImg"
       ) {
-        Network.uploadImage("api/upload/single/300", data)
+        Network.uploadImage(
+          "api/upload/single/300",
+          data.imageData,
+          data.imageName
+        )
           .then(() => {
             this.props
-              .updateContent(api, { value: data.name })
+              .updateContent(api, { value: data.imageName })
               .then(() => this.closeModal());
           })
           .catch(() => {
@@ -84,10 +109,14 @@ class FileModal extends React.Component {
         api === "content/data/hockeyImg" ||
         api === "content/data/zwemmenImg"
       ) {
-        Network.uploadImage("api/upload/single/1200", data)
+        Network.uploadImage(
+          "api/upload/single/1200",
+          data.imageData,
+          data.imageName
+        )
           .then(() => {
             this.props
-              .updateContent(api, { value: data.name })
+              .updateContent(api, { value: data.imageName })
               .then(() => this.closeModal());
           })
           .catch(() => {
@@ -99,10 +128,14 @@ class FileModal extends React.Component {
       }
 
       if (api === "content/data/headerImg") {
-        Network.uploadImage("api/upload/single/2000", data)
+        Network.uploadImage(
+          "api/upload/single/2000",
+          data.imageData,
+          data.imageName
+        )
           .then(() => {
             this.props
-              .updateContent(api, { value: data.name })
+              .updateContent(api, { value: data.imageName })
               .then(() => this.closeModal());
           })
           .catch(() => {

@@ -53,6 +53,17 @@ class FileModal extends React.Component {
     return true;
   };
 
+  makeid = length => {
+    var result = "";
+    var characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
   save = () => {
     const isValid = this.validate();
     const { data } = this.state;
@@ -61,10 +72,11 @@ class FileModal extends React.Component {
       var files = [];
       var names = [];
       for (let i = 0; i < data.length; i++) {
+        let name = this.makeid(32) + ".jpg";
         files.push(data[i]);
-        names.push(data[i].name);
+        names.push(name);
       }
-      Network.uploadImages("api/upload/multiple/900", files)
+      Network.uploadImages("api/upload/multiple/900", files, names)
         .then(() => {
           this.props
             .addPhotos({ albumId: this.state.albumId, images: names })
