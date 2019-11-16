@@ -158,7 +158,7 @@ class ArtikelModal extends React.Component {
       this.setState({ loading: true });
       if (data.id) {
         if (data.imageData) {
-          Network.uploadImage("api/upload", data.imageData)
+          Network.uploadImage("api/upload/single/900", data.imageData)
             .then(() => {
               this.setState(
                 prevState => ({
@@ -189,7 +189,7 @@ class ArtikelModal extends React.Component {
         }
       } else {
         if (data.imageData) {
-          Network.uploadImage("api/upload", data.imageData)
+          Network.uploadImage("api/upload/single/900", data.imageData)
             .then(() => {
               this.setState(
                 prevState => ({

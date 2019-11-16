@@ -10,6 +10,7 @@ import {
 import { validateRequired } from "utils/validate";
 import { updateContent } from "redux/content/actions";
 import { connect } from "react-redux";
+import Network from "utils/network";
 import "./modal.scss";
 
 class FileModal extends React.Component {
@@ -19,18 +20,16 @@ class FileModal extends React.Component {
     loading: false,
     title: null,
     api: null,
-    albumId: null,
     data: null
   };
 
-  openModal = (title, api, albumId) => {
+  openModal = (title, api) => {
     this.setState({
       modalOpen: true,
       error: null,
       loading: false,
       title,
       api,
-      albumId,
       data: null
     });
   };
@@ -59,16 +58,60 @@ class FileModal extends React.Component {
     const { api, data } = this.state;
     if (isValid) {
       this.setState({ loading: true });
-      this.props.updateContent(api, data).then(res => {
-        if (res.error) {
-          this.setState({
-            loading: false,
-            error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+
+      if (
+        api === "content/data/logoImg" ||
+        api === "content/data/wheelblazersImg"
+      ) {
+        Network.uploadImage("api/upload/single/300", data)
+          .then(() => {
+            this.props
+              .updateContent(api, { value: data.name })
+              .then(() => this.closeModal());
+          })
+          .catch(() => {
+            this.setState({
+              loading: false,
+              error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+            });
           });
-        } else {
-          this.closeModal();
-        }
-      });
+      }
+
+      if (
+        api === "content/data/bocciaImg" ||
+        api === "content/data/dansenImg" ||
+        api === "content/data/handbalImg" ||
+        api === "content/data/hockeyImg" ||
+        api === "content/data/zwemmenImg"
+      ) {
+        Network.uploadImage("api/upload/single/1200", data)
+          .then(() => {
+            this.props
+              .updateContent(api, { value: data.name })
+              .then(() => this.closeModal());
+          })
+          .catch(() => {
+            this.setState({
+              loading: false,
+              error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+            });
+          });
+      }
+
+      if (api === "content/data/headerImg") {
+        Network.uploadImage("api/upload/single/2000", data)
+          .then(() => {
+            this.props
+              .updateContent(api, { value: data.name })
+              .then(() => this.closeModal());
+          })
+          .catch(() => {
+            this.setState({
+              loading: false,
+              error: "Gelieve een PNG, JPG of JPEG bestand te uploaden"
+            });
+          });
+      }
     } else {
       this.setState({ error: "Gelieve een bestand te uploaden" });
     }

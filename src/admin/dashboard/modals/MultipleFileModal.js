@@ -64,7 +64,7 @@ class FileModal extends React.Component {
         files.push(data[i]);
         names.push(data[i].name);
       }
-      Network.uploadImages("api/upload/multiple", files)
+      Network.uploadImages("api/upload/multiple/900", files)
         .then(() => {
           this.props
             .addPhotos({ albumId: this.state.albumId, images: names })
