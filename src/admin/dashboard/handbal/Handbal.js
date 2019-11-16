@@ -45,7 +45,7 @@ class Handbal extends React.Component {
           <h2>Handbal Foto</h2>
           <div className="dashboard-flex">
             <img
-              src={process.env.REACT_APP_API_HOST + data.handbalImg}
+              src={process.env.REACT_APP_API_HOST + "small_" + data.handbalImg}
               alt="eumm"
             />
             <Button

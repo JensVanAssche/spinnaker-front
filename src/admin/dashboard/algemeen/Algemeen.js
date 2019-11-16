@@ -26,7 +26,7 @@ function Algemeen({ openTextareaModal, openFileModal, data }) {
         <h2>Header Foto</h2>
         <div className="dashboard-flex">
           <img
-            src={process.env.REACT_APP_API_HOST + data.headerImg}
+            src={process.env.REACT_APP_API_HOST + "small_" + data.headerImg}
             alt="eumm"
           />
           <Button

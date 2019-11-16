@@ -46,13 +46,26 @@ class Header extends React.Component {
   render() {
     const { content } = this.props;
 
+    var header;
+
+    if (window.innerWidth < 500) {
+      header = "small_" + content.headerImg;
+    }
+
+    if (window.innerWidth >= 500) {
+      header = "medium_" + content.headerImg;
+    }
+
+    if (window.innerWidth >= 1000) {
+      header = "large_" + content.headerImg;
+    }
+
     return (
       <header>
         <div
           className="header-image"
           style={{
-            backgroundImage: `url(${process.env.REACT_APP_API_HOST +
-              content.headerImg}`
+            backgroundImage: `url(${process.env.REACT_APP_API_HOST + header}`
           }}
         >
           <div className="ui container">

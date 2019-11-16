@@ -45,7 +45,7 @@ class Algemeen extends React.Component {
           <h2>Hockey Foto</h2>
           <div className="dashboard-flex">
             <img
-              src={process.env.REACT_APP_API_HOST + data.hockeyImg}
+              src={process.env.REACT_APP_API_HOST + "small_" + data.hockeyImg}
               alt="eumm"
             />
             <Button

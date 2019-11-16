@@ -11,7 +11,7 @@ function Algemeen({ openTextareaModal, openFileModal, data }) {
         <h2>Boccia Foto</h2>
         <div className="dashboard-flex">
           <img
-            src={process.env.REACT_APP_API_HOST + data.bocciaImg}
+            src={process.env.REACT_APP_API_HOST + "small_" + data.bocciaImg}
             alt="eumm"
           />
           <Button
