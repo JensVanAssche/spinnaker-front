@@ -36,7 +36,7 @@ class Artikel extends React.Component {
             {data.image && (
               <img
                 src={process.env.REACT_APP_API_HOST + data.image}
-                alt="article"
+                alt="artikel foto"
               />
             )}
             <div dangerouslySetInnerHTML={{ __html: data.body }} />

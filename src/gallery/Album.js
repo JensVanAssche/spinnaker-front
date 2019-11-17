@@ -49,7 +49,7 @@ class Photos extends React.Component {
                 >
                   <img
                     src={process.env.REACT_APP_API_HOST + photo.image}
-                    alt="a o"
+                    alt="album foto"
                   />
                 </div>
               ))}

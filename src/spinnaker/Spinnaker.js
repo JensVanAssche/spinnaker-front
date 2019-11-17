@@ -43,29 +43,27 @@ class Spinnaker extends React.Component {
           dangerouslySetInnerHTML={{ __html: content.spinnakerEngagementTitle }}
         />
 
-        {!loading &&
-          links &&
-          links.length > 0 && (
-            <>
-              <h2>Links</h2>
-              <div className="links">
-                {links.map(e => (
-                  <a
-                    key={e.url}
-                    href={e.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      key={e}
-                      src={process.env.REACT_APP_API_HOST + e.image}
-                      alt="logo"
-                    />
-                  </a>
-                ))}
-              </div>
-            </>
-          )}
+        {!loading && links && links.length > 0 && (
+          <>
+            <h2>Links</h2>
+            <div className="links">
+              {links.map(e => (
+                <a
+                  key={e.url}
+                  href={e.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    key={e}
+                    src={process.env.REACT_APP_API_HOST + e.image}
+                    alt="link logo"
+                  />
+                </a>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     );
   }

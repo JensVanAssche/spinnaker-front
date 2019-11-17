@@ -12,7 +12,7 @@ function Dansen({ openTextareaModal, openFileModal, data }) {
         <div className="dashboard-flex">
           <img
             src={process.env.REACT_APP_API_HOST + "small_" + data.dansenImg}
-            alt="eumm"
+            alt="dansen foto"
           />
           <Button
             icon

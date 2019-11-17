@@ -59,7 +59,7 @@ class Photos extends React.Component {
         <Modal.Content>
           <img
             src={process.env.REACT_APP_API_HOST + data[currentSlide].image}
-            alt="a o"
+            alt="album foto"
           />
         </Modal.Content>
         <Modal.Actions>

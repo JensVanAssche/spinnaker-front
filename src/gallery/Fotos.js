@@ -91,7 +91,7 @@ class Photos extends React.Component {
                   <Link to={`/fotos/album/` + photo.id}>
                     <img
                       src={process.env.REACT_APP_API_HOST + photo.thumbnail}
-                      alt="thumbnail"
+                      alt="album thumbnail"
                     />
                   </Link>
                 )}

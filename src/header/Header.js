@@ -76,7 +76,7 @@ class Header extends React.Component {
             <Link to="/" onClick={() => this.onNavigationClick()}>
               <img
                 src={process.env.REACT_APP_API_HOST + content.logoImg}
-                alt="Logo"
+                alt="spinnaker logo"
               />
             </Link>
           </div>

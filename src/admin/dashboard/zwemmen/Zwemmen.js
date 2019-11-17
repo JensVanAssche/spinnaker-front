@@ -46,7 +46,7 @@ class Zwemmen extends React.Component {
           <div className="dashboard-flex">
             <img
               src={process.env.REACT_APP_API_HOST + "small_" + data.zwemmenImg}
-              alt="eumm"
+              alt="zwemmen foto"
             />
             <Button
               icon

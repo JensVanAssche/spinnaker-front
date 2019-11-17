@@ -36,7 +36,7 @@ class App extends React.Component {
     if (!data && error) {
       return (
         <div className="error">
-          <img src={Logo} alt="logo" />
+          <img src={Logo} alt="spinnaker logo" />
           <h2>
             Sorry, de website is momenteel niet beschikbaar.
             <br />

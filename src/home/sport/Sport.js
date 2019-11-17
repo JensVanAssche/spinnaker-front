@@ -16,7 +16,7 @@ class Sport extends React.Component {
             "small_" +
             content[name.split(" ").reverse()[0] + "Img"]
           }
-          alt="Logo"
+          alt="sport categorie thumbnail"
         />
         <span>{name}</span>
       </Link>

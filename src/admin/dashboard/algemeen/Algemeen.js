@@ -10,7 +10,10 @@ function Algemeen({ openTextareaModal, openFileModal, data }) {
       <div className="dashboard-item">
         <h2>Spinnaker Logo</h2>
         <div className="dashboard-flex">
-          <img src={process.env.REACT_APP_API_HOST + data.logoImg} alt="eumm" />
+          <img
+            src={process.env.REACT_APP_API_HOST + data.logoImg}
+            alt="spinnaker logo"
+          />
           <Button
             icon
             className="small-button"
@@ -27,7 +30,7 @@ function Algemeen({ openTextareaModal, openFileModal, data }) {
         <div className="dashboard-flex">
           <img
             src={process.env.REACT_APP_API_HOST + "small_" + data.headerImg}
-            alt="eumm"
+            alt="spinnaker hoofd foto"
           />
           <Button
             icon

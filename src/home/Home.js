@@ -23,7 +23,7 @@ class Home extends React.Component {
             <h1>Welkom bij Spinnaker</h1>
             <Link to="/spinnaker">Ontdek wie we zijn</Link>
           </div>
-          <img src={Wave} alt="wave" />
+          <img src={Wave} alt="golf" />
         </div>
         <div className="ui container content">
           <div className="sports">

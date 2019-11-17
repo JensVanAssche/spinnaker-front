@@ -46,7 +46,7 @@ class Algemeen extends React.Component {
           <div className="dashboard-flex">
             <img
               src={process.env.REACT_APP_API_HOST + "small_" + data.hockeyImg}
-              alt="eumm"
+              alt="hockey foto"
             />
             <Button
               icon
@@ -64,7 +64,7 @@ class Algemeen extends React.Component {
           <div className="dashboard-flex">
             <img
               src={process.env.REACT_APP_API_HOST + data.wheelblazersImg}
-              alt="eumm"
+              alt="wheelblazers logo"
             />
             <Button
               icon
