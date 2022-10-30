@@ -40,7 +40,7 @@ function Boccia({ match }) {
             </NavLink>
           </li>
           <li onClick={() => onNavigationClick()}>
-            <NavLink to={`${match.path}/parantee`}>parantee competitie</NavLink>
+            <NavLink to={`${match.path}/gsportvlaanderen`}>gsportvlaanderen competitie</NavLink>
           </li>
           <li onClick={() => onNavigationClick()}>
             <NavLink to={`${match.path}/scholencompetitie`}>
@@ -61,7 +61,7 @@ function Boccia({ match }) {
         <Switch>
           <Route exact path={match.path} component={BocciaIndex} />
           <Route
-            path={`${match.path}/parantee`}
+            path={`${match.path}/gsportvlaanderen`}
             component={props => <Competitie league={0} {...props} />}
           />
           <Route

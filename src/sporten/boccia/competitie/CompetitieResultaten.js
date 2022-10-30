@@ -6,7 +6,7 @@ import { getResults } from "redux/results/actions";
 class CompetitieResultaten extends React.Component {
   state = {
     title: [
-      "Parantee Competitie Resultaten",
+      "GsportVlaanderen Competitie Resultaten",
       "Scholencompetitie Resultaten",
       "Competitie Nederland Resultaten"
     ],

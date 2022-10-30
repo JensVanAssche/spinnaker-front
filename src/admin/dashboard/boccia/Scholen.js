@@ -188,7 +188,7 @@ class Scholen extends React.Component {
                     className="small-button"
                     onClick={() =>
                       openKalenderModal(
-                        "Parantee Kalender Item aanpassen",
+                        "GsportVlaanderen Kalender Item aanpassen",
                         entry,
                         null
                       )

@@ -6,7 +6,7 @@ import { getStandings } from "redux/standings/actions";
 class CompetitieStand extends React.Component {
   state = {
     title: [
-      "Parantee Competitie Stand",
+      "GsportVlaanderen Competitie Stand",
       "Scholencompetitie Stand",
       "Competitie Nederland Stand"
     ],

@@ -5,7 +5,7 @@ import { selectData } from "redux/content/selectors";
 class CompetitieHistoriek extends React.Component {
   state = {
     title: [
-      "Parantee Competitie Historiek",
+      "GsportVlaanderen Competitie Historiek",
       "Scholencompetitie Historiek",
       "Competitie Nederland Historiek"
     ],

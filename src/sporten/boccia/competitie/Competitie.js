@@ -12,7 +12,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 class Competitie extends React.Component {
   state = {
-    league: ["PARANTEE COMPETITIE", "SCHOLENCOMPETITIE", "COMPETITIE NEDERLAND"]
+    league: ["GSPORTVLAANDEREN COMPETITIE", "SCHOLENCOMPETITIE", "COMPETITIE NEDERLAND"]
   };
 
   onHamburgerClick() {

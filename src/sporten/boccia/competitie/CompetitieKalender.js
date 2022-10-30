@@ -6,7 +6,7 @@ import { getCalendar } from "redux/calendar/actions";
 class CompetitieKalender extends React.Component {
   state = {
     title: [
-      "Parantee Competitie Kalender",
+      "GsportVlaanderen Competitie Kalender",
       "Scholencompetitie Kalender",
       "Competitie Nederland Kalender"
     ],

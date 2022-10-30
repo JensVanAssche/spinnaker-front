@@ -4,7 +4,7 @@ import { selectData } from "redux/content/selectors";
 
 class CompetitieIndex extends React.Component {
   state = {
-    title: ["Parantee Competitie", "Scholencompetitie", "Competitie Nederland"],
+    title: ["GsportVlaanderen Competitie", "Scholencompetitie", "Competitie Nederland"],
     content: ["bocciaParantee", "bocciaScholen", "bocciaNederland"]
   };
 

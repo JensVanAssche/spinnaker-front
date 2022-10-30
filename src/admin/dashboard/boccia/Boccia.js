@@ -16,7 +16,7 @@ class Boccia extends React.Component {
       />,
     },
     {
-      menuItem: "Parantee",
+      menuItem: "GsportVlaanderen",
       render: () => <Parantee
         openTextareaModal={this.props.openTextareaModal}
         openPdfModal={this.props.openPdfModal}

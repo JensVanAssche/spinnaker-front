@@ -53,9 +53,9 @@ class Parantee extends React.Component {
 
     return (
       <Tab.Pane className="no-border">
-        <h1>Parantee Competitie</h1>
+        <h1>GsportVlaanderen Competitie</h1>
         <div className="dashboard-item">
-          <h2>Parantee Tekst</h2>
+          <h2>GsportVlaanderen Tekst</h2>
           <div className="dashboard-flex">
             <p
               dangerouslySetInnerHTML={{
@@ -67,7 +67,7 @@ class Parantee extends React.Component {
               className="small-button"
               onClick={() =>
                 openTextareaModal(
-                  "Parantee Tekst",
+                  "GsportVlaanderen Tekst",
                   "content/data/bocciaParantee",
                   data.bocciaParantee
                 )
@@ -79,13 +79,13 @@ class Parantee extends React.Component {
         </div>
         <div className="dashboard-item">
           <div className="dashboard-flex">
-            <h2>Parantee Spelers</h2>
+            <h2>GsportVlaanderen Spelers</h2>
             <Button
               icon
               primary
               className="small-button"
               onClick={() =>
-                openPlayerModal("Parantee Speler toevoegen", null, "parantee")
+                openPlayerModal("GsportVlaanderen Speler toevoegen", null, "parantee")
               }
             >
               <span>Speler</span>
@@ -125,7 +125,7 @@ class Parantee extends React.Component {
                     icon
                     className="small-button"
                     onClick={() =>
-                      openPlayerModal("Parantee Speler aanpassen", player, null)
+                      openPlayerModal("GsportVlaanderen Speler aanpassen", player, null)
                     }
                   >
                     <Icon name="edit" />
@@ -137,14 +137,14 @@ class Parantee extends React.Component {
         </div>
         <div className="dashboard-item">
           <div className="dashboard-flex">
-            <h2>Parantee Kalender</h2>
+            <h2>GsportVlaanderen Kalender</h2>
             <Button
               icon
               primary
               className="small-button"
               onClick={() =>
                 openKalenderModal(
-                  "Parantee Kalender Item toevoegen",
+                  "GsportVlaanderen Kalender Item toevoegen",
                   null,
                   "parantee"
                 )
@@ -185,7 +185,7 @@ class Parantee extends React.Component {
                     className="small-button"
                     onClick={() =>
                       openKalenderModal(
-                        "Parantee Kalender Item aanpassen",
+                        "GsportVlaanderen Kalender Item aanpassen",
                         entry,
                         null
                       )
@@ -200,14 +200,14 @@ class Parantee extends React.Component {
         </div>
         <div className="dashboard-item">
           <div className="dashboard-flex">
-            <h2>Parantee Resultaten</h2>
+            <h2>GsportVlaanderen Resultaten</h2>
             <Button
               icon
               primary
               className="small-button"
               onClick={() =>
                 openPdfModal(
-                  "Parantee Resultaat toevoegen",
+                  "GsportVlaanderen Resultaat toevoegen",
                   "results/pdf",
                   null,
                   "parantee"
@@ -236,7 +236,7 @@ class Parantee extends React.Component {
                 className="small-button"
                 onClick={() =>
                   openPdfModal(
-                    "Parantee Resultaat aanpassen",
+                    "GsportVlaanderen Resultaat aanpassen",
                     "results/pdf",
                     result,
                     null
@@ -250,14 +250,14 @@ class Parantee extends React.Component {
         </div>
         <div className="dashboard-item">
           <div className="dashboard-flex">
-            <h2>Parantee Stand</h2>
+            <h2>GsportVlaanderen Stand</h2>
             <Button
               icon
               primary
               className="small-button"
               onClick={() =>
                 openPdfModal(
-                  "Parantee Stand toevoegen",
+                  "GsportVlaanderen Stand toevoegen",
                   "standings/pdf",
                   null,
                   "parantee"
@@ -286,7 +286,7 @@ class Parantee extends React.Component {
                 className="small-button"
                 onClick={() =>
                   openPdfModal(
-                    "Parantee Stand aanpassen",
+                    "GsportVlaanderen Stand aanpassen",
                     "standings/pdf",
                     stand,
                     null
@@ -299,7 +299,7 @@ class Parantee extends React.Component {
           ))}
         </div>
         <div className="dashboard-item">
-          <h2>Parantee Historiek</h2>
+          <h2>GsportVlaanderen Historiek</h2>
           <div className="dashboard-flex">
             <p
               dangerouslySetInnerHTML={{
@@ -311,7 +311,7 @@ class Parantee extends React.Component {
               className="small-button"
               onClick={() =>
                 openTextareaModal(
-                  "Parantee Historiek",
+                  "GsportVlaanderen Historiek",
                   "content/data/paranteeHistory",
                   data.paranteeHistory
                 )

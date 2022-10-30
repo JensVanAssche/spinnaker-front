@@ -7,7 +7,7 @@ import Player from "sporten/player/Player";
 class CompetitieSpelers extends React.Component {
   state = {
     title: [
-      "Parantee Competitie Spelers",
+      "GsportVlaanderen Competitie Spelers",
       "Scholencompetitie Spelers",
       "Competitie Nederland Spelers"
     ],
